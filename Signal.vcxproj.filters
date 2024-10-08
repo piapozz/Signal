@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{eec82aed-f37f-4f1f-a61d-af5a12ceb0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{fd5d4f1f-073e-487f-be5e-a1c931d440ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sein">
+      <UniqueIdentifier>{64372015-2823-4788-af18-ed7ea75501cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Sein">
+      <UniqueIdentifier>{47b97067-489f-4c86-a5a6-70750d66a9c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Ishihara">
+      <UniqueIdentifier>{7bc7c51d-b1b1-4fce-8a93-e1f09c2e0319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Ishiha">
+      <UniqueIdentifier>{bb97a83c-3ff6-4a77-bd84-b7c57c27e303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sakakura">
+      <UniqueIdentifier>{ec50c50e-9eef-41ad-b145-1d400e95bbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Sakakura">
+      <UniqueIdentifier>{ab20675e-45e0-4bda-9315-e51c64a5c190}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\cpp\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\BaseScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\SceneMain.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\SceneTitle.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\GameManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\SceneResult.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\BaseObject.cpp">
+      <Filter>ソース ファイル\Sein</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\BaseCharacter.cpp">
+      <Filter>ソース ファイル\Sein</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\Player.cpp">
+      <Filter>ソース ファイル\Sein</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\BaseBullet.cpp">
+      <Filter>ソース ファイル\Ishihara</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\InputManager.cpp">
+      <Filter>ソース ファイル\Sakakura</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\header\BaseScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\SceneMain.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\SceneTitle.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\GameManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\SceneManager.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\SceneResult.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\BaseObject.h">
+      <Filter>ヘッダー ファイル\Sein</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\BaseCharacter.h">
+      <Filter>ヘッダー ファイル\Sein</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\Player.h">
+      <Filter>ヘッダー ファイル\Sein</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\BaseBullet.h">
+      <Filter>ヘッダー ファイル\Ishiha</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\Const.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\InputManager.h">
+      <Filter>ヘッダー ファイル\Sakakura</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -139,6 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\AudioManager.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\Box.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\BulletManager.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\CollisionManager.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\EffectManager.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\Enemy.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\ExplosionShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\MultipleShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\NormalShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\PenetrationShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\ReflectionShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\StageManager.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\TrackingShot.cpp" />
+    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\UIManager.cpp" />
     <ClCompile Include="Sources\cpp\BaseCharacter.cpp" />
     <ClCompile Include="Sources\cpp\BaseObject.cpp" />
     <ClCompile Include="Sources\cpp\BaseScene.cpp" />
@@ -153,6 +167,20 @@
     <ClCompile Include="Sources\cpp\SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\AudioManager.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\Box.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\BulletManager.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\CollisionManager.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\EffectManager.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\Enemy.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\ExplosionShot.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\NormalShot.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\PenetrationShot.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\ReflectionShot.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\StageManager.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\TrackingShot.h" />
+    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\UIManager.h" />
+    <ClInclude Include="MultipleShot.h" />
     <ClInclude Include="Sources\header\BaseCharacter.h" />
     <ClInclude Include="Sources\header\BaseObject.h" />
     <ClInclude Include="Sources\header\BaseScene.h" />

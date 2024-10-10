@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "../header/SceneManager.h"
 
 // プログラム開始
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -18,8 +19,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return -1;
 	}
 
-	// シーン管理
-	//SceneManager* sceneManager = new SceneManager();
+	// シーンマネージャー生成
+	SceneManager* sceneManager = new SceneManager();
+
+	// 初期化
+	sceneManager->ChangeScene(BaseScene::MAIN);
 
 	// 描画先を裏画面にする
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -47,13 +51,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ClearDrawScreen();
 		clsDx();
 
-		/*
 		// シーン内処理
 		sceneManager->Proc();
 
 		// シーンの描画
 		sceneManager->Draw();
-		*/
+		
 
 		// 裏画面の内容を表画面に反映
 		ScreenFlip();

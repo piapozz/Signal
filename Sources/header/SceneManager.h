@@ -1,11 +1,11 @@
 #pragma once
 
 // シーンの基本クラス
-#include "BaseScene.h"
+#include "../header/BaseScene.h"
 
-#include "SceneTitle.h"
-#include "SceneMain.h"
-#include "SceneResult.h"
+#include "../header/SceneTitle.h"
+#include "../header/SceneMain.h"
+#include "../header/SceneResult.h"
 
 class SceneManager
 {

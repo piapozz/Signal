@@ -8,5 +8,4 @@ private:
 public:
 	Player();
 	~Player();
-
 };

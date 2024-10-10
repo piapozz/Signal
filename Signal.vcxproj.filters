@@ -81,49 +81,49 @@
     <ClCompile Include="Sources\cpp\InputManager.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\BulletManager.cpp">
+    <ClCompile Include="Sources\cpp\BulletManager.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\ExplosionShot.cpp">
+    <ClCompile Include="Sources\cpp\ExplosionShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\MultipleShot.cpp">
+    <ClCompile Include="Sources\cpp\MultipleShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\NormalShot.cpp">
+    <ClCompile Include="Sources\cpp\NormalShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\PenetrationShot.cpp">
+    <ClCompile Include="Sources\cpp\PenetrationShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\ReflectionShot.cpp">
+    <ClCompile Include="Sources\cpp\ReflectionShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\TrackingShot.cpp">
+    <ClCompile Include="Sources\cpp\TrackingShot.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\AudioManager.cpp">
+    <ClCompile Include="Sources\cpp\AudioManager.cpp">
       <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\UIManager.cpp">
+    <ClCompile Include="Sources\cpp\UIManager.cpp">
       <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\CollisionManager.cpp">
+    <ClCompile Include="Sources\cpp\CollisionManager.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\Enemy.cpp">
+    <ClCompile Include="Sources\cpp\Enemy.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\Box.cpp">
+    <ClCompile Include="Sources\cpp\Box.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\StageManager.cpp">
+    <ClCompile Include="Sources\cpp\StageManager.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
     <ClCompile Include="Sources\cpp\GameManager.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProjectData\Signal\Sources\cpp\EffectManager.cpp">
+    <ClCompile Include="Sources\cpp\EffectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,49 +161,49 @@
     <ClInclude Include="Sources\header\InputManager.h">
       <Filter>ヘッダー ファイル\Sakakura</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\BulletManager.h">
+    <ClInclude Include="Sources\header\BulletManager.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\ExplosionShot.h">
+    <ClInclude Include="Sources\header\ExplosionShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="MultipleShot.h">
+    <ClInclude Include="Sources\header\MultipleShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\NormalShot.h">
+    <ClInclude Include="Sources\header\NormalShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\PenetrationShot.h">
+    <ClInclude Include="Sources\header\PenetrationShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\ReflectionShot.h">
+    <ClInclude Include="Sources\header\ReflectionShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\TrackingShot.h">
+    <ClInclude Include="Sources\header\TrackingShot.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\AudioManager.h">
+    <ClInclude Include="Sources\header\AudioManager.h">
       <Filter>ヘッダー ファイル\Sein</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\UIManager.h">
+    <ClInclude Include="Sources\header\UIManager.h">
       <Filter>ヘッダー ファイル\Sein</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\CollisionManager.h">
+    <ClInclude Include="Sources\header\CollisionManager.h">
       <Filter>ヘッダー ファイル\Sakakura</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\Enemy.h">
+    <ClInclude Include="Sources\header\Enemy.h">
       <Filter>ヘッダー ファイル\Sakakura</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\Box.h">
+    <ClInclude Include="Sources\header\Box.h">
       <Filter>ヘッダー ファイル\Sakakura</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\StageManager.h">
+    <ClInclude Include="Sources\header\StageManager.h">
       <Filter>ヘッダー ファイル\Sakakura</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\GameManager.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectData\Signal\Sources\header\EffectManager.h">
+    <ClInclude Include="Sources\header\EffectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

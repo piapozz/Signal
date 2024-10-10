@@ -4,7 +4,6 @@
 class BaseObject
 {
 protected:
-
 	struct Status
 	{
 		VECTOR m_position;		// ˆÊ’u
@@ -28,4 +27,7 @@ protected:
 	~BaseObject();
 
 	void Draw();
+
+	void SetPosition(VECTOR objectPos);
+	void SetModelData(int model);
 };

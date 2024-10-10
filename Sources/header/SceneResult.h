@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseScene.h"
+#include "../header/BaseScene.h"
 
 class SceneResult :
     public BaseScene 

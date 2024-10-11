@@ -16,10 +16,14 @@ class InputManager
 		RIGHT_BUTTON,
 		LEFT_TRIGGER,
 		RIGHT_TRIGGER,
-		LEFT_STICK_BUTTON
+		LEFT_STICK_BUTTON,
+		RIGHT_STICK_BUTTON,
+
+		MAX
 	};
 
 private:
+	/*
 	struct InputParam
 	{
 		// 十字ボタンを押しているかのフラグ
@@ -48,10 +52,11 @@ private:
 		int lsInputX, lsInputY;
 		int rsInputX, rsInputY;
 	};
+	*/
 
-	InputParam inputParam[2];
+	DINPUT_JOYSTATE inputParam[2];		// 入力情報の構造体
 
-	int inputControllerNum;
+	int inputControllerNum;		// コントローラーの接続数
 
 public:
 	InputManager() {}

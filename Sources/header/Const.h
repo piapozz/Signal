@@ -1,14 +1,20 @@
+#pragma once
 #include <math.h>
 
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
-enum BUTTON
+enum class DirButton
 {
-	DOWN = 0,
-	LEFT,
-	RIGHT,
-	UP,
-	X,
+    DOWN = 0,
+    LEFT,
+    RIGHT,
+    UP,
+    MAX
+};
+
+enum class Button
+{
+	X = 0,
 	Y,
 	A,
 	B,
@@ -22,11 +28,18 @@ enum BUTTON
 	MAX
 };
 
-enum STICK
+enum class Stick
 {
 	LEFT = 0,
 	RIGHT,
 	MAX
+};
+
+enum class Shape				// 当たり判定の形区別するための情報
+{
+    CIRCLE = 0,
+    SQUARE,
+    MAX
 };
 
 // 二次元ベクトル
@@ -98,7 +111,7 @@ typedef struct Vector2
 };
 
 // 弾のステータス
-enum BulletStatus
+enum class BulletStatus
 {
     SPEED,
     POWER,
@@ -109,7 +122,7 @@ enum BulletStatus
 };
 
 // 弾のタイプ
-enum BulletType
+enum class BulletType
 {
     NORMAL,
     EXPLOSION,

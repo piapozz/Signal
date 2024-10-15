@@ -32,7 +32,7 @@ public:
 
 	// コンストラクタ
 	BaseBullet();
-	BaseBullet(float bulletStatus[BulletStatus::MAX], Status objStatus);
+	BaseBullet(float bulletStatus[], Status objStatus);
 
 	// デストラクタ
 	~BaseBullet();
@@ -41,11 +41,11 @@ public:
 	void Draw();
 
 	// 座標更新関数
-	void virtual Move() = 0;
+	void Move() {};
 
 	// 着弾関数
-	void virtual Impact() = 0;
+	void Impact() {};
 
 	// 破壊関数
-	void virtual Destroy() = 0;
+	void Destroy() {};
 };

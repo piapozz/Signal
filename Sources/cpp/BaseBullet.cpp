@@ -6,11 +6,11 @@ BaseBullet::BaseBullet()
 
 }
 
-BaseBullet::BaseBullet(float bulletStatus[BulletStatus::MAX], Status objStatus)
+BaseBullet::BaseBullet(float bulletStatus[], Status objStatus)
 {
-	_status.m_Speed = bulletStatus[BulletStatus::SPEED];
-	_status.m_Power = bulletStatus[BulletStatus::POWER];
-	_status.m_Range = bulletStatus[BulletStatus::RANGE];
+	_status.m_Speed = bulletStatus[(int)BulletStatus::SPEED];
+	_status.m_Power = bulletStatus[(int)BulletStatus::POWER];
+	_status.m_Range = bulletStatus[(int)BulletStatus::RANGE];
 
 	status = objStatus;
 }

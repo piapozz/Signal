@@ -7,14 +7,14 @@ class NormalShot
 {
 public:
 
-	NormalShot(float bulletStatus[BulletStatus::MAX], Status objStatus) : BaseBullet(bulletStatus, objStatus) {  }
+	NormalShot(float bulletStatus[], Status objStatus) : BaseBullet(bulletStatus, objStatus) {  }
 
-	void  Move() override;
+	void Move();
 
 	// íÖíeä÷êî
-	void Impact() override;
+	void Impact();
 
 	// îjâÛä÷êî
-	void Destroy() override;
+	void Destroy();
 };
 

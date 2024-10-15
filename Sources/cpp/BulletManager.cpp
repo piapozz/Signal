@@ -61,13 +61,13 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 void BulletManager::LevelUpStatus(BulletStatus status, int playerNum)
 {
 	// 受け取ったパラメーターを上昇
-	_bulletPram[playerNum].m_BulletStatus[status]++;
+	_bulletPram[playerNum].m_BulletStatus[(int)status]++;
 }
 
 // バレットのタイプを上げる
 // 引数 追加するタイプ、プレイヤーの番号、
-void BulletManager::LevelUpStatus(BulletStatus type, int playerNum)
+void BulletManager::LevelUpType(BulletType type, int playerNum)
 {
 	// 受け取ったタイプを上昇
-	_bulletPram[playerNum].m_BulletType[type]++;
+	_bulletPram[playerNum].m_BulletType[(int)type]++;
 }

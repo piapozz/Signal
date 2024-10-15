@@ -9,7 +9,7 @@ public:
 
 	NormalShot(float bulletStatus[], Status objStatus) : BaseBullet(bulletStatus, objStatus) {  }
 
-	void Move();
+	void Move() ;
 
 	// íÖíeä÷êî
 	void Impact();

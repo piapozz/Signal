@@ -4,6 +4,7 @@
 
 #include "Dxlib.h"
 #include "BaseObject.h"
+#include "Const.h"
 
 class BaseBullet
 	: public BaseObject
@@ -15,21 +16,28 @@ private:
 
 	typedef struct ShotStatus
 	{
-		bool MslFlg = false;    // 発射フラグ
-		const float MslSpeed = 5.0f;    // スピード
+		bool m_Flag = false;    // 発射フラグ
+	    float m_Speed = 5.0f;   // スピード
+		float m_Power = 1.0f;	// 破壊力	
+		float m_Range = 3.0f;	// 射程
 	};
+
+	ShotStatus _status;
+
+	int graph = LoadGraph("char* FileName");
 
 public:
 
-	// イニシャライザ
-	BaseBullet(){ };
+	// コンストラクタ
+	BaseBullet();
+	BaseBullet(float bulletStatus[BulletStatus::MAX], Status objStatus);
 
 	// デストラクタ
-	~BaseBullet() {};
+	~BaseBullet();
 
 	// 描画関数
 	void Draw();
 
 	// 座標更新関数
-	void Move();
+	void virtual Move() = 0;
 };

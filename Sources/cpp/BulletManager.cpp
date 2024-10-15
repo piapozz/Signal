@@ -24,12 +24,12 @@ BulletManager::~BulletManager()
 void BulletManager::Move() 
 {
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
-	for (int i = 0; i < bulletPram.size(); i++) 
+	for (int i = 0; i < _bulletPram.size(); i++) 
 	{
-		for (int j = 0; j < bulletPram[i].m_BulletList.size(); j++) 
+		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// 移動
-			bulletPram[i].m_BulletList[j].Move();
+			_bulletPram[i].m_BulletList[j].Move();
 		}
 	}
 }
@@ -38,12 +38,12 @@ void BulletManager::Move()
 void BulletManager::Draw()
 {
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
-	for (int i = 0; i < bulletPram.size(); i++)
+	for (int i = 0; i < _bulletPram.size(); i++)
 	{
-		for (int j = 0; j < bulletPram[i].m_BulletList.size(); j++)
+		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// 描画
-			bulletPram[i].m_BulletList[j].Draw();
+			_bulletPram[i].m_BulletList[j].Draw();
 		}
 	}
 }
@@ -52,7 +52,7 @@ void BulletManager::Draw()
 void BulletManager::AddBullet(int playerNum)
 {
 	// 渡されたプレイヤーの弾を一つ追加
-	bulletPram[playerNum].m_BulletList.push_back(BaseBullet());
+	_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus));
 }
 
 
@@ -61,7 +61,7 @@ void BulletManager::AddBullet(int playerNum)
 void BulletManager::LevelUpStatus(BulletStatus status, int playerNum)
 {
 	// 受け取ったパラメーターを上昇
-	bulletPram[playerNum].m_BulletStatus[status]++;
+	_bulletPram[playerNum].m_BulletStatus[status]++;
 }
 
 // バレットのタイプを上げる
@@ -69,5 +69,5 @@ void BulletManager::LevelUpStatus(BulletStatus status, int playerNum)
 void BulletManager::LevelUpStatus(BulletStatus type, int playerNum)
 {
 	// 受け取ったタイプを上昇
-	bulletPram[playerNum].m_BulletType[type]++;
+	_bulletPram[playerNum].m_BulletType[type]++;
 }

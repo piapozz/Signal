@@ -18,9 +18,10 @@ protected:
 	~BaseCharacter();
 
 	void Move(Vector2 moveVec, float angle);
-	void Rotate();
+	void Rotate(Vector2 stickAngle);
 	void Shot();
 	void Dodge(Vector2 moveVec, float angle);
 	void PowerUp();
 	void StatusUp();
+	void UpdateHitJudge();
 };

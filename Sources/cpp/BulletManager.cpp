@@ -49,10 +49,10 @@ void BulletManager::Draw()
 }
 
 // ”­Ë
-void BulletManager::AddBullet(int playerNum)
+void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
 	// “n‚³‚ê‚½ƒvƒŒƒCƒ„[‚Ì’e‚ğˆê‚Â’Ç‰Á
-	_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus));
+	_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, status));
 }
 
 

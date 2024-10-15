@@ -41,7 +41,7 @@ public:
 	void Draw();
 
 	// 発射
-	void AddBullet(int playerNum , Status status);
+	void AddBullet(int playerNum , BaseObject::Status status);
 
 	// バレットのステータスを上げる
 	// 引数 上げるステータス、プレイヤーの番号、

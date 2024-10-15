@@ -9,7 +9,12 @@ public:
 
 	NormalShot(float bulletStatus[BulletStatus::MAX], Status objStatus) : BaseBullet(bulletStatus, objStatus) {  }
 
-	void  Move() override {}
+	void  Move() override;
 
+	// ’…’eŠÖ”
+	void Impact() override;
+
+	// ”j‰óŠÖ”
+	void Destroy() override;
 };
 

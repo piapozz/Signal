@@ -22,6 +22,8 @@ private:
 		float m_Range = 3.0f;	// Ë’ö
 	};
 
+protected:
+
 	ShotStatus _status;
 
 	int graph = LoadGraph("char* FileName");
@@ -40,4 +42,10 @@ public:
 
 	// À•WXVŠÖ”
 	void virtual Move() = 0;
+
+	// ’…’eŠÖ”
+	void virtual Impact() = 0;
+
+	// ”j‰óŠÖ”
+	void virtual Destroy() = 0;
 };

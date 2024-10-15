@@ -8,9 +8,9 @@ BaseBullet::BaseBullet()
 
 BaseBullet::BaseBullet(float bulletStatus[BulletStatus::MAX], Status objStatus)
 {
-	_status.m_Speed = status[BulletStatus::SPEED];
-	_status.m_Power = status[BulletStatus::POWER];
-	_status.m_Range = status[BulletStatus::RANGE];
+	_status.m_Speed = bulletStatus[BulletStatus::SPEED];
+	_status.m_Power = bulletStatus[BulletStatus::POWER];
+	_status.m_Range = bulletStatus[BulletStatus::RANGE];
 
 	status = objStatus;
 }
@@ -25,5 +25,5 @@ BaseBullet::~BaseBullet()
 void BaseBullet::Draw()
 {
 	// âÒì]ägèkï`âÊ
-	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle , graph,TRUE);
+	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph,TRUE);
 }

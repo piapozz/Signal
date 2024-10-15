@@ -12,15 +12,15 @@ protected:
 	float dodgeCount;			// 回避のクールタイム管理
 	int exp;					// 壊した箱の数を管理
 
-	VECTOR oncePos;
+	Vector2 oncePos;
 
 	BaseCharacter();
 	~BaseCharacter();
 
-	void Move(VECTOR moveVec, float angle);
+	void Move(Vector2 moveVec, float angle);
 	void Rotate();
 	void Shot();
-	void Dodge(VECTOR moveVec, float angle);
+	void Dodge(Vector2 moveVec, float angle);
 	void PowerUp();
 	void StatusUp();
 };

@@ -6,12 +6,18 @@
 #include "BaseObject.h"
 
 class BaseBullet
+	: public BaseObject
 {
 private:
 
 	// 弾丸の色
-	const int _BULLET_COLOR = GetColor(255, 0, 0);
+	const int _BULLET_COLOR = GetColor(0, 0, 0);
 
+	typedef struct ShotStatus
+	{
+		bool MslFlg = false;    // 発射フラグ
+		const float MslSpeed = 5.0f;    // スピード
+	};
 
 public:
 

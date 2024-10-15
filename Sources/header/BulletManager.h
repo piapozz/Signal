@@ -1,5 +1,44 @@
 #pragma once
+
+#include <vector>
+#include "BaseBullet.h"
+
+using namespace std;
+
 class BulletManager
 {
-};
+public:
+	// プレイヤーごとに持つ弾の情報
+	typedef struct BulletPram
+	{
+		int m_BulletStatus[BulletStatus::MAX] = { 1,1,1,1 };
+		int m_BulletType[BulletType::MAX] = { 1,0,0,0,0,0 };
+		std::vector<BaseBullet> m_BulletList;
+	};
 
+	std::vector<BulletPram> bulletPram;
+
+	// コンストラクタ
+	BulletManager();
+	BulletManager(int playerNum);
+
+	// デストラクタ
+	~BulletManager();
+
+	// 弾の移動
+	void Move();
+
+	// 描画
+	void Draw();
+
+	// 発射
+	void AddBullet(int playerNum);
+
+	// バレットのステータスを上げる
+	// 引数 上げるステータス、プレイヤーの番号、
+	void LevelUpStatus(BulletStatus status , int playerNum);
+
+	// バレットのタイプを上げる
+	// 引数 追加するタイプ、プレイヤーの番号、
+	void LevelUpType(BulletType type, int playerNum);
+};

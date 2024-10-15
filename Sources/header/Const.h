@@ -94,4 +94,28 @@ typedef struct Vector2
         x /= distance;
         y /= distance;
     }
+
+    // 弾のステータス
+    enum BulletStatus
+    {
+        SPEED,
+        POWWER,
+        RANGE,
+        RATE,
+
+        MAX
+    };
+
+    // 弾のタイプ
+    enum BulletType
+    {
+        NORMAL,
+        EXPLOSION,
+        MULTI_SHOT,
+        PENETRATION,
+        REFLECTION,
+        TRACKING_SHOT,
+
+        MAX
+    };
 };

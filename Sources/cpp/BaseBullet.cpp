@@ -3,7 +3,8 @@
 // コンストラクタ
 BaseBullet::BaseBullet() 
 {
-
+	// 有効化
+	_status.m_Flag = true;
 }
 
 BaseBullet::BaseBullet(float bulletStatus[], Status objStatus)
@@ -13,6 +14,9 @@ BaseBullet::BaseBullet(float bulletStatus[], Status objStatus)
 	_status.m_Range = bulletStatus[(int)BulletStatus::RANGE];
 
 	status = objStatus;
+
+	// 有効化
+	_status.m_Flag = true;
 }
 
 // デストラクタ
@@ -26,4 +30,11 @@ void BaseBullet::Draw()
 {
 	// 回転拡縮描画
 	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph,TRUE);
+}
+
+// 射程管理関数
+void BaseBullet::CheckRange() 
+{
+
+	Destroy();
 }

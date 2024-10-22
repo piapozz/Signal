@@ -4,6 +4,7 @@ Player::Player()
 {
 	// ƒvƒŒƒCƒ„[‚Ì¶‘¶ó‹µ
 	isDead = false;
+	canMove = true;
 }
 
 Player::~Player()

@@ -32,10 +32,7 @@ void BaseObject::SetAngle(float angle) { status.m_angle = angle; }
 void BaseObject::SetShapeSize(float size) { status.m_shapeSize = size; }
 
 // モデルデータをセット
-void BaseObject::SetModelData(int model)
-{
-	// 引数でもらったモデルをセット
-	objectHandle = model;
-}
+void BaseObject::SetModelData(int model) { objectHandle = model; }
+
 
 BaseObject::Status BaseObject::GetStatus() { return status; }

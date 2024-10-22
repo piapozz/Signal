@@ -18,8 +18,8 @@ protected:
 	bool canDodge;
 	bool dodgeNow;				// 回避している状態かを見る
 
-	BaseCharacter();
-	~BaseCharacter();
+	BaseCharacter();					// コンストラクタ
+	~BaseCharacter();					// デストラクタ
 
 	void Move(Vector2 moveVec);
 	void DodgeMove();

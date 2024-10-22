@@ -37,8 +37,8 @@ protected:
 	bool hitObject;			// オブジェクトにヒットしたかを管理
 	bool hitBullet;			// 弾にヒットしたかを管理
 
-	BaseObject();
-	~BaseObject();
+	BaseObject();							// コンストラクタ
+	~BaseObject();							// デストラクタ
 
 	void Draw();
 

@@ -2,7 +2,8 @@
 
 BaseCharacter::BaseCharacter()
 {
-
+	hitObject = false;
+	hitBullet = false;
 }
 
 BaseCharacter::~BaseCharacter()

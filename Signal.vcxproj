@@ -146,6 +146,7 @@
     <ClCompile Include="Sources\cpp\EffectManager.cpp" />
     <ClCompile Include="Sources\cpp\Enemy.cpp" />
     <ClCompile Include="Sources\cpp\ExplosionShot.cpp" />
+    <ClCompile Include="Sources\cpp\MixBullet.cpp" />
     <ClCompile Include="Sources\cpp\MultipleShot.cpp" />
     <ClCompile Include="Sources\cpp\NormalShot.cpp" />
     <ClCompile Include="Sources\cpp\PenetrationShot.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Sources\header\EffectManager.h" />
     <ClInclude Include="Sources\header\Enemy.h" />
     <ClInclude Include="Sources\header\ExplosionShot.h" />
+    <ClInclude Include="Sources\header\MixBullet.h" />
     <ClInclude Include="Sources\header\NormalShot.h" />
     <ClInclude Include="Sources\header\PenetrationShot.h" />
     <ClInclude Include="Sources\header\ReflectionShot.h" />

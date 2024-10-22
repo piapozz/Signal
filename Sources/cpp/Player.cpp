@@ -2,7 +2,8 @@
 
 Player::Player()
 {
-
+	// プレイヤーの生存状況
+	isDead = false;
 }
 
 Player::~Player()
@@ -10,35 +11,42 @@ Player::~Player()
 
 }
 
+// プレイヤーのメイン処理
 void Player::Proc()
 {
-	/*
-	if (canMove != false)
+	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
+	if (isDead != true)
 	{
-		
-		if (inputManager->CheckStickDown())
+		// コントローラーの状態を更新
+		GetController();
+
+		// もし移動できる状態だったら
+		if (canMove)
 		{
-			// 移動方向と自身の向きを使って移動
-			Move(status.m_position, status.m_angle);
-
-			// 移動中に回避ボタンが押されたら
-			if (inputManager->CheckDownButton(playerNum, LEFT_TRIGGER) == true)
-			{
-				// 回避処理
-				Dodge(status.m_position, status.m_angle);
-			}
+			// もし回避移動が有効になっていたら回避移動をする
+			if (dodgeNow == true) DodgeMove();
+			// 回避移動状態ではなかったら通常移動をする
+			else Move(controller.m_LStick);
 		}
-			
 
-		// コントローラーの入力を受け取って自身を回転
-		// Rotate()
-
-		
+		// プレイヤーの向きを変更
+		Rotate(controller.m_RStick);
 	}
-	*/
+
+	// 体力が0になったときプレイヤーは死にます
+	if (status.m_life <= 0) isDead = true;
 }
 
+// プレイヤーに番号を振り分け
 void Player::SetPlayerNum(int playerNumber)
 {
+	// 引数でもらった番号をプレイヤー番号に設定
+	playerNum = playerNumber;
+}
 
+// コントローラー情報を更新
+void Player::GetController()
+{
+	controller.m_LStick = inputManager->GetStick(playerNum, Stick::LEFT);
+	controller.m_RStick = inputManager->GetStick(playerNum, Stick::RIGHT);
 }

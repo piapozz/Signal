@@ -11,7 +11,7 @@ BaseCharacter::~BaseCharacter()
 }
 
 // 通常移動処理
-void BaseCharacter::Move(Vector2 moveVec, float angle)
+void BaseCharacter::Move(Vector2 moveVec)
 {
 	// 移動後の予定座標
 	Vector2 temp;
@@ -19,21 +19,71 @@ void BaseCharacter::Move(Vector2 moveVec, float angle)
 	// 斜めに入力されていなかったら
 	if (moveVec.x != 0.0f && moveVec.y == 0.0f || moveVec.x == 0.0f && moveVec.y != 0.0f)
 	{
+		/*
 		if (moveVec.x >= 0) temp.x += moveVec.x * speed;
 		if (moveVec.x <= 0) temp.x -= moveVec.x * speed;
 		if (moveVec.y >= 0) temp.y += moveVec.y * speed;
 		if (moveVec.y <= 0) temp.y -= moveVec.y * speed;
+		*/
+
+		// 移動ベクトルにスピードをかけてそのまま加算
+		temp.x += moveVec.x * speed;
+		temp.y += moveVec.y * speed;
 	}
 
 	// 斜め入力されていたら
 	else
 	{
-		if (moveVec.x >= 0 && moveVec.y >= 0) temp.x += moveVec.x * speed;
-		if (moveVec.x <= 0 && moveVec.y >= 0) temp.x -= moveVec.x * speed;
-		if (moveVec.x >= 0 && moveVec.y <= 0) temp.y += moveVec.y * speed;
-		if (moveVec.x <= 0 && moveVec.y <= 0) temp.y -= moveVec.y * speed;
+		/*
+		// 右上移動
+		if (moveVec.x >= 0 && moveVec.y >= 0)
+		{
+			temp.x += moveVec.x * speed / 2.0f;
+		}
+
+		// 左上移動
+		if (moveVec.x <= 0 && moveVec.y >= 0)
+		{
+			temp.x += moveVec.x * speed / 2.0f;
+		}
+
+		// 右下移動
+		if (moveVec.x >= 0 && moveVec.y <= 0)
+		{
+			temp.y += moveVec.y * speed;
+		}
+
+		// 左下移動
+		if (moveVec.x <= 0 && moveVec.y <= 0)
+		{
+			temp.y += moveVec.y * speed;
+		}
+		*/
+
+		// 移動ベクトルにスピードをかけてそのまま加算
+		temp.x += moveVec.x * speed / 0.5f;
+		temp.y += moveVec.y * speed / 0.5f;
 	}
+
 	// 移動予定座標とオブジェクトとの当たり判定を見て移動を完了させるか分岐
+	if (hitObject != true)
+	{
+		// 座標を更新
+		status.m_position.x += temp.x;
+		status.m_position.y += temp.y;
+	}
+}
+
+// 回避移動の処理
+void BaseCharacter::DodgeMove()
+{
+	Vector2 temp;
+
+	// 向いている方向に強制的に進む
+	temp.x = cos(status.m_angle) * dodgeSpeed;
+	temp.y = sin(status.m_angle) * dodgeSpeed;
+
+	// 移動予定座標がオブジェクトにあたっていなかったら
 	if (hitObject != true)
 	{
 		// 座標を更新
@@ -45,36 +95,16 @@ void BaseCharacter::Move(Vector2 moveVec, float angle)
 // 向きを変える
 void BaseCharacter::Rotate(Vector2 stickAngle)
 {
-	// 方向入力に従ってキャラクターを移動
+	// 移動方向から角度を計算
 	if (stickAngle.x != 0.0f || stickAngle.y != 0.0f)
-	{	
-		
-	}
-}
-
-void BaseCharacter::Shot()
-{
-
-}
-
-void BaseCharacter::Dodge(Vector2 moveVec, float angle)
-{
-	// 移動方向に向かって回避を実装
-	if (moveVec.x != 0.0f || moveVec.y != 0.0f)
 	{
-		// 計算用のVECTOR変数
-		Vector2 temp;
-
-		float sinParam = sinf(angle / 180.0f * DX_PI_F);
-		float cosParam = cosf(angle / 180.0f * DX_PI_F);
-
-
-		temp.x = moveVec.x * cosParam - moveVec.y * sinParam * 2.0f;
-		temp.y = moveVec.x * sinParam + moveVec.y * cosParam * 2.0f;
-
-		// 当たり判定によって自身の場所を更新するかを決める
+		// 角度計算しつつ角度をラジアンで返す
+		status.m_angle = atan2(stickAngle.y, stickAngle.x) * (180.0f / DX_PI_F);
 	}
 }
+
+// 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
+void BaseCharacter::Dodge(Vector2 moveVec) { if (canDodge == true)dodgeNow = true; }
 
 void BaseCharacter::PowerUp()
 {

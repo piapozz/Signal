@@ -10,22 +10,27 @@ BaseObject::~BaseObject()
 
 }
 
-// モデルを描画
+// 画像を描画
 void BaseObject::Draw()
 {
-	// モデルを描画
-	if (objectModel != NULL) MV1DrawModel(objectModel);
+	// 画像を描画
+	if (objectHandle != NULL) DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, status.m_angle * (DX_PI_F / 180), objectHandle, true);
+	// ハンドルに何も入っていなかったら代わりに丸を生成
 	else DrawCircle(status.m_position.x, status.m_position.y, 150, GetColor(255, 0, 0), FALSE);
 }
 
 // オブジェクトの座標変更
 void BaseObject::SetPosition(Vector2 objectPos)
 {
+	// 引数でもらった座標で更新
 	status.m_position = objectPos;
 }
 
 // モデルデータをセット
 void BaseObject::SetModelData(int model)
 {
-	objectModel = model;
+	// 引数でもらったモデルをセット
+	objectHandle = model;
 }
+
+BaseObject::Status BaseObject::GetStatus() { return status; }

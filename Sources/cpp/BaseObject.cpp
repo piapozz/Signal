@@ -20,11 +20,16 @@ void BaseObject::Draw()
 }
 
 // オブジェクトの座標変更
-void BaseObject::SetPosition(Vector2 objectPos)
-{
-	// 引数でもらった座標で更新
-	status.m_position = objectPos;
-}
+void BaseObject::SetPosition(Vector2 objectPos) { status.m_position = objectPos; }
+
+// オブジェクトの体力を設定
+void BaseObject::SetLife(float life) { status.m_life = life; }
+
+// オブジェクトの向きを設定
+void BaseObject::SetAngle(float angle) { status.m_angle = angle; }
+
+// オブジェクトの大きさを設定
+void BaseObject::SetShapeSize(float size) { status.m_shapeSize = size; }
 
 // モデルデータをセット
 void BaseObject::SetModelData(int model)

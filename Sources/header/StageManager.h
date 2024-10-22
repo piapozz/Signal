@@ -32,7 +32,7 @@ private:
 public:
 
 	StageManager();
-	~StageManager(){}
+	~StageManager();
 
 	Vector2 ConvertNumToPos(int x, int y);
 };

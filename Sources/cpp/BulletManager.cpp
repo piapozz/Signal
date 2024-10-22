@@ -28,6 +28,9 @@ void BulletManager::Move()
 	{
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
+			// —LŒø”»’è
+			if (!_bulletPram[i].m_BulletList[j].CheckActive()) return;
+
 			// ˆÚ“®
 			_bulletPram[i].m_BulletList[j].Move();
 		}
@@ -42,6 +45,9 @@ void BulletManager::Draw()
 	{
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
+			// —LŒø”»’è
+			if (!_bulletPram[i].m_BulletList[j].CheckActive()) return;
+
 			// •`‰æ
 			_bulletPram[i].m_BulletList[j].Draw();
 		}
@@ -51,8 +57,45 @@ void BulletManager::Draw()
 // ”­ŽË
 void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
-	// “n‚³‚ê‚½ƒvƒŒƒCƒ„[‚Ì’e‚ðˆê‚Â’Ç‰Á
-	_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, status));
+	// RateŒvŽZ
+	time += GetNowCount();
+
+	float interval = 1 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
+
+	if (time < interval) return;
+
+	time = 0;
+
+	// ŠgŽU‚Ìƒpƒ‰ƒ[ƒ^[‚ª‚ ‚Á‚½ê‡•¡”•ûŒü‚ÉŒü‚¯‚Ä”­ŽË‚·‚é
+	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
+	{
+		// “n‚³‚ê‚½ƒvƒŒƒCƒ„[‚Ì’e‚ðˆê‚Â’Ç‰Á
+		_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, status));
+	}
+	else 
+	{
+		// ƒŒƒxƒ‹‚ðŠi”[
+		int level = _bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT];
+
+		// ŠÔŠu‚ðŽZo
+		float rate = _diffusionAngleMax / ((_diffusion * level) + 1);
+
+		// ƒ‰ƒWƒAƒ“‚É•ÏŠ·
+		float radianAngle = rate / 180 * DX_PI;
+
+		// ”­ŽËƒXƒe[ƒ^ƒX‚ðì¬
+		BaseObject::Status temp = status;
+		temp.m_angle -= radianAngle * ((_diffusion * level) / 2);
+
+		// ‚»‚ê‚¼‚ê‚ÌŠp“x‚É‘Î‚µ‚Ä’e‚ð”­ŽË
+		for (int i = 0; i < ((_diffusion * level) + 1); i++) 
+		{
+			temp.m_angle += radianAngle * i;
+
+			// ’e‚ð’Ç‰Á
+			_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, temp));
+		}
+	}
 }
 
 

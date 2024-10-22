@@ -22,7 +22,12 @@ private:
 
 	std::vector<BulletPram> _bulletPram;
 
-	float m_Rate = 1.0f;	// ”­ËŠÔŠu
+	float time = 0;					// Œ»İ‚Ì•b”
+
+	const float RATE_VALUE = 0.2f;	// ˆêƒŒƒxƒ‹‚²‚Æ‚Éã‚ª‚Á‚Ä‚¢‚­ƒŒ[ƒg
+
+	int _diffusion = 2;				// ŠgU‚ÌƒŒƒxƒ‹ˆê‚²‚Æ‚É‘‚¦‚é’e‚Ì”
+	int _diffusionAngleMax = 120;	// ŠgU‚·‚éŠp“x
 
 public:
 

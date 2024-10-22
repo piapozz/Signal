@@ -40,6 +40,9 @@ public:
 	// 描画関数
 	void Draw();
 
+	// 射程管理関数
+	void CheckRange();
+
 	// 座標更新関数
 	void Move() {};
 
@@ -48,4 +51,7 @@ public:
 
 	// 破壊関数
 	void Destroy() {};
+
+	// 有効かどうか返す
+	bool CheckActive() { return _status.m_Flag; }
 };

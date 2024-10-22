@@ -8,19 +8,23 @@ class BaseCharacter : public BaseObject
 protected:
 	InputManager* inputManager;
 
-	float speed;				// 自機のスピード
-	float dodgeCount;			// 回避のクールタイム管理
 	int exp;					// 壊した箱の数を管理
 
-	Vector2 oncePos;
+	float speed;				// 自機のスピード
+	float dodgeSpeed;			// 回避の速さ
+	float dodgeCount;			// 回避のクールタイム管理
+	float dodgeFlame;			// 回避に使うフレーム数
+
+	bool canDodge;
+	bool dodgeNow;				// 回避している状態かを見る
 
 	BaseCharacter();
 	~BaseCharacter();
 
-	void Move(Vector2 moveVec, float angle);
+	void Move(Vector2 moveVec);
+	void DodgeMove();
 	void Rotate(Vector2 stickAngle);
-	void Shot();
-	void Dodge(Vector2 moveVec, float angle);
+	void Dodge(Vector2 moveVec);
 	void PowerUp();
 	void StatusUp();
 	void UpdateHitJudge();

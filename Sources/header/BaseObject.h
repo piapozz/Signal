@@ -13,16 +13,14 @@ public:
 		float m_shapeSize;		// 形の大きさ
 	};
 
+	Status GetStatus();			// 構造体の情報を取得
+
+	Vector2 oldPosition;
+
 protected:
 	Status status;
 
-	enum Shape				// 当たり判定の形区別するための情報
-	{
-		CIRCLE,
-		SQUARE,
-	};
-
-	int objectModel;		// オブジェクトのモデル管理
+	int objectHandle;		// オブジェクトの見た目を管理（モデルや画像）
 
 	bool canMove;			// 動けるかどうかを管理
 	bool canHit;			// 壁や弾などダメージが必要あるものかを区別

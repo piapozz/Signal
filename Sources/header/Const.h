@@ -3,6 +3,8 @@
 
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
+const float BOX_SIZE = 1.0f;    // 箱のサイズ
+
 enum class DirButton
 {
     DOWN = 0,
@@ -45,8 +47,8 @@ enum class Shape				// 当たり判定の形区別するための情報
 // 二次元ベクトル
 typedef struct Vector2
 {
-    float x;
-    float y;
+    static float x;
+    static float y;
 
     Vector2 operator+(Vector2 vec)
     {
@@ -90,24 +92,39 @@ typedef struct Vector2
         y = Y;
     }
 
-    float Distance()
+    static float Distance(Vector2 vec1, Vector2 vec2)
     {
-        return 0;
+        return Size(vec1 - vec2);;
     }
 
-    float Size()
+    static float size()
     {
         return sqrtf(powf(x, 2) + powf(y, 2));
     }
 
-    void Normalize()
+    static float Size(Vector2 vec)
     {
-        float distance = Size();
+        return sqrtf(powf(vec.x, 2) + powf(vec.y, 2));
+    }
+
+    static void normalize()
+    {
+        float distance = size();
         
         x /= distance;
         y /= distance;
     }
 
+    static Vector2 Normalize(Vector2 vec)
+    {
+        Vector2 temp;
+        float distance = vec.size();
+
+        temp.x = vec.x / distance;
+        temp.y = vec.y / distance;
+
+        return temp;
+    }
 };
 
 // 弾のステータス

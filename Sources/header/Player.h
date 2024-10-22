@@ -19,8 +19,8 @@ private:
 	bool isDead;
 
 public:
-	Player();
-	~Player();
+	Player();								// コンストラクタ
+	~Player();								// デストラクタ
 
 	void Proc();
 	void SetPlayerNum(int playerNumber);

@@ -9,11 +9,14 @@ StageManager::StageManager()
 		{
 			switch ((ObjectType)_stageLayout[x][y])
 			{
-			case ObjectType::NONE:
-				continue;
-				break;
 			case ObjectType::BOX:
-				_stageData[x][y] = new Box(ConvertNumToPos(x, y));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), 1.0f));
+				break;
+			case ObjectType::WALL:
+				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
+				break;
+			default:
+				continue;
 				break;
 			}
 		}
@@ -34,4 +37,9 @@ StageManager::~StageManager()
 Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
 	return Vector2(x * BOX_SIZE, y * BOX_SIZE);
+}
+
+std::vector<Box> StageManager::GetBoxData()
+{
+	return _boxList;
 }

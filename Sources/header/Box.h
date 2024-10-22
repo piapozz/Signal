@@ -5,7 +5,7 @@ class Box : public BaseObject
 {
 private:
 
-	Vector2 vertex[4];		// 頂点の座標
+	Vector2 _vertex[4];		// 頂点の座標
 
 public:
 
@@ -14,5 +14,6 @@ public:
 	~Box(){}
 
 	void CalVertexPos();
+	Vector2 GetNormDir();
+	Vector2 GetVertexPos(int n);
 };
-

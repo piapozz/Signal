@@ -1,21 +1,28 @@
 #include "../header/CollisionManager.h"
 #include "../header/StageManager.h"
 
-// 法線
-// オブジェクト同士の判定とBulletBaseとObjectBaseとの判定
+CollisionManager::CollisionManager()
+{
+	
+}
+
+CollisionManager::~CollisionManager()
+{
+
+}
 
 // ベースオブジェクトとベースオブジェクトの判定
-bool CollisionManager::HitCheck(BaseObject obj1, BaseObject obj2)
+bool CollisionManager::HitCheckBaseObj(BaseObject obj1, BaseObject obj2)
 {
 	// オブジェクトの形で処理を分岐
 	// 両方円なら
-	if (true)
+	if (obj1)
 	{
 		// 座標と半径
-		Vector2 pos1;
-		float radius1;
-		Vector2 pos2;
-		float radius2;
+		Vector2 pos1 = obj1.GetStatus().m_position;
+		float radius1 = obj1.GetStatus().m_shapeSize;
+		Vector2 pos2 = obj2.GetStatus().m_position;
+		float radius2 = obj2.GetStatus().m_shapeSize;
 
 		// 距離の差が半径の合計以下なら接触
 		if (Vector2::Distance(pos1, pos2) >= (radius1 + radius2))
@@ -23,15 +30,19 @@ bool CollisionManager::HitCheck(BaseObject obj1, BaseObject obj2)
 			return true;
 		}
 	}
+	else
+	{
+
+	}
 
 	return false;
 }
 
 // 射線が通っているかレイで判定する関数
-bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2)
+bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vector<Box> boxList)
 {
 	// すべての箱と判定
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < boxList.size(); i++)
 	{
 		// 例外処理
 		// 線分からの距離が接触しない距離ならスキップ
@@ -40,17 +51,11 @@ bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2)
 		// すべての辺と判定
 		for (int j = 0; j < 4; j++)
 		{
-			// 辺の線分
-			Vector2 sideLine;
-			// レイ
-			Vector2 ray = pos1 - pos2;
-			// 壁の辺とレイが交わっていたら接触
-			if (false)
-			{
-
-			}
+			if (CheckLineCross(pos1, pos2, boxList[i].GetVertexPos(j), boxList[i].GetVertexPos((j + 1) % 4)) == true)
+				return false;
 		}
 	}
+	return true;
 }
 
 // 線分と線分が交わっているかを判定する関数

@@ -7,6 +7,11 @@ Enemy::Enemy()
 	colManager = new CollisionManager();
 }
 
+Enemy::~Enemy()
+{
+	delete colManager;
+}
+
 // “G‚Ì‹““®
 void Enemy::Proc()
 {

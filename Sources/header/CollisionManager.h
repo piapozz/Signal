@@ -6,14 +6,14 @@ class CollisionManager
 {
 private:
 
-
+	
 	
 public:
 
-	CollisionManager(){}
-	~CollisionManager(){}
+	CollisionManager();
+	~CollisionManager();
 
-	bool HitCheck(BaseObject obj1, BaseObject obj2);
-	bool CheckBetweenObject(Vector2 pos1, Vector2 pos2);
+	bool HitCheckBaseObj(BaseObject obj1, BaseObject obj2);
+	bool CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vector<Box> boxList);
 	bool CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2);
 };

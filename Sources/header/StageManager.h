@@ -1,5 +1,7 @@
 #pragma once
+#include <vector>
 #include "BaseObject.h"
+#include "Box.h"
 
 class StageManager
 {
@@ -28,6 +30,7 @@ private:
 
 	// ブロックの可変長配列
 	BaseObject* _stageData[5][5];
+	std::vector<Box> _boxList;
 
 public:
 
@@ -35,5 +38,5 @@ public:
 	~StageManager();
 
 	Vector2 ConvertNumToPos(int x, int y);
+	std::vector<Box> GetBoxData();
 };
-

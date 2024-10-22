@@ -52,3 +52,9 @@ bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2)
 		}
 	}
 }
+
+// ü•ª‚Æü•ª‚ªŒğ‚í‚Á‚Ä‚¢‚é‚©‚ğ”»’è‚·‚éŠÖ”
+bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2)
+{
+
+}

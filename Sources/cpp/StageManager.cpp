@@ -20,6 +20,17 @@ StageManager::StageManager()
 	}
 }
 
+StageManager::~StageManager()
+{
+	for (int x = 0; x < 5; x++)
+	{
+		for (int y = 0; y < 5; y++)
+		{
+			delete _stageData[x][y];
+		}
+	}
+}
+
 Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
 	return Vector2(x * BOX_SIZE, y * BOX_SIZE);

@@ -24,7 +24,7 @@ Box::Box(Vector2 pos, float life)
 void Box::CalVertexPos()
 {
 	// ’¸“_‚Ü‚Å‚Ì’·‚³
-	float length = sqrtf(powf(1 / 2, 2) * 2);
+	float length = sqrtf(powf(BOX_SIZE / 2, 2) * 2);
 
 	// Žl‚ÂŠp•ªŒJ‚è•Ô‚·
 	for (int i = 0; i < 4; i++)

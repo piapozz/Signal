@@ -8,9 +8,19 @@ public:
 	struct Status
 	{
 		Vector2 m_position;		// 位置
-		float m_life;			// オブジェクトの体力
 		float m_angle;			// 向き
+		float m_life;			// オブジェクトの体力
 		float m_shapeSize;		// 形の大きさ
+
+		// ステータスの初期化
+		Status() 
+		{
+			m_position.x = 0.0f;
+			m_position.y = 0.0f;
+			m_angle = 0.0;
+			m_life = 1.0f;
+			m_shapeSize = 1.0;
+		}
 	};
 
 	Status GetStatus();			// 構造体の情報を取得
@@ -33,5 +43,9 @@ protected:
 	void Draw();
 
 	void SetPosition(Vector2 objectPos);
+	void SetLife(float life);
+	void SetAngle(float angle);
+	void SetShapeSize(float size);
+
 	void SetModelData(int model);
 };

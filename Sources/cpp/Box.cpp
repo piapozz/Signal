@@ -21,6 +21,16 @@ Box::Box(Vector2 pos, float life)
 	status.m_life = life;
 }
 
+void Box::Draw()
+{
+	int x1 = _vertex[0].x;
+	int y1 = _vertex[0].y;
+	int x2 = _vertex[2].x;
+	int y2 = _vertex[2].y;
+
+	DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
+}
+
 // ’¸“_‚ÌÀ•W‚ğŒvZ‚·‚éŠÖ”
 void Box::CalVertexPos()
 {

@@ -29,14 +29,16 @@ private:
 	};
 
 	// ブロックの可変長配列
-	BaseObject* _stageData[5][5];
-	std::vector<Box> _boxList;
+	BaseObject* _stageData[STAGE_WIDTH][STAGE_HEIGHT];
+	std::vector<Box*> _boxList;
 
 public:
 
 	StageManager();
 	~StageManager();
 
+	void Draw();
+
 	Vector2 ConvertNumToPos(int x, int y);
-	std::vector<Box> GetBoxData();
+	std::vector<Box*> GetBoxData();
 };

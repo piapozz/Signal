@@ -75,7 +75,7 @@
     <ClCompile Include="Sources\cpp\Player.cpp">
       <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\BaseBullet.cpp">
+    <ClCompile Include="Sources\cpp\BaseChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
     <ClCompile Include="Sources\cpp\InputManager.cpp">
@@ -84,22 +84,22 @@
     <ClCompile Include="Sources\cpp\BulletManager.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\ExplosionShot.cpp">
+    <ClCompile Include="Sources\cpp\ExplosionChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\MultipleShot.cpp">
+    <ClCompile Include="Sources\cpp\MultipleChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\NormalShot.cpp">
+    <ClCompile Include="Sources\cpp\NormalChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\PenetrationShot.cpp">
+    <ClCompile Include="Sources\cpp\PenetrationChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\ReflectionShot.cpp">
+    <ClCompile Include="Sources\cpp\ReflectionChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\TrackingShot.cpp">
+    <ClCompile Include="Sources\cpp\TrackingChamber..cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
     <ClCompile Include="Sources\cpp\AudioManager.cpp">
@@ -126,7 +126,7 @@
     <ClCompile Include="Sources\cpp\EffectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\MixBullet.cpp">
+    <ClCompile Include="Sources\cpp\MainBullet.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
   </ItemGroup>

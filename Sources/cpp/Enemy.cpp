@@ -27,7 +27,7 @@ void Enemy::Proc()
 	//Move();
 
 	// ŽËü‚ª’Ê‚Á‚Ä‚¢‚é‚È‚ç
-	if (colManager->CheckBetweenObject(status.m_position, playerPos))
+	if (colManager->CheckBetweenObject(status.m_position, playerPos), )
 	{
 		Shot();
 	}

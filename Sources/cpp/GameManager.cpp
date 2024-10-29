@@ -40,6 +40,7 @@ void GameManager::Init()
 void GameManager::Proc()
 {
 	// “ü—ÍŽæ“¾
+	inputManager->Proc();
 
 	// ƒvƒŒƒCƒ„[‚ÌˆÚ“®
 
@@ -49,7 +50,7 @@ void GameManager::Proc()
 	bulletManager->Move();
 
 	// “–‚½‚è”»’è
-	
+	collisionManager->
 }
 
 // •`‰æ

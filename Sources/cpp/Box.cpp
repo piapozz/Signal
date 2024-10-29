@@ -7,6 +7,8 @@ Box::Box(Vector2 pos)
 
 	// ’¸“_‚ÌÀ•W‚ğ‹‚ß‚é
 	CalVertexPos();
+
+	_isWall = false;
 }
 
 Box::Box(Vector2 pos, float life)
@@ -19,6 +21,8 @@ Box::Box(Vector2 pos, float life)
 
 	// ‘Ì—Íİ’è
 	status.m_life = life;
+
+	_isWall = true;
 }
 
 void Box::Draw()

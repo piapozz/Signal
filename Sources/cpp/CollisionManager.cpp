@@ -1,5 +1,4 @@
 #include "../header/CollisionManager.h"
-#include "../header/StageManager.h"
 
 CollisionManager::CollisionManager()
 {
@@ -12,12 +11,12 @@ CollisionManager::~CollisionManager()
 }
 
 // ベースオブジェクトとベースオブジェクトの判定
-bool CollisionManager::HitCheckBaseObj(BaseObject obj1, BaseObject obj2)
+bool CollisionManager::HitCheck_BaseObj(BaseObject obj1, BaseObject obj2)
 {
 	// 座標と半径
-	Vector2 pos1 = obj1.GetStatus().m_position;
+	Vector2 pos1 = obj1.GetStatus().m_nextPosition;
 	float radius1 = obj1.GetStatus().m_shapeSize;
-	Vector2 pos2 = obj2.GetStatus().m_position;
+	Vector2 pos2 = obj2.GetStatus().m_nextPosition;
 	float radius2 = obj2.GetStatus().m_shapeSize;
 
 	// 距離の差が半径の合計以下なら接触
@@ -29,6 +28,39 @@ bool CollisionManager::HitCheckBaseObj(BaseObject obj1, BaseObject obj2)
 	return false;
 }
 
+// ベースオブジェクトと箱の判定
+bool CollisionManager::HitCheck_BaseObj_Box(BaseObject obj, Box box)
+{
+	Vector2 objPos = obj.GetStatus().m_nextPosition;
+	Vector2 vertexPos[4];
+	float radius = obj.GetStatus().m_shapeSize;
+	for (int i = 0; i < 4; i++)
+	{
+		vertexPos[i] = box.GetVertexPos(i);
+	}
+
+	// 矩形のy領域判定
+	if ((objPos.x > vertexPos[2].x) && (objPos.x < vertexPos[0].x) && (objPos.y > vertexPos[2].y - radius) && (objPos.y < vertexPos[0].y + radius))
+		return true;
+	// 矩形のx領域判定
+	if ((objPos.x > vertexPos[2].x - radius) && (objPos.x < vertexPos[0].x + radius) && (objPos.y > vertexPos[2].y) && (objPos.y < vertexPos[0].y))
+		return true;
+	// 各頂点の領域判定
+	for (int i = 0; i < 4; i++)
+	{
+		float distanceX = vertexPos[i].x - objPos.x;
+		float distanceY = vertexPos[i].y - objPos.y;
+
+		if (powf(distanceX, 2) + powf(distanceY, 2) < powf(radius, 2))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+// みかん
 // 射線が通っているかレイで判定する関数
 bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vector<Box*> boxList)
 {
@@ -64,26 +96,27 @@ void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject> players)
 		{
 			if (i >= j) return;
 
-			if (HitCheckBaseObj(players[i], players[j]))
+			if (HitCheck_BaseObj(players[i], players[j]))
 			{
 				// オブジェクトのhitFlagを立てる
+				players[i].SetHitFlag(true);
+				players[j].SetHitFlag(true);
 			}
 		}
 	}
 }
 
 // プレイヤーと弾を判定する関数
-void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject> players, std::vector<BaseObject> bullets)
+void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject> players, std::vector<MainBullet> bullets)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
 		for (int j = 0; j < bullets.size(); j++)
 		{
-			if (i >= j) return;
-
-			if (HitCheckBaseObj(players[i], bullets[j]))
+			if (HitCheck_BaseObj(players[i], bullets[j]))
 			{
-				// オブジェクトのhitFlagを立てる
+				// ダメージ処理
+				players[i].TakeDamage(bullets[j].GetPower());
 			}
 		}
 	}
@@ -92,11 +125,36 @@ void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject> players, s
 // プレイヤーと箱を判定する関数
 void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject> players, std::vector<Box> boxs)
 {
-
+	for (int i = 0; i < players.size(); i++)
+	{
+		for (int j = 0; j < boxs.size(); j++)
+		{
+			if (HitCheck_BaseObj_Box(players[i], boxs[j]))
+			{
+				// オブジェクトのhitFlagを立てる
+				players[i].SetHitFlag(true);
+				boxs[j].SetHitFlag(true);
+			}
+		}
+	}
 }
 
 // 弾と箱を判定する関数
-void CollisionManager::HitCheck_Bullet_Box(std::vector<BaseObject> bullets, std::vector<Box> boxs)
+void CollisionManager::HitCheck_Bullet_Box(std::vector<MainBullet> bullets, std::vector<Box> boxs)
 {
-
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		for (int j = 0; j < boxs.size(); j++)
+		{
+			if (HitCheck_BaseObj_Box(bullets[i], boxs[j]))
+			{
+				// 壁かどうかで分岐
+				if (boxs[j].GetIsWall() == true)
+					bullets[i].Destroy();
+				else
+					// ダメージ処理
+					boxs[j].TakeDamage(bullets[i].GetPower());
+			}
+		}
+	}
 }

@@ -6,9 +6,6 @@
 
 class BaseCharacter : public BaseObject
 {
-public:
-	Vector2 nextPos;
-
 protected:
 	InputManager* inputManager;
 	CollisionManager* collisionManager;

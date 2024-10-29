@@ -1,22 +1,8 @@
-#include "../header/NormalChamber..h"
+#include "../header/NormalChamber.h"
 
 
 void NormalChamber::Move()
 {
-	oldPosition = status.m_position;
-
-	status.m_position.x = status.m_position.x + cosf(status.m_angle) * _status.m_Speed;
-	status.m_position.y = status.m_position.y - sinf(status.m_angle) * _status.m_Speed;
-}
-
-// íÖíeä÷êî
-void NormalChamber::Impact()
-{
-	Destroy();
-}
-
-// îjâÛä÷êî
-void  NormalChamber::Destroy()
-{
-	_status.m_Flag = false;
+	status.m_nextPosition.x = status.m_position.x + cosf(status.m_angle) * mainContainer.m_Speed;
+	status.m_nextPosition.y = status.m_position.y - sinf(status.m_angle) * mainContainer.m_Speed;
 }

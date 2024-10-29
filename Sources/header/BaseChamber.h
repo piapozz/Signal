@@ -20,30 +20,7 @@
 // ③ それらに伴う補助関数
 
 class BaseChamber
-	: public BaseObject
 {
-private:
-
-	// 弾丸の色
-	const int _BULLET_COLOR = GetColor(0, 0, 0);
-
-	typedef struct ShotStatus
-	{
-		bool m_Flag = false;    // 発射フラグ
-	    float m_Speed = 5.0f;   // スピード
-		float m_Power = 1.0f;	// 破壊力	
-		float m_Range = 3.0f;	// 射程
-	};
-
-protected:
-
-
-	ShotStatus _status;
-
-	int graph = LoadGraph("char* FileName");
-
-	float distance = 0;
-
 public:
 
 	// 基礎ステータス
@@ -53,6 +30,7 @@ public:
 		float m_Speed = 5.0f;   // スピード
 		float m_Power = 1.0f;	// 破壊力	
 		float m_Range = 3.0f;	// 射程
+		int color = GetColor(0, 0, 0);	// 弾丸の色
 	};
 
 	// 反射ステータス
@@ -89,29 +67,31 @@ public:
 		ExplosionContainer explosionContainer;
 	};
 
+protected:
+		
+	BaseObject::Status status;
+	MainContainer mainContainer;
+
+public:
+
+
 	// コンストラクタ
 	BaseChamber();
-	BaseChamber(float bulletStatus[], Status objStatus);
-	BaseChamber(Status status, MainContainer container);
+	BaseChamber(BaseObject::Status *status, MainContainer *container);
 
 	// デストラクタ
 	~BaseChamber();
 
-	// 描画関数
-	void Draw();
-
-	// 射程管理関数
-	void CheckRange();
-
-	// 座標更新関数
-	void Move() {};
+	// 角度修正関数
+	virtual void AngleModifying() = 0;
+	
+	// 移動関数
+	virtual void Move() = 0;
 
 	// 着弾関数
-	void Impact() {};
+	virtual void Impact() = 0;
 
-	// 破壊関数
-	void Destroy() {};
-
-	// 有効かどうか返す
-	bool CheckActive() { return _status.m_Flag; }
+	// 消滅関数 
+	virtual void Destroy() = 0;
+	
 };

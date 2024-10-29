@@ -29,7 +29,7 @@ void BulletManager::Move()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// —LŒø”»’è
-			if (!_bulletPram[i].m_BulletList[j].CheckActive()) return;
+			if (!_bulletPram[i].m_BulletList[j].GetActive()) return;
 
 			// ˆÚ“®
 			_bulletPram[i].m_BulletList[j].Move();
@@ -46,7 +46,7 @@ void BulletManager::Draw()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// —LŒø”»’è
-			if (!_bulletPram[i].m_BulletList[j].CheckActive()) return;
+			if (!_bulletPram[i].m_BulletList[j].GetActive()) return;
 
 			// •`‰æ
 			_bulletPram[i].m_BulletList[j].Draw();
@@ -70,7 +70,16 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
 	{
 		// “n‚³‚ê‚½ƒvƒŒƒCƒ„[‚Ì’e‚ðˆê‚Â’Ç‰Á
-		_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
+		//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
+		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++) 
+		{
+			if (!_bulletPram[playerNum].m_BulletList[i].GetActive()) continue;
+
+			// Žg‚¦‚é’e‚ðŒ©‚Â‚¯‚½
+			_bulletPram[playerNum].m_BulletList[i].Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
+
+			break;
+		}
 	}
 	else 
 	{
@@ -93,7 +102,17 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 			temp.m_angle += radianAngle * i;
 
 			// ’e‚ð’Ç‰Á
-			_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, temp));
+			//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, temp));
+
+			for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++)
+			{
+				if (!_bulletPram[playerNum].m_BulletList[i].GetActive()) continue;
+
+				// Žg‚¦‚é’e‚ðŒ©‚Â‚¯‚½
+				_bulletPram[playerNum].m_BulletList[i].Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
+
+				break;
+			}
 		}
 	}
 }

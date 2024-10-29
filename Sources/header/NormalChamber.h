@@ -7,14 +7,17 @@ class NormalChamber
 {
 public:
 
-	NormalChamber(float bulletStatus[], Status objStatus) : BaseChamber(bulletStatus, objStatus) {  }
+	NormalChamber(BaseObject::Status* status, MainContainer* container) : BaseChamber(status, container) {  }
 
-	void Move() ;
+	void Move();
+
+	// Šp“xC³ŠÖ”
+	void AngleModifying() {};
 
 	// ’…’eŠÖ”
-	void Impact();
+	void Impact() {};
 
-	// ”j‰óŠÖ”
-	void Destroy();
+	// Á–ÅŠÖ” 
+	void Destroy() {};
 };
 

@@ -11,6 +11,7 @@ public:
 		float m_angle;			// 向き
 		float m_life;			// オブジェクトの体力
 		float m_shapeSize;		// 形の大きさ
+		Shape m_shape;			// 形
 
 		// ステータスの初期化
 		Status() 
@@ -27,6 +28,11 @@ public:
 
 	Vector2 oldPosition;
 
+	BaseObject();							// コンストラクタ
+	~BaseObject();							// デストラクタ
+
+	Shape GetShape();						// 形を取得
+
 protected:
 	Status status;
 
@@ -37,15 +43,12 @@ protected:
 	bool hitObject;			// オブジェクトにヒットしたかを管理
 	bool hitBullet;			// 弾にヒットしたかを管理
 
-	BaseObject();							// コンストラクタ
-	~BaseObject();							// デストラクタ
-
 	void Draw();
+	void TakeDamage(float damageSize);
 
 	void SetPosition(Vector2 objectPos);
 	void SetLife(float life);
 	void SetAngle(float angle);
 	void SetShapeSize(float size);
-
 	void SetModelData(int model);
 };

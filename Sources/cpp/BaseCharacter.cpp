@@ -14,82 +14,47 @@ BaseCharacter::~BaseCharacter()
 // 通常移動処理
 void BaseCharacter::Move(Vector2 moveVec)
 {
-	// 移動後の予定座標
-	Vector2 temp;
+	tempPos.x = 0.0f;
+	tempPos.y = 0.0f;
 
-	// 斜めに入力されていなかったら
-	if (moveVec.x != 0.0f && moveVec.y == 0.0f || moveVec.x == 0.0f && moveVec.y != 0.0f)
+	// 回避移動だったら
+	if (dodgeNow)
 	{
-		/*
-		if (moveVec.x >= 0) temp.x += moveVec.x * speed;
-		if (moveVec.x <= 0) temp.x -= moveVec.x * speed;
-		if (moveVec.y >= 0) temp.y += moveVec.y * speed;
-		if (moveVec.y <= 0) temp.y -= moveVec.y * speed;
-		*/
-
-		// 移動ベクトルにスピードをかけてそのまま加算
-		temp.x += moveVec.x * speed;
-		temp.y += moveVec.y * speed;
+		// 向いている方向に強制的に進む
+		tempPos.x = cos(status.m_angle) * dodgeSpeed;
+		tempPos.y = sin(status.m_angle) * dodgeSpeed;
 	}
 
-	// 斜め入力されていたら
+	// 通常移動
 	else
 	{
-		/*
-		// 右上移動
-		if (moveVec.x >= 0 && moveVec.y >= 0)
+		// 斜めに入力されていなかったら
+		if (moveVec.x != 0.0f && moveVec.y == 0.0f || moveVec.x == 0.0f && moveVec.y != 0.0f)
 		{
-			temp.x += moveVec.x * speed / 2.0f;
+			// 移動ベクトルにスピードをかけてそのまま加算
+			tempPos.x += moveVec.x * speed;
+			tempPos.y += moveVec.y * speed;
 		}
 
-		// 左上移動
-		if (moveVec.x <= 0 && moveVec.y >= 0)
+		// 斜め入力されていたら
+		else
 		{
-			temp.x += moveVec.x * speed / 2.0f;
+			// 移動ベクトルにスピードをかけてそのまま加算
+			tempPos.x += moveVec.x * speed / 0.5f;
+			tempPos.y += moveVec.y * speed / 0.5f;
 		}
-
-		// 右下移動
-		if (moveVec.x >= 0 && moveVec.y <= 0)
-		{
-			temp.y += moveVec.y * speed;
-		}
-
-		// 左下移動
-		if (moveVec.x <= 0 && moveVec.y <= 0)
-		{
-			temp.y += moveVec.y * speed;
-		}
-		*/
-
-		// 移動ベクトルにスピードをかけてそのまま加算
-		temp.x += moveVec.x * speed / 0.5f;
-		temp.y += moveVec.y * speed / 0.5f;
-	}
-
-	// 移動予定座標とオブジェクトとの当たり判定を見て移動を完了させるか分岐
-	if (hitObject != true)
-	{
-		// 座標を更新
-		status.m_position.x += temp.x;
-		status.m_position.y += temp.y;
 	}
 }
 
-// 回避移動の処理
-void BaseCharacter::DodgeMove()
+// 現在座標に適応
+void BaseCharacter::UpdatePosition()
 {
-	Vector2 temp;
-
-	// 向いている方向に強制的に進む
-	temp.x = cos(status.m_angle) * dodgeSpeed;
-	temp.y = sin(status.m_angle) * dodgeSpeed;
-
-	// 移動予定座標がオブジェクトにあたっていなかったら
+	// 移動予定座標とオブジェクトとの当たり判定を見て移動を完了させるか分岐（この状態では動けなくなる）
 	if (hitObject != true)
 	{
 		// 座標を更新
-		status.m_position.x += temp.x;
-		status.m_position.y += temp.y;
+		status.m_position.x += tempPos.x;
+		status.m_position.y += tempPos.y;
 	}
 }
 
@@ -120,6 +85,6 @@ void BaseCharacter::StatusUp()
 // プレイヤーが保持する当たり判定の情報を更新
 void BaseCharacter::UpdateHitJudge()
 {
-	// hitObject = オブジェクトと比較する関数
-	// hitBullet = 弾と比較する関数
+	// hitObject = collisionManager->HitCheck();
+	// hitBullet = collisionManager->HitCheck();
 }

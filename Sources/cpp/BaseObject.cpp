@@ -19,6 +19,11 @@ void BaseObject::Draw()
 	else DrawCircle(status.m_position.x, status.m_position.y, 150, GetColor(255, 0, 0), FALSE);
 }
 
+void BaseObject::TakeDamage(float damageSize)
+{
+	status.m_life -= damageSize;
+}
+
 // オブジェクトの座標変更
 void BaseObject::SetPosition(Vector2 objectPos) { status.m_position = objectPos; }
 
@@ -34,5 +39,7 @@ void BaseObject::SetShapeSize(float size) { status.m_shapeSize = size; }
 // モデルデータをセット
 void BaseObject::SetModelData(int model) { objectHandle = model; }
 
+// 形を取得する
+Shape BaseObject::GetShape() { return status.m_shape; }
 
 BaseObject::Status BaseObject::GetStatus() { return status; }

@@ -33,5 +33,23 @@ protected:
 
 	float distance = 0;
 
+public:
 
+	MixBullet();
+	~MixBullet();
+
+	// Šp“xC³
+	void UpdateAngle();
+
+	// ˆÚ“®
+	void Move();
+
+	// ’…’e
+	void Impact();
+
+	// Á–Å
+	void Destroy();
+
+	// •`‰æ
+	void Draw();
 };

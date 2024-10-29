@@ -69,7 +69,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// シーンマネージャーの削除
-	//delete sceneManager;
+	delete sceneManager;
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

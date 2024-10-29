@@ -6,6 +6,19 @@
 #include "BaseObject.h"
 #include "Const.h"
 
+// ① バレットステータス構造体を改造純粋仮想関数の用意
+// ステータス、画像の改造関数
+// 角度修正関数
+// 移動関数
+// 着弾関数
+// 消滅関数
+// ② レベルに応じた効果の上昇関数を作成
+// 貫通数
+// 爆発範囲
+// 反射回数
+// 誘導係数
+// ③ それらに伴う補助関数
+
 class BaseBullet
 	: public BaseObject
 {
@@ -23,6 +36,8 @@ private:
 	};
 
 protected:
+
+	BaseBullet b;
 
 	ShotStatus _status;
 

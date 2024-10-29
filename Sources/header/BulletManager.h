@@ -18,19 +18,55 @@ public:
 		std::vector<BaseBullet> m_BulletList;
 	};
 
+	// 弾の構造体
+	typedef struct BulletContainer 
+	{
+
+	};
+
+	// 基礎ステータス
+	typedef struct BulletContainer
+	{
+
+	};
+
+	// 反射ステータス
+	typedef struct BulletContainer
+	{
+
+	};
+
+	// 誘導ステータス
+	typedef struct BulletContainer
+	{
+
+	};
+
+	// 貫通ステータス
+	typedef struct BulletContainer 
+	{
+
+	};
+
+	// 爆発ステータス
+	typedef struct BulletContainer
+	{
+
+	};
+
 private:
 
-	std::vector<BulletPram> _bulletPram;
 
-	float time = 0;					// 現在の秒数
 
 	const float RATE_VALUE = 0.2f;	// 一レベルごとに上がっていくレート
 
 	int _diffusion = 2;				// 拡散のレベル一ごとに増える弾の数
 	int _diffusionAngleMax = 120;	// 拡散する角度
+	float time = 0;					// 現在の秒数
 
 public:
 
+	static std::vector<BulletPram> _bulletPram;
 
 	// コンストラクタ
 	BulletManager();

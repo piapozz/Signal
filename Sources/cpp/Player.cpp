@@ -15,6 +15,9 @@ Player::~Player()
 // プレイヤーのメイン処理
 void Player::Proc()
 {
+	// 当たり判定の更新
+	UpdateHitJudge();
+
 	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
 	if (isDead != true)
 	{
@@ -24,10 +27,8 @@ void Player::Proc()
 		// もし移動できる状態だったら
 		if (canMove)
 		{
-			// もし回避移動が有効になっていたら回避移動をする
-			if (dodgeNow == true) DodgeMove();
 			// 回避移動状態ではなかったら通常移動をする
-			else Move(controller.m_LStick);
+			Move(controller.m_LStick);
 		}
 
 		// プレイヤーの向きを変更

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "BaseChamber.h"
+#include "MainBullet.h"
 
-#include "NormalChamber..h"
+#include "NormalChamber.h"
 
 using namespace std;
 
@@ -15,10 +15,8 @@ public:
 	{
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 		int m_BulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
-		std::vector<BaseChamber> m_BulletList;
+		std::vector<MainBullet> m_BulletList;
 	};
-
-
 
 private:
 

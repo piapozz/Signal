@@ -46,13 +46,6 @@ void MainBullet::Destroy()
 	_mainContainer.m_Flag = false;
 }
 
-
-// À•WXV
-void UpdatePosition() 
-{
-
-}
-
 // •`‰æŠÖ”
 void MainBullet::Draw()
 {

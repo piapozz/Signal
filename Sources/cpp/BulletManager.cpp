@@ -10,14 +10,29 @@ BulletManager::BulletManager()
 // コンストラクタ
 BulletManager::BulletManager(int playerNum)
 {
+	for (int i = 0; i < playerNum; i++) 
+	{
+		_bulletPram.push_back(BulletPram());
+
+		for (int j = 0; j < BULLET_MAX; j++) 
+		{
+			_bulletPram[i].m_BulletList.push_back(new MainBullet());
+		}
+	}
 
 }
 
 
-// コンストラクタ
+// デストラクタ
 BulletManager::~BulletManager()
 {
-
+	for (int i = 0; i < _bulletPram.size(); i++)
+	{
+		for (int j = 0; j < BULLET_MAX; j++)
+		{
+			delete _bulletPram[i].m_BulletList[j];
+		}
+	}
 }
 
 // 弾の移動
@@ -29,10 +44,10 @@ void BulletManager::Move()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j].GetActive()) return;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
 
 			// 移動
-			_bulletPram[i].m_BulletList[j].Move();
+			_bulletPram[i].m_BulletList[j]->Move();
 		}
 	}
 }
@@ -46,10 +61,10 @@ void BulletManager::Draw()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j].GetActive()) return;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
 
 			// 描画
-			_bulletPram[i].m_BulletList[j].Draw();
+			_bulletPram[i].m_BulletList[j]->Draw();
 		}
 	}
 }
@@ -73,10 +88,10 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
 		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++) 
 		{
-			if (!_bulletPram[playerNum].m_BulletList[i].GetActive()) continue;
+			if (!_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
 
 			// 使える弾を見つけた
-			_bulletPram[playerNum].m_BulletList[i].Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
+			_bulletPram[playerNum].m_BulletList[i]->Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
 
 			break;
 		}
@@ -106,10 +121,10 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 
 			for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++)
 			{
-				if (!_bulletPram[playerNum].m_BulletList[i].GetActive()) continue;
+				if (!_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
 
 				// 使える弾を見つけた
-				_bulletPram[playerNum].m_BulletList[i].Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
+				_bulletPram[playerNum].m_BulletList[i]->Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
 
 				break;
 			}

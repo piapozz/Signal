@@ -28,6 +28,8 @@ protected:
 
 	int graph = LoadGraph("char* FileName");
 
+	float distance = 0;
+
 public:
 
 	// コンストラクタ

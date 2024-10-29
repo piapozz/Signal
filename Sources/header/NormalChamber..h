@@ -1,13 +1,13 @@
 #pragma once
 
-#include "BaseBullet.h"
+#include "BaseChamber.h"
 
-class NormalShot
-	: public BaseBullet
+class NormalChamber
+	: public BaseChamber
 {
 public:
 
-	NormalShot(float bulletStatus[], Status objStatus) : BaseBullet(bulletStatus, objStatus) {  }
+	NormalChamber(float bulletStatus[], Status objStatus) : BaseChamber(bulletStatus, objStatus) {  }
 
 	void Move() ;
 

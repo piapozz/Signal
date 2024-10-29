@@ -19,7 +19,7 @@
 // 誘導係数
 // ③ それらに伴う補助関数
 
-class BaseBullet
+class BaseChamber
 	: public BaseObject
 {
 private:
@@ -37,7 +37,6 @@ private:
 
 protected:
 
-	BaseBullet b;
 
 	ShotStatus _status;
 
@@ -47,12 +46,56 @@ protected:
 
 public:
 
+	// 基礎ステータス
+	typedef struct MainContainer
+	{
+		bool m_Flag = false;    // 発射フラグ
+		float m_Speed = 5.0f;   // スピード
+		float m_Power = 1.0f;	// 破壊力	
+		float m_Range = 3.0f;	// 射程
+	};
+
+	// 反射ステータス
+	typedef struct ReflectionContainer
+	{
+
+	};
+
+	// 誘導ステータス
+	typedef struct TrackingContainer
+	{
+
+	};
+
+	// 貫通ステータス
+	typedef struct PenetrationContainer
+	{
+
+	};
+
+	// 爆発ステータス
+	typedef struct ExplosionContainer
+	{
+
+	};
+
+	// 弾の構造体
+	typedef struct BulletContainer
+	{
+		MainContainer mainContainer;
+		ReflectionContainer reflectionContainer;
+		TrackingContainer trackingContainer;
+		PenetrationContainer penetrationContainer;
+		ExplosionContainer explosionContainer;
+	};
+
 	// コンストラクタ
-	BaseBullet();
-	BaseBullet(float bulletStatus[], Status objStatus);
+	BaseChamber();
+	BaseChamber(float bulletStatus[], Status objStatus);
+	BaseChamber(Status status, MainContainer container);
 
 	// デストラクタ
-	~BaseBullet();
+	~BaseChamber();
 
 	// 描画関数
 	void Draw();

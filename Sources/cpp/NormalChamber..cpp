@@ -1,7 +1,7 @@
-#include "../header/NormalShot.h"
+#include "../header/NormalChamber..h"
 
 
-void NormalShot::Move()  
+void NormalChamber::Move()
 {
 	oldPosition = status.m_position;
 
@@ -10,13 +10,13 @@ void NormalShot::Move()
 }
 
 // íÖíeä÷êî
-void NormalShot::Impact()
+void NormalChamber::Impact()
 {
 	Destroy();
 }
 
 // îjâÛä÷êî
-void  NormalShot::Destroy()
+void  NormalChamber::Destroy()
 {
 	_status.m_Flag = false;
 }

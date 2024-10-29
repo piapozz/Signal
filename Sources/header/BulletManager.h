@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "BaseBullet.h"
+#include "BaseChamber.h"
 
-#include "NormalShot.h"
+#include "NormalChamber..h"
 
 using namespace std;
 
@@ -15,48 +15,12 @@ public:
 	{
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 		int m_BulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
-		std::vector<BaseBullet> m_BulletList;
+		std::vector<BaseChamber> m_BulletList;
 	};
 
-	// 弾の構造体
-	typedef struct BulletContainer 
-	{
 
-	};
-
-	// 基礎ステータス
-	typedef struct BulletContainer
-	{
-
-	};
-
-	// 反射ステータス
-	typedef struct BulletContainer
-	{
-
-	};
-
-	// 誘導ステータス
-	typedef struct BulletContainer
-	{
-
-	};
-
-	// 貫通ステータス
-	typedef struct BulletContainer 
-	{
-
-	};
-
-	// 爆発ステータス
-	typedef struct BulletContainer
-	{
-
-	};
 
 private:
-
-
 
 	const float RATE_VALUE = 0.2f;	// 一レベルごとに上がっていくレート
 

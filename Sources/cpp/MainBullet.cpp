@@ -1,18 +1,18 @@
-#include "../header/MixBullet.h"
+#include "../header/MainBullet.h"
 
-MixBullet::MixBullet() 
+MainBullet::MainBullet()
 {
 	// 与えられたタイプ、ステータスの情報をもとに最終的なステータスと画像を出す
 
 }
 
-MixBullet::~MixBullet() 
+MainBullet::~MainBullet()
 {
 
 }
 
 // 角度修正
-void MixBullet::UpdateAngle() 
+void MainBullet::UpdateAngle()
 {
 	// 反射の角度補正
 
@@ -21,14 +21,14 @@ void MixBullet::UpdateAngle()
 }
 
 // 移動
-void MixBullet::Move()
+void MainBullet::Move()
 {
 	// 通常の移動
 
 }
 
 // 着弾時
-void MixBullet::Impact()
+void MainBullet::Impact()
 {
 	// 貫通の着弾
 
@@ -37,7 +37,7 @@ void MixBullet::Impact()
 }
 
 // 消滅時
-void MixBullet::Destroy()
+void MainBullet::Destroy()
 {
 	// 爆発の消滅時
 

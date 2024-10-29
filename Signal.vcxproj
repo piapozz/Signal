@@ -175,7 +175,7 @@
     <ClInclude Include="Sources\header\EffectManager.h" />
     <ClInclude Include="Sources\header\Enemy.h" />
     <ClInclude Include="Sources\header\ExplosionChamber..h" />
-    <ClInclude Include="Sources\header\MixBullet.h" />
+    <ClInclude Include="Sources\header\MainBullet.h" />
     <ClInclude Include="Sources\header\NormalChamber..h" />
     <ClInclude Include="Sources\header\PenetrationChamber..h" />
     <ClInclude Include="Sources\header\ReflectionChamber..h" />

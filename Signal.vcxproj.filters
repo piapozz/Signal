@@ -209,7 +209,7 @@
     <ClInclude Include="Sources\header\EffectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\MixBullet.h">
+    <ClInclude Include="Sources\header\MainBullet.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
   </ItemGroup>

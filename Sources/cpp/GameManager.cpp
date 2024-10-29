@@ -3,8 +3,8 @@
 // コンストラクタ
 GameManager::GameManager()
 {
-	player = new Player();
-	enemy = new Enemy();
+	players.push_back(new Player());
+	players.push_back(new Enemy());
 	collisionManager = new CollisionManager();
 	stageManager = new StageManager();
 	//bulletManager = new BulletManager();
@@ -15,8 +15,10 @@ GameManager::GameManager()
 // デストラクタ
 GameManager::~GameManager() 
 {
-	delete player;				// プレイヤー
-	delete enemy;				// エネミー
+	for (int i = 0; i < players.size(); i++)
+	{
+		delete players[i];
+	}
 	delete collisionManager;	// 当たり判定
 	delete stageManager;		// ステージ
 	delete bulletManager;		// 弾
@@ -28,7 +30,7 @@ GameManager::~GameManager()
 void GameManager::Init() 
 {
 	// プレイヤーの数を取得
-	playerMax = inputManager->GetPlayerNum();
+	playerMax = players.size();
 
 	// 弾を人数分用意
 	bulletManager = new BulletManager(playerMax);
@@ -42,21 +44,33 @@ void GameManager::Proc()
 	// 入力取得
 	inputManager->Proc();
 
-	// プレイヤーの移動
-
-	// 敵の移動
+	// 移動
+	for (int i = 0; i < players.size(); i++)
+	{
+		
+	}
 
 	// 弾の移動
 	bulletManager->Move();
 
 	// 当たり判定
-	collisionManager->
+	collisionManager->HitCheck_Everything(players, stageManager->GetBoxData());
 }
 
 // 描画
 void GameManager::Draw()
 {
+	// プレイヤーたちの描画
+	for (int i = 0; i < players.size(); i++)
+	{
+		players[i]->Draw();
+	}
+
+	// 弾の描画
 	bulletManager->Draw();
+
+	// ステージの描画
+	stageManager->Draw();
 }
 
 

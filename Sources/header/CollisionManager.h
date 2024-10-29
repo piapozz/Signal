@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "StageManager.h"
 #include "MainBullet.h"
+#include "BulletManager.h"
 
 class CollisionManager
 {
@@ -17,12 +18,13 @@ public:
 	CollisionManager();
 	~CollisionManager();
 
-	bool HitCheck_BaseObj(BaseObject obj1, BaseObject obj2);
-	bool HitCheck_BaseObj_Box(BaseObject obj, Box box);
+	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
+	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
 	bool CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vector<Box*> boxList);
 	bool CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2);
-	void HitCheck_Player_Player(std::vector<BaseObject> players);
-	void HitCheck_Player_Bullet(std::vector<BaseObject> players, std::vector<MainBullet> bullets);
-	void HitCheck_Player_Box(std::vector<BaseObject> players, std::vector<Box> boxs);
-	void HitCheck_Bullet_Box(std::vector<MainBullet> bullets, std::vector<Box> boxs);
+	void HitCheck_Player_Player(std::vector<BaseObject*> players);
+	void HitCheck_Player_Bullet(std::vector<BaseObject*> players);
+	void HitCheck_Player_Box(std::vector<BaseObject*> players, std::vector<Box*> boxs);
+	void HitCheck_Bullet_Box(std::vector<Box*> boxs);
+	void HitCheck_Everything(std::vector<BaseObject*> players, std::vector<Box*> boxs);
 };

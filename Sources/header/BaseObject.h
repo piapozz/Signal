@@ -8,6 +8,7 @@ public:
 	struct Status
 	{
 		Vector2 m_position;		// 位置
+		Vector2 m_nextPostion;	// 移動予定座標
 		float m_angle;			// 向き
 		float m_life;			// オブジェクトの体力
 		float m_shapeSize;		// 形の大きさ
@@ -25,8 +26,6 @@ public:
 	};
 
 	Status GetStatus();			// 構造体の情報を取得
-
-	Vector2 oldPosition;
 
 	BaseObject();							// コンストラクタ
 	~BaseObject();							// デストラクタ

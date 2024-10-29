@@ -21,6 +21,17 @@ Box::Box(Vector2 pos, float life)
 	status.m_life = life;
 }
 
+void Box::Draw()
+{
+	int x1 = _vertex[0].x;
+	int y1 = _vertex[0].y;
+	int x2 = _vertex[2].x;
+	int y2 = _vertex[2].y;
+
+	DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
+}
+
+// 頂点の座標を計算する関数
 void Box::CalVertexPos()
 {
 	// 頂点までの長さ
@@ -34,6 +45,18 @@ void Box::CalVertexPos()
 		// 頂点までのベクトル
 		Vector2 temp = Vector2(cosf(angle) * length, sinf(angle) * length);
 		// 頂点の座標を保存
-		vertex[i] = status.m_position + temp;
+		_vertex[i] = status.m_position + temp;
 	}
+}
+
+// 法線を返す関数
+Vector2 Box::GetNormDir()
+{
+
+}
+
+// 頂点座標を返す関数
+Vector2 Box::GetVertexPos(int n)
+{
+	return _vertex[n];
 }

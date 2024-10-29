@@ -1,16 +1,15 @@
 #pragma once
 
-#include "NormalShot.h"
-#include "ExplosionShot.h"
-#include "MultipleShot.h"
-#include "PenetrationShot.h"
-#include "TrackingShot.h"
-#include "ReflectionShot.h"
+#include "NormalChamber..h"
+#include "ExplosionChamber..h"
+#include "MultipleChamber..h"
+#include "PenetrationChamber..h"
+#include "TrackingChamber..h"
+#include "ReflectionChamber..h"
 
-// BaseBulletポインタをコンストラクタを渡す
 // それぞれの関数を呼び出して移動などをする
 
-class MixBullet
+class MainBullet
 {
 private:
 
@@ -19,10 +18,7 @@ private:
 
 	typedef struct ShotStatus
 	{
-		bool m_Flag = false;    // 発射フラグ
-		float m_Speed = 5.0f;   // スピード
-		float m_Power = 1.0f;	// 破壊力	
-		float m_Range = 3.0f;	// 射程
+		
 	};
 
 protected:
@@ -35,8 +31,8 @@ protected:
 
 public:
 
-	MixBullet();
-	~MixBullet();
+	MainBullet();
+	~MainBullet();
 
 	// 角度修正
 	void UpdateAngle();

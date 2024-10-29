@@ -1,13 +1,13 @@
-#include "../Sources/header/BaseBullet.h"
+#include "../Sources/header/BaseChamber.h"
 
 // コンストラクタ
-BaseBullet::BaseBullet() 
+BaseChamber::BaseChamber()
 {
 	// 有効化
 	_status.m_Flag = true;
 }
 
-BaseBullet::BaseBullet(float bulletStatus[], Status objStatus)
+BaseChamber::BaseChamber(float bulletStatus[], Status objStatus)
 {
 	_status.m_Speed = bulletStatus[(int)BulletStatus::SPEED];
 	_status.m_Power = bulletStatus[(int)BulletStatus::POWER];
@@ -20,20 +20,20 @@ BaseBullet::BaseBullet(float bulletStatus[], Status objStatus)
 }
 
 // デストラクタ
-BaseBullet::~BaseBullet()
+BaseChamber::~BaseChamber()
 {
 
 }
 
 // 描画関数
-void BaseBullet::Draw()
+void BaseChamber::Draw()
 {
 	// 回転拡縮描画
 	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph,TRUE);
 }
 
 // 射程管理関数
-void BaseBullet::CheckRange() 
+void BaseChamber::CheckRange()
 {
 	// 前の座標から距離を出して足していく
 	distance += Vector2::Distance(oldPosition, status.m_position);

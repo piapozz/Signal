@@ -1,5 +1,5 @@
 #pragma once
-class ReflectionShot
+class ReflectionChamber
 {
 };
 

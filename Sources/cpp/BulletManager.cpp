@@ -70,7 +70,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
 	{
 		// “n‚³‚ê‚½ƒvƒŒƒCƒ„[‚Ì’e‚ğˆê‚Â’Ç‰Á
-		_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, status));
+		_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
 	}
 	else 
 	{
@@ -93,7 +93,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 			temp.m_angle += radianAngle * i;
 
 			// ’e‚ğ’Ç‰Á
-			_bulletPram[playerNum].m_BulletList.push_back(NormalShot(_bulletPram[playerNum].m_BulletStatus, temp));
+			_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, temp));
 		}
 	}
 }

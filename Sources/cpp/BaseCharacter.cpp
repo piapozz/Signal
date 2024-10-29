@@ -14,15 +14,15 @@ BaseCharacter::~BaseCharacter()
 // 通常移動処理
 void BaseCharacter::Move(Vector2 moveVec)
 {
-	tempPos.x = 0.0f;
-	tempPos.y = 0.0f;
+	nextPos.x = 0.0f;
+	nextPos.y = 0.0f;
 
 	// 回避移動だったら
 	if (dodgeNow)
 	{
 		// 向いている方向に強制的に進む
-		tempPos.x = cos(status.m_angle) * dodgeSpeed;
-		tempPos.y = sin(status.m_angle) * dodgeSpeed;
+		nextPos.x = cos(status.m_angle) * dodgeSpeed;
+		nextPos.y = sin(status.m_angle) * dodgeSpeed;
 	}
 
 	// 通常移動
@@ -32,16 +32,16 @@ void BaseCharacter::Move(Vector2 moveVec)
 		if (moveVec.x != 0.0f && moveVec.y == 0.0f || moveVec.x == 0.0f && moveVec.y != 0.0f)
 		{
 			// 移動ベクトルにスピードをかけてそのまま加算
-			tempPos.x += moveVec.x * speed;
-			tempPos.y += moveVec.y * speed;
+			nextPos.x += moveVec.x * speed;
+			nextPos.y += moveVec.y * speed;
 		}
 
 		// 斜め入力されていたら
 		else
 		{
 			// 移動ベクトルにスピードをかけてそのまま加算
-			tempPos.x += moveVec.x * speed / 0.5f;
-			tempPos.y += moveVec.y * speed / 0.5f;
+			nextPos.x += moveVec.x * speed / 0.5f;
+			nextPos.y += moveVec.y * speed / 0.5f;
 		}
 	}
 }
@@ -53,8 +53,8 @@ void BaseCharacter::UpdatePosition()
 	if (hitObject != true)
 	{
 		// 座標を更新
-		status.m_position.x += tempPos.x;
-		status.m_position.y += tempPos.y;
+		status.m_position.x += nextPos.x;
+		status.m_position.y += nextPos.y;
 	}
 }
 

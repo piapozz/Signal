@@ -6,8 +6,8 @@
 
 class BaseCharacter : public BaseObject
 {
-private:
-	Vector2 tempPos;
+public:
+	Vector2 nextPos;
 
 protected:
 	InputManager* inputManager;

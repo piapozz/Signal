@@ -15,9 +15,6 @@ Player::~Player()
 // プレイヤーのメイン処理
 void Player::Proc()
 {
-	// 当たり判定の更新
-	UpdateHitJudge();
-
 	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
 	if (isDead != true)
 	{
@@ -33,6 +30,9 @@ void Player::Proc()
 
 		// プレイヤーの向きを変更
 		Rotate(controller.m_RStick);
+
+		// 座標を更新
+		UpdatePosition();
 	}
 
 	// 体力が0になったときプレイヤーは死にます

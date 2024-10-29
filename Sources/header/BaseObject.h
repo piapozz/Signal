@@ -15,7 +15,7 @@ public:
 		Shape m_shape;			// 形
 
 		// ステータスの初期化
-		Status() 
+		Status()
 		{
 			m_position.x = 0.0f;
 			m_position.y = 0.0f;
@@ -32,6 +32,9 @@ public:
 	BaseObject();							// コンストラクタ
 	~BaseObject();							// デストラクタ
 
+	void TakeDamage(float damageSize);
+	void SetHitFlag(bool hitCheck);
+
 	Shape GetShape();						// 形を取得
 
 protected:
@@ -40,12 +43,9 @@ protected:
 	int objectHandle;		// オブジェクトの見た目を管理（モデルや画像）
 
 	bool canMove;			// 動けるかどうかを管理
-	bool canHit;			// 壁や弾などダメージが必要あるものかを区別
 	bool hitObject;			// オブジェクトにヒットしたかを管理
-	bool hitBullet;			// 弾にヒットしたかを管理
 
 	void Draw();
-	void TakeDamage(float damageSize);
 
 	void SetPosition(Vector2 objectPos);
 	void SetLife(float life);

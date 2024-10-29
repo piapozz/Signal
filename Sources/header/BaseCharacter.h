@@ -6,6 +6,10 @@
 
 class BaseCharacter : public BaseObject
 {
+public:
+	BaseCharacter();					// コンストラクタ
+	~BaseCharacter();					// デストラクタ
+
 protected:
 	InputManager* inputManager;
 	CollisionManager* collisionManager;
@@ -20,14 +24,10 @@ protected:
 	bool canDodge;
 	bool dodgeNow;				// 回避している状態かを見る
 
-	BaseCharacter();					// コンストラクタ
-	~BaseCharacter();					// デストラクタ
-
 	void Move(Vector2 moveVec);
 	void UpdatePosition();
 	void Rotate(Vector2 stickAngle);
 	void Dodge(Vector2 moveVec);
 	void PowerUp();
 	void StatusUp();
-	void UpdateHitJudge();
 };

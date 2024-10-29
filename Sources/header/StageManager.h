@@ -29,7 +29,6 @@ private:
 	};
 
 	// ブロックの可変長配列
-	BaseObject* _stageData[STAGE_WIDTH][STAGE_HEIGHT];
 	std::vector<Box*> _boxList;
 
 public:

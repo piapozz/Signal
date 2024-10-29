@@ -6,6 +6,7 @@ class Box : public BaseObject
 private:
 
 	Vector2 _vertex[4];		// 頂点の座標
+	bool _isWall;			// 壁かどうかのフラグ
 
 public:
 
@@ -18,4 +19,5 @@ public:
 	void CalVertexPos();
 	Vector2 GetNormDir();
 	Vector2 GetVertexPos(int n);
+	bool GetIsWall() { return _isWall; }
 };

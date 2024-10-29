@@ -2,13 +2,16 @@
 
 BaseCharacter::BaseCharacter()
 {
+	inputManager = new InputManager();
+	collisionManager = new CollisionManager();
+
 	hitObject = false;
-	hitBullet = false;
 }
 
 BaseCharacter::~BaseCharacter()
 {
-
+	delete inputManager;
+	delete collisionManager;
 }
 
 // 通常移動処理
@@ -80,11 +83,4 @@ void BaseCharacter::PowerUp()
 void BaseCharacter::StatusUp()
 {
 
-}
-
-// プレイヤーが保持する当たり判定の情報を更新
-void BaseCharacter::UpdateHitJudge()
-{
-	// hitObject = collisionManager->HitCheck();
-	// hitBullet = collisionManager->HitCheck();
 }

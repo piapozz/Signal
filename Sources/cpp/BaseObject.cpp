@@ -19,6 +19,13 @@ void BaseObject::Draw()
 	else DrawCircle(status.m_position.x, status.m_position.y, 150, GetColor(255, 0, 0), FALSE);
 }
 
+// フラグを切り替える関数
+void BaseObject::SetHitFlag(bool hitCheck)
+{
+	hitObject = hitCheck;
+}
+
+// ダメージを受け取り体力を減らす関数関数
 void BaseObject::TakeDamage(float damageSize)
 {
 	status.m_life -= damageSize;

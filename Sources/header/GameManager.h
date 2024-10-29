@@ -23,9 +23,7 @@ public:
 
 private:
 
-	Player* player;						// プレイヤー
-	Enemy* enemy;						// エネミー
-	std::vector<BaseObject*> players;	// プレイヤーたちの可変長配列
+	std::vector<BaseCharacter*> players;	// プレイヤーたちの可変長配列
 	CollisionManager* collisionManager;	// 当たり判定
 	StageManager* stageManager;			// ステージ
 	BulletManager* bulletManager;		// 弾

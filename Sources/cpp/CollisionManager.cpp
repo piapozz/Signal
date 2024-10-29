@@ -11,13 +11,13 @@ CollisionManager::~CollisionManager()
 }
 
 // ベースオブジェクトとベースオブジェクトの判定
-bool CollisionManager::HitCheck_BaseObj(BaseObject obj1, BaseObject obj2)
+bool CollisionManager::HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2)
 {
 	// 座標と半径
-	Vector2 pos1 = obj1.GetStatus().m_nextPosition;
-	float radius1 = obj1.GetStatus().m_shapeSize;
-	Vector2 pos2 = obj2.GetStatus().m_nextPosition;
-	float radius2 = obj2.GetStatus().m_shapeSize;
+	Vector2 pos1 = obj1->GetStatus().m_nextPosition;
+	float radius1 = obj1->GetStatus().m_shapeSize;
+	Vector2 pos2 = obj2->GetStatus().m_nextPosition;
+	float radius2 = obj2->GetStatus().m_shapeSize;
 
 	// 距離の差が半径の合計以下なら接触
 	if (Vector2::Distance(pos1, pos2) >= (radius1 + radius2))
@@ -29,14 +29,14 @@ bool CollisionManager::HitCheck_BaseObj(BaseObject obj1, BaseObject obj2)
 }
 
 // ベースオブジェクトと箱の判定
-bool CollisionManager::HitCheck_BaseObj_Box(BaseObject obj, Box box)
+bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
 {
-	Vector2 objPos = obj.GetStatus().m_nextPosition;
+	Vector2 objPos = obj->GetStatus().m_nextPosition;
 	Vector2 vertexPos[4];
-	float radius = obj.GetStatus().m_shapeSize;
+	float radius = obj->GetStatus().m_shapeSize;
 	for (int i = 0; i < 4; i++)
 	{
-		vertexPos[i] = box.GetVertexPos(i);
+		vertexPos[i] = box->GetVertexPos(i);
 	}
 
 	// 矩形のy領域判定
@@ -88,7 +88,7 @@ bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vect
 }
 
 // プレイヤーと敵を判定する関数
-void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject> players)
+void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject*> players)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -99,31 +99,35 @@ void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject> players)
 			if (HitCheck_BaseObj(players[i], players[j]))
 			{
 				// オブジェクトのhitFlagを立てる
-				players[i].SetHitFlag(true);
-				players[j].SetHitFlag(true);
+				players[i]->SetHitFlag(true);
+				players[j]->SetHitFlag(true);
 			}
 		}
 	}
 }
 
 // プレイヤーと弾を判定する関数
-void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject> players, std::vector<MainBullet> bullets)
+void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject*> players)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
-		for (int j = 0; j < bullets.size(); j++)
+		for (int j = 0; j < BulletManager::_bulletPram.size(); j++)
 		{
-			if (HitCheck_BaseObj(players[i], bullets[j]))
+			if (i == j) continue;
+			for (int k = 0; k < BulletManager::_bulletPram[j].m_BulletList.size(); k++)
 			{
-				// ダメージ処理
-				players[i].TakeDamage(bullets[j].GetPower());
+				if (HitCheck_BaseObj(players[i], BulletManager::_bulletPram[j].m_BulletList[k]))
+				{
+					// ダメージ処理
+					players[i]->TakeDamage(BulletManager::_bulletPram[i].m_BulletList[j]->GetPower());
+				}
 			}
 		}
 	}
 }
 
 // プレイヤーと箱を判定する関数
-void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject> players, std::vector<Box> boxs)
+void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject*> players, std::vector<Box*> boxs)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -132,29 +136,40 @@ void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject> players, std:
 			if (HitCheck_BaseObj_Box(players[i], boxs[j]))
 			{
 				// オブジェクトのhitFlagを立てる
-				players[i].SetHitFlag(true);
-				boxs[j].SetHitFlag(true);
+				players[i]->SetHitFlag(true);
+				boxs[j]->SetHitFlag(true);
 			}
 		}
 	}
 }
 
 // 弾と箱を判定する関数
-void CollisionManager::HitCheck_Bullet_Box(std::vector<MainBullet> bullets, std::vector<Box> boxs)
+void CollisionManager::HitCheck_Bullet_Box(std::vector<Box*> boxs)
 {
-	for (int i = 0; i < bullets.size(); i++)
+	for (int i = 0; i < boxs.size(); i++)
 	{
-		for (int j = 0; j < boxs.size(); j++)
+		for (int j = 0; j < BulletManager::_bulletPram.size(); j++)
 		{
-			if (HitCheck_BaseObj_Box(bullets[i], boxs[j]))
+			for (int k = 0; k < BulletManager::_bulletPram[j].m_BulletList.size(); k++)
 			{
-				// 壁かどうかで分岐
-				if (boxs[j].GetIsWall() == true)
-					bullets[i].Destroy();
-				else
-					// ダメージ処理
-					boxs[j].TakeDamage(bullets[i].GetPower());
+				if (HitCheck_BaseObj_Box(BulletManager::_bulletPram[j].m_BulletList[k], boxs[i]))
+				{
+					// 壁かどうかで分岐
+					if (boxs[j]->GetIsWall() == true)
+						BulletManager::_bulletPram[i].m_BulletList[j]->Destroy();
+					else
+						// ダメージ処理
+						boxs[j]->TakeDamage(BulletManager::_bulletPram[i].m_BulletList[j]->GetPower());
+				}
 			}
 		}
 	}
+}
+
+void CollisionManager::HitCheck_Everything(std::vector<BaseObject*> players, std::vector<Box*> boxs)
+{
+	HitCheck_Player_Player(players);
+	HitCheck_Player_Bullet(players);
+	HitCheck_Player_Box(players, boxs);
+	HitCheck_Bullet_Box(boxs);
 }

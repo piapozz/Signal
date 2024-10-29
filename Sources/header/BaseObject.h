@@ -8,7 +8,7 @@ public:
 	struct Status
 	{
 		Vector2 m_position;		// 位置
-		Vector2 m_nextPostion;	// 移動予定座標
+		Vector2 m_nextPosition;	// 移動予定座標
 		float m_angle;			// 向き
 		float m_life;			// オブジェクトの体力
 		float m_shapeSize;		// 形の大きさ
@@ -19,6 +19,8 @@ public:
 		{
 			m_position.x = 0.0f;
 			m_position.y = 0.0f;
+			m_nextPosition.x = 0.0f;
+			m_nextPosition.y = 0.0f;
 			m_angle = 0.0;
 			m_life = 1.0f;
 			m_shapeSize = 1.0;

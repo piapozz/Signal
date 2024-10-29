@@ -28,6 +28,7 @@ void UIManager::Draw(int playerNum)
 	DrawFormatString(15, 5, COLOR_BLACK, "Speed : %f", bulletManager->_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::SPEED]);
 	DrawFormatString(15, 35, COLOR_BLACK, "Power : %f", bulletManager->_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::POWER]);
 	DrawFormatString(15, 65, COLOR_BLACK, "Range : %f", bulletManager->_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RANGE]);
+	DrawFormatString(15, 95, COLOR_BLACK, "Rate : %f", bulletManager->_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE]);
 }
 
 void UIManager::StatusList(int statusType)

@@ -9,8 +9,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetFullScreenResolutionMode(DX_FSRESOLUTIONMODE_MAXIMUM);
 
+	int WINDOW_WIDTH = 1920;
+	int WINDOW_HEIGHT = 1080;
+
 	// ‰ğ‘œ“x‚ğİ’è
-	//SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+	SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+	SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	if (DxLib_Init() == -1)

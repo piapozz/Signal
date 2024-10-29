@@ -14,7 +14,6 @@ CollisionManager::~CollisionManager()
 // ベースオブジェクトとベースオブジェクトの判定
 bool CollisionManager::HitCheckBaseObj(BaseObject obj1, BaseObject obj2)
 {
-
 	// 座標と半径
 	Vector2 pos1 = obj1.GetStatus().m_position;
 	float radius1 = obj1.GetStatus().m_shapeSize;
@@ -57,7 +56,47 @@ bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vect
 }
 
 // プレイヤーと敵を判定する関数
-void CollisionManager::HitCheckPlayer()
+void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject> players)
+{
+	for (int i = 0; i < players.size(); i++)
+	{
+		for (int j = 0; j < players.size(); j++)
+		{
+			if (i >= j) return;
+
+			if (HitCheckBaseObj(players[i], players[j]))
+			{
+				// オブジェクトのhitFlagを立てる
+			}
+		}
+	}
+}
+
+// プレイヤーと弾を判定する関数
+void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject> players, std::vector<BaseObject> bullets)
+{
+	for (int i = 0; i < players.size(); i++)
+	{
+		for (int j = 0; j < bullets.size(); j++)
+		{
+			if (i >= j) return;
+
+			if (HitCheckBaseObj(players[i], bullets[j]))
+			{
+				// オブジェクトのhitFlagを立てる
+			}
+		}
+	}
+}
+
+// プレイヤーと箱を判定する関数
+void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject> players, std::vector<Box> boxs)
+{
+
+}
+
+// 弾と箱を判定する関数
+void CollisionManager::HitCheck_Bullet_Box(std::vector<BaseObject> bullets, std::vector<Box> boxs)
 {
 
 }

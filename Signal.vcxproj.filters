@@ -84,22 +84,22 @@
     <ClCompile Include="Sources\cpp\BulletManager.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\ExplosionChamber..cpp">
+    <ClCompile Include="Sources\cpp\ExplosionChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\MultipleChamber..cpp">
+    <ClCompile Include="Sources\cpp\MultipleChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\NormalChamber..cpp">
+    <ClCompile Include="Sources\cpp\NormalChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\PenetrationChamber..cpp">
+    <ClCompile Include="Sources\cpp\PenetrationChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\ReflectionChamber..cpp">
+    <ClCompile Include="Sources\cpp\ReflectionChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\TrackingChamber..cpp">
+    <ClCompile Include="Sources\cpp\TrackingChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
     <ClCompile Include="Sources\cpp\AudioManager.cpp">
@@ -167,22 +167,22 @@
     <ClInclude Include="Sources\header\BulletManager.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\ExplosionChamber..h">
+    <ClInclude Include="Sources\header\ExplosionChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\MultipleChamber..h">
+    <ClInclude Include="Sources\header\MultipleChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\NormalChamber..h">
+    <ClInclude Include="Sources\header\NormalChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\PenetrationChamber..h">
+    <ClInclude Include="Sources\header\PenetrationChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\ReflectionChamber..h">
+    <ClInclude Include="Sources\header\ReflectionChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\TrackingChamber..h">
+    <ClInclude Include="Sources\header\TrackingChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\AudioManager.h">

@@ -35,6 +35,10 @@ void BaseBullet::Draw()
 // Ë’öŠÇ—ŠÖ”
 void BaseBullet::CheckRange() 
 {
+	// ‘O‚ÌÀ•W‚©‚ç‹——£‚ğo‚µ‚Ä‘«‚µ‚Ä‚¢‚­
+	distance += Vector2::Distance(oldPosition, status.m_position);
+
+	if (distance < _status.m_Range) return;
 
 	Destroy();
 }

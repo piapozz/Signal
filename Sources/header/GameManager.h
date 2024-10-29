@@ -1,5 +1,13 @@
 #pragma once
 
+#include "Player.h"
+#include "Enemy.h"
+#include "CollisionManager.h"
+#include "StageManager.h"
+#include "BulletManager.h"
+#include "UIManager.h"
+#include "InputManager.h"
+
 // ゲームの進行クラス
 
 class GameManager
@@ -15,6 +23,15 @@ public:
 
 private:
 
+	Player* player;						// プレイヤー
+	Enemy* enemy;						// エネミー
+	CollisionManager* collisionManager;	// 当たり判定
+	StageManager* stageManager;			// ステージ
+	BulletManager* bulletManager;		// 弾
+	UIManager* uiManager;				// UI
+	InputManager* inputManager;			// 入力
+
+	int playerMax;
 
 };
 

@@ -155,7 +155,7 @@
     <ClInclude Include="Sources\header\Player.h">
       <Filter>ヘッダー ファイル\Sein</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\BaseBullet.h">
+    <ClInclude Include="Sources\header\BaseChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\Const.h">
@@ -167,22 +167,22 @@
     <ClInclude Include="Sources\header\BulletManager.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\ExplosionShot.h">
+    <ClInclude Include="Sources\header\ExplosionChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\MultipleShot.h">
+    <ClInclude Include="Sources\header\MultipleChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\NormalShot.h">
+    <ClInclude Include="Sources\header\NormalChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\PenetrationShot.h">
+    <ClInclude Include="Sources\header\PenetrationChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\ReflectionShot.h">
+    <ClInclude Include="Sources\header\ReflectionChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\TrackingShot.h">
+    <ClInclude Include="Sources\header\TrackingChamber..h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\AudioManager.h">
@@ -209,7 +209,7 @@
     <ClInclude Include="Sources\header\EffectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\MixBullet.h">
+    <ClInclude Include="Sources\header\MainBullet.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
   </ItemGroup>

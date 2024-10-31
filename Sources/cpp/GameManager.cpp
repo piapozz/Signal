@@ -3,8 +3,8 @@
 // コンストラクタ
 GameManager::GameManager()
 {
-	players.push_back(new Player());
-	players.push_back(new Enemy());
+	players.push_back(new Player(Vector2(50.0f, 50.0f)));
+	players.push_back(new Enemy(Vector2(50.0f, 200.0f)));
 	collisionManager = new CollisionManager();
 	stageManager = new StageManager();
 	//bulletManager = new BulletManager();
@@ -31,46 +31,54 @@ void GameManager::Init()
 {
 	// プレイヤーの数を取得
 	playerMax = players.size();
+	
+	for (int i = 0; i < players.size(); i++)
+	{
+		//if (players[i]->GetIsPlayer() == true)
+		{
+			players[i]->SetPlayerNum(i);
+		}
+	}
 
 	// 弾を人数分用意
 	bulletManager = new BulletManager(playerMax);
 
 }
-
-
 // 処理
 void GameManager::Proc()
 {
 	// 入力取得
 	inputManager->Proc();
 
-	// 移動
 	for (int i = 0; i < players.size(); i++)
 	{
-		
+		players[i]->Proc(bulletManager, inputManager);
 	}
 
 	// 弾の移動
 	bulletManager->Move();
 
 	// 当たり判定
-	collisionManager->HitCheck_Everything(players, stageManager->GetBoxData());
+	collisionManager->HitCheck_Everything(players, stageManager->GetBoxData(),bulletManager);
 }
 
 // 描画
 void GameManager::Draw()
 {
+	// ステージの描画
+	stageManager->Draw();
+
 	// プレイヤーたちの描画
 	for (int i = 0; i < players.size(); i++)
 	{
 		players[i]->Draw();
+
+		uiManager->Draw(i, bulletManager);
 	}
 
 	// 弾の描画
 	bulletManager->Draw();
 
-	// ステージの描画
-	stageManager->Draw();
 }
 
 

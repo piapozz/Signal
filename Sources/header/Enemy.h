@@ -5,12 +5,10 @@ class Enemy : public BaseCharacter
 {
 private:
 
-	CollisionManager* colManager;
-
 public:
 
-	Enemy();
+	Enemy(Vector2 pos);
 	~Enemy();
 
-	void Proc();
+	void Proc(BulletManager* bullet, InputManager* inputManager);
 };

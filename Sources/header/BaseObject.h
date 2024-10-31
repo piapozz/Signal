@@ -23,7 +23,7 @@ public:
 			m_nextPosition.y = 0.0f;
 			m_angle = 0.0;
 			m_life = 1.0f;
-			m_shapeSize = 1.0;
+			m_shapeSize = 1.0f;
 		}
 	};
 
@@ -35,6 +35,13 @@ public:
 	void TakeDamage(float damageSize);
 	void SetHitFlag(bool hitCheck);
 
+	void SetPosition(Vector2 objectPos);
+	void SetLife(float life);
+	void SetAngle(float angle);
+	void SetShapeSize(float size);
+	void SetModelData(int model);
+	void Draw();
+
 	Shape GetShape();						// 形を取得
 
 protected:
@@ -44,12 +51,4 @@ protected:
 
 	bool canMove;			// 動けるかどうかを管理
 	bool hitObject;			// オブジェクトにヒットしたかを管理
-
-	void Draw();
-
-	void SetPosition(Vector2 objectPos);
-	void SetLife(float life);
-	void SetAngle(float angle);
-	void SetShapeSize(float size);
-	void SetModelData(int model);
 };

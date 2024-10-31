@@ -40,9 +40,6 @@ public:
 	// Á–Å
 	void Destroy();
 
-	// À•WXV
-	void UpdatePosition();
-
 	// •`‰æ
 	void Draw();
 

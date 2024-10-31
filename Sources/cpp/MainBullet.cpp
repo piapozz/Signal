@@ -54,12 +54,6 @@ void MainBullet::Draw()
 	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize,GetColor(255,255,255));
 }
 
-// À•WXV
-void MainBullet::UpdatePosition()
-{
-	status.m_position = status.m_nextPosition;
-}
-
 // Ë’öŠÇ—ŠÖ”
 void MainBullet::CheckRange()
 {

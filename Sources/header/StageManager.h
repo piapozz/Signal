@@ -32,13 +32,14 @@ private:
 
 	std::vector<Vector2> _playerStartPos;	// プレイヤーの初期位置
 
-	//Vector2 _defaultStagePos = Vector;				// ステージのアンカー座標
+	Vector2 _defaultStagePos;				// ステージのアンカー座標
 
 public:
 
 	StageManager();
 	~StageManager();
 
+	void Proc();
 	void Draw();
 
 	Vector2 ConvertNumToPos(int x, int y);

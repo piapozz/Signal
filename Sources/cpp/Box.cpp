@@ -8,7 +8,7 @@ Box::Box(Vector2 pos)
 	// 頂点の座標を求める
 	CalVertexPos();
 
-	_isWall = false;
+	_isWall = true;
 }
 
 Box::Box(Vector2 pos, float life)
@@ -22,7 +22,7 @@ Box::Box(Vector2 pos, float life)
 	// 体力設定
 	status.m_life = life;
 
-	_isWall = true;
+	_isWall = false;
 }
 
 void Box::Draw()
@@ -51,6 +51,11 @@ void Box::CalVertexPos()
 		// 頂点の座標を保存
 		_vertex[i] = status.m_position + temp;
 	}
+}
+
+void Box::DestroyBox()
+{
+	
 }
 
 // 法線を返す関数

@@ -74,6 +74,8 @@ void GameManager::Proc()
 
 	// ’e‚ÌÀ•WXV
 	bulletManager->UpdatePosition();
+
+	stageManager->Proc();
 }
 
 // •`‰æ

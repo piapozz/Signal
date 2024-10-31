@@ -140,7 +140,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		temp.m_angle -= radianAngle * ((_diffusion * level) / 2);
 
 		// ‚»‚ê‚¼‚ê‚ÌŠp“x‚É‘Î‚µ‚Ä’e‚ð”­ŽË
-		for (int i = 0; i < ((_diffusion * level) + 2); i++) 
+		for (int i = 0; i < ((_diffusion * level) + 1); i++) 
 		{
 			temp.m_angle += radianAngle * i;
 

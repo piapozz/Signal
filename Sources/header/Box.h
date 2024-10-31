@@ -21,5 +21,6 @@ public:
 	void CalVertexPos();
 	Vector2 GetNormDir();
 	Vector2 GetVertexPos(int n);
+	void DestroyBox();
 	bool GetIsWall() { return _isWall; }
 };

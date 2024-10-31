@@ -3,7 +3,8 @@
 
 StageManager::StageManager()
 {
-	//_defaultStagePos = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
+	_defaultStagePos.x = WINDOW_WIDTH / 2 - STAGE_WIDTH / 2 * BOX_SIZE;
+	_defaultStagePos.y = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
 
 	for (int x = 0; x < 5; x++)
 	{
@@ -12,7 +13,7 @@ StageManager::StageManager()
 			switch ((ObjectType)_stageLayout[x][y])
 			{
 			case ObjectType::BOX:
-				_boxList.push_back(new Box(ConvertNumToPos(x, y), 1.0f));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), 10.0f));
 				break;
 			case ObjectType::WALL:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
@@ -37,6 +38,15 @@ StageManager::~StageManager()
 	}
 }
 
+void StageManager::Proc()
+{
+	for (int i = 0; i < _boxList.size(); i++)
+	{
+		if (_boxList[i]->GetStatus().m_life <= 0)
+			_boxList.erase(_boxList.begin() + i);
+	}
+}
+
 void StageManager::Draw()
 {
 	for (int i = 0; i < _boxList.size(); i++)
@@ -47,5 +57,5 @@ void StageManager::Draw()
 
 Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
-	return Vector2(x * BOX_SIZE, y * BOX_SIZE);
+	return _defaultStagePos + Vector2(x * BOX_SIZE, y * BOX_SIZE);
 }

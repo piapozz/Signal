@@ -6,7 +6,6 @@ BulletManager::BulletManager()
 
 }
 
-
 // コンストラクタ
 BulletManager::BulletManager(int playerNum)
 {
@@ -20,8 +19,8 @@ BulletManager::BulletManager(int playerNum)
 		}
 	}
 
+	time = GetNowCount();
 }
-
 
 // デストラクタ
 BulletManager::~BulletManager()
@@ -69,17 +68,20 @@ void BulletManager::Draw()
 	}
 }
 
-// 発射
+/// <summary>
+/// バレットリストに現在のステータスの弾を追加する
+/// </summary>
+/// <param name="playerNum">プレイヤー番号</param>
+/// <param name="status">弾を発射する座標と角度</param>
 void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
 	// Rate計算
-	time += GetNowCount();
 
 	float interval = 1 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
-	if (time < interval) return;
+	if (GetNowCount() - time < interval) return;
 
-	time = 0;
+	time = GetNowCount();
 
 	// 拡散のパラメーターがあった場合複数方向に向けて発射する
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
@@ -88,7 +90,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
 		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++) 
 		{
-			if (!_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
+			if (_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
 
 			// 使える弾を見つけた
 			_bulletPram[playerNum].m_BulletList[i]->Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);

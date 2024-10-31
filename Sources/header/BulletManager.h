@@ -22,7 +22,7 @@ private:
 
 	std::vector<BulletPram> _bulletPram;
 
-	const float RATE_VALUE = 0.2f;	// 一レベルごとに上がっていくレート
+	const float RATE_VALUE = 600.2f;	// 一レベルごとに上がっていくレート
 
 	int _diffusion = 2;				// 拡散のレベル一ごとに増える弾の数
 	int _diffusionAngleMax = 120;	// 拡散する角度

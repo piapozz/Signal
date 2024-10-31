@@ -65,8 +65,8 @@ public:
 
 protected:
 		
-	BaseObject::Status status;
-	MainContainer mainContainer;
+	BaseObject::Status* status;
+	MainContainer* mainContainer;
 
 public:
 

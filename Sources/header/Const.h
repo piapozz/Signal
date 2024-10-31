@@ -8,6 +8,10 @@ const float BOX_SIZE = 100.0f;    // î†ÇÃÉTÉCÉY
 
 const int STAGE_WIDTH = 5;
 const int STAGE_HEIGHT = 5;
+const float STAGE_MARGIN_RATE = 0.1f;
+
+const int WINDOW_WIDTH = 1920;
+const int WINDOW_HEIGHT = 1080;
 
 enum class DirButton
 {

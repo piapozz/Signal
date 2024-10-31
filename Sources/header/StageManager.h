@@ -28,11 +28,11 @@ private:
 		2, 2, 2, 2, 2
 	};
 
-	// ブロックの可変長配列
-	std::vector<Box*> _boxList;
+	std::vector<Box*> _boxList;				// ブロックの可変長配列
 
-	// プレイヤーの初期位置
-	std::vector<Vector2> _playerStartPos;
+	std::vector<Vector2> _playerStartPos;	// プレイヤーの初期位置
+
+	//Vector2 _defaultStagePos = Vector;				// ステージのアンカー座標
 
 public:
 

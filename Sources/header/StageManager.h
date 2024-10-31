@@ -31,6 +31,9 @@ private:
 	// ブロックの可変長配列
 	std::vector<Box*> _boxList;
 
+	// プレイヤーの初期位置
+	std::vector<Vector2> _playerStartPos;
+
 public:
 
 	StageManager();
@@ -39,5 +42,6 @@ public:
 	void Draw();
 
 	Vector2 ConvertNumToPos(int x, int y);
-	std::vector<Box*> GetBoxData();
+	std::vector<Box*> GetBoxData() { return _boxList; }
+	std::vector<Vector2> GetStartPos() { return _playerStartPos; }
 };

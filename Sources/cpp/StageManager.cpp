@@ -15,6 +15,9 @@ StageManager::StageManager()
 			case ObjectType::WALL:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
 				break;
+			case (ObjectType::PLAYER, ObjectType::ENEMY):
+				_playerStartPos.push_back(ConvertNumToPos(x, y));
+				break;
 			default:
 				continue;
 				break;
@@ -42,9 +45,4 @@ void StageManager::Draw()
 Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
 	return Vector2(x * BOX_SIZE, y * BOX_SIZE);
-}
-
-std::vector<Box*> StageManager::GetBoxData()
-{
-	return _boxList;
 }

@@ -15,7 +15,7 @@ public:
 
 	void SetPlayerNum(int playerNumber);
 	void Rotate(Vector2 stickAngle);
-	void Move(Vector2 moveVec);
+	void Move();
 	void Dodge();
 	bool GetIsPlayer();
 	void PowerUp();
@@ -24,10 +24,11 @@ public:
 	virtual void Proc(BulletManager* bullet, InputManager* inputManager) = 0;
 
 protected:
+	Vector2 moveVec;
 
 	int exp;					// 壊した箱の数を管理
 
-	float speed = 1;				// 自機のスピード
+	float speed = 1;			// 自機のスピード
 	float dodgeSpeed;			// 回避の速さ
 	float dodgeCount;			// 回避のクールタイム管理
 	float dodgeFlame;			// 回避に使うフレーム数

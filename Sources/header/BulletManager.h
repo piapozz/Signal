@@ -22,13 +22,12 @@ private:
 
 	std::vector<BulletPram> _bulletPram;
 
-	const float RATE_VALUE = 600.2f;	// 一レベルごとに上がっていくレート
+	const float RATE_VALUE = 60.2f;	// 一レベルごとに上がっていくレート
 
 	int _diffusion = 2;				// 拡散のレベル一ごとに増える弾の数
 	int _diffusionAngleMax = 120;	// 拡散する角度
 	float time = 0;					// 現在の秒数
 
-	
 public:
 
 	// コンストラクタ
@@ -43,6 +42,9 @@ public:
 
 	// 描画
 	void Draw();
+
+	// 弾の座標一括更新
+	void UpdatePosition();
 
 	// 発射
 	void AddBullet(int playerNum , BaseObject::Status status);

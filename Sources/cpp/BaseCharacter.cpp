@@ -15,7 +15,7 @@ BaseCharacter::~BaseCharacter()
 }
 
 // 通常移動処理
-void BaseCharacter::Move(Vector2 moveVec)
+void BaseCharacter::Move()
 {
 	printfDx("moveVec.x%f\n", moveVec.x);
 	printfDx("moveVec.y%f\n", moveVec.y);
@@ -56,7 +56,7 @@ void BaseCharacter::Move(Vector2 moveVec)
 void BaseCharacter::Rotate(Vector2 stickAngle)
 {
 	// 移動方向から角度を計算
-	if (stickAngle.x != 0.0f || stickAngle.y != 0.0f)
+	//if (stickAngle.x != 0.0f || stickAngle.y != 0.0f)
 	{
 		// 角度計算しつつ角度をラジアンで返す
 		status.m_angle = atan2(stickAngle.y, stickAngle.x) * (180.0f / DX_PI_F);

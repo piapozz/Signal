@@ -16,6 +16,8 @@ public:
 
 	void Draw();
 
+	void Move(){}
+
 	void CalVertexPos();
 	Vector2 GetNormDir();
 	Vector2 GetVertexPos(int n);

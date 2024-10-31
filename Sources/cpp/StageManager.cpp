@@ -15,7 +15,8 @@ StageManager::StageManager()
 			case ObjectType::WALL:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
 				break;
-			case (ObjectType::PLAYER, ObjectType::ENEMY):
+			case ObjectType::PLAYER:
+			case ObjectType::ENEMY:
 				_playerStartPos.push_back(ConvertNumToPos(x, y));
 				break;
 			default:

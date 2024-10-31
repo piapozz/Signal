@@ -40,7 +40,7 @@ bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
 	}
 
 	// 矩形のy領域判定
-	if ((objPos.x > vertexPos[2].x) && (objPos.x < vertexPos[0].x) && (objPos.y > vertexPos[2].y - radius) && (objPos.y < vertexPos[0].y + radius))
+	if ((objPos.x < vertexPos[2].x) && (objPos.x > vertexPos[0].x) && (objPos.y > vertexPos[2].y - radius) && (objPos.y < vertexPos[0].y + radius))
 		return true;
 	// 矩形のx領域判定
 	if ((objPos.x > vertexPos[2].x - radius) && (objPos.x < vertexPos[0].x + radius) && (objPos.y > vertexPos[2].y) && (objPos.y < vertexPos[0].y))
@@ -94,7 +94,7 @@ void CollisionManager::HitCheck_Player_Player(std::vector<BaseCharacter*> player
 	{
 		for (int j = 0; j < players.size(); j++)
 		{
-			if (i >= j) return;
+			if (i >= j) continue;
 
 			if (HitCheck_BaseObj(players[i], players[j]))
 			{
@@ -157,11 +157,11 @@ void CollisionManager::HitCheck_Bullet_Box(std::vector<Box*> boxs, BulletManager
 				if (HitCheck_BaseObj_Box(bullet->GetBulletList()[j].m_BulletList[k], boxs[i]))
 				{
 					// 壁かどうかで分岐
-					if (boxs[j]->GetIsWall() == true)
-						bullet->GetBulletList()[i].m_BulletList[j]->Destroy();
+					if (boxs[i]->GetIsWall() == true)
+						bullet->GetBulletList()[j].m_BulletList[k]->Destroy();
 					else
 						// ダメージ処理
-						boxs[j]->TakeDamage(bullet->GetBulletList()[i].m_BulletList[j]->GetPower());
+						boxs[i]->TakeDamage(bullet->GetBulletList()[j].m_BulletList[k]->GetPower());
 				}
 			}
 		}

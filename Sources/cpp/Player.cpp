@@ -46,7 +46,7 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 		if (controller.m_RTrigger) bullet->AddBullet(deviceNum, status);
 
 		// 座標を更新
-		UpdatePosition();
+		// UpdatePosition();
 	}
 
 	// 体力が0になったときプレイヤーは死にます

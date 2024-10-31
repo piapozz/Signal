@@ -29,6 +29,7 @@ void BaseObject::UpdatePosition()
 		status.m_position.x = status.m_nextPosition.x;
 		status.m_position.y = status.m_nextPosition.y;
 	}
+	else { hitObject = false; }
 }
 
 // ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚éŠÖ”

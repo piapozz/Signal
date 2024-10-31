@@ -14,9 +14,8 @@ public:
 	~BaseCharacter();					// デストラクタ
 
 	void SetPlayerNum(int playerNumber);
-	void Move(Vector2 moveVec);
-	void UpdatePosition();
 	void Rotate(Vector2 stickAngle);
+	void Move(Vector2 moveVec);
 	void Dodge();
 	bool GetIsPlayer();
 	void PowerUp();

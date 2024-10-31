@@ -19,6 +19,18 @@ void BaseObject::Draw()
 	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize, GetColor(255, 0, 0), TRUE);
 }
 
+// 現在座標に適応
+void BaseObject::UpdatePosition()
+{
+	// 移動予定座標とオブジェクトとの当たり判定を見て移動を完了させるか分岐（この状態では動けなくなる）
+	if (hitObject != true)
+	{
+		// 座標を更新
+		status.m_position.x = status.m_nextPosition.x;
+		status.m_position.y = status.m_nextPosition.y;
+	}
+}
+
 // フラグを切り替える関数
 void BaseObject::SetHitFlag(bool hitCheck)
 {

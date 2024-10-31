@@ -43,7 +43,7 @@ void BulletManager::Move()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 
 			// 移動
 			_bulletPram[i].m_BulletList[j]->Move();
@@ -54,18 +54,24 @@ void BulletManager::Move()
 // 描画
 void BulletManager::Draw()
 {
+	int count = 0;
+
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
 	for (int i = 0; i < _bulletPram.size(); i++)
 	{
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 
 			// 描画
 			_bulletPram[i].m_BulletList[j]->Draw();
+
+			count++;
 		}
 	}
+
+	printfDx("\n%d / 256\n", count);
 }
 
 // 座標更新
@@ -77,9 +83,12 @@ void BulletManager::UpdatePosition()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 
-			// 描画
+			// 射程管理
+			_bulletPram[i].m_BulletList[j]->CheckRange();
+
+			// 更新
 			_bulletPram[i].m_BulletList[j]->UpdatePosition();
 		}
 	}
@@ -124,14 +133,14 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		float rate = _diffusionAngleMax / ((_diffusion * level) + 1);
 
 		// ラジアンに変換
-		float radianAngle = rate / 180 * DX_PI;
+		float radianAngle = rate;
 
 		// 発射ステータスを作成
 		BaseObject::Status temp = status;
 		temp.m_angle -= radianAngle * ((_diffusion * level) / 2);
 
 		// それぞれの角度に対して弾を発射
-		for (int i = 0; i < ((_diffusion * level) + 1); i++) 
+		for (int i = 0; i < ((_diffusion * level) + 2); i++) 
 		{
 			temp.m_angle += radianAngle * i;
 
@@ -140,10 +149,10 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 
 			for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++)
 			{
-				if (!_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
+				if (_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
 
 				// 使える弾を見つけた
-				_bulletPram[playerNum].m_BulletList[i]->Reload(status, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
+				_bulletPram[playerNum].m_BulletList[i]->Reload(temp, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
 
 				break;
 			}

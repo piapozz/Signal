@@ -82,4 +82,5 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 
 	// Žg—p’†
 	_mainContainer.m_Flag = true;
+	distance = 0;
 }

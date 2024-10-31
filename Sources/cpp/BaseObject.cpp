@@ -14,9 +14,9 @@ BaseObject::~BaseObject()
 void BaseObject::Draw()
 {
 	// 画像を描画
-	if (objectHandle != NULL) DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, status.m_angle * (DX_PI_F / 180), objectHandle, true);
+	//if (objectHandle != NULL) DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, status.m_angle * (DX_PI_F / 180), objectHandle, true);
 	// ハンドルに何も入っていなかったら代わりに丸を生成
-	else DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize, GetColor(255, 0, 0), TRUE);
+	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize, GetColor(255, 0, 0), TRUE);
 }
 
 // フラグを切り替える関数

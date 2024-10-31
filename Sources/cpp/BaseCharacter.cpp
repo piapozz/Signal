@@ -5,6 +5,8 @@ BaseCharacter::BaseCharacter()
 
 	hitObject = false;
 	dodgeNow = false;
+
+	speed = 1.0f;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -74,10 +76,10 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 }
 
 // プレイヤーに番号を振り分け
-void BaseCharacter::SetPlayerNum(int deviceNumber)
+void BaseCharacter::SetPlayerNum(int playerNumber)
 {
 	// 引数でもらった番号をプレイヤー番号に設定
-	deviceNum = deviceNumber;
+	playerNum = playerNumber;
 }
 
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える

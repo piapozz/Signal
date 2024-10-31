@@ -3,10 +3,10 @@
 // コンストラクタ
 GameManager::GameManager()
 {
-	players.push_back(new Player(Vector2(50.0f, 50.0f)));
+	stageManager = new StageManager();
+	players.push_back(new Player(stageManager->GetStartPos()[0]));
 	players.push_back(new Enemy(Vector2(50.0f, 200.0f)));
 	collisionManager = new CollisionManager();
-	stageManager = new StageManager();
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
 	inputManager = new InputManager();
@@ -32,10 +32,16 @@ void GameManager::Init()
 	// プレイヤーの数を取得
 	playerMax = players.size();
 	
+	// プレイヤーの設定
 	for (int i = 0; i < players.size(); i++)
 	{
-		//if (players[i]->GetIsPlayer() == true)
+		// デバイスごとに番号をつける
+		players[i]->deviceNum = i;
+
+		// プレイヤーだったらどのコントローラーを使うかを割り当てる
+		if (players[i]->GetIsPlayer() == true)
 		{
+			// 割り当て
 			players[i]->SetPlayerNum(i);
 		}
 	}

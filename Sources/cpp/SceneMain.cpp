@@ -2,7 +2,7 @@
 
 SceneMain::SceneMain() 
 {
-
+    gameManager = new GameManager();
 }
 
 SceneMain::~SceneMain() 

@@ -5,7 +5,6 @@
 class UIManager
 {
 private:
-	BulletManager* bulletManager;
 
 	const int COLOR_BLACK = GetColor(0, 0, 0);
 
@@ -25,7 +24,7 @@ public:
 	~UIManager();
 
 	void Proc();
-	void Draw(int playerNum);
+	void Draw(int playerNum, BulletManager* bullet);
 	void StatusList(int statusType);
 
 };

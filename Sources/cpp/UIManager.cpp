@@ -2,25 +2,20 @@
 
 UIManager::UIManager()
 {
-	bulletManager = new BulletManager();
+
 }
 
 UIManager::~UIManager()
 {
-	delete bulletManager;
+
 }
 
 void UIManager::Proc()
 {
-	// デバイスの分だけUIを表示
-	for (int i = 1; deviceMax < 1; i++)
-	{
-		Draw(i);
-	}
 
 }
 
-void UIManager::Draw(int deviceNum)
+void UIManager::Draw(int deviceNum, BulletManager* bullet)
 {
 	if (deviceNum == 1)
 	{
@@ -39,16 +34,16 @@ void UIManager::Draw(int deviceNum)
 	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "射撃タイプ画像");
 
 	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Speed : %f", bulletManager->_bulletPram[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
+	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Speed : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
 
 	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Power : %f", bulletManager->_bulletPram[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
+	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Power : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
 
 	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Range : %f", bulletManager->_bulletPram[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
+	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Range : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
 
 	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Rate : %f", bulletManager->_bulletPram[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
+	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Rate : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
 }
 
 void UIManager::StatusList(int statusType)

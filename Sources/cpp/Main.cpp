@@ -13,8 +13,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int WINDOW_HEIGHT = 1080;
 
 	// ‰ð‘œ“x‚ðÝ’è
-	SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
-	SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	// SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+	// SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	if (DxLib_Init() == -1)

@@ -2,21 +2,22 @@
 
 BaseCharacter::BaseCharacter()
 {
-	inputManager = new InputManager();
-	collisionManager = new CollisionManager();
 
 	hitObject = false;
+	dodgeNow = false;
 }
 
 BaseCharacter::~BaseCharacter()
 {
-	delete inputManager;
-	delete collisionManager;
+
 }
 
 // 通常移動処理
 void BaseCharacter::Move(Vector2 moveVec)
 {
+	printfDx("moveVec.x%f\n", moveVec.x);
+	printfDx("moveVec.y%f\n", moveVec.y);
+
 	status.m_nextPosition.x = 0.0f;
 	status.m_nextPosition.y = 0.0f;
 
@@ -72,8 +73,17 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 	}
 }
 
+// プレイヤーに番号を振り分け
+void BaseCharacter::SetPlayerNum(int deviceNumber)
+{
+	// 引数でもらった番号をプレイヤー番号に設定
+	deviceNum = deviceNumber;
+}
+
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
-void BaseCharacter::Dodge(Vector2 moveVec) { if (canDodge == true)dodgeNow = true; }
+void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
+
+bool BaseCharacter::GetIsPlayer() { return isPlayer; }
 
 void BaseCharacter::PowerUp()
 {

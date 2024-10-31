@@ -1,19 +1,19 @@
 #include "../header/Enemy.h"
 #include "../header/Player.h"
-#include "../header/CollisionManager.h"
 
-Enemy::Enemy()
+Enemy::Enemy(Vector2 pos)
 {
-	colManager = new CollisionManager();
+	status.m_position = pos;
+	status.m_nextPosition = pos;
 }
 
 Enemy::~Enemy()
 {
-	delete colManager;
+
 }
 
 // 敵の挙動
-void Enemy::Proc()
+void Enemy::Proc(BulletManager* bullet, InputManager* inputManager)
 {
 	// ゲームマネージャーからプレイヤーの座標を取得
 	Vector2 playerPos;
@@ -26,10 +26,9 @@ void Enemy::Proc()
 
 	//Move();
 
+
 	// 射線が通っているなら
-	if (colManager->CheckBetweenObject(status.m_position, playerPos), )
-	{
-		Shot();
-	}
-	
+
+	bullet->AddBullet(deviceNum, status);
+
 }

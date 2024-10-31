@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <vector>
 
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
@@ -50,8 +51,9 @@ enum class Shape				// 当たり判定の形区別するための情報
 // 二次元ベクトル
 typedef struct Vector2
 {
-    static float x;
-    static float y;
+public:
+    float x;
+    float y;
 
     Vector2 operator+(Vector2 vec)
     {
@@ -100,7 +102,7 @@ typedef struct Vector2
         return Size(vec1 - vec2);;
     }
 
-    static float size()
+    float size()
     {
         return sqrtf(powf(x, 2) + powf(y, 2));
     }
@@ -110,7 +112,7 @@ typedef struct Vector2
         return sqrtf(powf(vec.x, 2) + powf(vec.y, 2));
     }
 
-    static void normalize()
+    void normalize()
     {
         float distance = size();
         
@@ -118,7 +120,7 @@ typedef struct Vector2
         y /= distance;
     }
 
-    static Vector2 Normalize(Vector2 vec)
+    Vector2 Normalize(Vector2 vec)
     {
         Vector2 temp;
         float distance = vec.size();

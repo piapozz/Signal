@@ -84,7 +84,7 @@ bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vecto
 // 線分と線分が交わっているかを判定する関数
 bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2)
 {
-
+	return false;
 }
 
 // プレイヤーと敵を判定する関数
@@ -107,19 +107,19 @@ void CollisionManager::HitCheck_Player_Player(std::vector<BaseCharacter*> player
 }
 
 // プレイヤーと弾を判定する関数
-void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseCharacter*> players)
+void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseCharacter*> players , BulletManager *bullet)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
-		for (int j = 0; j < BulletManager::_bulletPram.size(); j++)
+		for (int j = 0; j < bullet->GetBulletList().size(); j++)
 		{
 			if (i == j) continue;
-			for (int k = 0; k < BulletManager::_bulletPram[j].m_BulletList.size(); k++)
+			for (int k = 0; k < bullet->GetBulletList()[j].m_BulletList.size(); k++)
 			{
-				if (HitCheck_BaseObj(players[i], BulletManager::_bulletPram[j].m_BulletList[k]))
+				if (HitCheck_BaseObj(players[i],bullet->GetBulletList()[j].m_BulletList[k]))
 				{
 					// ダメージ処理
-					players[i]->TakeDamage(BulletManager::_bulletPram[i].m_BulletList[j]->GetPower());
+					players[i]->TakeDamage(bullet->GetBulletList()[i].m_BulletList[j]->GetPower());
 				}
 			}
 		}
@@ -144,32 +144,34 @@ void CollisionManager::HitCheck_Player_Box(std::vector<BaseCharacter*> players, 
 }
 
 // 弾と箱を判定する関数
-void CollisionManager::HitCheck_Bullet_Box(std::vector<Box*> boxs)
+void CollisionManager::HitCheck_Bullet_Box(std::vector<Box*> boxs, BulletManager* bullet)
 {
 	for (int i = 0; i < boxs.size(); i++)
 	{
-		for (int j = 0; j < BulletManager::_bulletPram.size(); j++)
+		for (int j = 0; j < bullet->GetBulletList().size(); j++)
 		{
-			for (int k = 0; k < BulletManager::_bulletPram[j].m_BulletList.size(); k++)
+			for (int k = 0; k < bullet->GetBulletList()[j].m_BulletList.size(); k++)
 			{
-				if (HitCheck_BaseObj_Box(BulletManager::_bulletPram[j].m_BulletList[k], boxs[i]))
+				if (!bullet->GetBulletList()[j].m_BulletList[k]->GetActive()) continue;
+
+				if (HitCheck_BaseObj_Box(bullet->GetBulletList()[j].m_BulletList[k], boxs[i]))
 				{
 					// 壁かどうかで分岐
 					if (boxs[j]->GetIsWall() == true)
-						BulletManager::_bulletPram[i].m_BulletList[j]->Destroy();
+						bullet->GetBulletList()[i].m_BulletList[j]->Destroy();
 					else
 						// ダメージ処理
-						boxs[j]->TakeDamage(BulletManager::_bulletPram[i].m_BulletList[j]->GetPower());
+						boxs[j]->TakeDamage(bullet->GetBulletList()[i].m_BulletList[j]->GetPower());
 				}
 			}
 		}
 	}
 }
 
-void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, std::vector<Box*> boxs)
+void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, std::vector<Box*> boxs, BulletManager* bullet)
 {
 	HitCheck_Player_Player(players);
-	HitCheck_Player_Bullet(players);
+	HitCheck_Player_Bullet(players, bullet);
 	HitCheck_Player_Box(players, boxs);
-	HitCheck_Bullet_Box(boxs);
+	HitCheck_Bullet_Box(boxs, bullet);
 }

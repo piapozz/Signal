@@ -51,6 +51,7 @@ void MainBullet::Draw()
 {
 	// ‰ñ“]Šgk•`‰æ
 	//DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph, TRUE);
+	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize,GetColor(255,255,255));
 }
 
 // À•WXV

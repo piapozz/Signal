@@ -1,10 +1,6 @@
 #pragma once
-#include <math.h>
-#include <vector>
 
-#include "Dxlib.h"
 #include "BaseObject.h"
-#include "Const.h"
 
 // ① バレットステータス構造体を改造純粋仮想関数の用意
 // ステータス、画像の改造関数

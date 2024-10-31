@@ -56,7 +56,7 @@ void Box::CalVertexPos()
 // –@ü‚ğ•Ô‚·ŠÖ”
 Vector2 Box::GetNormDir()
 {
-
+	return Vector2(0, 0);
 }
 
 // ’¸“_À•W‚ğ•Ô‚·ŠÖ”

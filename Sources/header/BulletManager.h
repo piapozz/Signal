@@ -3,8 +3,6 @@
 #include <vector>
 #include "MainBullet.h"
 
-#include "NormalChamber.h"
-
 using namespace std;
 
 class BulletManager
@@ -22,15 +20,16 @@ public:
 
 private:
 
+	std::vector<BulletPram> _bulletPram;
+
 	const float RATE_VALUE = 0.2f;	// 一レベルごとに上がっていくレート
 
 	int _diffusion = 2;				// 拡散のレベル一ごとに増える弾の数
 	int _diffusionAngleMax = 120;	// 拡散する角度
 	float time = 0;					// 現在の秒数
 
+	
 public:
-
-	static std::vector<BulletPram> _bulletPram;
 
 	// コンストラクタ
 	BulletManager();
@@ -47,6 +46,8 @@ public:
 
 	// 発射
 	void AddBullet(int playerNum , BaseObject::Status status);
+
+	std::vector<BulletPram> GetBulletList() { return _bulletPram; }
 
 	// バレットのステータスを上げる
 	// 引数 上げるステータス、プレイヤーの番号、

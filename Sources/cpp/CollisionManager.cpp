@@ -88,7 +88,7 @@ bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vect
 }
 
 // プレイヤーと敵を判定する関数
-void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject*> players)
+void CollisionManager::HitCheck_Player_Player(std::vector<BaseCharacter*> players)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -107,7 +107,7 @@ void CollisionManager::HitCheck_Player_Player(std::vector<BaseObject*> players)
 }
 
 // プレイヤーと弾を判定する関数
-void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject*> players)
+void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseCharacter*> players)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -127,7 +127,7 @@ void CollisionManager::HitCheck_Player_Bullet(std::vector<BaseObject*> players)
 }
 
 // プレイヤーと箱を判定する関数
-void CollisionManager::HitCheck_Player_Box(std::vector<BaseObject*> players, std::vector<Box*> boxs)
+void CollisionManager::HitCheck_Player_Box(std::vector<BaseCharacter*> players, std::vector<Box*> boxs)
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -166,7 +166,7 @@ void CollisionManager::HitCheck_Bullet_Box(std::vector<Box*> boxs)
 	}
 }
 
-void CollisionManager::HitCheck_Everything(std::vector<BaseObject*> players, std::vector<Box*> boxs)
+void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, std::vector<Box*> boxs)
 {
 	HitCheck_Player_Player(players);
 	HitCheck_Player_Bullet(players);

@@ -20,7 +20,7 @@ bool CollisionManager::HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2)
 	float radius2 = obj2->GetStatus().m_shapeSize;
 
 	// ‹——£‚Ì·‚ª”¼Œa‚Ì‡ŒvˆÈ‰º‚È‚çÚG
-	if (Vector2::Distance(pos1, pos2) >= (radius1 + radius2))
+	if (Vector2::Distance(pos1, pos2) <= (radius1 + radius2))
 	{
 		return true;
 	}

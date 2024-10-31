@@ -5,7 +5,7 @@ GameManager::GameManager()
 {
 	stageManager = new StageManager();
 	players.push_back(new Player(stageManager->GetStartPos()[0]));
-	players.push_back(new Enemy(Vector2(50.0f, 200.0f)));
+	players.push_back(new Enemy(stageManager->GetStartPos()[1]));
 	collisionManager = new CollisionManager();
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();

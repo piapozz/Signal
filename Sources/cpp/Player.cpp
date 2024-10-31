@@ -22,9 +22,8 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 {
 	
 	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
-	//if (isDead != true)
+	// if (isDead != true)
 	{
-
 		// コントローラーの状態を更新
 		GetController(inputManager);
 

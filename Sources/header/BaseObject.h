@@ -23,7 +23,7 @@ public:
 			m_nextPosition.y = 0.0f;
 			m_angle = 0.0;
 			m_life = 1.0f;
-			m_shapeSize = 1.0f;
+			m_shapeSize = 5.0f;
 		}
 	};
 

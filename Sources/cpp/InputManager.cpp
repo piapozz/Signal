@@ -61,6 +61,8 @@ Vector2 InputManager::GetStick(int playerNum, Stick stick)
 	printfDx("temp.y%f\n", temp.y);
 	printfDx("num%d\n", playerNum);
 
+	temp.normalize();
+
 	return temp;
 }
 

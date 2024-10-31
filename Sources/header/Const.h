@@ -4,7 +4,7 @@
 
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
-const float BOX_SIZE = 1.0f;    // 箱のサイズ
+const float BOX_SIZE = 100.0f;    // 箱のサイズ
 
 const int STAGE_WIDTH = 5;
 const int STAGE_HEIGHT = 5;
@@ -115,6 +115,8 @@ public:
     void normalize()
     {
         float distance = size();
+
+        if (distance == 0) return;
         
         x /= distance;
         y /= distance;

@@ -7,7 +7,8 @@
 class BaseCharacter : public BaseObject
 {
 public:
-	int deviceNum;
+	int deviceNum;						// 弾の管理などに使う変数
+	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ

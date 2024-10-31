@@ -19,8 +19,6 @@ public:
 
 	bool isDead;
 
-	int playerNum;
-
 	Player(Vector2 pos);					// コンストラクタ
 	~Player();								// デストラクタ
 

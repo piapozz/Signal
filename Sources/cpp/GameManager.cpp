@@ -71,6 +71,9 @@ void GameManager::Proc()
 	{
 		players[i]->UpdatePosition();
 	}
+
+	// ’e‚ÌÀ•WXV
+	bulletManager->UpdatePosition();
 }
 
 // •`‰æ

@@ -68,6 +68,23 @@ void BulletManager::Draw()
 	}
 }
 
+// 座標更新
+void BulletManager::UpdatePosition()
+{
+	// プレイヤーとそれぞれの弾の分繰り返して座標更新する
+	for (int i = 0; i < _bulletPram.size(); i++)
+	{
+		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
+		{
+			// 有効判定
+			if (!_bulletPram[i].m_BulletList[j]->GetActive()) return;
+
+			// 描画
+			_bulletPram[i].m_BulletList[j]->UpdatePosition();
+		}
+	}
+}
+
 /// <summary>
 /// バレットリストに現在のステータスの弾を追加する
 /// </summary>

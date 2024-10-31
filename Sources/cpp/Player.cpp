@@ -22,11 +22,13 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 {
 	
 	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
-	if (isDead != true)
+	//if (isDead != true)
 	{
 
 		// コントローラーの状態を更新
 		GetController(inputManager);
+
+		moveVec = controller.m_LStick;
 
 		// 回避が押されていたら回避する
 		if (controller.m_LTrigger)Dodge();
@@ -35,7 +37,7 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 		if (canMove)
 		{
 			// 回避移動状態ではなかったら通常移動をする回避状態だったら回避する
-			Move(controller.m_LStick);
+			Move();
 		}
 
 		// プレイヤーの向きを変更

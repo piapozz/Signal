@@ -31,19 +31,23 @@ void UIManager::Draw(int deviceNum, BulletManager* bullet)
 
 	else { return; }
 
+	/*
 	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "射撃タイプ画像");
 
-	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Speed : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
+	DrawFormatString(infoHeight + 30, infoWidth, COLOR_BLACK, "Speed : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
 
-	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Power : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
+	DrawFormatString(infoHeight + 60, infoWidth, COLOR_BLACK, "Power : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
 
-	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Range : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
+	DrawFormatString(infoHeight + 90, infoWidth, COLOR_BLACK, "Range : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
 
-	infoHeight += 30;
-	DrawFormatString(infoHeight, infoWidth, COLOR_BLACK, "Rate : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
+	DrawFormatString(infoHeight + 120, infoWidth, COLOR_BLACK, "Rate : %f", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);]
+	*/
+
+	printfDx("射撃タイプ画像\n");
+	printfDx("Speed : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
+	printfDx("Power : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
+	printfDx("Range : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
+	printfDx("Rate : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
 }
 
 void UIManager::StatusList(int statusType)

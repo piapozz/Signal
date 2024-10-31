@@ -66,6 +66,11 @@ void GameManager::Proc()
 
 	// “–‚½‚è”»’è
 	collisionManager->HitCheck_Everything(players, stageManager->GetBoxData(),bulletManager);
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		players[i]->UpdatePosition();
+	}
 }
 
 // •`‰æ

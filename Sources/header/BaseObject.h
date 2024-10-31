@@ -34,6 +34,8 @@ public:
 
 	void TakeDamage(float damageSize);
 	void SetHitFlag(bool hitCheck);
+	virtual void Move(Vector2 moveVec);
+	void UpdatePosition();
 
 	void SetPosition(Vector2 objectPos);
 	void SetLife(float life);

@@ -29,6 +29,6 @@ void Enemy::Proc(BulletManager* bullet, InputManager* inputManager)
 
 	// ŽËü‚ª’Ê‚Á‚Ä‚¢‚é‚È‚ç
 
-	bullet->AddBullet(deviceNum, status);
+	// bullet->AddBullet(deviceNum, status);
 
 }

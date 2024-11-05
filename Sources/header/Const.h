@@ -6,8 +6,6 @@ const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
 const float BOX_SIZE = 100.0f;    // 箱のサイズ
 
-const int STAGE_WIDTH = 5;
-const int STAGE_HEIGHT = 5;
 const float STAGE_MARGIN_RATE = 0.1f;
 
 const int WINDOW_WIDTH = 1920;
@@ -103,7 +101,7 @@ public:
 
     static float Distance(Vector2 vec1, Vector2 vec2)
     {
-        return Size(vec1 - vec2);;
+        return Size(vec1 - vec2);
     }
 
     float size()

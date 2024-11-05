@@ -3,12 +3,15 @@
 
 StageManager::StageManager()
 {
-	_defaultStagePos.x = WINDOW_WIDTH / 2 - STAGE_WIDTH / 2 * BOX_SIZE;
+	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
+	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
+
+	_defaultStagePos.x = WINDOW_WIDTH / 2 - _stageWidth / 2 * BOX_SIZE;
 	_defaultStagePos.y = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
 
-	for (int x = 0; x < 5; x++)
+	for (int x = 0; x < sizeof(_stageLayout) / sizeof(_stageLayout[0]); x++)
 	{
-		for (int y = 0; y < 5; y++)
+		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[1]); y++)
 		{
 			switch ((ObjectType)_stageLayout[x][y])
 			{

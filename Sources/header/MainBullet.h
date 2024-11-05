@@ -49,9 +49,6 @@ public:
 	// 座標、角度、ステータスセット
 	void Reload(Status objStatus, float Pram[], int type[]);
 
-	// 使用中か返す
-	bool GetActive() { return _bulletContainer.mainContainer.m_Flag; }
-
 	// パワーを返す
 	int GetPower() { return status.m_power; }
 };

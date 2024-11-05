@@ -43,7 +43,7 @@ void MainBullet::Destroy()
 
 
 	// 使用を終わる
-	_bulletContainer.mainContainer.m_Flag = false;
+	status.m_angle = false;
 }
 
 // 描画関数
@@ -81,6 +81,6 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	}
 
 	// 使用中
-	_bulletContainer.mainContainer.m_Flag = true;
+	status.m_angle = true;
 	distance = 0;
 }

@@ -7,10 +7,10 @@ BaseChamber::BaseChamber()
 }
 
 
-BaseChamber::BaseChamber(BaseObject::Status* objStatus, MainContainer* container)
+BaseChamber::BaseChamber(BaseObject::Status* objStatus, BulletContainer* container)
 {
 	status = objStatus;
-	mainContainer = container;
+	bulletContainer = container;
 }
 
 // デストラクタ

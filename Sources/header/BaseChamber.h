@@ -22,9 +22,7 @@ public:
 	// 基礎ステータス
 	typedef struct MainContainer
 	{
-		bool m_Flag = false;    // 発射フラグ
 		float m_Speed = 5.0f;   // スピード
-		float m_Power = 1.0f;	// 破壊力	
 		float m_Range = 300.0f;	// 射程
 		int color = GetColor(0, 0, 0);	// 弾丸の色
 	};
@@ -38,7 +36,8 @@ public:
 	// 誘導ステータス
 	typedef struct TrackingContainer
 	{
-
+		float turnAngle = 5;			// 補正する角度
+		Vector2 targetPosition;			// 誘導対象
 	};
 
 	// 貫通ステータス
@@ -50,7 +49,8 @@ public:
 	// 爆発ステータス
 	typedef struct ExplosionContainer
 	{
-
+		float size = 0;
+		float power = 0;
 	};
 
 	// 弾の構造体
@@ -66,14 +66,14 @@ public:
 protected:
 		
 	BaseObject::Status* status;
-	MainContainer* mainContainer;
+	BulletContainer* bulletContainer;
 
 public:
 
 
 	// コンストラクタ
 	BaseChamber();
-	BaseChamber(BaseObject::Status *status, MainContainer *container);
+	BaseChamber(BaseObject::Status *status, BulletContainer*container);
 
 	// デストラクタ
 	~BaseChamber();

@@ -140,23 +140,22 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		temp.m_angle -= radianAngle * ((_diffusion * level) / 2);
 
 		// ‚»‚ê‚¼‚ê‚ÌŠp“x‚É‘Î‚µ‚Ä’e‚ð”­ŽË
-		for (int i = 0; i < ((_diffusion * level) + 1); i++) 
+		for (int i = 0; i < ((_diffusion * level) + 1); i++)
 		{
-			temp.m_angle += radianAngle * i;
+			// Œ»Ý‚ÌŠp“x‚É‰ž‚¶‚Ä’e‚Ì”­ŽËƒXƒe[ƒ^ƒX‚ð’²®
+			temp.m_angle = status.m_angle - radianAngle * ((_diffusion * level) / 2) + radianAngle * i;
 
-			// ’e‚ð’Ç‰Á
-			//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, temp));
-
-			for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++)
+			// Žg‚¦‚é’e‚ð’T‚µ‚ÄƒŠƒ[ƒh
+			for (int j = 0; j < _bulletPram[playerNum].m_BulletList.size(); j++)
 			{
-				if (_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
-
+				if (_bulletPram[playerNum].m_BulletList[j]->GetActive()) continue;
+				
 				// Žg‚¦‚é’e‚ðŒ©‚Â‚¯‚½
-				_bulletPram[playerNum].m_BulletList[i]->Reload(temp, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
-
+				_bulletPram[playerNum].m_BulletList[j]->Reload(temp, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
 				break;
 			}
 		}
+
 	}
 }
 

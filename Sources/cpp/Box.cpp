@@ -4,6 +4,8 @@ Box::Box(Vector2 pos)
 {
 	// 座標指定
 	SetPosition(pos);
+	status.m_nextPosition = pos;
+	status.m_shapeSize = BOX_SIZE;
 
 	// 頂点の座標を求める
 	CalVertexPos();
@@ -15,6 +17,8 @@ Box::Box(Vector2 pos, float life)
 {
 	// 座標指定
 	SetPosition(pos);
+	status.m_nextPosition = pos;
+	status.m_shapeSize = BOX_SIZE;
 
 	// 頂点の座標を求める
 	CalVertexPos();

@@ -94,7 +94,7 @@ void GameManager::Draw()
 	// ƒvƒŒƒCƒ„[‚½‚¿‚Ì•`‰æ
 	for (int i = 0; i < players.size(); i++)
 	{
-		players[i]->Draw();
+		if (players[i]->status.m_isActive != false)players[i]->Draw();
 
 		uiManager->Draw(i, bulletManager);
 	}

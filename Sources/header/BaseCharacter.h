@@ -20,6 +20,7 @@ public:
 	void Move();
 	void Dodge();
 	bool GetIsPlayer();
+	void GainExp(int expValue);
 	void PowerUp();
 	void StatusUp();
 

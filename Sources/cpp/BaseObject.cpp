@@ -37,9 +37,11 @@ void BaseObject::SetHitFlag(bool hitCheck)
 }
 
 // ƒ_ƒ[ƒW‚ğó‚¯æ‚è‘Ì—Í‚ğŒ¸‚ç‚·ŠÖ”ŠÖ”
-void BaseObject::TakeDamage(float damageSize)
+bool BaseObject::TakeDamage(float damageSize)
 {
 	status.m_life -= damageSize;
+
+	return status.m_life <= 0;
 }
 
 void BaseObject::SetActive(bool flag) { status.m_isActive = flag; }

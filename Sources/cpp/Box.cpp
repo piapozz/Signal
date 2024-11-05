@@ -25,6 +25,9 @@ Box::Box(Vector2 pos, float life)
 
 	// ‘Ì—ÍÝ’è
 	status.m_life = life;
+	_maxLife = life;
+
+	_exp = 1;
 
 	_isWall = false;
 }
@@ -57,15 +60,40 @@ void Box::CalVertexPos()
 	}
 }
 
+void Box::RevivalBox()
+{
+	SetActive(true);
+	status.m_life = _maxLife;
+}
+
 void Box::DestroyBox()
 {
-	
+	SetActive(false);
+	_untilRevivalCount = REVIVAL_TIME;
+}
+
+void Box::RevivalCount()
+{
+	_untilRevivalCount--;
 }
 
 // –@ü‚ð•Ô‚·ŠÖ”
-Vector2 Box::GetNormDir()
+Vector2 Box::GetNormDir(Vector2 pos)
 {
-	return Vector2(0, 0);
+	Vector2 dir =  pos - GetStatus().m_position;
+	float angle = atan2f(dir.y, dir.x);
+
+	Vector2 result;
+	if (angle >= -DX_PI_F / 4 * 3 && angle < -DX_PI_F / 4 * 1)
+		result = Vector2(0, -1);
+	else if (angle >= -DX_PI_F / 4 * 1 && angle < DX_PI_F / 4 * 1)
+		result = Vector2(1, 0);
+	else if (angle >= DX_PI_F / 4 * 1 && angle < DX_PI_F / 4 * 3)
+		result = Vector2(0, 1);
+	else
+		result = Vector2(-1, 0);
+
+	return result;
 }
 
 // ’¸“_À•W‚ð•Ô‚·ŠÖ”

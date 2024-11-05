@@ -2,12 +2,18 @@
 #include <math.h>
 #include <vector>
 
+// プレイヤー
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
-const float BOX_SIZE = 100.0f;    // 箱のサイズ
+// 箱
+const float BOX_SIZE = 100.0f;  // 箱のサイズ
+const int REVIVAL_TIME = 300;   // 復活までの時間
+const float BOX_LIFE = 10.0f;
 
+// ステージ
 const float STAGE_MARGIN_RATE = 0.1f;
 
+// ウィンドウ
 const int WINDOW_WIDTH = 1920;
 const int WINDOW_HEIGHT = 1080;
 

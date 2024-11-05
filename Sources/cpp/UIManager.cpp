@@ -48,6 +48,10 @@ void UIManager::Draw(int deviceNum, BulletManager* bullet)
 	printfDx("Power : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
 	printfDx("Range : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
 	printfDx("Rate : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
+
+	// FPS‚Ì•`‰æ
+	DrawBox(1810, 0, 1920, 20, GetColor(30, 30, 30), true);
+	DrawFormatString(1820, 0, GetColor(0, 255, 125), "FPS : %.1f", GetFPS());
 }
 
 void UIManager::StatusList(int statusType)

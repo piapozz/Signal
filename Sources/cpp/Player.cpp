@@ -6,7 +6,6 @@ Player::Player(Vector2 pos)
 	status.m_nextPosition = pos;
 
 	// プレイヤーの生存状況
-	isDead = false;
 	canMove = true;
 
 	isPlayer = true;
@@ -21,8 +20,8 @@ Player::~Player()
 void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 {
 	
-	// 死んでいなかったら処理をする ※isDeadがtrueのときは死んでいる
-	// if (isDead != true)
+	// 死んでいなかったら処理をする ※isActiveがtrueのときは死んでいる
+	// if (status.m_isActive)
 	{
 		// コントローラーの状態を更新
 		GetController(inputManager);
@@ -49,7 +48,7 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 	}
 
 	// 体力が0になったときプレイヤーは死にます
-	if (status.m_life <= 0) isDead = true;
+	if (status.m_life <= 0) status.m_isActive = false;
 	
 }
 

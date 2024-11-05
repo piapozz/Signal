@@ -17,8 +17,6 @@ public:
 
 	Controller controller;
 
-	bool isDead;
-
 	Player(Vector2 pos);					// コンストラクタ
 	~Player();								// デストラクタ
 

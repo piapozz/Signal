@@ -13,6 +13,8 @@ public:
 		float m_angle;			// 向き
 		float m_life;			// オブジェクトの体力
 		float m_shapeSize;		// 形の大きさ
+		float m_power;			// 相手に与えるダメージ
+		bool m_isActive;		// 生存状況
 		Shape m_shape;			// 形
 
 		// ステータスの初期化
@@ -24,6 +26,8 @@ public:
 			m_nextPosition.y = 0.0f;
 			m_angle = 0.0;
 			m_life = 1.0f;
+			m_power = 0.0f;
+			m_isActive = true;
 			m_shapeSize = 5.0f;
 		}
 	};
@@ -47,8 +51,8 @@ public:
 
 	Shape GetShape();						// 形を取得
 
-protected:
 	Status status;
+protected:
 
 	int objectHandle;		// オブジェクトの見た目を管理（モデルや画像）
 

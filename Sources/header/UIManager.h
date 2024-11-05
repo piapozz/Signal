@@ -14,6 +14,10 @@ private:
 	const int PLAYER_HEIGHT_2 = 1920 - 250;
 	const int PLAYER_WIDTH_2 = 20;
 
+	int bulletIcon[(int)BulletType::MAX];
+
+	// const char bulletStateText[(int)BulletStatus::MAX];
+
 	int infoHeight, infoWidth;
 
 	int deviceMax = 2;
@@ -23,9 +27,9 @@ public:
 	UIManager();
 	~UIManager();
 
+	void Init();
 	void Proc();
 	void Draw(int playerNum, BulletManager* bullet);
-	void StatusList(int statusType);
 
 };
 

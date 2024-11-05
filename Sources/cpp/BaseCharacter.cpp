@@ -17,9 +17,6 @@ BaseCharacter::~BaseCharacter()
 // ’ÊíˆÚ“®ˆ—
 void BaseCharacter::Move()
 {
-	printfDx("moveVec.x%f\n", moveVec.x);
-	printfDx("moveVec.y%f\n", moveVec.y);
-
 	// ‰ñ”ğˆÚ“®‚¾‚Á‚½‚ç
 	if (dodgeNow)
 	{
@@ -65,6 +62,8 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
 
 bool BaseCharacter::GetIsPlayer() { return isPlayer; }
+
+void BaseCharacter::GainExp(int expValue) { exp += expValue; }
 
 void BaseCharacter::PowerUp()
 {

@@ -12,11 +12,11 @@ public:
 	typedef struct BulletPram
 	{
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
-		int m_BulletType[(int)BulletType::MAX] = { 1,0,1,0,0,0 };
+		int m_BulletType[(int)BulletType::MAX] = { 1,0,5,0,0,0 };
 		std::vector<MainBullet*> m_BulletList;
 	};
 
-	const int BULLET_MAX = 256;
+	const int BULLET_MAX = 128;
 
 private:
 
@@ -25,7 +25,7 @@ private:
 	const float RATE_VALUE = 200.2f;	// ˆêƒŒƒxƒ‹‚²‚Æ‚Éã‚ª‚Á‚Ä‚¢‚­ƒŒ[ƒg
 
 	int _diffusion = 2;				// ŠgU‚ÌƒŒƒxƒ‹ˆê‚²‚Æ‚É‘‚¦‚é’e‚Ì”
-	int _diffusionAngleMax = 60 ;	// ŠgU‚·‚éŠp“x
+	int _diffusionAngleMax = 120 ;	// ŠgU‚·‚éŠp“x
 	float time = 0;					// Œ»İ‚Ì•b”
 
 public:

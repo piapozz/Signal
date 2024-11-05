@@ -7,7 +7,7 @@ class NormalChamber
 {
 public:
 
-	NormalChamber(BaseObject::Status* status, MainContainer* container) : BaseChamber(status, container) {  }
+	NormalChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
 
 	void Move();
 

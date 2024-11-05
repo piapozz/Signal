@@ -3,7 +3,7 @@
 MainBullet::MainBullet()
 {
 	// 与えられたタイプ、ステータスの情報をもとに最終的なステータスと画像を出す
-	normalChanber = new NormalChamber(&status, &_mainContainer);
+	normalChanber = new NormalChamber(&status, &_bulletContainer);
 }
 
 MainBullet::~MainBullet()
@@ -43,7 +43,7 @@ void MainBullet::Destroy()
 
 
 	// 使用を終わる
-	_mainContainer.m_Flag = false;
+	_bulletContainer.mainContainer.m_Flag = false;
 }
 
 // 描画関数
@@ -51,7 +51,7 @@ void MainBullet::Draw()
 {
 	// 回転拡縮描画
 	//DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph, TRUE);
-	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize,GetColor(255,255,255));
+	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize *3,GetColor(255,255,255),false);
 }
 
 // 射程管理関数
@@ -60,7 +60,7 @@ void MainBullet::CheckRange()
 	// 次の座標から距離を出して足していく
 	distance += Vector2::Distance(status.m_nextPosition, status.m_position);
 
-	if (distance < _mainContainer.m_Range) return;
+	if (distance < _bulletContainer.mainContainer.m_Range) return;
 
 	Destroy();
 }
@@ -81,6 +81,6 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	}
 
 	// 使用中
-	_mainContainer.m_Flag = true;
+	_bulletContainer.mainContainer.m_Flag = true;
 	distance = 0;
 }

@@ -14,7 +14,7 @@ class MainBullet
 {
 private:
 
-	BaseChamber::MainContainer _mainContainer;
+	BaseChamber::BulletContainer _bulletContainer;
 
 	float distance = 0;
 
@@ -50,12 +50,8 @@ public:
 	void Reload(Status objStatus, float Pram[], int type[]);
 
 	// 使用中か返す
-	bool GetActive() { return _mainContainer.m_Flag; }
+	bool GetActive() { return _bulletContainer.mainContainer.m_Flag; }
 
 	// パワーを返す
-	int GetPower() 
-	{ 
-		Destroy();
-		return _mainContainer.m_Power; 
-	}
+	int GetPower() { return status.m_power; }
 };

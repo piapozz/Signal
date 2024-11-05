@@ -42,6 +42,10 @@ void BaseObject::TakeDamage(float damageSize)
 	status.m_life -= damageSize;
 }
 
+void BaseObject::SetActive(bool flag) { status.m_isActive = flag; }
+
+bool BaseObject::GetActive() { return status.m_isActive; }
+
 // オブジェクトの座標変更
 void BaseObject::SetPosition(Vector2 objectPos) { status.m_position = objectPos; }
 

@@ -42,6 +42,8 @@ public:
 	virtual void Move() = 0;
 	void UpdatePosition();
 
+	void SetActive(bool flag);
+	bool GetActive();
 	void SetPosition(Vector2 objectPos);
 	void SetLife(float life);
 	void SetAngle(float angle);

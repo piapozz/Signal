@@ -2,10 +2,12 @@
 #include "../header/BaseObject.h"
 #include "BulletManager.h"
 #include "InputManager.h"
-#include <math.h>
 
 class BaseCharacter : public BaseObject
 {
+private:
+	float vecLength;					// ベクトルの長さ
+
 public:
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
@@ -28,7 +30,7 @@ protected:
 
 	int exp;					// 壊した箱の数を管理
 
-	float speed = 1;			// 自機のスピード
+	float speed = 100;			// 自機のスピード
 	float dodgeSpeed;			// 回避の速さ
 	float dodgeCount;			// 回避のクールタイム管理
 	float dodgeFlame;			// 回避に使うフレーム数

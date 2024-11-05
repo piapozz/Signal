@@ -13,10 +13,8 @@ BaseObject::~BaseObject()
 // 画像を描画
 void BaseObject::Draw()
 {
-	// 画像を描画
-	//if (objectHandle != NULL) DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, status.m_angle * (DX_PI_F / 180), objectHandle, true);
-	// ハンドルに何も入っていなかったら代わりに丸を生成
-	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize, GetColor(255, 0, 0), TRUE);
+	// 描画
+	DrawRotaGraph(status.m_position.x, status.m_position.y, 1.5f, status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
 }
 
 // 現在座標に適応
@@ -56,8 +54,8 @@ void BaseObject::SetAngle(float angle) { status.m_angle = angle; }
 // オブジェクトの大きさを設定
 void BaseObject::SetShapeSize(float size) { status.m_shapeSize = size; }
 
-// モデルデータをセット
-void BaseObject::SetModelData(int model) { objectHandle = model; }
+// イメージデータをセット
+void BaseObject::SetImageData(const char* objName) { objectHandle = LoadGraph(objName); }
 
 // 形を取得する
 Shape BaseObject::GetShape() { return status.m_shape; }

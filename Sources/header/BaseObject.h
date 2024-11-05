@@ -1,5 +1,6 @@
 #pragma once
 #include <DxLib.h>
+#include <math.h>
 #include "../header/Const.h"
 
 class BaseObject
@@ -41,7 +42,7 @@ public:
 	void SetLife(float life);
 	void SetAngle(float angle);
 	void SetShapeSize(float size);
-	void SetModelData(int model);
+	void SetImageData(const char* objName);
 	void Draw();
 
 	Shape GetShape();						// Œ`‚ðŽæ“¾

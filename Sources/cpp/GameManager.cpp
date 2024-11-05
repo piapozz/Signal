@@ -43,6 +43,13 @@ void GameManager::Init()
 		{
 			// 割り当て
 			players[i]->SetPlayerNum(i);
+			// プレイヤー用のイメージを設定
+			players[i]->SetImageData("Resources/Player.png");
+		}
+		else
+		{
+			// 敵用のイメージを設定
+			players[i]->SetImageData("Resources/Enemy.png");
 		}
 	}
 

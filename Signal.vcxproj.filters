@@ -129,6 +129,9 @@
     <ClCompile Include="Sources\cpp\MainBullet.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
+    <ClCompile Include="..\Downloads\pui (3)\pui\Sources\cpp\BaseDamageObject.cpp">
+      <Filter>ソース ファイル\Ishihara</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\header\BaseScene.h">
@@ -210,6 +213,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\MainBullet.h">
+      <Filter>ヘッダー ファイル\Ishihara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Downloads\pui (3)\pui\Sources\header\BaseDamageObject.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
   </ItemGroup>

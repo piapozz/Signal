@@ -16,7 +16,7 @@ public:
 		std::vector<MainBullet*> m_BulletList;
 	};
 
-	const int BULLET_MAX = 128;
+	const int BULLET_MAX = 256;
 
 private:
 

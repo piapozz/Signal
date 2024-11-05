@@ -114,10 +114,11 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	// 当たってたら
 	if (HitCheck_BaseObj(player, bullet) == true)
 	{
+		// まだダメージを与えていないなら
 		// ダメージ処理
 		player->TakeDamage(bullet->GetPower());
 		// 着弾処理
-		bullet->Destroy();
+		bullet->Impact();
 	}
 }
 
@@ -126,24 +127,32 @@ void CollisionManager::HitCheck_Player_Box(BaseCharacter* player, Box* box)
 {
 	if (HitCheck_BaseObj_Box(player, box) == true)
 	{
+		// 法線の更新
+		box->GetNormDir(player->GetStatus().m_nextPosition);
+
 		// オブジェクトのhitFlagを立てる
 		player->SetHitFlag(true);
-
-		// 法線の更新
 	}
 }
 
 // 弾と箱を判定する関数
-void CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
+bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 {
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
+		// 法線の更新
+		box->GetNormDir(bullet->GetStatus().m_nextPosition);
+
 		// 箱なら
 		if (box->GetIsWall() == false)
-			// ダメージ処理
-			box->TakeDamage(bullet->GetPower());
+			// まだダメージを与えていないなら
+			// ダメージ処理、倒しているなら
+			if (box->TakeDamage(bullet->GetPower()) == true)
+				return true;
+			else
+				return false;
 		// 着弾処理
-		bullet->Destroy();
+		bullet->Impact();
 	}
 }
 
@@ -155,14 +164,17 @@ void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, 
 	{
 		BaseCharacter* player_1 = players[p1];
 
-		for (int p2 = 0; p2 < players.size(); p2++)
+		// 箱のループ
+		for (int bo = 0; bo < boxs.size(); bo++)
 		{
-			std::vector<MainBullet*> bulletList = bullets->GetBulletList()[p2].m_BulletList;
+			Box* box = boxs[bo];
 
-			// 箱のループ
-			for (int bo = 0; bo < boxs.size(); bo++)
+			for (int p2 = 0; p2 < players.size(); p2++)
 			{
-				Box* box = boxs[bo];
+				BaseCharacter* player_2 = players[p2];
+
+				std::vector<MainBullet*> bulletList = bullets->GetBulletList()[p2].m_BulletList;
+				//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
 
 				// 弾のループ
 				for (int bu = 0; bu < bulletList.size(); bu++)
@@ -180,25 +192,49 @@ void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, 
 
 					// 箱と弾
 					if (IsInProximity(bullet, box) == true)
-						HitCheck_Bullet_Box(bullet, box);
+						if (HitCheck_Bullet_Box(bullet, box))
+							player_2->GainExp(box->GetExp());
 				}
 
-				// プレイヤーと箱
-				if (IsInProximity(player_1, box) == true)
-					HitCheck_Player_Box(player_1, box);
+				/*
+				// 爆発のループ
+				for (int ex = 0; ex < explosionList.size(); ex++)
+				{
+					MainBullet* explosion = explosionList[ex];
+					// 弾が非アクティブならスキップ
+					if (!explosion->GetActive()) continue;
+
+					// 撃った本人ならスキップ
+					if (p1 == p2) continue;
+
+					// プレイヤーと弾
+					if (IsInProximity(player_1, explosion) == true)
+						HitCheck_Player_Bullet(player_1, explosion);
+
+					// 箱と弾
+					if (IsInProximity(explosion, box) == true)
+						HitCheck_Bullet_Box(explosion, box);
+				}
+				*/
+			}
+
+			// プレイヤーと箱
+			if (IsInProximity(player_1, box) == true)
+			{
+				HitCheck_Player_Box(player_1, box);
 			}
 		}
 
 		for (int p2 = p1 + 1; p2 < players.size(); p2++)
 		{
+			BaseCharacter* player_2 = players[p2];
+
 			// 同じ組み合わせはスキップ
 			if (p1 >= p2) continue;
 
-			BaseCharacter* player_2 = players[p2];
-
 			if (IsInProximity(player_1, player_2) == true)
-			// プレイヤーとプレイヤー
-			HitCheck_Player_Player(player_1, player_2);
+				// プレイヤーとプレイヤー
+				HitCheck_Player_Player(player_1, player_2);
 		}
 	}
 }

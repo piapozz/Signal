@@ -16,7 +16,7 @@ StageManager::StageManager()
 			switch ((ObjectType)_stageLayout[x][y])
 			{
 			case ObjectType::BOX:
-				_boxList.push_back(new Box(ConvertNumToPos(x, y), 10.0f));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE));
 				break;
 			case ObjectType::WALL:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
@@ -45,8 +45,13 @@ void StageManager::Proc()
 {
 	for (int i = 0; i < _boxList.size(); i++)
 	{
-		if (_boxList[i]->GetStatus().m_life <= 0)
-			_boxList.erase(_boxList.begin() + i);
+		if (_boxList[i]->GetActive() == false)
+			if (_boxList[i]->GetRevivalCount() > 0)
+				_boxList[i]->RevivalCount();
+			else
+				_boxList[i]->RevivalBox();
+		else if(_boxList[i]->GetStatus().m_life <= 0)
+			_boxList[i]->DestroyBox();
 	}
 }
 
@@ -54,7 +59,8 @@ void StageManager::Draw()
 {
 	for (int i = 0; i < _boxList.size(); i++)
 	{
-		_boxList[i]->Draw();
+		if (_boxList[i]->GetActive() == true)
+			_boxList[i]->Draw();
 	}
 }
 

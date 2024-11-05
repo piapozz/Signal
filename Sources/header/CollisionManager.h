@@ -7,6 +7,7 @@
 #include "MainBullet.h"
 #include "BulletManager.h"
 #include "BaseCharacter.h"
+#include "BaseDamageObject.h"
 
 class CollisionManager
 {
@@ -20,7 +21,7 @@ private:
 	void HitCheck_Player_Player(BaseCharacter* player_1, BaseCharacter* player_2);
 	void HitCheck_Player_Bullet(BaseCharacter* player, MainBullet* bullet);
 	void HitCheck_Player_Box(BaseCharacter* player, Box* box);
-	void HitCheck_Bullet_Box(MainBullet* bullet, Box* box);
+	bool HitCheck_Bullet_Box(MainBullet* bullet, Box* box);
 	
 public:
 

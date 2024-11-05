@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Downloads\pui (3)\pui\Sources\cpp\BaseDamageObject.cpp" />
     <ClCompile Include="Sources\cpp\AudioManager.cpp" />
     <ClCompile Include="Sources\cpp\Box.cpp" />
     <ClCompile Include="Sources\cpp\BulletManager.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Sources\cpp\SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Downloads\pui (3)\pui\Sources\header\BaseDamageObject.h" />
     <ClInclude Include="Sources\header\AudioManager.h" />
     <ClInclude Include="Sources\header\Box.h" />
     <ClInclude Include="Sources\header\BulletManager.h" />

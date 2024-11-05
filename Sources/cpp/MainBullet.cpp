@@ -4,6 +4,8 @@ MainBullet::MainBullet()
 {
 	// 与えられたタイプ、ステータスの情報をもとに最終的なステータスと画像を出す
 	normalChanber = new NormalChamber(&status, &_bulletContainer);
+
+	status.m_isActive = false;
 }
 
 MainBullet::~MainBullet()
@@ -34,6 +36,8 @@ void MainBullet::Impact()
 
 	// 反射の着弾
 
+	Destroy();
+
 }
 
 // 消滅時
@@ -43,7 +47,7 @@ void MainBullet::Destroy()
 
 
 	// 使用を終わる
-	status.m_angle = false;
+	status.m_isActive = false;
 }
 
 // 描画関数
@@ -81,6 +85,6 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	}
 
 	// 使用中
-	status.m_angle = true;
+	status.m_isActive = true;
 	distance = 0;
 }

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "MainBullet.h"
+#include "Explosion.h"
 
 using namespace std;
 
@@ -14,9 +15,12 @@ public:
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 		int m_BulletType[(int)BulletType::MAX] = { 1,0,5,0,0,0 };
 		std::vector<MainBullet*> m_BulletList;
+		std::vector<Explosion*> m_ExplosionList;
+		float time = 0;
 	};
 
 	const int BULLET_MAX = 256;
+	const int EXPLOSION_MAX = BULLET_MAX;
 
 private:
 
@@ -26,7 +30,6 @@ private:
 
 	int _diffusion = 2;				// ŠgU‚ÌƒŒƒxƒ‹ˆê‚²‚Æ‚É‘‚¦‚é’e‚Ì”
 	int _diffusionAngleMax = 120 ;	// ŠgU‚·‚éŠp“x
-	float time = 0;					// Œ»İ‚Ì•b”
 
 public:
 

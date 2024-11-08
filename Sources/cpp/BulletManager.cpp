@@ -12,14 +12,14 @@ BulletManager::BulletManager(int playerNum)
 	for (int i = 0; i < playerNum; i++) 
 	{
 		_bulletPram.push_back(BulletPram());
+		_bulletPram[i].time = GetNowCount();
 
 		for (int j = 0; j < BULLET_MAX; j++) 
 		{
 			_bulletPram[i].m_BulletList.push_back(new MainBullet());
+			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
 		}
 	}
-
-	time = GetNowCount();
 }
 
 // デストラクタ
@@ -43,10 +43,15 @@ void BulletManager::Move()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// 有効判定
-			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
+			if (!_bulletPram[i].m_BulletList[j]->GetActive() && !_bulletPram[i].m_ExplosionList[j]->GetActive()) continue;
 
 			// 移動
-			_bulletPram[i].m_BulletList[j]->Move();
+			// 爆発物の移動、拡縮
+			_bulletPram[i].m_BulletList[j]->GetActive() && _bulletPram[i].m_ExplosionList[j]->GetActive() ?
+				_bulletPram[i].m_BulletList[j]->Move(), _bulletPram[i].m_ExplosionList[j]->Move()
+				: _bulletPram[i].m_BulletList[j]->GetActive() ?
+				_bulletPram[i].m_BulletList[j]->Move() : _bulletPram[i].m_ExplosionList[j]->Move();
+
 		}
 	}
 }
@@ -71,7 +76,7 @@ void BulletManager::Draw()
 		}
 	}
 
-	printfDx("\n%d / 256\n", count);
+	printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
 }
 
 // 座標更新
@@ -105,9 +110,9 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 
 	float interval = 1 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
-	if (GetNowCount() - time < interval) return;
+	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 
-	time = GetNowCount();
+	_bulletPram[playerNum].time = GetNowCount();
 
 	// 拡散のパラメーターがあった場合複数方向に向けて発射する
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
@@ -155,7 +160,6 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 				break;
 			}
 		}
-
 	}
 }
 

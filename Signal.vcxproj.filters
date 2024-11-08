@@ -87,7 +87,7 @@
     <ClCompile Include="Sources\cpp\ExplosionChamber.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\MultipleChamber.cpp">
+    <ClCompile Include="Sources\cpp\Explosion.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
     <ClCompile Include="Sources\cpp\NormalChamber.cpp">
@@ -173,7 +173,7 @@
     <ClInclude Include="Sources\header\ExplosionChamber.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\header\MultipleChamber.h">
+    <ClInclude Include="Sources\header\Explosion.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
     <ClInclude Include="Sources\header\NormalChamber.h">

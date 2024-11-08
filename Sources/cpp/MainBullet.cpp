@@ -50,14 +50,6 @@ void MainBullet::Destroy()
 	status.m_isActive = false;
 }
 
-// 描画関数
-void MainBullet::Draw()
-{
-	// 回転拡縮描画
-	//DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, DX_PI / 180 * status.m_angle, graph, TRUE);
-	DrawCircle(status.m_position.x, status.m_position.y, status.m_shapeSize *3,GetColor(255,255,255),false);
-}
-
 // 射程管理関数
 void MainBullet::CheckRange()
 {
@@ -87,4 +79,12 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	// 使用中
 	status.m_isActive = true;
 	distance = 0;
+}
+
+// ステータスのレベルによって値を書き換える
+void MainBullet::UpdateStatus()
+{
+	_bulletContainer.mainContainer.m_Speed = bulletType[(int)BulletStatus::SPEED] * 5;
+	_bulletContainer.mainContainer.m_Range = bulletType[(int)BulletStatus::RANGE] * 300;
+	damage = bulletType[(int)BulletStatus::POWER] * 1;
 }

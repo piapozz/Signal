@@ -16,8 +16,15 @@ Player::~Player()
 
 }
 
+void Player::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager)
+{
+	bulletManager = bullet;
+	inputManager = inputManager;
+}
+
+
 // プレイヤーのメイン処理
-void Player::Proc(BulletManager* bullet, InputManager* inputManager)
+void Player::Proc()
 {
 	DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
 	// 死んでいなかったら処理をする ※isActiveがtrueのときは死んでいる
@@ -41,7 +48,7 @@ void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 		// プレイヤーの向きを変更
 		Rotate(controller.m_RStick);
 
-		if (controller.m_RTrigger) bullet->AddBullet(deviceNum, status);
+		if (controller.m_RTrigger) bulletManager->AddBullet(deviceNum, status);
 
 		// 座標を更新
 		// UpdatePosition();

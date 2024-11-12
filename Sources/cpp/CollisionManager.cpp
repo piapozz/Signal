@@ -84,16 +84,21 @@ bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vecto
 		// すべての辺と判定
 		for (int j = 0; j < 4; j++)
 		{
+			// 接触していたらfalse
 			if (CheckLineCross(pos1, pos2, boxList[i]->GetVertexPos(j), boxList[i]->GetVertexPos((j + 1) % 4)) == true)
 				return false;
 		}
 	}
+	// どの箱とも接触していないならtrue
 	return true;
 }
 
 // 線分と線分が交わっているかを判定する関数
 bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2)
 {
+	// 外積を使って計算
+
+
 	return false;
 }
 
@@ -116,9 +121,14 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	{
 		// まだダメージを与えていないなら
 		// ダメージ処理
-		player->TakeDamage(bullet->GetPower());
+		player->TakeDamage(bullet->GetDamage());
 		// 着弾処理
 		bullet->Impact();
+		// 貫通弾なら当たったオブジェクトを渡す
+		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
+		{
+			bullet->AddHitObject(player);
+		}
 	}
 }
 
@@ -147,12 +157,18 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 		if (box->GetIsWall() == false)
 			// まだダメージを与えていないなら
 			// ダメージ処理、倒しているなら
-			if (box->TakeDamage(bullet->GetPower()) == true)
+			if (box->TakeDamage(bullet->GetDamage()) == true)
 				return true;
 			else
 				return false;
 		// 着弾処理
 		bullet->Impact();
+
+		// 貫通弾なら当たったオブジェクトを渡す
+		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
+		{
+			bullet->AddHitObject(box);
+		}
 	}
 }
 

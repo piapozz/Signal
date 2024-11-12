@@ -7,11 +7,11 @@ class Explosion:
 {
 private:
 
-	BaseChamber::ExplosionContainer ExplosionContainer
+	BaseChamber::ExplosionContainer ExplosionContainer;
 
 public:
 
 	// ”š”­‚Ì–c’£
-	void Move();
+	void Move(){}
 };
 

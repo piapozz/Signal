@@ -15,12 +15,12 @@ private:
 
 	BaseChamber::BulletContainer _bulletContainer;
 
-	float distance = 0;
+	float _distance = 0;
 
-	NormalChamber* normalChanber;
+	NormalChamber* _normalChanber;
 
-	float bulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
-	int bulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
+	float _bulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
+	int _bulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
 
 	void UpdateStatus();
 
@@ -46,4 +46,7 @@ public:
 
 	// 座標、角度、ステータスセット
 	void Reload(Status objStatus, float Pram[], int type[]);
+
+	// 弾の性質を取得
+	int GetBulletType(BulletType type) { return _bulletType[(int)type]; }
 };

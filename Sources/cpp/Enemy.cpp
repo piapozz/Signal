@@ -12,10 +12,11 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players)
+void Enemy::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager)
 {
 	_pBulletManager = bullet;
 	_pPlayers = players;
+	_pCollisionManager = collisionManager;
 }
 
 // “G‚Ì‹““®
@@ -51,7 +52,6 @@ void Enemy::Proc()
 	Move();
 
 	// ŽËü‚ª’Ê‚Á‚Ä‚¢‚é‚È‚ç
-
+	if (_pCollisionManager->)
 	_pBulletManager->AddBullet(deviceNum, status);
-
 }

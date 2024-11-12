@@ -10,7 +10,7 @@ CollisionManager::~CollisionManager()
 
 }
 
-void CollisionManager::Init(std::vector<BaseCharacter*> players, std::vector<Box*> boxs, BulletManager* bullet)
+void CollisionManager::Init(vector<BaseCharacter*> players, vector<Box*> boxs, BulletManager* bullet)
 {
 	_pPlayers = players;
 	_pBoxs = boxs;
@@ -77,7 +77,6 @@ bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
 	return false;
 }
 
-// みかん
 // 射線が通っているかレイで判定する関数
 bool CollisionManager::CheckHitRay(Vector2 pos1, Vector2 pos2)
 {
@@ -182,12 +181,14 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 		// 箱なら
 		if (box->GetIsWall() == false)
+		{
 			// まだダメージを与えていないなら
 			// ダメージ処理、倒しているなら
 			if (box->TakeDamage(bullet->GetDamage()) == true)
 				return true;
 			else
 				return false;
+		}
 		// 着弾処理
 		bullet->Impact();
 

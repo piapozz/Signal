@@ -2,7 +2,6 @@
 #include "BaseObject.h"
 #include "BulletManager.h"
 #include "InputManager.h"
-#include "CollisionManager.h"
 
 class BaseCharacter : public BaseObject
 {
@@ -32,7 +31,6 @@ public:
 	void PowerUp();
 	void StatusUp();
 
-	virtual void Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager) = 0;
 	virtual void Proc() = 0;
 
 protected:
@@ -48,5 +46,4 @@ protected:
 	bool isPlayer;
 	bool canDodge;
 	bool dodgeNow;				// ‰ñ”ğ‚µ‚Ä‚¢‚éó‘Ô‚©‚ğŒ©‚é
-
 };

@@ -7,16 +7,16 @@ class BaseDamageObject :
 protected:
 
     float damage;
-    std::vector<BaseObject> hitObject;
+    std::vector<BaseObject*> hitObject;
 
 public:
 
     // 初期化
     BaseDamageObject() :damage(0) { hitObject.clear(); }
-    ~BaseDamageObject(){}
+    ~BaseDamageObject() { hitObject.clear(); }
 
     // 当たったオブジェクトを追加
-    void AddHitObject(BaseObject hit) { hitObject.push_back(hit); }
+    void AddHitObject(BaseObject* hit) { hitObject.push_back(hit); }
 
     // ダメージ取得
     float GetDamage() { return damage; }

@@ -37,6 +37,8 @@ void GameManager::Init()
 
 	collisionManager->Init(players, stageManager->GetBoxData(), bulletManager);
 
+	uiManager->Init(bulletManager);
+
 	// プレイヤーの数を取得
 	playerMax = players.size();
 	
@@ -91,48 +93,7 @@ void GameManager::Proc()
 	// レベルアップ処理
 	for (int i = 0; i < players.size(); i++)
 	{
-		// レベルアップに必要な個数を満たしていたら
-		if (players[i]->GetExpValue() >= players[i]->request)
-		{
-
-			// レベルアップしたら次のレベルアップに必要なコストを上げる
-			players[i]->request += 3;
-
-			// 三の倍数回これまでにレベルアップしていたらパワーアップから選ぶ
-			if (players[i]->levelUpCount % 3)
-			{
-				// パワーアップできる回数を一あげる
-
-
-			}
-
-			// 三の倍数回ではなかったらステータスから選ぶ
-			else 
-			{
-				// ステータスアップできる回数を一あげる
-
-
-			}
-
-		}
-
-		// レベルアップできる回数を見てコントローラーの入力を受け取り結果を反映させる
-		// パワーアップを行う
-		if (players[i]->powerUpCount)
-		{
-			// 列挙体BulletTypeの大きさを使って乱数を取得 
-			GetRand((int)BulletType::MAX);
-
-
-		}
-
-		// ステータスアップを行う
-		else if (players[i]->statusUpCount)
-		{
-
-			GetRand((int)BulletStatus::MAX);
-
-		}
+	
 	}
 
 	// 弾の座標更新
@@ -152,7 +113,7 @@ void GameManager::Draw()
 	{
 		if (players[i]->status.m_isActive != false)players[i]->Draw();
 
-		uiManager->Draw(i, bulletManager);
+		uiManager->Draw(i);
 	}
 
 	

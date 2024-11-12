@@ -7,30 +7,26 @@ class UIManager
 {
 private:
 
+	BulletManager* bulletManager;
+
 	const int COLOR_BLACK = GetColor(255, 0, 0);
-
-	const int PLAYER_HEIGHT_1 = 20;
-	const int PLAYER_WIDTH_1 = 20;
-
-	const int PLAYER_HEIGHT_2 = 1920 - 250;
-	const int PLAYER_WIDTH_2 = 20;
 
 	int bulletIcon[(int)BulletType::MAX];
 
 	string bulletStateText[(int)BulletStatus::MAX];
 
-	int infoHeight, infoWidth;
+	Vector2 infoPos;
 
 	int deviceMax = 2;
 	int deviceCount;
 
 public:
-	UIManager();
+	UIManager(Vector2 initPos);
 	~UIManager();
 
-	void Init();
+	void Init(BulletManager* bullet);
 	void Proc();
-	void Draw(int playerNum, BulletManager* bullet);
+	void Draw(int playerNum);
 	void LevelUpUI();
 
 };

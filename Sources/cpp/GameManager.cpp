@@ -74,9 +74,19 @@ void GameManager::Proc()
 	// 当たり判定
 	collisionManager->HitCheck_Everything(players, stageManager->GetBoxData(),bulletManager);
 
+	// 座標を更新
 	for (int i = 0; i < players.size(); i++)
 	{
 		players[i]->UpdatePosition();
+	}
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		if (players[i]->GetExpValue() >= 3)
+		{
+			players[i]->request++;
+
+		}
 	}
 
 	// 弾の座標更新

@@ -1,12 +1,13 @@
 #pragma once
 #include "../header/BulletManager.h"
 #include "../header/Const.h"
+#include <string>
 
 class UIManager
 {
 private:
 
-	const int COLOR_BLACK = GetColor(0, 0, 0);
+	const int COLOR_BLACK = GetColor(255, 0, 0);
 
 	const int PLAYER_HEIGHT_1 = 20;
 	const int PLAYER_WIDTH_1 = 20;
@@ -16,7 +17,7 @@ private:
 
 	int bulletIcon[(int)BulletType::MAX];
 
-	// const char bulletStateText[(int)BulletStatus::MAX];
+	string bulletStateText[(int)BulletStatus::MAX];
 
 	int infoHeight, infoWidth;
 
@@ -30,6 +31,7 @@ public:
 	void Init();
 	void Proc();
 	void Draw(int playerNum, BulletManager* bullet);
+	void LevelUpUI();
 
 };
 

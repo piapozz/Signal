@@ -8,6 +8,11 @@ UIManager::UIManager()
 	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("");
 	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("");
 	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
+
+	bulletStateText[(int)BulletStatus::SPEED] = "SPEED";
+	bulletStateText[(int)BulletStatus::POWER] = "POWER";
+	bulletStateText[(int)BulletStatus::RANGE] = "RANGE";
+	bulletStateText[(int)BulletStatus::RATE] = "RATE";
 }
 
 UIManager::~UIManager()
@@ -72,24 +77,23 @@ void UIManager::Draw(int deviceNum, BulletManager* bullet)
 	//	}
 	//}
 
-	for (int i = 0; i < (int)BulletStatus::MAX; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		DrawFormatString(infoHeight + i * 50, infoWidth, COLOR_BLACK, "%c :","aa");
+		infoHeight += 100;
+
+
+		DrawFormatString(infoHeight + i, infoWidth, COLOR_BLACK, bulletStateText[i].c_str());
 
 		// ステータスの値によって星を描画
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < (int)BulletStatus::MAX; j++)
 		{
-			if (i < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoHeight + i * 50, infoWidth + j * 30, COLOR_BLACK, "★"); }
-			else DrawFormatString(infoHeight + i * 50, infoWidth + j * 30, COLOR_BLACK, "☆");
+			if (i < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoHeight + i * 30, infoWidth + j * 20, COLOR_BLACK, "★"); }
+			else DrawFormatString(infoHeight + i * 30, infoWidth + j * 20, COLOR_BLACK, "☆");
 		}
 	}
+}
 
-	printfDx("%d\n", infoHeight);
-	printfDx("%d\n", infoWidth);
+void UIManager::LevelUpUI()
+{
 
-	//printfDx("射撃タイプ画像\n");
-	//printfDx("Speed : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::SPEED]);
-	//printfDx("Power : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::POWER]);
-	//printfDx("Range : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RANGE]);
-	//printfDx("Rate : %f\n", bullet->GetBulletList()[deviceNum].m_BulletStatus[(int)BulletStatus::RATE]);
 }

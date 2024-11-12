@@ -19,7 +19,7 @@ Player::~Player()
 // プレイヤーのメイン処理
 void Player::Proc(BulletManager* bullet, InputManager* inputManager)
 {
-	
+	DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
 	// 死んでいなかったら処理をする ※isActiveがtrueのときは死んでいる
 	// if (status.m_isActive)
 	{
@@ -59,4 +59,9 @@ void Player::GetController(InputManager* inputManager)
 	controller.m_RStick = inputManager->GetStick(deviceNum, Stick::RIGHT);
 	controller.m_LTrigger = inputManager->GetButton(deviceNum, Button::LEFT_TRIGGER);
 	controller.m_RTrigger = inputManager->GetButton(deviceNum, Button::RIGHT_TRIGGER);
+}
+
+bool LevelUp()
+{
+
 }

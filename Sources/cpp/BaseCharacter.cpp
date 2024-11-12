@@ -6,7 +6,9 @@ BaseCharacter::BaseCharacter()
 	hitObject = false;
 	dodgeNow = false;
 
-	speed = 1.0f;
+	exp = 0;
+	request = 3;
+	// speed = 1.0f;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -64,6 +66,8 @@ void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
 bool BaseCharacter::GetIsPlayer() { return isPlayer; }
 
 void BaseCharacter::GainExp(int expValue) { exp += expValue; }
+
+int BaseCharacter::GetExpValue() { return exp; }
 
 void BaseCharacter::PowerUp()
 {

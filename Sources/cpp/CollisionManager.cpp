@@ -10,6 +10,13 @@ CollisionManager::~CollisionManager()
 
 }
 
+void CollisionManager::Init(std::vector<BaseCharacter*> players, std::vector<Box*> boxs, BulletManager* bullet)
+{
+	_pPlayers = players;
+	_pBoxs = boxs;
+	_pBullet = bullet;
+}
+
 // オブジェクト同士が近距離にあるかを返す関数
 bool CollisionManager::IsInProximity(BaseObject* obj1, BaseObject* obj2)
 {
@@ -72,20 +79,20 @@ bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
 
 // みかん
 // 射線が通っているかレイで判定する関数
-bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vector<Box*> boxList)
+bool CollisionManager::CheckHitRay(Vector2 pos1, Vector2 pos2)
 {
 	// すべての箱と判定
-	for (int i = 0; i < boxList.size(); i++)
+	for (int i = 0; i < _pBoxs.size(); i++)
 	{
 		// 例外処理
 		// 線分からの距離が接触しない距離ならスキップ
-		if (false) continue;
+		//if (false) continue;
 
 		// すべての辺と判定
 		for (int j = 0; j < 4; j++)
 		{
 			// 接触していたらfalse
-			if (CheckLineCross(pos1, pos2, boxList[i]->GetVertexPos(j), boxList[i]->GetVertexPos((j + 1) % 4)) == true)
+			if (CheckLineCross(pos1, pos2, _pBoxs[i]->GetVertexPos(j), _pBoxs[i]->GetVertexPos((j + 1) % 4)) == true)
 				return false;
 		}
 	}
@@ -94,12 +101,32 @@ bool CollisionManager::CheckBetweenObject(Vector2 pos1, Vector2 pos2, std::vecto
 }
 
 // 線分と線分が交わっているかを判定する関数
-bool CollisionManager::CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2)
+bool CollisionManager::CheckLineCross(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
 {
 	// 外積を使って計算
+	// グループ①
+	Vector2 a_to_b = b - a;
+	Vector2 a_to_c = c - a;
+	Vector2 a_to_d = d - a;
 
+	float cross1 = Vector2::Cross(a_to_b, a_to_c);
+	float cross2 = Vector2::Cross(a_to_b, a_to_d);
 
-	return false;
+	if (cross1 * cross2 > 0)
+		return false;
+
+	// グループ②
+	Vector2 c_to_d = d - c;
+	Vector2 c_to_a = a - c;
+	Vector2 c_to_b = b - c;
+
+	cross1 = Vector2::Cross(c_to_d, c_to_a);
+	cross2 = Vector2::Cross(c_to_d, c_to_b);
+
+	if (cross1 * cross2 > 0)
+		return false;
+
+	return true;
 }
 
 // プレイヤーと敵を判定する関数
@@ -173,23 +200,23 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 }
 
 // すべてのオブジェクトを判定する関数
-void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, std::vector<Box*> boxs, BulletManager* bullets)
+void CollisionManager::HitCheck_Everything()
 {
 	// プレイヤーループ
-	for (int p1 = 0; p1 < players.size(); p1++)
+	for (int p1 = 0; p1 < _pPlayers.size(); p1++)
 	{
-		BaseCharacter* player_1 = players[p1];
+		BaseCharacter* player_1 = _pPlayers[p1];
 
 		// 箱のループ
-		for (int bo = 0; bo < boxs.size(); bo++)
+		for (int bo = 0; bo < _pBoxs.size(); bo++)
 		{
-			Box* box = boxs[bo];
+			Box* box = _pBoxs[bo];
 
-			for (int p2 = 0; p2 < players.size(); p2++)
+			for (int p2 = 0; p2 < _pPlayers.size(); p2++)
 			{
-				BaseCharacter* player_2 = players[p2];
+				BaseCharacter* player_2 = _pPlayers[p2];
 
-				std::vector<MainBullet*> bulletList = bullets->GetBulletList()[p2].m_BulletList;
+				std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
 				//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
 
 				// 弾のループ
@@ -241,9 +268,9 @@ void CollisionManager::HitCheck_Everything(std::vector<BaseCharacter*> players, 
 			}
 		}
 
-		for (int p2 = p1 + 1; p2 < players.size(); p2++)
+		for (int p2 = p1 + 1; p2 < _pPlayers.size(); p2++)
 		{
-			BaseCharacter* player_2 = players[p2];
+			BaseCharacter* player_2 = _pPlayers[p2];
 
 			// 同じ組み合わせはスキップ
 			if (p1 >= p2) continue;

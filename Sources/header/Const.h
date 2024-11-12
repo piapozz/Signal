@@ -139,7 +139,7 @@ public:
         y /= distance;
     }
 
-    Vector2 Normalize(Vector2 vec)
+    static Vector2 Normalize(Vector2 vec)
     {
         Vector2 temp;
         float distance = vec.size();
@@ -148,6 +148,11 @@ public:
         temp.y = vec.y / distance;
 
         return temp;
+    }
+
+    static float Cross(Vector2 vec1, Vector2 vec2)
+    {
+        return vec1.x * vec2.y - vec2.x * vec1.y;
     }
 };
 

@@ -14,6 +14,10 @@ public:
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 	int request;						// 次の要求量
+	int levelUpCount;
+	int powerUpCount;
+	int statusUpCount;
+	
 
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ

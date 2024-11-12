@@ -4,7 +4,9 @@
 class Player : public BaseCharacter
 {
 private:
-	
+	BulletManager* bulletManager;
+	InputManager* inputManager;
+
 public:
 	// コントローラーの状態を管理する
 	struct Controller
@@ -20,6 +22,7 @@ public:
 	Player(Vector2 pos);					// コンストラクタ
 	~Player();								// デストラクタ
 
-	void Proc(BulletManager* bullet, InputManager* inputManager);
+	void Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager);
+	void Proc();
 	void GetController(InputManager* inputManager);
 };

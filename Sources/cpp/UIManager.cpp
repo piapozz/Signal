@@ -96,4 +96,6 @@ void UIManager::Draw(int deviceNum, BulletManager* bullet)
 void UIManager::LevelUpUI()
 {
 
+
+
 }

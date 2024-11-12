@@ -27,7 +27,8 @@ public:
 	void PowerUp();
 	void StatusUp();
 
-	virtual void Proc(BulletManager* bullet, InputManager* inputManager) = 0;
+	virtual void Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players) = 0;
+	virtual void Proc() = 0;
 
 protected:
 	Vector2 moveVec;

@@ -56,6 +56,15 @@ enum class Shape				// 当たり判定の形区別するための情報
     MAX
 };
 
+enum class ObjectType
+{
+    PLAYER = 0,
+    BOX,
+    WALL,
+    BULLET,
+    MAX
+};
+
 // 二次元ベクトル
 typedef struct Vector2
 {

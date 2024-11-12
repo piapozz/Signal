@@ -5,7 +5,7 @@ GameManager::GameManager()
 {
 	stageManager = new StageManager();
 	players.push_back(new Player(stageManager->GetStartPos()[0]));
-	players.push_back(new Enemy(stageManager->GetStartPos()[1]));
+	enemys.push_back(new Enemy(stageManager->GetStartPos()[1]));
 	collisionManager = new CollisionManager();
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
@@ -29,10 +29,16 @@ GameManager::~GameManager()
 // ‰Šú‰»
 void GameManager::Init() 
 {
+	for (int i = 0; i < enemys.size(); i++)
+	{
+		enemys[i]->Init(collisionManager);
+		players.push_back(enemys[i]);
+	}
+
 	// 
 	for (int i = 0; i < players.size(); i++)
 	{
-		players[i]->Init(bulletManager, inputManager, players, collisionManager);
+		players[i]->Init(bulletManager, inputManager, players);
 	}
 
 	collisionManager->Init(players, stageManager->GetBoxData(), bulletManager);

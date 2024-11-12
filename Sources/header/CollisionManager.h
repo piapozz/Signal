@@ -9,12 +9,14 @@
 #include "BaseCharacter.h"
 #include "BaseDamageObject.h"
 
+using namespace std;
+
 class CollisionManager
 {
 private:
 
-	std::vector<BaseCharacter*> _pPlayers;
-	std::vector<Box*> _pBoxs;
+	vector<BaseCharacter*> _pPlayers;
+	vector<Box*> _pBoxs;
 	BulletManager* _pBullet;
 
 	bool IsInProximity(BaseObject* obj1, BaseObject* obj2);
@@ -31,7 +33,7 @@ public:
 	CollisionManager();
 	~CollisionManager();
 
-	void Init(std::vector<BaseCharacter*> players, std::vector<Box*> boxs, BulletManager* bullet);
+	void Init(vector<BaseCharacter*> players, vector<Box*> boxs, BulletManager* bullet);
 
 	bool CheckHitRay(Vector2 pos1, Vector2 pos2);
 	void HitCheck_Everything();

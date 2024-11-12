@@ -12,24 +12,31 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager)
+void Enemy::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players)
 {
 	_pBulletManager = bullet;
 	_pPlayers = players;
+}
+
+void Enemy::Init(CollisionManager* collisionManager)
+{
 	_pCollisionManager = collisionManager;
 }
 
 // 敵の挙動
 void Enemy::Proc()
 {
+	Vector2 pos = status.m_position;
+
 	// プレイヤーの中から一番近いプレイヤーを標的にする
 	BaseCharacter* target = _pPlayers[0];
-	float nearDistance = fabs(Vector2::Size(target->status.m_position - status.m_position));
+	Vector2 targetPos = target->status.m_position;
+	float nearDistance = fabs(Vector2::Size(targetPos - pos));
 	for (int i = 1; i < _pPlayers.size(); i++)
 	{
-		Vector2 targetPos = _pPlayers[i]->status.m_position;
+		targetPos = _pPlayers[i]->status.m_position;
 
-		float distance = fabs(Vector2::Size(targetPos - status.m_position));
+		float distance = fabs(Vector2::Size(targetPos - pos));
 
 		if (distance != 0 && distance < nearDistance)
 		{
@@ -38,9 +45,9 @@ void Enemy::Proc()
 		}
 	}
 
-	Vector2 playerPos = target->status.m_position;
+	_isObstacle = _pCollisionManager->CheckHitRay(pos, targetPos);
 
-	Vector2 angle = status.m_position - playerPos;
+	Vector2 angle = pos - targetPos;
 	angle.normalize();
 
 	// 移動量を決める
@@ -49,9 +56,9 @@ void Enemy::Proc()
 	// 常にプレイヤーの方向を向く
 	Rotate(angle);
 
-	Move();
+	//Move();
 
-	// 射線が通っているなら
-	if (_pCollisionManager->)
-	_pBulletManager->AddBullet(deviceNum, status);
+	// 射撃
+	if (_isObstacle == false)
+		_pBulletManager->AddBullet(deviceNum, status);
 }

@@ -49,8 +49,8 @@ public:
 	// 爆発ステータス
 	typedef struct ExplosionContainer
 	{
-		float size = 0;
-		float power = 0;
+		float expansionRange;			// 膨張する範囲
+
 	};
 
 	// 弾の構造体

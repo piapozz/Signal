@@ -3,7 +3,7 @@
 MainBullet::MainBullet()
 {
 	// 与えられたタイプ、ステータスの情報をもとに最終的なステータスと画像を出す
-	normalChanber = new NormalChamber(&status, &_bulletContainer);
+	_normalChanber = new NormalChamber(&status, &_bulletContainer);
 
 	status.m_isActive = false;
 }
@@ -26,7 +26,7 @@ void MainBullet::UpdateAngle()
 void MainBullet::Move()
 {
 	// 通常の移動
-	normalChanber->Move();
+	_normalChanber->Move();
 }
 
 // 着弾時
@@ -54,9 +54,9 @@ void MainBullet::Destroy()
 void MainBullet::CheckRange()
 {
 	// 次の座標から距離を出して足していく
-	distance += Vector2::Distance(status.m_nextPosition, status.m_position);
+	_distance += Vector2::Distance(status.m_nextPosition, status.m_position);
 
-	if (distance < _bulletContainer.mainContainer.m_Range) return;
+	if (_distance < _bulletContainer.mainContainer.m_Range) return;
 
 	Destroy();
 }
@@ -68,23 +68,23 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 
 	for (int i = 0; i < (int)BulletStatus::MAX; i++) 
 	{
-		bulletStatus[i] = Pram[i];
+		_bulletStatus[i] = Pram[i];
 	}
 
 	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
-		bulletType[i] = type[i];
+		_bulletType[i] = type[i];
 	}
 
 	// 使用中
 	status.m_isActive = true;
-	distance = 0;
+	_distance = 0;
 }
 
 // ステータスのレベルによって値を書き換える
 void MainBullet::UpdateStatus()
 {
-	_bulletContainer.mainContainer.m_Speed = bulletType[(int)BulletStatus::SPEED] * 5;
-	_bulletContainer.mainContainer.m_Range = bulletType[(int)BulletStatus::RANGE] * 300;
-	damage = bulletType[(int)BulletStatus::POWER] * 1;
+	_bulletContainer.mainContainer.m_Speed = _bulletType[(int)BulletStatus::SPEED] * 5;
+	_bulletContainer.mainContainer.m_Range = _bulletType[(int)BulletStatus::RANGE] * 300;
+	damage = _bulletType[(int)BulletStatus::POWER] * 1;
 }

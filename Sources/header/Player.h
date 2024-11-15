@@ -22,7 +22,7 @@ public:
 	Player(Vector2 pos);					// コンストラクタ
 	~Player();								// デストラクタ
 
-	void Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager);
 	void Proc();
-	void GetController(InputManager* inputManager);
+	void Init(BulletManager* bullet, InputManager* input);
+	void GetController();
 };

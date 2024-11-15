@@ -15,9 +15,9 @@ GameManager::GameManager()
 // デストラクタ
 GameManager::~GameManager() 
 {
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
-		delete players[i];
+		delete devices[i];
 	}
 	delete collisionManager;	// 当たり判定
 	delete stageManager;		// ステージ
@@ -29,43 +29,43 @@ GameManager::~GameManager()
 // 初期化
 void GameManager::Init() 
 {
+	for (int i = 0; i < players.size(); i++)
+	{
+		players[i]->Init(bulletManager,inputManager);
+		devices.push_back(players[i]);
+	}
+
 	for (int i = 0; i < enemys.size(); i++)
 	{
 		enemys[i]->Init(collisionManager);
-		players.push_back(enemys[i]);
+		devices.push_back(enemys[i]);
 	}
 
-	// 
-	for (int i = 0; i < players.size(); i++)
-	{
-		players[i]->Init(bulletManager, inputManager, players);
-	}
-
-	collisionManager->Init(players, stageManager->GetBoxData(), bulletManager);
+	collisionManager->Init(devices, stageManager->GetBoxData(), bulletManager);
 
 	uiManager->Init(bulletManager);
 
 	// プレイヤーの数を取得
-	playerMax = players.size();
+	playerMax = devices.size();
 	
 	// プレイヤーの設定
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
 		// デバイスごとに番号をつける
-		players[i]->deviceNum = i;
+		devices[i]->deviceNum = i;
 
 		// プレイヤーだったらどのコントローラーを使うかを割り当てる
-		if (players[i]->GetIsPlayer() == true)
+		if (devices[i]->GetIsPlayer() == true)
 		{
 			// 割り当て
-			players[i]->SetPlayerNum(i);
+			devices[i]->SetPlayerNum(i);
 			// プレイヤー用のイメージを設定
-			players[i]->SetImageData("Resources/Player.png");
+			devices[i]->SetImageData("Resources/Player.png");
 		}
 		else
 		{
 			// 敵用のイメージを設定
-			players[i]->SetImageData("Resources/Enemy.png");
+			devices[i]->SetImageData("Resources/Enemy.png");
 		}
 	}
 
@@ -79,9 +79,9 @@ void GameManager::Proc()
 	// 入力取得
 	inputManager->Proc();
 
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
-		players[i]->Proc();
+		devices[i]->Proc();
 	}
 
 	// 弾の移動
@@ -91,13 +91,13 @@ void GameManager::Proc()
 	collisionManager->HitCheck_Everything();
 
 	// 座標を更新
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
-		players[i]->UpdatePosition();
+		devices[i]->UpdatePosition();
 	}
 
 	// レベルアップ処理
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
 	
 	}
@@ -115,9 +115,9 @@ void GameManager::Draw()
 	stageManager->Draw();
 
 	// プレイヤーたちの描画
-	for (int i = 0; i < players.size(); i++)
+	for (int i = 0; i < devices.size(); i++)
 	{
-		if (players[i]->status.m_isActive != false)players[i]->Draw();
+		if (devices[i]->status.m_isActive != false)devices[i]->Draw();
 
 		uiManager->Draw(i);
 	}

@@ -17,6 +17,10 @@ const float STAGE_MARGIN_RATE = 0.1f;
 const int WINDOW_WIDTH = 1920;
 const int WINDOW_HEIGHT = 1080;
 
+// UIŠÖ˜A
+const int CHOICE_POWER_MAX = 3;
+const int CHOICE_STATUS_MAX = 3;
+
 enum class DirButton
 {
     DOWN = 0,

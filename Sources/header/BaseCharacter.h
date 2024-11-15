@@ -16,7 +16,12 @@ public:
 	int levelUpCount;
 	int powerUpCount;
 	int statusUpCount;
-	
+
+	// int choicePower[CHOICE_POWER_MAX];
+	// int choiceStatus[CHOICE_STATUS_MAX];
+
+	std::vector<int> choicePower;
+	std::vector<int> choiceStatus;
 
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ
@@ -28,6 +33,7 @@ public:
 	bool GetIsPlayer();
 	void GainExp(int expValue);
 	int GetExpValue();
+	void LevelUp();
 	void PowerUp();
 	void StatusUp();
 

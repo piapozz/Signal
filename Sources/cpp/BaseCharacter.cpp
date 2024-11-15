@@ -60,6 +60,106 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 	playerNum = playerNumber;
 }
 
+void BaseCharacter::LevelUp()
+{
+	// レベルアップに必要な個数を満たしていたら
+	if (GetExpValue() >= request)
+	{
+		// レベルアップしたら次のレベルアップに必要なコストを上げる
+		request += 3;
+
+		// 三の倍数回これまでにレベルアップしていたらパワーアップから選ぶ
+		if (levelUpCount % 3)
+		{
+			// パワーアップできる回数を一あげる
+			powerUpCount++;
+
+		}
+
+		// 三の倍数回ではなかったらステータスから選ぶ
+		else
+		{
+			// ステータスアップできる回数を一あげる
+			statusUpCount++;
+
+		}
+	}
+
+	// レベルアップできる回数を見てコントローラーの入力を受け取り結果を反映させる
+	// パワーアップを行う
+	if (powerUpCount)
+	{
+
+		PowerUp();
+	}
+
+	// ステータスアップを行う
+	else if (statusUpCount)
+	{
+
+		StatusUp();
+	}
+}
+
+// 選択肢を
+void BaseCharacter::PowerUp()
+{
+	// 重複しないように選択肢配列の中身を抽選
+	// 選択肢配列の中身を抽選するfor文
+	for (int i = 0; 0 < CHOICE_POWER_MAX; i++)
+	{
+		// 他の中身と重複していないかを確認する
+		for (int j = 0; 0 < CHOICE_POWER_MAX; j++)
+		{
+			// 重複しなくなるまで無限ループ
+			while (choicePower[i] != choicePower[j])
+			{
+				// 列挙体BulletTypeの大きさを使って乱数を取得し選択肢配列に代入
+				choicePower[i] = GetRand((int)BulletType::MAX);
+			}
+		}
+	}
+
+	// MAXをのぞいた可変長配列の初期化
+	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
+	{
+		// 可変長配列に要素を追加
+		choicePower.push_back(i);
+	}
+
+	// BulletType::NORMALを削除 （begin() で戦闘を削除）
+	choicePower.erase(choicePower.begin());
+
+	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
+	for (int i = 0; i < choicePower.size() - CHOICE_POWER_MAX; i++)
+	{
+		auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size()));
+
+		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
+		choicePower.erase(it);
+	}
+}
+
+// ステータスアップを行う
+void BaseCharacter::StatusUp()
+{
+	// 重複しないように選択肢配列の中身を抽選
+	// 選択肢配列の中身を抽選するfor文
+	for (int i = 0; 0 < CHOICE_STATUS_MAX; i++)
+	{
+		// 他の中身と重複していないかを確認する
+		for (int j = 0; 0 < CHOICE_STATUS_MAX; j++)
+		{
+			// 重複しなくなるまで無限ループ
+			while (choiceStatus[i] != choiceStatus[j])
+			{
+				// 列挙体BulletTypeの大きさを使って乱数を取得し選択肢配列に代入
+				choiceStatus[i] = GetRand((int)BulletStatus::MAX);
+			}
+		}
+	}
+}
+
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
 void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
 
@@ -68,13 +168,3 @@ bool BaseCharacter::GetIsPlayer() { return isPlayer; }
 void BaseCharacter::GainExp(int expValue) { exp += expValue; }
 
 int BaseCharacter::GetExpValue() { return exp; }
-
-void BaseCharacter::PowerUp()
-{
-
-}
-
-void BaseCharacter::StatusUp()
-{
-
-}

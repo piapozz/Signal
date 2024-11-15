@@ -16,12 +16,11 @@ Player::~Player()
 
 }
 
-void Player::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players, CollisionManager* collisionManager)
+void Player::Init(BulletManager* bullet, InputManager* input)
 {
 	bulletManager = bullet;
-	inputManager = inputManager;
+	inputManager = input;
 }
-
 
 // プレイヤーのメイン処理
 void Player::Proc()
@@ -31,7 +30,7 @@ void Player::Proc()
 	// if (status.m_isActive)
 	{
 		// コントローラーの状態を更新
-		GetController(inputManager);
+		GetController();
 
 		moveVec = controller.m_LStick;
 
@@ -60,7 +59,7 @@ void Player::Proc()
 }
 
 // コントローラー情報を更新
-void Player::GetController(InputManager* inputManager)
+void Player::GetController()
 {
 	controller.m_LStick = inputManager->GetStick(deviceNum, Stick::LEFT);
 	controller.m_RStick = inputManager->GetStick(deviceNum, Stick::RIGHT);

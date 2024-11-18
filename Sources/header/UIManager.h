@@ -29,5 +29,8 @@ public:
 	void Draw(int playerNum);
 	void LevelUpUI();
 
+	void StatusUpUI(std::vector<int> statusNum);
+	void PowerUpUI(std::vector<int> typeNum);
+
 };
 

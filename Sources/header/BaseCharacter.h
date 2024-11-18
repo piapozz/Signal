@@ -23,6 +23,8 @@ public:
 	std::vector<int> choicePower;
 	std::vector<int> choiceStatus;
 
+	bool choiceFlag;
+
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ
 

@@ -43,26 +43,19 @@ void UIManager::Draw(int deviceNum)
 	// ステータスの状態を星で描画
 	for (int i = 0; i < 5; i++)
 	{
-		infoPos.y += 100;
 
-		DrawFormatString(infoPos.x, infoPos.y, COLOR_BLACK, bulletStateText[i].c_str());
+		infoPos.x += 100;
+
+
+		DrawFormatString(infoPos.x + i, infoPos.y, COLOR_BLACK, bulletStateText[i].c_str());
+
 
 		// ステータスの値によって星を描画
 		for (int j = 0; j < (int)BulletStatus::MAX; j++)
 		{
-			/*
-			if (j < bulletManager->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x + i * 30, infoPos.y, COLOR_BLACK, "★"); }
+			infoPos.y += 50;
+			if (i < bulletManager->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x + i * 30, infoPos.y + j * 20, COLOR_BLACK, "★"); }
 			else DrawFormatString(infoPos.x + i * 30, infoPos.y + j * 20, COLOR_BLACK, "☆");
-			*/
-
-			// 星マーク格納用変数
-			string starMark;
-
-			// ステータスの状態でどっちが入るかを決める
-			starMark = j < bulletManager->GetBulletList()[deviceNum].m_BulletStatus[i] ? "★" : "☆";
-
-			// 決めた評価を使って描画
-			DrawFormatString(infoPos.x + i * 30, infoPos.y, COLOR_BLACK, starMark.c_str());
 		}
 	}
 }
@@ -70,4 +63,24 @@ void UIManager::Draw(int deviceNum)
 void UIManager::LevelUpUI()
 {
 
+}
+
+// 引数にBaseCharacterのchoiceStatus配列を受け取り描画
+void UIManager::StatusUpUI(std::vector<int> statusArray)
+{
+	// 配列のサイズ分だけ回す
+	for (int i = 0; i < statusArray.size(); i++)
+	{
+
+	}
+}
+
+// 引数にBaseCharacterのchoicePower配列を受け取り描画
+void UIManager::StatusUpUI(std::vector<int> powerArray)
+{
+	// 配列のサイズ分だけ回す
+	for (int i = 0; i < powerArray.size(); i++)
+	{
+
+	}
 }

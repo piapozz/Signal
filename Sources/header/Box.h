@@ -22,8 +22,8 @@ public:
 	void Move(){}
 
 	void CalVertexPos();
-	Vector2 GetNormDir(Vector2 pos);
-	Vector2 GetVertexPos(int n);
+	Vector2 GetNormDir(Vector2 pos) override;		// –@ü‚ğ•Ô‚·ŠÖ”
+	Vector2 GetVertexPos(int n);			// ’¸“_À•W‚ğ•Ô‚·ŠÖ”
 	void RevivalBox();
 	void DestroyBox();
 	void RevivalCount();

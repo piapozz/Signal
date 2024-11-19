@@ -50,7 +50,7 @@ public:
 	void SetShapeSize(float size);
 	void SetImageData(const char* objName);
 	void Draw();
-
+	virtual Vector2 GetNormDir(Vector2 hitPos);			// –@ü‚ğ•Ô‚·ŠÖ”
 	Shape GetShape();						// Œ`‚ğæ“¾
 
 	Status status;

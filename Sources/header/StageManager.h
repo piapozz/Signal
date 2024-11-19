@@ -63,4 +63,5 @@ public:
 	Vector2 ConvertNumToPos(int x, int y);
 	std::vector<Box*> GetBoxData() { return _boxList; }
 	std::vector<Vector2> GetStartPos() { return _playerStartPos; }
+	Box* GetNearBox(Vector2 pos);				// ˆê”Ô‹ß‚¢” ‚ğ•Ô‚·ŠÖ”
 };

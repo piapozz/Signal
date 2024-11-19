@@ -12,53 +12,77 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players)
+void Enemy::Init(BulletManager* bullet, std::vector<BaseCharacter*> players, CollisionManager* collisionManager, StageManager* stageManager)
 {
 	_pBulletManager = bullet;
 	_pPlayers = players;
-}
-
-void Enemy::Init(CollisionManager* collisionManager)
-{
 	_pCollisionManager = collisionManager;
+	_pStageManager = stageManager;
+	SetTarget();
 }
 
 // 敵の挙動
 void Enemy::Proc()
 {
 	Vector2 pos = status.m_position;
-
-	// プレイヤーの中から一番近いプレイヤーを標的にする
-	BaseCharacter* target = _pPlayers[0];
-	Vector2 targetPos = target->status.m_position;
-	float nearDistance = fabs(Vector2::Size(targetPos - pos));
-	for (int i = 1; i < _pPlayers.size(); i++)
+	Vector2 targetPos = _targetObj->status.m_position;
+	// 標的との間に障害物があるか標的が非アクティブになったら
+	if (!_targetObj->GetActive() || !_pCollisionManager->CheckHitRay(pos, targetPos))
 	{
-		targetPos = _pPlayers[i]->status.m_position;
-
-		float distance = fabs(Vector2::Size(targetPos - pos));
-
-		if (distance != 0 && distance < nearDistance)
-		{
-			target = _pPlayers[i];
-			nearDistance = distance;
-		}
+		// ターゲットを変更
+		SetTarget();
 	}
 
-	_isObstacle = _pCollisionManager->CheckHitRay(pos, targetPos);
-
-	Vector2 angle = pos - targetPos;
-	angle.normalize();
+	// 標的の方向を向く
+	Vector2 angleDir = Vector2::Normalize(targetPos - pos);
+	Rotate(angleDir);
 
 	// 移動量を決める
-	moveVec = Vector2(0, 0);
-
-	// 常にプレイヤーの方向を向く
-	Rotate(angle);
-
-	//Move();
+	moveVec = angleDir;
+	Move();
 
 	// 射撃
-	if (_isObstacle == false)
-		_pBulletManager->AddBullet(deviceNum, status);
+	_pBulletManager->AddBullet(deviceNum, status);
+}
+
+void Enemy::SetTarget()
+{
+	// BaseObjectを継承しているオブジェクトのリスト
+	std::vector<BaseObject*> objectList;
+
+	// 射線の通っているプレイヤーを標的にする
+	Vector2 pos = status.m_position;
+	std::vector<BaseCharacter*> playerList;
+
+	for (int i = 0; i < _pPlayers.size(); i++)
+	{
+		Vector2 targetPos = _pPlayers[i]->status.m_position;
+
+		// 間にオブジェクトがないか判定
+		if (_pCollisionManager->CheckHitRay(pos, targetPos))
+			playerList.push_back(_pPlayers[i]);
+	}
+
+	// 射線上にプレイヤーがいるか
+	if (playerList.size() > 0)
+	{
+		_targetObj = playerList[0];
+		float nearDistance = Vector2::Distance(pos, _targetObj->status.m_position);
+		// 距離が近いプレイヤーを標的にする
+		for (int i = 1; i < playerList.size(); i++)
+		{
+			float distance = Vector2::Distance(pos, _targetObj->status.m_position);
+			if (nearDistance < distance)
+			{
+				_targetObj = playerList[i];
+				nearDistance = distance;
+			}
+		}
+	}
+	// プレイヤーがいないなら
+	else
+	{
+		// 一番近くの箱を標的にする
+		_targetObj = _pStageManager->GetNearBox(pos);
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseCharacter.h"
 #include "CollisionManager.h"
+#include "StageManager.h"
 
 class Enemy : public BaseCharacter
 {
@@ -9,15 +10,16 @@ private:
 	BulletManager* _pBulletManager;
 	std::vector<BaseCharacter*> _pPlayers;
 	CollisionManager* _pCollisionManager;
+	StageManager* _pStageManager;
 
-	bool _isObstacle;
+	BaseObject* _targetObj;
 
 public:
 
 	Enemy(Vector2 pos);
 	~Enemy();
 
-	void Init(BulletManager* bullet, InputManager* inputManager, std::vector<BaseCharacter*> players);
-	void Init(CollisionManager* collisionManager);
+	void Init(BulletManager* bullet, std::vector<BaseCharacter*> players, CollisionManager* collisionManager, StageManager* stageManager);
 	void Proc();
+	void SetTarget();
 };

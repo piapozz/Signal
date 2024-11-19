@@ -68,3 +68,23 @@ Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
 	return _defaultStagePos + Vector2(x * BOX_SIZE, y * BOX_SIZE);
 }
+
+Box* StageManager::GetNearBox(Vector2 pos)
+{
+	Box* nearBox = _boxList[0];
+	float nearDistance = Vector2::Distance(pos, nearBox->GetStatus().m_position);
+	for (int i = 1; i < _boxList.size(); i++)
+	{
+		// 非アクティブならスキップ
+		if (_boxList[i]->GetStatus().m_isActive == false) continue;
+		// 壁ならスキップ
+		if (_boxList[i]->GetIsWall() == true) continue;
+
+		// 距離の比較
+		float distance = Vector2::Distance(pos, _boxList[i]->GetStatus().m_position);
+		if (distance < nearDistance)
+			nearBox = _boxList[i];
+	}
+
+	return nearBox;
+}

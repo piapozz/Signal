@@ -67,3 +67,9 @@ void BaseObject::SetImageData(const char* objName) { objectHandle = LoadGraph(ob
 Shape BaseObject::GetShape() { return status.m_shape; }
 
 BaseObject::Status BaseObject::GetStatus() { return status; }
+
+// –@ü‚ğæ“¾‚·‚éŠÖ”
+Vector2 BaseObject::GetNormDir(Vector2 hitPos)
+{
+	return Vector2::Normalize(hitPos - status.m_position);
+}

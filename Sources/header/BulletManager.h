@@ -13,7 +13,7 @@ public:
 	typedef struct BulletPram
 	{
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
-		int m_BulletType[(int)BulletType::MAX] = { 1,0,5,0,0,0 };
+		int m_BulletType[(int)BulletType::MAX] = { 1,0,5,5,5,5 };
 		std::vector<MainBullet*> m_BulletList;
 		std::vector<Explosion*> m_ExplosionList;
 		float time = 0;

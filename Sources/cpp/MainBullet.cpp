@@ -10,6 +10,8 @@ MainBullet::MainBullet()
 	_chanbers[(int)BulletType::TRACKING_SHOT] = new TrackingChamber(&status, &_bulletContainer);
 	_chanbers[(int)BulletType::MULTI_SHOT] = new NormalChamber(&status, &_bulletContainer);
 
+	objectHandle = LoadGraph("Resources/Enemy.png");
+
 	status.m_isActive = false;
 }
 
@@ -38,8 +40,11 @@ void MainBullet::Move()
 // 着弾時
 void MainBullet::Impact(ObjectType hitType)
 {
-	BaseObject newObj = *hitObject[hitObject.size() - 1];
-	_bulletContainer.reflectionContainer.norm = newObj.GetNormDir(status.m_position);
+	if (hitObject.size() > 0) 
+	{
+		BaseObject newObj = *hitObject[hitObject.size() - 1];
+		_bulletContainer.reflectionContainer.norm = newObj.GetNormDir(status.m_position);
+	}
 
 	switch (hitType)
 	{
@@ -111,7 +116,7 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 // ステータスのレベルによって値を書き換える
 void MainBullet::UpdateStatus()
 {
-	_bulletContainer.mainContainer.m_Speed = _bulletType[(int)BulletStatus::SPEED] * 5;
-	_bulletContainer.mainContainer.m_Range = _bulletType[(int)BulletStatus::RANGE] * 300;
-	damage = _bulletType[(int)BulletStatus::POWER] * 1;
+	_bulletContainer.mainContainer.m_Speed = _bulletStatus[(int)BulletStatus::SPEED] * 5;
+	_bulletContainer.mainContainer.m_Range = _bulletStatus[(int)BulletStatus::RANGE] * 300;
+	damage = _bulletStatus[(int)BulletStatus::POWER] * 1;
 }

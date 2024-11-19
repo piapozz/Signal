@@ -149,7 +149,7 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 		// ダメージ処理
 		player->TakeDamage(bullet->GetDamage());
 		// 着弾処理
-		bullet->Impact();
+		bullet->Impact(ObjectType::PLAYER);
 		// 貫通弾なら当たったオブジェクトを渡す
 		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
 		{
@@ -190,7 +190,7 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 				return false;
 		}
 		// 着弾処理
-		bullet->Impact();
+		bullet->Impact(ObjectType::BOX);
 
 		// 貫通弾なら当たったオブジェクトを渡す
 		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)

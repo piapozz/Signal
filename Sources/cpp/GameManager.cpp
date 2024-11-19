@@ -27,7 +27,7 @@ GameManager::~GameManager()
 }
 
 // ‰Šú‰»
-void GameManager::Init() 
+void GameManager::Init()
 {
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -37,7 +37,7 @@ void GameManager::Init()
 
 	for (int i = 0; i < enemys.size(); i++)
 	{
-		enemys[i]->Init(collisionManager);
+		enemys[i]->Init(bulletManager, devices, collisionManager, stageManager);
 		devices.push_back(enemys[i]);
 	}
 

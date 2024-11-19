@@ -3,7 +3,6 @@
 #include "DxLib.h"
 #include "BaseObject.h"
 #include "Box.h"
-#include "StageManager.h"
 #include "MainBullet.h"
 #include "BulletManager.h"
 #include "BaseCharacter.h"

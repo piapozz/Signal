@@ -3,38 +3,62 @@
 MainBullet::MainBullet()
 {
 	// 与えられたタイプ、ステータスの情報をもとに最終的なステータスと画像を出す
-	_normalChanber = new NormalChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::NORMAL] = new NormalChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::EXPLOSION] = new ExplosionChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::PENETRATION] = new PenetrationChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::REFLECTION] = new ReflectionChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::TRACKING_SHOT] = new TrackingChamber(&status, &_bulletContainer);
+	_chanbers[(int)BulletType::MULTI_SHOT] = new NormalChamber(&status, &_bulletContainer);
 
 	status.m_isActive = false;
 }
 
 MainBullet::~MainBullet()
 {
-
+	// ポインタの削除
+	for (int i = 0; i < (int)BulletType::MAX; i++) {
+		if(_chanbers[i] != nullptr) delete _chanbers[i];
+	}
 }
 
 // 角度修正
 void MainBullet::UpdateAngle()
 {
-	// 反射の角度補正
-
 	// 誘導の角度修正
-
+	_chanbers[(int)BulletType::TRACKING_SHOT]->AngleModifying();
 }
 
 // 移動
 void MainBullet::Move()
 {
 	// 通常の移動
-	_normalChanber->Move();
+	_chanbers[(int)BulletType::NORMAL]->Move();
 }
 
 // 着弾時
-void MainBullet::Impact()
+void MainBullet::Impact(ObjectType hitType)
 {
-	// 貫通の着弾
+	_bulletContainer.reflectionContainer.norm = hitObject[hitObject.size() - 1].norm;
 
-	// 反射の着弾
+	switch (hitType)
+	{
+	case ObjectType::PLAYER:
+		// 貫通の着弾
+		if (_chanbers[(int)BulletType::PENETRATION]->Impact()) return;
+		break;
+	case ObjectType::BOX:
+		// 貫通の着弾
+		if (_chanbers[(int)BulletType::PENETRATION]->Impact()) return;
+		// 反射の着弾
+		if (_chanbers[(int)BulletType::REFLECTION]->Impact()) return;
+		break;
+	case ObjectType::WALL:
+		// 反射の着弾
+		if (_chanbers[(int)BulletType::REFLECTION]->Impact()) return;
+		break;
+	default:
+		break;
+	}
 
 	Destroy();
 
@@ -44,7 +68,7 @@ void MainBullet::Impact()
 void MainBullet::Destroy()
 {
 	// 爆発の消滅時
-
+	_chanbers[(int)BulletType::EXPLOSION]->Destroy();
 
 	// 使用を終わる
 	status.m_isActive = false;
@@ -79,6 +103,8 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	// 使用中
 	status.m_isActive = true;
 	_distance = 0;
+	UpdateStatus();
+	_bulletContainer.LevelUp(_bulletType);
 }
 
 // ステータスのレベルによって値を書き換える

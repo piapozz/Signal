@@ -12,12 +12,12 @@ public:
 	void Move();
 
 	// Šp“xC³ŠÖ”
-	void AngleModifying() {};
+	void AngleModifying() {}
 
 	// ’…’eŠÖ”
-	void Impact() {};
+	bool Impact() { return true; }
 
 	// Á–ÅŠÖ” 
-	void Destroy() {};
+	void Destroy() {}
 };
 

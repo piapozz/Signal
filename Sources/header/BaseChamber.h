@@ -22,15 +22,21 @@ public:
 	// 基礎ステータス
 	typedef struct MainContainer
 	{
-		float m_Speed = 5.0f;   // スピード
-		float m_Range = 300.0f;	// 射程
+		float m_Speed = 5.0f;			// スピード
+		float m_Range = 300.0f;			// 射程
 		int color = GetColor(0, 0, 0);	// 弾丸の色
 	};
 
 	// 反射ステータス
 	typedef struct ReflectionContainer
 	{
+		int reflectionCount = 1;		// 反射回数
+		Vector2 norm;					// 法線
+	public:
+		void LevelUp(int level)
+		{
 
+		}
 	};
 
 	// 誘導ステータス
@@ -38,18 +44,34 @@ public:
 	{
 		float turnAngle = 5;			// 補正する角度
 		Vector2 targetPosition;			// 誘導対象
+	public:
+		void LevelUp(int level)
+		{
+
+		}
 	};
 
 	// 貫通ステータス
 	typedef struct PenetrationContainer
 	{
+		int penetrationCount = 1;		// 貫通回数 
+	public:
+		void LevelUp(int level)
+		{
 
+		}
 	};
 
 	// 爆発ステータス
 	typedef struct ExplosionContainer
 	{
-		float expansionRange;			// 膨張する範囲
+		float expansionRange = 0.2f;			// 一フレームごとに膨張する範囲
+		float time = 1;						// 持続時間
+	public:
+		void LevelUp(int level)
+		{
+
+		}
 
 	};
 
@@ -61,6 +83,24 @@ public:
 		TrackingContainer trackingContainer;
 		PenetrationContainer penetrationContainer;
 		ExplosionContainer explosionContainer;
+		int level[(int)BulletType::MAX];
+
+	public:
+		void LevelUp(int type[]) 
+		{
+			int temp[(int)BulletType::MAX];
+
+			for (int i = 0; i < (int)BulletType::MAX; i++) 
+			{
+				temp[i] = level[i] - type[i];
+				level[i] = type[i];
+			}
+
+			if (temp[(int)BulletType::REFLECTION] > 0) reflectionContainer.LevelUp(temp[(int)BulletType::REFLECTION]);
+			if (temp[(int)BulletType::TRACKING_SHOT] > 0) trackingContainer.LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
+			if (temp[(int)BulletType::PENETRATION] > 0) penetrationContainer.LevelUp(temp[(int)BulletType::PENETRATION]);
+			if (temp[(int)BulletType::EXPLOSION] > 0) explosionContainer.LevelUp(temp[(int)BulletType::EXPLOSION]);
+		}
 	};
 
 protected:
@@ -85,7 +125,7 @@ public:
 	virtual void Move() = 0;
 
 	// 着弾関数
-	virtual void Impact() = 0;
+	virtual bool Impact() = 0;
 
 	// 消滅関数 
 	virtual void Destroy() = 0;

@@ -43,15 +43,13 @@ void BulletManager::Move()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
 		{
 			// —LŒø”»’è
-			if (!_bulletPram[i].m_BulletList[j]->GetActive() && !_bulletPram[i].m_ExplosionList[j]->GetActive()) continue;
-
 			// ˆÚ“®
-			// ”š”­•¨‚ÌˆÚ“®AŠgk
-			_bulletPram[i].m_BulletList[j]->GetActive() && _bulletPram[i].m_ExplosionList[j]->GetActive() ?
-				_bulletPram[i].m_BulletList[j]->Move(), _bulletPram[i].m_ExplosionList[j]->Move()
-				: _bulletPram[i].m_BulletList[j]->GetActive() ?
-				_bulletPram[i].m_BulletList[j]->Move() : _bulletPram[i].m_ExplosionList[j]->Move();
+			if (_bulletPram[i].m_BulletList[j]->GetActive())
+				_bulletPram[i].m_BulletList[j]->Move();
 
+			// ”š”­•¨‚ÌˆÚ“®AŠgk
+			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
+				_bulletPram[i].m_ExplosionList[j]->Move();
 		}
 	}
 }
@@ -67,10 +65,13 @@ void BulletManager::Draw()
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// —LŒø”»’è
-			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
-
 			// •`‰æ
-			_bulletPram[i].m_BulletList[j]->Draw();
+			if (_bulletPram[i].m_BulletList[j]->GetActive())
+				_bulletPram[i].m_BulletList[j]->Draw();
+
+			// ”š”­•¨‚Ì•`‰æ
+			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
+				_bulletPram[i].m_ExplosionList[j]->Draw();
 
 			count++;
 		}
@@ -87,6 +88,10 @@ void BulletManager::UpdatePosition()
 	{
 		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
+			// ”š”­•¨‚ÌŒo‰ßŽžŠÔƒ`ƒFƒbƒN
+			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
+				_bulletPram[i].m_ExplosionList[j]->Move();
+
 			// —LŒø”»’è
 			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 

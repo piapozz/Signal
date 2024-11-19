@@ -1,14 +1,17 @@
 #include "../header/ReflectionChamber.h"
 
-// ベクトルとfloatの足し算
-Vector2 AddVecf(Vector2 vec, float n);
-// ベクトルとfloatの引き算
-Vector2 SubVecf(Vector2 vec, float n);
-// ベクトルとfloatの掛け算
-Vector2 MulVecf(Vector2 vec, float n);
-// ベクトルとfloatの割り算
-Vector2 DivVecf(Vector2 vec, float n);
-Vector2 MulVecVec(Vector2 vec1, Vector2 vec2);
+
+// ラジアンから方向ベクトルを取得
+Vector2 RadianToVector2(float radian);
+
+// 方向ベクトルからラジアンを取得
+float Vector2ToRadian(Vector2 direction);
+
+// 反射後のベクトルを計算
+Vector2 ReflectVector(Vector2 direction, Vector2 normal);
+
+// ラジアンの反射計算
+float ReflectRadian(float radian, Vector2 normal);
 
 // 反射カウントが残っていればfalse
 bool ReflectionChamber::Impact()

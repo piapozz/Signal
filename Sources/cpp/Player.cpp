@@ -27,7 +27,7 @@ void Player::Proc()
 {
 	DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
 	// 死んでいなかったら処理をする ※isActiveがtrueのときは死んでいる
-	// if (status.m_isActive)
+	if (status.m_isActive)
 	{
 		// コントローラーの状態を更新
 		GetController();

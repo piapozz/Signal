@@ -18,6 +18,7 @@ BulletManager::BulletManager(int playerNum)
 		{
 			_bulletPram[i].m_BulletList.push_back(new MainBullet());
 			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
+			_bulletPram[i].m_BulletList[j]->SetActive(false);
 		}
 	}
 }
@@ -73,11 +74,11 @@ void BulletManager::Draw()
 			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
 				_bulletPram[i].m_ExplosionList[j]->Draw();
 
-			count++;
+			//count++;
 		}
 	}
 
-	printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
+	//printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
 }
 
 // ç¿ïWçXêV

@@ -96,6 +96,26 @@ public:
         return temp;
     }
 
+    Vector2 operator*(Vector2 vec)
+    {
+        Vector2 temp;
+
+        temp.x = x * vec.x;
+        temp.y = y * vec.y;
+
+        return temp;
+    }
+
+    Vector2 operator-(float num)
+    {
+        Vector2 temp;
+
+        temp.x = x - num;
+        temp.y = y - num;
+
+        return temp;
+    }
+
     Vector2 operator*(float num)
     {
         Vector2 temp;
@@ -152,6 +172,11 @@ public:
         temp.y = vec.y / distance;
 
         return temp;
+    }
+
+    static float Dot(Vector2 vec1, Vector2 vec2) 
+    {
+        return vec1.x * vec2.x + vec2.y * vec1.y;
     }
 
     static float Cross(Vector2 vec1, Vector2 vec2)

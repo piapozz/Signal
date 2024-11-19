@@ -17,7 +17,7 @@ private:
 
 	float _distance = 0;
 
-	NormalChamber* _normalChanber;
+	BaseChamber* _chanbers[(int)BulletType::MAX];
 
 	float _bulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 	int _bulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
@@ -36,7 +36,7 @@ public:
 	void Move();
 
 	// íÖíeéû
-	void Impact();
+	void Impact(ObjectType hitType);
 
 	// è¡ñ≈éû
 	void Destroy();

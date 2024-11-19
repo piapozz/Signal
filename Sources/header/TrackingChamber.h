@@ -9,15 +9,15 @@ public:
 
 	TrackingChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
 
-	void Move() {};
+	void Move() {}
 
 	// Šp“xC³ŠÖ”
-	void AngleModifying() ;
+	void AngleModifying();
 
 	// ’…’eŠÖ”
-	void Impact() {};
+	bool Impact() { return true; }
 
 	// Á–ÅŠÖ” 
-	void Destroy() {};
+	void Destroy() {}
 };
 

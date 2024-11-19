@@ -38,7 +38,8 @@ void MainBullet::Move()
 // ’…’eŽž
 void MainBullet::Impact(ObjectType hitType)
 {
-	_bulletContainer.reflectionContainer.norm = hitObject[hitObject.size() - 1].norm;
+	BaseObject newObj = *hitObject[hitObject.size() - 1];
+	_bulletContainer.reflectionContainer.norm = newObj.GetNormDir(status.m_position);
 
 	switch (hitType)
 	{

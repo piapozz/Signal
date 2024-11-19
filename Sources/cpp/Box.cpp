@@ -78,9 +78,9 @@ void Box::RevivalCount()
 }
 
 // ñ@ê¸Çï‘Ç∑ä÷êî
-Vector2 Box::GetNormDir(Vector2 pos)
+Vector2 Box::GetNormDir(Vector2 hitPos)
 {
-	Vector2 dir =  pos - GetStatus().m_position;
+	Vector2 dir = hitPos - GetStatus().m_position;
 	float angle = atan2f(dir.y, dir.x);
 
 	Vector2 result;

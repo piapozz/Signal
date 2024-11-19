@@ -45,11 +45,13 @@ void StageManager::Proc()
 {
 	for (int i = 0; i < _boxList.size(); i++)
 	{
+		// boxが非アクティブなら復活をカウント
 		if (_boxList[i]->GetActive() == false)
 			if (_boxList[i]->GetRevivalCount() > 0)
 				_boxList[i]->RevivalCount();
 			else
 				_boxList[i]->RevivalBox();
+		// 体力がなくなったら非アクティブにする
 		else if(_boxList[i]->GetStatus().m_life <= 0)
 			_boxList[i]->DestroyBox();
 	}

@@ -12,7 +12,7 @@ public:
 	void Move() {}
 
 	// Šp“xC³ŠÖ”
-	void AngleModifying();
+	void AngleModifying() {};
 
 	// ’…’eŠÖ”
 	bool Impact() { return true; }

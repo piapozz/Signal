@@ -195,9 +195,8 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 		// 着弾処理
 		bullet->Impact(objType);
 
-		// 貫通弾なら当たったオブジェクトを渡す
-		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
-			bullet->AddHitObject(box);
+		// 当たったオブジェクトを渡す
+		bullet->AddHitObject(box);
 	}
 
 	return false;

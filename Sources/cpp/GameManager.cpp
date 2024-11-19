@@ -10,6 +10,8 @@ GameManager::GameManager()
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
 	inputManager = new InputManager();
+	// 弾を人数分用意
+	bulletManager = new BulletManager(players.size() + enemys.size());
 }
 
 // デストラクタ
@@ -69,8 +71,6 @@ void GameManager::Init()
 		}
 	}
 
-	// 弾を人数分用意
-	bulletManager = new BulletManager(playerMax);
 
 }
 // 処理

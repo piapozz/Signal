@@ -1,6 +1,6 @@
 #include "../header/UIManager.h"
 
-UIManager::UIManager(Vector2 initPos)
+UIManager::UIManager()
 {
 	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("");
 	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("");
@@ -13,8 +13,6 @@ UIManager::UIManager(Vector2 initPos)
 	bulletStateText[(int)BulletStatus::POWER] = "POWER";
 	bulletStateText[(int)BulletStatus::RANGE] = "RANGE";
 	bulletStateText[(int)BulletStatus::RATE] = "RATE";
-
-	infoPos = initPos;
 }
 
 UIManager::~UIManager()
@@ -65,22 +63,68 @@ void UIManager::LevelUpUI()
 
 }
 
-// 引数にBaseCharacterのchoiceStatus配列を受け取り描画
-void UIManager::StatusUpUI(std::vector<int> statusArray)
+// 弾のステータスを描画
+void UIManager::StatusViewer(int deviceNum)
 {
-	// 配列のサイズ分だけ回す
-	for (int i = 0; i < statusArray.size(); i++)
+	// ステータスの状態を星で描画
+	for (int i = 0; i < 5; i++)
 	{
 
+		infoPos.x += 100;
+
+		// ステータス名
+		DrawFormatString(infoPos.x + i, infoPos.y, COLOR_BLACK, bulletStateText[i].c_str());
+
+
+		// ステータスの値によって星を描画
+		for (int j = 0; j < (int)BulletStatus::MAX; j++)
+		{
+			infoPos.y += 50;
+			// ステータスのレベルが「i」を超えていたら黒星で描画
+			if (i < bulletManager->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x + i * 30, infoPos.y + j * 20, COLOR_BLACK, "★"); }
+			// 超えていなかったら白星で描画
+			else DrawFormatString(infoPos.x + i * 30, infoPos.y + j * 20, COLOR_BLACK, "☆");
+		}
 	}
 }
 
-// 引数にBaseCharacterのchoicePower配列を受け取り描画
-void UIManager::StatusUpUI(std::vector<int> powerArray)
+// プレイヤーの周りにステータスを描画
+void UIManager::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos)
 {
-	// 配列のサイズ分だけ回す
-	for (int i = 0; i < powerArray.size(); i++)
-	{
+	Vector2 tempPos;
 
+	// 配列の分プレイヤーの周りにUIを描画
+	for (int i = 0; i < vectorArray.size(); i++)
+	{
+		// 「i」の状態を見て方角を分岐 ※北東南西の順番で描画
+		switch (i)
+		{
+		case (int)Cardinal::NORTH:
+			tempPos.x = 0.0f;
+			tempPos.y = -distanceError;
+
+			break;
+		case (int)Cardinal::EAST:
+			tempPos.x = distanceError;
+			tempPos.y = 0.0f;
+
+			break;
+		case (int)Cardinal::SOUTH:
+			tempPos.x = 0.0f;
+			tempPos.y = distanceError;
+
+			break;
+		case (int)Cardinal::WEST:
+			tempPos.x = -distanceError;
+			tempPos.y = 0.0f;
+
+			break;
+		}
+
+		// プレイヤーから方角に合わせる
+		tempPos = tempPos + playerPos;
+
+		// 画像を描画
+		DrawRotaGraph(tempPos.x, tempPos.y, 1.0f, DX_PI_F / 2, statusImage[vectorArray[i]], TRUE);
 	}
 }

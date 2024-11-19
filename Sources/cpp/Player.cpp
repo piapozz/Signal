@@ -66,8 +66,3 @@ void Player::GetController()
 	controller.m_LTrigger = inputManager->GetButton(deviceNum, Button::LEFT_TRIGGER);
 	controller.m_RTrigger = inputManager->GetButton(deviceNum, Button::RIGHT_TRIGGER);
 }
-
-bool LevelUp()
-{
-
-}

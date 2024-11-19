@@ -6,7 +6,7 @@ BaseCharacter::BaseCharacter()
 	hitObject = false;
 	dodgeNow = false;
 
-	choiceFlag = false;
+	canLottery = true;
 
 	exp = 0;
 	request = 3;
@@ -62,82 +62,46 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 	playerNum = playerNumber;
 }
 
-void BaseCharacter::LevelUp()
+// 経験値を見て
+void BaseCharacter::ObserveExp()
 {
 	// レベルアップに必要な個数を満たしていたら
 	if (GetExpValue() >= request)
 	{
 		// レベルアップしたら次のレベルアップに必要なコストを上げる
-		request += 3;
+		request += request + 1;
 
 		// 三の倍数回これまでにレベルアップしていたらパワーアップから選ぶ
-		if (levelUpCount % 3)
+		if (levelUpCount % 3 == 0)
 		{
 			// パワーアップできる回数を一あげる
-			powerUpCount++;
-
+			lotteryPowerCount++;
 		}
 
 		// 三の倍数回ではなかったらステータスから選ぶ
 		else
 		{
 			// ステータスアップできる回数を一あげる
-			statusUpCount++;
-
+			lotteryStatusCount++;
 		}
 	}
 
-	if (choiceFlag == false)
+	if (canLottery == true)
 	{
-		// レベルアップできる回数を見てコントローラーの入力を受け取り結果を反映させる
-		// ステータスアップを行う
-		if (statusUpCount > 0 && powerUpCount <= 0)
+		// どちらかが強化できる状態だったら
+		if (lotteryStatusCount != 0 || lotteryPowerCount != 0)
 		{
-			// ステータスアップの抽選を行う
-			StatusUp();
-		}
+			// 強化できるのがステータスだったらステータス強化を実行
+			lotteryStatusCount > 0 ? LotteryStatus() : LotteryPower();
 
-		// パワーアップを行う
-		else if (powerUpCount > 0)
-		{
-			// パワーアップの抽選を行う
-			PowerUp();
+			// プレイヤーが選択を行い適応させるまで抽選を制限
+			canLottery = false;
 		}
-	}
-	else
-	{
-		// UIを描画する
-
 	}
 }
 
-// 選択肢を
-void BaseCharacter::PowerUp()
-{
-	// MAXをのぞいた可変長配列の初期化
-	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
-	{
-		// 可変長配列に要素を追加
-		choicePower.push_back(i);
-	}
-
-	// BulletType::NORMALを削除 （begin() で戦闘を削除）
-	choicePower.erase(choicePower.begin());
-
-	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
-	for (int i = 0; i < choicePower.size() - CHOICE_POWER_MAX; i++)
-	{
-		auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size()));
-
-		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
-		choicePower.erase(it);
-	}
-
-	choiceFlag = true;
-}
-
-// ステータスアップを行う
-void BaseCharacter::StatusUp()
+// ステータスアップできるものを抽選する
+void BaseCharacter::LotteryStatus()
 {
 	// MAXをのぞいた可変長配列の初期化
 	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
@@ -158,7 +122,46 @@ void BaseCharacter::StatusUp()
 		choiceStatus.erase(it);
 	}
 
-	choiceFlag = true;
+	// 選択肢を選べる状態にする
+	canChoose = true;
+}
+
+// パワーアップできるものを抽選する
+void BaseCharacter::LotteryPower()
+{
+	// MAXをのぞいた可変長配列の初期化
+	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
+	{
+		// 可変長配列に要素を追加
+		choicePower.push_back(i);
+	}
+
+	// BulletType::NORMALを削除 （begin() で戦闘を削除）
+	choicePower.erase(choicePower.begin());
+
+	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
+	for (int i = 0; i < choicePower.size() - CHOICE_POWER_MAX; i++)
+	{
+		// auto型で取得してから削除
+		auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size()));
+
+		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
+		choicePower.erase(it);
+	}
+
+	// 選択肢を選べる状態にする
+	canChoose = true;
+}
+
+void BaseCharacter::ChooseBonus()
+{
+	// ボーナスを得ることができる状態だったら
+	if (canChoose)
+	{
+
+		// 抽選できる状態に戻す
+		canLottery = true;
+	}
 }
 
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える

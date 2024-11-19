@@ -174,111 +174,113 @@ void CollisionManager::HitCheck_Player_Box(BaseCharacter* player, Box* box)
 // 弾と箱を判定する関数
 bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 {
+	bool result = false;
+
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
 		// 法線の更新
 		box->GetNormDir(bullet->GetStatus().m_nextPosition);
 
+		ObjectType objType = ObjectType::WALL;
 		// 箱なら
 		if (box->GetIsWall() == false)
 		{
+			objType = ObjectType::BOX;
 			// まだダメージを与えていないなら
 			// ダメージ処理、倒しているなら
 			if (box->TakeDamage(bullet->GetDamage()) == true)
-				return true;
-			else
-				return false;
+				result = true;
 		}
+
 		// 着弾処理
-		bullet->Impact(ObjectType::BOX);
+		bullet->Impact(objType);
 
 		// 貫通弾なら当たったオブジェクトを渡す
 		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
-		{
 			bullet->AddHitObject(box);
-		}
 	}
+
+	return false;
 }
 
 // すべてのオブジェクトを判定する関数
 void CollisionManager::HitCheck_Everything()
 {
-	// プレイヤーループ
+	// プレイヤーの当たり判定
 	for (int p1 = 0; p1 < _pPlayers.size(); p1++)
 	{
 		BaseCharacter* player_1 = _pPlayers[p1];
 
-		// 箱のループ
+		// プレイヤーごとの判定
+		for (int p2 = 0; p2 < _pPlayers.size(); p2++)
+		{
+			// 同じ組み合わせはスキップ
+			if (p1 >= p2) continue;
+			BaseCharacter* player_2 = _pPlayers[p2];
+
+			// ほかプレイヤーとの当たり判定
+			if (IsInProximity(player_1, player_2) == true)
+				// プレイヤーとプレイヤー
+				HitCheck_Player_Player(player_1, player_2);
+
+			// 弾との判定
+			std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
+			//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
+
+			// 弾のループ
+			for (int bu = 0; bu < bulletList.size(); bu++)
+			{
+				MainBullet* bullet = bulletList[bu];
+				// 弾が非アクティブならスキップ
+				if (!bullet->GetActive()) continue;
+
+				// プレイヤーと弾
+				if (IsInProximity(player_1, bullet) == true)
+					HitCheck_Player_Bullet(player_1, bullet);
+			}
+		}
+
+		// boxとの判定
 		for (int bo = 0; bo < _pBoxs.size(); bo++)
 		{
 			Box* box = _pBoxs[bo];
+			// 箱が非アクティブならスキップ
+			if (!box->GetActive()) continue;
 
-			for (int p2 = 0; p2 < _pPlayers.size(); p2++)
-			{
-				BaseCharacter* player_2 = _pPlayers[p2];
-
-				std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
-				//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
-
-				// 弾のループ
-				for (int bu = 0; bu < bulletList.size(); bu++)
-				{
-					MainBullet* bullet = bulletList[bu];
-					// 弾が非アクティブならスキップ
-					if (!bullet->GetActive()) continue;
-
-					// 撃った本人ならスキップ
-					if (p1 == p2) continue;
-
-					// プレイヤーと弾
-					if (IsInProximity(player_1, bullet) == true)
-						HitCheck_Player_Bullet(player_1, bullet);
-
-					// 箱と弾
-					if (IsInProximity(bullet, box) == true)
-						if (HitCheck_Bullet_Box(bullet, box))
-							player_2->GainExp(box->GetExp());
-				}
-
-				/*
-				// 爆発のループ
-				for (int ex = 0; ex < explosionList.size(); ex++)
-				{
-					MainBullet* explosion = explosionList[ex];
-					// 弾が非アクティブならスキップ
-					if (!explosion->GetActive()) continue;
-
-					// 撃った本人ならスキップ
-					if (p1 == p2) continue;
-
-					// プレイヤーと弾
-					if (IsInProximity(player_1, explosion) == true)
-						HitCheck_Player_Bullet(player_1, explosion);
-
-					// 箱と弾
-					if (IsInProximity(explosion, box) == true)
-						HitCheck_Bullet_Box(explosion, box);
-				}
-				*/
-			}
-
-			// プレイヤーと箱
+			
 			if (IsInProximity(player_1, box) == true)
 			{
 				HitCheck_Player_Box(player_1, box);
 			}
 		}
+	}
 
-		for (int p2 = p1 + 1; p2 < _pPlayers.size(); p2++)
+	// boxと弾の判定
+	for (int bo = 0; bo < _pBoxs.size(); bo++)
+	{
+		Box* box = _pBoxs[bo];
+		// 箱が非アクティブならスキップ
+		if (!box->GetActive()) continue;
+
+		// プレイヤーの数繰り返す
+		for (int p2 = 0; p2 < _pPlayers.size(); p2++)
 		{
 			BaseCharacter* player_2 = _pPlayers[p2];
 
-			// 同じ組み合わせはスキップ
-			if (p1 >= p2) continue;
+			std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
+			//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
 
-			if (IsInProximity(player_1, player_2) == true)
-				// プレイヤーとプレイヤー
-				HitCheck_Player_Player(player_1, player_2);
+			// 弾のループ
+			for (int bu = 0; bu < bulletList.size(); bu++)
+			{
+				MainBullet* bullet = bulletList[bu];
+				// 弾が非アクティブならスキップ
+				if (!bullet->GetActive()) continue;
+
+				if (IsInProximity(bullet, box) == true)
+					if (HitCheck_Bullet_Box(bullet, box))
+						player_2->GainExp(box->GetExp());
+			}
 		}
 	}
 }

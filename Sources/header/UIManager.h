@@ -20,17 +20,32 @@ private:
 	int deviceMax = 2;
 	int deviceCount;
 
+	// 方位
+	enum Cardinal
+	{
+		NORTH = 0,
+		EAST,
+		SOUTH,
+		WEST
+	};
+
+	const float distanceError = 20.0f;
+
+	// パワーアップに使う画像を管理
+	int powerImage[(int)BulletType::MAX];
+	// ステータスアップに使う画像を管理
+	int statusImage[(int)BulletStatus::MAX];
+
 public:
-	UIManager(Vector2 initPos);
+	UIManager();
 	~UIManager();
 
 	void Init(BulletManager* bullet);
 	void Proc();
 	void Draw(int playerNum);
+	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos);
+	void StatusViewer(int deviceNum);
+
 	void LevelUpUI();
-
-	void StatusUpUI(std::vector<int> statusNum);
-	void PowerUpUI(std::vector<int> typeNum);
-
 };
 

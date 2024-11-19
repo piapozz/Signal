@@ -13,31 +13,33 @@ public:
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 	int request;						// 次の要求量
-	int levelUpCount;
-	int powerUpCount;
-	int statusUpCount;
+	int levelUpCount;				
+	int lotteryPowerCount;				// 抽選できる回数
+	int lotteryStatusCount;				// 抽選できる回数
 
-	// int choicePower[CHOICE_POWER_MAX];
-	// int choiceStatus[CHOICE_STATUS_MAX];
+	std::vector<int> choicePower;		// パワーアップの選択肢を格納
+	std::vector<int> choiceStatus;		// ステータスアップの選択肢を格納
 
-	std::vector<int> choicePower;
-	std::vector<int> choiceStatus;
-
-	bool choiceFlag;
+	bool canLottery;					// 抽選を行うことができるかの管理
+	bool canChoose;						// ボーナスを選ぶことができるかの管理
 
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ
 
-	void SetPlayerNum(int playerNumber);
 	void Rotate(Vector2 stickAngle);
 	void Move();
 	void Dodge();
-	bool GetIsPlayer();
-	void GainExp(int expValue);
-	int GetExpValue();
 	void LevelUp();
-	void PowerUp();
-	void StatusUp();
+	void ObserveExp();
+	void LotteryStatus();
+	void LotteryPower();
+	void ChooseBonus();
+
+	// 値の取得や変更を行う関数
+	bool GetIsPlayer();
+	int GetExpValue();
+	void GainExp(int expValue);
+	void SetPlayerNum(int playerNumber);
 
 	virtual void Proc() = 0;
 

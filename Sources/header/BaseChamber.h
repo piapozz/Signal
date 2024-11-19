@@ -30,12 +30,12 @@ public:
 	// 反射ステータス
 	typedef struct ReflectionContainer
 	{
-		int reflectionCount = 1;		// 反射回数
+		int reflectionCount = 0;		// 反射回数
 		Vector2 norm;					// 法線
 	public:
 		void LevelUp(int level)
 		{
-
+			reflectionCount = level;
 		}
 	};
 
@@ -47,18 +47,18 @@ public:
 	public:
 		void LevelUp(int level)
 		{
-
+			turnAngle = level * 5;
 		}
 	};
 
 	// 貫通ステータス
 	typedef struct PenetrationContainer
 	{
-		int penetrationCount = 1;		// 貫通回数 
+		int penetrationCount = 0;		// 貫通回数 
 	public:
 		void LevelUp(int level)
 		{
-
+			penetrationCount = level;
 		}
 	};
 
@@ -70,7 +70,7 @@ public:
 	public:
 		void LevelUp(int level)
 		{
-
+			expansionRange = level * 0.2f;
 		}
 
 	};
@@ -86,13 +86,13 @@ public:
 		int level[(int)BulletType::MAX];
 
 	public:
-		void LevelUp(int type[]) 
+		void LevelUp(int type[])
 		{
 			int temp[(int)BulletType::MAX];
 
 			for (int i = 0; i < (int)BulletType::MAX; i++) 
 			{
-				temp[i] = level[i] - type[i];
+				temp[i] = abs(level[i] - type[i]);
 				level[i] = type[i];
 			}
 

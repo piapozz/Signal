@@ -96,11 +96,11 @@ void BulletManager::UpdatePosition()
 			// —LŒø”»’è
 			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 
-			// ŽË’öŠÇ—
-			_bulletPram[i].m_BulletList[j]->CheckRange();
-
 			// XV
 			_bulletPram[i].m_BulletList[j]->UpdatePosition();
+
+			// ŽË’öŠÇ—
+			_bulletPram[i].m_BulletList[j]->CheckRange();
 		}
 	}
 }

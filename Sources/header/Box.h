@@ -22,7 +22,7 @@ public:
 	void Move(){}
 
 	void CalVertexPos();
-	Vector2 GetNormDir(Vector2 pos) override;		// 法線を返す関数
+	Vector2 GetNormDir(Vector2 hitPos) override;		// 法線を返す関数
 	Vector2 GetVertexPos(int n);			// 頂点座標を返す関数
 	void RevivalBox();
 	void DestroyBox();

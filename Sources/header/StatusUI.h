@@ -17,6 +17,7 @@ private:
 	const int STAR_TO_STAR = 20;
 
 	Vector2 infoPos;
+	Vector2 initPos;
 
 	int deviceMax = 2;
 	int deviceCount;
@@ -28,7 +29,7 @@ private:
 	string bulletStateText[(int)BulletStatus::MAX];
 
 public:
-	StatusUI(BulletManager* bulletManager);
+	StatusUI(BulletManager* bulletManager, Vector2 position);
 	~StatusUI();
 	void Init();
 

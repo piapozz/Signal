@@ -1,6 +1,6 @@
 #include "../header/StatusUI.h"
 
-StatusUI::StatusUI(BulletManager* bulletManager)
+StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 {
 	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("");
 	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("");
@@ -14,8 +14,8 @@ StatusUI::StatusUI(BulletManager* bulletManager)
 	bulletStateText[(int)BulletStatus::RANGE] = "RANGE";
 	bulletStateText[(int)BulletStatus::RATE] = "RATE";
 
-	infoPos.x = 0.0f;
-	infoPos.y = 0.0f;
+	// 初期位置を更新
+	initPos = position;
 
 	bullet = bulletManager;
 }
@@ -34,7 +34,7 @@ void StatusUI::ArrangeIcon()
 void StatusUI::StatusViewer(int deviceNum)
 {
 	// 高さの初期位置
-	infoPos.y = 200.0f;
+	infoPos.y = initPos.y;
 
 	int textError = 0;
 
@@ -44,7 +44,7 @@ void StatusUI::StatusViewer(int deviceNum)
 	// ステータスの状態を星で描画
 	for (int i = 0; i < (int)BulletStatus::MAX; i++)
 	{
-		infoPos.x = 0.0f;
+		infoPos.x = initPos.x;
 		infoPos.y += 20.0f;
 
 		// ステータス名
@@ -53,8 +53,9 @@ void StatusUI::StatusViewer(int deviceNum)
 		// ステータスの値によって星を描画
 		for (int j = 0; j < 5; j++)
 		{
+			infoPos.x = initPos.x;
 			// 
-			infoPos.x = j * STAR_TO_STAR + textError * TEXT_TO_STAR;
+			infoPos.x += j * STAR_TO_STAR + textError * TEXT_TO_STAR;
 			// ステータスのレベルが「i」を超えていたら黒星で描画
 			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "★"); }
 			// 超えていなかったら白星で描画

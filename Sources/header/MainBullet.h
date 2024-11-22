@@ -5,6 +5,7 @@
 #include "PenetrationChamber.h"
 #include "TrackingChamber.h"
 #include "ReflectionChamber.h"
+#include "Box.h"
 
 // ‚»‚ê‚¼‚ê‚ÌŠÖ”‚ğŒÄ‚Ño‚µ‚ÄˆÚ“®‚È‚Ç‚ğ‚·‚é
 
@@ -13,7 +14,7 @@ class MainBullet
 {
 private:
 
-	BaseChamber::BulletContainer _bulletContainer;
+	BaseChamber::BulletContainer* _bulletContainer;
 
 	float _distance = 0;
 

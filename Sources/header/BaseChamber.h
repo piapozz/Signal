@@ -23,7 +23,7 @@ public:
 	typedef struct MainContainer
 	{
 		float m_Speed = 5.0f;			// スピード
-		float m_Range = 300.0f;			// 射程
+		float m_Range = 1.0f;			// 射程
 		int color = GetColor(0, 0, 0);	// 弾丸の色
 	};
 
@@ -92,8 +92,7 @@ public:
 
 			for (int i = 0; i < (int)BulletType::MAX; i++) 
 			{
-				temp[i] = abs(level[i] - type[i]);
-				level[i] = type[i];
+				temp[i] = type[i];
 			}
 
 			if (temp[(int)BulletType::REFLECTION] > 0) reflectionContainer.LevelUp(temp[(int)BulletType::REFLECTION]);

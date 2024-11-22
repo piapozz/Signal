@@ -18,6 +18,9 @@ public:
     // 当たったオブジェクトを追加
     void AddHitObject(BaseObject* hit) { hitObject.push_back(hit); }
 
+    // 当たったオブジェクト履歴を取得
+    std::vector<BaseObject*> GetHitObject() { return hitObject; }
+
     // ダメージ取得
     float GetDamage() { return damage; }
 };

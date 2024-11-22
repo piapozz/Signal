@@ -74,11 +74,12 @@ void BulletManager::Draw()
 			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
 				_bulletPram[i].m_ExplosionList[j]->Draw();
 
-			//count++;
+			if (_bulletPram[i].m_BulletList[j]->GetActive())
+			count++;
 		}
 	}
 
-	//printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
+	printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
 }
 
 // 座標更新
@@ -96,11 +97,11 @@ void BulletManager::UpdatePosition()
 			// 有効判定
 			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
 
-			// 更新
-			_bulletPram[i].m_BulletList[j]->UpdatePosition();
-
 			// 射程管理
 			_bulletPram[i].m_BulletList[j]->CheckRange();
+
+			// 更新
+			_bulletPram[i].m_BulletList[j]->UpdatePosition();
 		}
 	}
 }
@@ -114,7 +115,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
 	// Rate計算
 
-	float interval = 1 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
+	float interval = 100 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
 	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 
@@ -124,7 +125,6 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
 	{
 		// 渡されたプレイヤーの弾を一つ追加
-		//_bulletPram[playerNum].m_BulletList.push_back(NormalChamber(_bulletPram[playerNum].m_BulletStatus, status));
 		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++) 
 		{
 			if (_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;

@@ -36,7 +36,7 @@ void Player::Proc()
 
 		// 回避が押されていたら回避する
 		if (controller.m_LTrigger)Dodge();
-		
+
 		// もし移動できる状態だったら
 		if (canMove)
 		{
@@ -47,7 +47,14 @@ void Player::Proc()
 		// プレイヤーの向きを変更
 		Rotate(controller.m_RStick);
 
+		// 射撃を行う
 		if (controller.m_RTrigger) bulletManager->AddBullet(deviceNum, status);
+
+		// 経験値を見て強化できるか確認
+		ObserveExp();
+
+		// 強化内容をボタンで選ぶ
+		ChooseBonus(InputButtonToInt());
 
 		// 座標を更新
 		// UpdatePosition();
@@ -55,7 +62,7 @@ void Player::Proc()
 
 	// 体力が0になったときプレイヤーは死にます
 	if (status.m_life <= 0) status.m_isActive = false;
-	
+
 }
 
 // コントローラー情報を更新
@@ -65,4 +72,20 @@ void Player::GetController()
 	controller.m_RStick = inputManager->GetStick(deviceNum, Stick::RIGHT);
 	controller.m_LTrigger = inputManager->GetButton(deviceNum, Button::LEFT_TRIGGER);
 	controller.m_RTrigger = inputManager->GetButton(deviceNum, Button::RIGHT_TRIGGER);
+}
+
+// コントローラーで入力されたXYABボタンをint型で返す
+int Player::InputButtonToInt()
+{
+	int value;
+
+	for (int i = 0; i < (int)Cardinal::MAX; i++)
+	{
+		if (inputManager->GetButton(deviceNum, Button::X)) value = (int)Cardinal::WEST;
+		else if (inputManager->GetButton(deviceNum, Button::Y)) value = (int)Cardinal::NORTH;
+		else if (inputManager->GetButton(deviceNum, Button::B)) value = (int)Cardinal::EAST;
+		else if (inputManager->GetButton(deviceNum, Button::A)) value = (int)Cardinal::SOUTH;
+	}
+
+	return value;
 }

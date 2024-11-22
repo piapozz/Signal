@@ -45,8 +45,6 @@ void GameManager::Init()
 
 	collisionManager->Init(devices, stageManager->GetBoxData(), bulletManager);
 
-	uiManager->Init(bulletManager);
-
 	// プレイヤーの数を取得
 	playerMax = devices.size();
 	
@@ -71,7 +69,7 @@ void GameManager::Init()
 		}
 	}
 
-
+	uiManager->Init(bulletManager, devices);
 }
 // 処理
 void GameManager::Proc()
@@ -96,12 +94,6 @@ void GameManager::Proc()
 		devices[i]->UpdatePosition();
 	}
 
-	// レベルアップ処理
-	for (int i = 0; i < devices.size(); i++)
-	{
-	
-	}
-
 	// 弾の座標更新
 	bulletManager->UpdatePosition();
 
@@ -119,10 +111,12 @@ void GameManager::Draw()
 	{
 		if (devices[i]->status.m_isActive != false)devices[i]->Draw();
 
-		uiManager->Draw(i);
-	}
+		// uiManager->Draw(i);
 
-	
+		uiManager->Draw();
+
+
+	}
 
 	// 弾の描画
 	bulletManager->Draw();

@@ -105,9 +105,6 @@
     <ClCompile Include="Sources\cpp\AudioManager.cpp">
       <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\cpp\UIManager.cpp">
-      <Filter>ソース ファイル\Sein</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\cpp\CollisionManager.cpp">
       <Filter>ソース ファイル\Sakakura</Filter>
     </ClCompile>
@@ -131,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="Sources\cpp\BaseDamageObject.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\StatusUI.cpp">
+      <Filter>ソース ファイル\Sein</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\cpp\UIManager.cpp">
+      <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="Sources\header\BaseDamageObject.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\StatusUI.h">
+      <Filter>ヘッダー ファイル\Sein</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

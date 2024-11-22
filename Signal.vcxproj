@@ -153,6 +153,7 @@
     <ClCompile Include="Sources\cpp\PenetrationChamber.cpp" />
     <ClCompile Include="Sources\cpp\ReflectionChamber.cpp" />
     <ClCompile Include="Sources\cpp\StageManager.cpp" />
+    <ClCompile Include="Sources\cpp\StatusUI.cpp" />
     <ClCompile Include="Sources\cpp\TrackingChamber.cpp" />
     <ClCompile Include="Sources\cpp\UIManager.cpp" />
     <ClCompile Include="Sources\cpp\BaseCharacter.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Sources\header\PenetrationChamber.h" />
     <ClInclude Include="Sources\header\ReflectionChamber.h" />
     <ClInclude Include="Sources\header\StageManager.h" />
+    <ClInclude Include="Sources\header\StatusUI.h" />
     <ClInclude Include="Sources\header\TrackingChamber.h" />
     <ClInclude Include="Sources\header\UIManager.h" />
     <ClInclude Include="Sources\header\Explosion.h" />

@@ -14,14 +14,15 @@ public:
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 	int request;						// 次の要求量
 	int levelUpCount;				
-	int lotteryPowerCount;				// 抽選できる回数
-	int lotteryStatusCount;				// 抽選できる回数
+	int lotteryPowerCount;				// パワーを抽選できる回数
+	int lotteryStatusCount;				// ステータス抽選できる回数
 
 	std::vector<int> choicePower;		// パワーアップの選択肢を格納
 	std::vector<int> choiceStatus;		// ステータスアップの選択肢を格納
 
 	bool canLottery;					// 抽選を行うことができるかの管理
-	bool canChoose;						// ボーナスを選ぶことができるかの管理
+	bool choosePower;					// パワーの強化を実行してるかどうか
+	bool chooseStatus;					// ステータスの強化を実行しているかどうか
 
 	BaseCharacter();					// コンストラクタ
 	~BaseCharacter();					// デストラクタ
@@ -33,17 +34,21 @@ public:
 	void ObserveExp();
 	void LotteryStatus();
 	void LotteryPower();
-	void ChooseBonus();
+	void ChooseBonus(int selectedButton);
 
 	// 値の取得や変更を行う関数
 	bool GetIsPlayer();
 	int GetExpValue();
 	void GainExp(int expValue);
+	Vector2 GetPlayerPos();
+	int GetChooceFlag();
 	void SetPlayerNum(int playerNumber);
 
 	virtual void Proc() = 0;
 
 protected:
+	BulletManager* bullet;
+
 	Vector2 moveVec;
 
 	int exp;					// 壊した箱の数を管理

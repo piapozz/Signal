@@ -25,4 +25,5 @@ public:
 	void Proc();
 	void Init(BulletManager* bullet, InputManager* input);
 	void GetController();
+	int InputButtonToInt();
 };

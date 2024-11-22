@@ -20,6 +20,7 @@ const int WINDOW_HEIGHT = 1080;
 // UIŠÖ˜A
 const int CHOICE_POWER_MAX = 3;
 const int CHOICE_STATUS_MAX = 3;
+const float DISTANCE_ERROR = 20.0f;
 
 enum class DirButton
 {
@@ -57,6 +58,16 @@ enum class Shape				// “–‚½‚è”»’è‚ÌŒ`‹æ•Ê‚·‚é‚½‚ß‚Ìî•ñ
 {
     CIRCLE = 0,
     SQUARE,
+    MAX
+};
+
+// •ûˆÊ
+enum class Cardinal
+{
+    WEST = 0,
+    NORTH,
+    EAST,
+    SOUTH,
     MAX
 };
 

@@ -13,6 +13,8 @@ private:
 	std::vector<BaseCharacter*> devices;	// プレイヤーたちの可変長配列
 	std::vector <StatusUI*> statusUI;
 
+	Vector2 initPos[PLAYER_MAX];
+
 	int flagStatus;
 
 public:

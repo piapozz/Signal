@@ -2,7 +2,10 @@
 
 UIManager::UIManager()
 {
-
+	initPos[0] = { 0.0f,25.0f };
+	initPos[1] = { 1500.0f,25.0f };
+	// initPos[2] = { 0.0f,750.0f };
+	// initPos[3] = { 1500,750.0f };
 }
 
 UIManager::~UIManager()
@@ -20,7 +23,7 @@ void UIManager::Init(BulletManager* bulletManager, std::vector<BaseCharacter*> d
 	// UI–{‘Ì‚ğ¶¬
 	for (int i = 0; i < PLAYER_MAX; i++)
 	{
-		statusUI.push_back(new StatusUI(bullet));
+		statusUI.push_back(new StatusUI(bullet, initPos[i]));
 	}
 }
 

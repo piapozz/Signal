@@ -146,14 +146,16 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	if (HitCheck_BaseObj(player, bullet) == true)
 	{
 		// まだダメージを与えていないなら
-		// ダメージ処理
-		player->TakeDamage(bullet->GetDamage());
-		// 着弾処理
-		bullet->Impact(ObjectType::PLAYER);
-		// 貫通弾なら当たったオブジェクトを渡す
-		if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
+		std::vector<MainBullet*> bulletHitList = bullet->GetHitObj();
+		for (int i = 0; i < )
 		{
-			bullet->AddHitObject(player);
+			// ダメージ処理
+			player->TakeDamage(bullet->GetDamage());
+			// 着弾処理
+			bullet->Impact(ObjectType::PLAYER);
+			// 貫通弾なら当たったオブジェクトを渡す
+			if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
+				bullet->AddHitObject(player);
 		}
 	}
 }
@@ -178,9 +180,6 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
-		// 法線の更新
-		box->GetNormDir(bullet->GetStatus().m_nextPosition);
-
 		ObjectType objType = ObjectType::WALL;
 		// 箱なら
 		if (box->GetIsWall() == false)

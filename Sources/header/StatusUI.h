@@ -16,7 +16,6 @@ private:
 	const int TEXT_TO_STAR = 10;
 	const int STAR_TO_STAR = 20;
 
-	Vector2 infoPos;
 	Vector2 initPos;
 
 	int deviceMax = 2;
@@ -34,6 +33,7 @@ public:
 	void Init();
 
 	void ArrangeIcon();
+	void BulletLevel();
 	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos);
 	void StatusViewer(int deviceNum);
 

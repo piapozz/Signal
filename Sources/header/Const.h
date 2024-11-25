@@ -22,6 +22,9 @@ const int CHOICE_POWER_MAX = 3;
 const int CHOICE_STATUS_MAX = 3;
 const float DISTANCE_ERROR = 20.0f;
 
+const float BULLET_ICON_WIDTH = 75.0f;
+const float BULLET_ICON_HEIGHT = 75.0f;
+
 enum class DirButton
 {
     DOWN = 0,

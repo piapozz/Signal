@@ -3,8 +3,8 @@
 StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 {
 	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("");
-	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("");
-	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("");
+	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("Resources/Bullet_2.png");
+	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_1.png");
 	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("");
 	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("");
 	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
@@ -27,12 +27,27 @@ StatusUI::~StatusUI()
 
 void StatusUI::ArrangeIcon()
 {
+	Vector2 infoPos;
+
+	for (int i = 0; i < (int)BulletType::MAX; i++)
+	{
+		infoPos.x += BULLET_ICON_HEIGHT * i;
+		infoPos.y += BULLET_ICON_WIDTH * i;
+
+		DrawExtendGraph(initPos.x, initPos.y, initPos.x * 2, initPos.y * 2, bulletIcon[i], TRUE);
+	}
+}
+
+void StatusUI::BulletLevel()
+{
 
 }
 
 // 弾のステータスを描画
 void StatusUI::StatusViewer(int deviceNum)
 {
+	Vector2 infoPos;
+
 	// 高さの初期位置
 	infoPos.y = initPos.y;
 

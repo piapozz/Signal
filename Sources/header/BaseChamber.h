@@ -67,7 +67,8 @@ public:
 	struct ExplosionContainer
 	{
 		float expansionRange = 0.2f;			// 一フレームごとに膨張する範囲
-		float time = 1;						// 持続時間
+		float time = 1;							// 持続時間
+		bool active = false;					// 爆発の有効化
 	public:
 		void LevelUp(int level)
 		{
@@ -79,11 +80,11 @@ public:
 	// 弾の構造体
 	struct BulletContainer
 	{
-		MainContainer mainContainer;
-		ReflectionContainer reflectionContainer;
-		TrackingContainer trackingContainer;
-		PenetrationContainer penetrationContainer;
-		ExplosionContainer explosionContainer;
+		MainContainer* mainContainer = new MainContainer();
+		ReflectionContainer* reflectionContainer = new ReflectionContainer();
+		TrackingContainer* trackingContainer = new TrackingContainer();
+		PenetrationContainer* penetrationContainer = new PenetrationContainer();
+		ExplosionContainer* explosionContainer = new ExplosionContainer();
 		int level[(int)BulletType::MAX];
 
 	public:
@@ -96,10 +97,10 @@ public:
 				temp[i] = type[i];
 			}
 
-			if (temp[(int)BulletType::REFLECTION] > 0) reflectionContainer.LevelUp(temp[(int)BulletType::REFLECTION]);
-			if (temp[(int)BulletType::TRACKING_SHOT] > 0) trackingContainer.LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
-			if (temp[(int)BulletType::PENETRATION] > 0) penetrationContainer.LevelUp(temp[(int)BulletType::PENETRATION]);
-			if (temp[(int)BulletType::EXPLOSION] > 0) explosionContainer.LevelUp(temp[(int)BulletType::EXPLOSION]);
+			if (temp[(int)BulletType::REFLECTION] > 0) reflectionContainer->LevelUp(temp[(int)BulletType::REFLECTION]);
+			if (temp[(int)BulletType::TRACKING_SHOT] > 0) trackingContainer->LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
+			if (temp[(int)BulletType::PENETRATION] > 0) penetrationContainer->LevelUp(temp[(int)BulletType::PENETRATION]);
+			if (temp[(int)BulletType::EXPLOSION] > 0) explosionContainer->LevelUp(temp[(int)BulletType::EXPLOSION]);
 		}
 	};
 
@@ -109,7 +110,6 @@ protected:
 	BulletContainer* bulletContainer;
 
 public:
-
 
 	// コンストラクタ
 	BaseChamber();

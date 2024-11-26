@@ -13,7 +13,7 @@ public:
 	struct BulletPram
 	{
 		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,10,1 };
-		int m_BulletType[(int)BulletType::MAX] = { 1,0,3,0,10,10 };
+		int m_BulletType[(int)BulletType::MAX] = { 1,10,0,0,10,0 };
 		std::vector<MainBullet*> m_BulletList;
 		std::vector<Explosion*> m_ExplosionList;
 		float time = 0;
@@ -48,6 +48,9 @@ public:
 
 	// 弾の座標一括更新
 	void UpdatePosition();
+
+	// 爆発の要請があるなら生成する
+	void CreateExplosion();
 
 	// 発射
 	void AddBullet(int playerNum , BaseObject::Status status);

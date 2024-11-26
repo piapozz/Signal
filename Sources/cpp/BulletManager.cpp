@@ -106,6 +106,31 @@ void BulletManager::UpdatePosition()
 	}
 }
 
+// // 爆発の要請があるなら生成する
+void BulletManager::CreateExplosion()
+{
+	// プレイヤーとそれぞれの弾の分繰り返して座標更新する
+	for (int i = 0; i < _bulletPram.size(); i++)
+	{
+		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
+		{
+			// 要請判定
+			if (!_bulletPram[i].m_BulletList[j]->GetExplosion()) continue;
+
+			// 生成
+			for (int k = 0; k < _bulletPram[i].m_ExplosionList.size(); k++)
+			{
+				if (_bulletPram[k].m_ExplosionList[i]->GetActive()) continue;
+
+				// 使える弾を見つけた
+				_bulletPram[i].m_ExplosionList[i] = new Explosion(_bulletPram[i].m_BulletList[j]->GetExplosionStatus(), _bulletPram[i].m_BulletList[j]->status);
+
+				break;
+			}
+		}
+	}
+}
+
 /// <summary>
 /// バレットリストに現在のステータスの弾を追加する
 /// </summary>
@@ -115,7 +140,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
 	// Rate計算
 
-	float interval = 100 + (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
+	float interval = 1000 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
 	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 
@@ -168,7 +193,6 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		}
 	}
 }
-
 
 // バレットのステータスを上げる
 // 引数 上げるステータス、プレイヤーの番号、

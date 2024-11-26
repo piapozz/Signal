@@ -6,8 +6,8 @@ bool PenetrationChamber::Impact()
 	bool penetrationEnd = true;
 
 	// 残っているならカウントを減らす
-	bulletContainer->penetrationContainer.penetrationCount > 0 ?
-		bulletContainer->penetrationContainer.penetrationCount --: penetrationEnd = false;
+	bulletContainer->penetrationContainer->penetrationCount > 0 ?
+		bulletContainer->penetrationContainer->penetrationCount --: penetrationEnd = false;
 
 	return penetrationEnd;
 }

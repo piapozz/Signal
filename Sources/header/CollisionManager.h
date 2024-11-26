@@ -24,6 +24,8 @@ private:
 	void HitCheck_Player_Bullet(BaseCharacter* player, MainBullet* bullet);
 	void HitCheck_Player_Box(BaseCharacter* player, Box* box);
 	bool HitCheck_Bullet_Box(MainBullet* bullet, Box* box);
+	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
+	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
 	
 public:
 
@@ -32,8 +34,7 @@ public:
 
 	void Init(vector<BaseCharacter*> players, vector<Box*> boxs, BulletManager* bullet);
 
-	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
-	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
 	bool CheckHitRay(Vector2 pos1, Vector2 pos2);
 	void HitCheck_Everything();
+	void UpdateHitObj();
 };

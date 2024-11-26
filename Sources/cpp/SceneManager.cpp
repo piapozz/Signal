@@ -42,18 +42,18 @@ void SceneManager::ChangeScene(int scene)
 	// ˆø”‚ÌƒV[ƒ“‚ÉØ‚è‘Ö‚¦‚é
 	switch (scene)
 	{
-	case BaseScene::TITLE:
+	case BaseScene::GAME_TITLE:
 		_scene = new SceneTitle();
 		break;
-	case BaseScene::MAIN:
+	case BaseScene::GAME_MAIN:
 		_scene = new SceneMain();
 		break;
-	case BaseScene::RESULT:
+	case BaseScene::GAME_RESULT:
 		_scene = new SceneResult();
 		break;
-	case BaseScene::OPTION:
+	case BaseScene::GAME_OPTION:
 		break;
-	case BaseScene::EXIT:
+	case BaseScene::GAME_EXIT:
 		_exitFlag = true;
 		return;
 	default:

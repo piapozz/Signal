@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include <vector>
+#include <string>
 #include "DxLib.h"
 
 // プレイヤー
@@ -10,6 +11,10 @@ const int PLAYER_MAX = 2;		// プレイヤーの最大数
 const float BOX_SIZE = 100.0f;  // 箱のサイズ
 const int REVIVAL_TIME = 300;   // 復活までの時間
 const float BOX_LIFE = 10.0f;
+
+// 色データ
+const int COLOR_BLACK = GetColor(0, 0, 0);
+const int COLOR_WHITE = GetColor(255, 255, 255);
 
 // ステージ
 const float STAGE_MARGIN_RATE = 0.1f;
@@ -25,6 +30,8 @@ const float DISTANCE_ERROR = 20.0f;
 
 const float BULLET_ICON_WIDTH = 75.0f;
 const float BULLET_ICON_HEIGHT = 75.0f;
+
+const int FONT_DEFAULT = 20;
 
 const float RAD = (float)(180 / DX_PI);
 

@@ -86,7 +86,7 @@ void BaseCharacter::ObserveExp()
 		if (lotteryStatusCount != 0 || lotteryPowerCount != 0)
 		{
 			// パワーアップを優先で強化できるものの抽選を行う
-			lotteryPowerCount > 0 ? LotteryPower() : LotteryStatus();
+			//lotteryPowerCount > 0 ? LotteryPower() : LotteryStatus();
 
 			// プレイヤーが選択を行い適応させるまで抽選を制限
 			canLottery = false;

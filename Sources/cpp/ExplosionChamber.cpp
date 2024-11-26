@@ -5,5 +5,5 @@
 void ExplosionChamber::Destroy()
 {
 	// ”š”­‚ð¶¬
-
+	bulletContainer->explosionContainer->active = true;
 }

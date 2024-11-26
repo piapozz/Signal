@@ -15,7 +15,7 @@ class MainBullet
 {
 private:
 
-	BaseChamber::BulletContainer* _bulletContainer;
+	BaseChamber::BulletContainer* _bulletContainer = new BaseChamber::BulletContainer();
 
 	float _distance = 0;
 
@@ -51,4 +51,17 @@ public:
 
 	// ’e‚Ì«Ž¿‚ðŽæ“¾
 	int GetBulletType(BulletType type) { return _bulletType[(int)type]; }
+
+	// ”š”­‚ª—LŒø‚©‚Ç‚¤‚©
+	bool GetExplosion() 
+	{
+		if (_bulletContainer->explosionContainer->active)
+		{
+			_bulletContainer->explosionContainer->active = false;
+			return true;
+		}
+		return  false;
+	}
+
+	BaseChamber::ExplosionContainer GetExplosionStatus() { return *_bulletContainer->explosionContainer; }
 };

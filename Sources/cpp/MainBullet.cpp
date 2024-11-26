@@ -20,9 +20,11 @@ MainBullet::MainBullet()
 MainBullet::~MainBullet()
 {
 	// ポインタの削除
-	for (int i = 0; i < (int)BulletType::MAX; i++) {
+	for (int i = 0; i < (int)BulletType::MAX; i++) 
+	{
 		if(_chanbers[i] != nullptr) delete _chanbers[i];
 	}
+	delete _bulletContainer;
 }
 
 // 角度修正
@@ -47,11 +49,14 @@ void MainBullet::Impact(ObjectType hitType)
 		Box newObj =  *hitBoxObject[hitBoxObject.size() - 1];
 		BaseChamber::ReflectionContainer temp;
 		temp.norm = newObj.GetNormDir(status.m_position);
-		_bulletContainer->reflectionContainer = temp;
+		_bulletContainer->reflectionContainer = &temp;
 	}
-	else if (hitCharObject.size() > 0 && hitType == ObjectType::PLAYER) 
+	else if(hitType != ObjectType::PLAYER)
 	{
-
+		Box newObj = *hitBoxObject[0];
+		BaseChamber::ReflectionContainer temp;
+		temp.norm = newObj.GetNormDir(status.m_position);
+		_bulletContainer->reflectionContainer = &temp;
 	}
 
 	switch (hitType)
@@ -94,7 +99,7 @@ void MainBullet::CheckRange()
 	// 次の座標から距離を出して足していく
 	_distance += Vector2::Distance(status.m_nextPosition, status.m_position);
 
-	if (_distance < _bulletContainer->mainContainer.m_Range) return;
+	if (_distance < _bulletContainer->mainContainer->m_Range) return;
 
 	Destroy();
 }
@@ -126,7 +131,7 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 // ステータスのレベルによって値を書き換える
 void MainBullet::UpdateStatus()
 {
-	_bulletContainer->mainContainer.m_Speed = _bulletStatus[(int)BulletStatus::SPEED] * 5;
-	_bulletContainer->mainContainer.m_Range = _bulletStatus[(int)BulletStatus::RANGE] * 300;
+	_bulletContainer->mainContainer->m_Speed = _bulletStatus[(int)BulletStatus::SPEED] * 5;
+	_bulletContainer->mainContainer->m_Range = _bulletStatus[(int)BulletStatus::RANGE] * 300;
 	damage = _bulletStatus[(int)BulletStatus::POWER] * 1;
 }

@@ -5,6 +5,7 @@ Explosion::Explosion()
 {
 	// ŠÔ‚Ì‰Šú‰»
 	_time = (float)GetNowCount();
+	objectHandle = LoadGraph("Resources/Enemy.png");
 }
 
 Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus)

@@ -30,13 +30,13 @@ bool ReflectionChamber::Impact()
 // ラジアンから方向ベクトルを取得
 Vector2 RadianToVector2(float radian)
 {
-    return Vector2(cos(radian), sin(radian));
+    return Vector2(cosf(radian), sinf(radian));
 }
 
 // 方向ベクトルからラジアンを取得
 float Vector2ToRadian(Vector2 direction)
 {
-    return atan2(direction.y, direction.x) ;
+    return atan2f(direction.y, direction.x);
 }
 
 // 反射後のベクトルを計算

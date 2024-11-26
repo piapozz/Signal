@@ -4,13 +4,13 @@
 Explosion::Explosion() 
 {
 	// 時間の初期化
-	_time = GetNowCount();
+	_time = (float)GetNowCount();
 }
 
 Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus)
 {
 	// 情報、ステータス、時間の初期化
-	_time = GetNowCount();
+	_time = (float)GetNowCount();
 	_explosionContainer = container;
 	status = objStatus;
 }

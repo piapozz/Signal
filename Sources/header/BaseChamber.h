@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseDamageObject.h"
+#include "Const.h"
 
 // ① バレットステータス構造体を改造純粋仮想関数の用意
 // ステータス、画像の改造関数
@@ -20,7 +21,7 @@ class BaseChamber
 public:
 
 	// 基礎ステータス
-	typedef struct MainContainer
+	 struct MainContainer
 	{
 		float m_Speed = 5.0f;			// スピード
 		float m_Range = 1.0f;			// 射程
@@ -28,7 +29,7 @@ public:
 	};
 
 	// 反射ステータス
-	typedef struct ReflectionContainer
+	struct ReflectionContainer
 	{
 		int reflectionCount = 0;		// 反射回数
 		Vector2 norm;					// 法線
@@ -40,19 +41,19 @@ public:
 	};
 
 	// 誘導ステータス
-	typedef struct TrackingContainer
+	struct TrackingContainer
 	{
 		float turnAngle = 5;			// 補正する角度
 		Vector2 targetPosition;			// 誘導対象
 	public:
 		void LevelUp(int level)
 		{
-			turnAngle = level * 5;
+			turnAngle = (float)(level * 5.0f);
 		}
 	};
 
 	// 貫通ステータス
-	typedef struct PenetrationContainer
+	struct PenetrationContainer
 	{
 		int penetrationCount = 0;		// 貫通回数 
 	public:
@@ -63,7 +64,7 @@ public:
 	};
 
 	// 爆発ステータス
-	typedef struct ExplosionContainer
+	struct ExplosionContainer
 	{
 		float expansionRange = 0.2f;			// 一フレームごとに膨張する範囲
 		float time = 1;						// 持続時間
@@ -76,7 +77,7 @@ public:
 	};
 
 	// 弾の構造体
-	typedef struct BulletContainer
+	struct BulletContainer
 	{
 		MainContainer mainContainer;
 		ReflectionContainer reflectionContainer;

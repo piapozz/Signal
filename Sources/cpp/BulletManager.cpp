@@ -119,7 +119,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 
 	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 
-	_bulletPram[playerNum].time = GetNowCount();
+	_bulletPram[playerNum].time = (float)GetNowCount();
 
 	// ŠgŽU‚Ìƒpƒ‰ƒ[ƒ^[‚ª‚ ‚Á‚½ê‡•¡”•ûŒü‚ÉŒü‚¯‚Ä”­ŽË‚·‚é
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
@@ -141,7 +141,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 		int level = _bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT];
 
 		// ŠÔŠu‚ðŽZo
-		float rate = _diffusionAngleMax / ((_diffusion * level) + 1);
+		float rate = (float)(_diffusionAngleMax / ((_diffusion * level) + 1));
 
 		// ƒ‰ƒWƒAƒ“‚É•ÏŠ·
 		float radianAngle = rate;

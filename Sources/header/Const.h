@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include <vector>
+#include "DxLib.h"
 
 // プレイヤー
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
@@ -24,6 +25,8 @@ const float DISTANCE_ERROR = 20.0f;
 
 const float BULLET_ICON_WIDTH = 75.0f;
 const float BULLET_ICON_HEIGHT = 75.0f;
+
+const float RAD = (float)(180 / DX_PI);
 
 enum class DirButton
 {
@@ -84,7 +87,7 @@ enum class ObjectType
 };
 
 // 二次元ベクトル
-typedef struct Vector2
+struct Vector2
 {
 public:
     float x;

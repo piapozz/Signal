@@ -1,4 +1,6 @@
 #pragma once
+#include "Const.h"
+using namespace std;
 
 // シーンの基本クラス
 class BaseScene 
@@ -9,11 +11,11 @@ public:
 	enum SceneName
 	{
 		NONE = 0,
-		TITLE,
-		MAIN,
-		RESULT,
-		OPTION,
-		EXIT,
+		GAME_TITLE,
+		GAME_MAIN,
+		GAME_RESULT,
+		GAME_OPTION,
+		GAME_EXIT,
 
 		MAX
 	};
@@ -33,4 +35,6 @@ public:
 
 	// シーンの切り替え
 	virtual int CheckChangeScene() = 0;
+
+	void DrawString(string text, Vector2 position);
 };

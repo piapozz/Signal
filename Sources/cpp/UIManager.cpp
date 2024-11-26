@@ -37,9 +37,9 @@ void UIManager::Draw()
 	for (int i = 0; i < PLAYER_MAX; i++)
 	{
 		// 取得している射撃タイプを画像で順番に並べる
-		statusUI[i]->ArrangeIcon();
+		statusUI[i]->ArrangeIcon(devices[i]->deviceNum);
 		// 取得している射撃タイプの下にレベルを表示する
-		statusUI[i]->
+		// statusUI[i]->
 		// ステータスの状態を星で描画
 		statusUI[i]->StatusViewer(devices[i]->deviceNum);
 

@@ -20,10 +20,14 @@ void SceneMain::Proc()
 {
     // 入力　処理
     gameManager->Proc();
+
+
 }
 
 int SceneMain::CheckChangeScene() 
 {
+    // ゲームが終了していたらシーンを遷移
+    if (gameManager->CheckFinish() == true)sceneName = SceneName::GAME_RESULT;
 
     return sceneName;
 }

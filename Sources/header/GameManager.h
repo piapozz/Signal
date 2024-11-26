@@ -21,6 +21,8 @@ public:
 	void Proc();												// 処理
 	void Draw();												// 描画
 
+	bool CheckFinish();
+
 private:
 
 	std::vector<BaseCharacter*> devices;	// プレイヤーたちの可変長配列
@@ -33,6 +35,7 @@ private:
 	InputManager* inputManager;			// 入力
 
 	int playerMax;
+	bool isFinish;
 
 };
 

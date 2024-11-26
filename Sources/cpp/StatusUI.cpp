@@ -1,12 +1,13 @@
 #include "../header/StatusUI.h"
 
+// 色々なものを初期化する
 StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 {
-	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("");
-	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("Resources/Bullet_2.png");
-	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_1.png");
-	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("");
-	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("");
+	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("Resources/Bullet_Normal.png");
+	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("Resources/Bullet_Explosion.png");
+	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_MultiShot.png");
+	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("Resources/Bullet_Penetration.png");
+	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("Resources/Bullet_Reflection.png");
 	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
 
 	bulletStateText[(int)BulletStatus::SPEED] = "SPEED";
@@ -14,9 +15,12 @@ StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 	bulletStateText[(int)BulletStatus::RANGE] = "RANGE";
 	bulletStateText[(int)BulletStatus::RATE] = "RATE";
 
+	levelViewIcon = LoadGraph("Resources/Bullet_Level_Bar.png");
+
 	// 初期位置を更新
 	initPos = position;
 
+	// bulletManagerを継ぎながら取得
 	bullet = bulletManager;
 }
 
@@ -25,22 +29,39 @@ StatusUI::~StatusUI()
 
 }
 
-void StatusUI::ArrangeIcon()
+// アイコンとその弾のレベルを描画
+void StatusUI::ArrangeIcon(int deviceNum)
 {
-	Vector2 infoPos;
+	// 描画する座標の左上の頂点座標を初期化
+	Vector2 infoPos = initPos;
 
+	// 弾の種類を描画
 	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
 		infoPos.x += BULLET_ICON_HEIGHT * i;
 		infoPos.y += BULLET_ICON_WIDTH * i;
 
-		DrawExtendGraph(initPos.x, initPos.y, initPos.x * 2, initPos.y * 2, bulletIcon[i], TRUE);
+		// 描画
+		DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + BULLET_ICON_HEIGHT, infoPos.y + BULLET_ICON_WIDTH, bulletIcon[i], TRUE);
+
+		// 弾のレベルバーを描画
+		for (int j = 0; j < LEVEL_MAX; j++)
+		{
+			// 間隔を調節するための変数
+			Vector2 distanceError;
+
+			// 定数を使ってx,yそれぞれの誤差を初期化する
+			distanceError.x = j * LEVEL_BAR_HEIGHT;
+			distanceError.y = j * LEVEL_BAR_WIDTH;
+
+			// 弾のレベルを見てレベル分レベルバーを描画する
+			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i])
+			{
+				// レベルバーを描画
+				DrawExtendGraph(infoPos.x + distanceError.x, infoPos.y + distanceError.y, infoPos.x + distanceError.x * 2, infoPos.y + distanceError.y * 2, bulletIcon[i], TRUE);
+			}
+		}
 	}
-}
-
-void StatusUI::BulletLevel()
-{
-
 }
 
 // 弾のステータスを描画

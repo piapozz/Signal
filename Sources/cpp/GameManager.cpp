@@ -12,6 +12,9 @@ GameManager::GameManager()
 	inputManager = new InputManager();
 	// 弾を人数分用意
 	bulletManager = new BulletManager(players.size() + enemys.size());
+
+	// ゲームが終了しているかを管理
+	isFinish = false;
 }
 
 // デストラクタ
@@ -60,12 +63,12 @@ void GameManager::Init()
 			// 割り当て
 			devices[i]->SetPlayerNum(i);
 			// プレイヤー用のイメージを設定
-			devices[i]->SetImageData("Resources/Player.png");
+			devices[i]->SetImageData("Resources/Signal_Player.png");
 		}
 		else
 		{
 			// 敵用のイメージを設定
-			devices[i]->SetImageData("Resources/Enemy.png");
+			devices[i]->SetImageData("Resources/Signal_Enemy.png");
 		}
 	}
 
@@ -123,4 +126,4 @@ void GameManager::Draw()
 
 }
 
-
+bool GameManager::CheckFinish() { return isFinish; }

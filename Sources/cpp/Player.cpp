@@ -77,7 +77,7 @@ void Player::GetController()
 // コントローラーで入力されたXYABボタンをint型で返す
 int Player::InputButtonToInt()
 {
-	int value;
+	int value = 0;
 
 	for (int i = 0; i < (int)Cardinal::MAX; i++)
 	{

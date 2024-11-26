@@ -22,9 +22,14 @@ private:
 	int deviceCount;
 
 	const float DISTANCE_ERROR = 20.0f;
+	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 10;
+	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 5;
+	const int LEVEL_MAX = 5;
 
 	// パワーアップに使う画像を管理
 	int bulletIcon[(int)BulletType::MAX];
+	// 弾のレベル表示に使う画像
+	int levelViewIcon;
 	string bulletStateText[(int)BulletStatus::MAX];
 
 public:
@@ -32,8 +37,7 @@ public:
 	~StatusUI();
 	void Init();
 
-	void ArrangeIcon();
-	void BulletLevel();
+	void ArrangeIcon(int deviceNum);
 	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos);
 	void StatusViewer(int deviceNum);
 

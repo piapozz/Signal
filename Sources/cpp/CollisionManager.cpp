@@ -145,7 +145,7 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	// 当たってたら
 	if (HitCheck_BaseObj(player, bullet) == true)
 	{
-		std::vector<BaseCharacter*> hitCharaList = bullet->GetHitPlayer();
+		std::vector<BaseObject*> hitCharaList = bullet->hitCharObject;
 		// すでに当たっているオブジェクトならスキップし、
 		// 当たっているオブジェクトを更新
 		for (int i = 0; i < hitCharaList.size(); i++)
@@ -161,7 +161,7 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 		// 着弾処理
 		bullet->Impact(ObjectType::PLAYER);
 		// 貫通弾なら当たったオブジェクトを渡す
-		bullet->AddHitPlayer(player);
+		bullet->hitCharObject.push_back(player);
 	}
 }
 
@@ -185,12 +185,12 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
-		std::vector<Box*> hitBoxList = bullet->GetHitBox();
+		std::vector<Box*> hitBoxList = bullet->hitBoxObject;
 		bool isHit = false;
 		for (int i = 0; i < hitBoxList.size(); i++)
 		{
 			if (box == hitBoxList[i])
-				return;
+				return result;
 		}
 
 		ObjectType objType = ObjectType::WALL;
@@ -211,7 +211,7 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 		bullet->Impact(objType);
 
 		// 当たったオブジェクトを渡す
-		bullet->AddHitObject(box);
+		bullet->hitBoxObject.push_back(box);
 	}
 
 	return result;
@@ -294,6 +294,37 @@ void CollisionManager::HitCheck_Everything()
 				if (IsInProximity(bullet, box) == true)
 					if (HitCheck_Bullet_Box(bullet, box))
 						player_2->GainExp(box->GetExp());
+			}
+		}
+	}
+}
+
+// 弾が当たったオブジェクトを更新する
+void CollisionManager::UpdateHitObj()
+{
+	// プレイヤーごとの判定
+	for (int p2 = 0; p2 < _pPlayers.size(); p2++)
+	{
+		std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
+		// 弾のループ
+		for (int bu = 0; bu < bulletList.size(); bu++)
+		{
+			// プレイヤーとの判定
+			std::vector<BaseObject*> hitCharaList = bulletList[bu]->hitCharObject;
+			for (int chara = hitCharaList.size() - 1; chara >= 0; chara--)
+			{
+				// プレイヤーが接触していないならリストから削除
+				if (!HitCheck_BaseObj(bulletList[bu], hitCharaList[chara]))
+					hitCharaList.erase(hitCharaList.begin() + 1);
+			}
+
+			// boxとの判定
+			std::vector<Box*> hitBoxList = bulletList[bu]->hitBoxObject;
+			for (int box = hitBoxList.size() - 1; box >= 0; box--)
+			{
+				// プレイヤーが接触していないならリストから削除
+				if (!HitCheck_BaseObj_Box(bulletList[bu], hitBoxList[box]))
+					hitBoxList.erase(hitBoxList.begin() + 1);
 			}
 		}
 	}

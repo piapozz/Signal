@@ -10,11 +10,12 @@ private:
 	int _untilRevivalCount = REVIVAL_TIME;
 	float _maxLife;
 	int _exp;
+	int _graphHandle;
 
 public:
 
-	Box(Vector2 pos);
-	Box(Vector2 pos, float life);
+	Box(Vector2 pos, int handle);
+	Box(Vector2 pos, float life, int handle);
 	~Box(){}
 
 	void Draw();

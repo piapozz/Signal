@@ -9,6 +9,9 @@ StageManager::StageManager()
 	_defaultStagePos.x = WINDOW_WIDTH / 2 - _stageWidth / 2 * BOX_SIZE;
 	_defaultStagePos.y = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
 
+	_boxHandle = LoadGraph("Resources/Box.png");
+	_wallHandle = LoadGraph("Resources/Wall.png");
+
 	for (int x = 0; x < sizeof(_stageLayout) / sizeof(_stageLayout[0]); x++)
 	{
 		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[1]); y++)
@@ -16,10 +19,10 @@ StageManager::StageManager()
 			switch ((ObjectType)_stageLayout[x][y])
 			{
 			case ObjectType::BOX:
-				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE, _boxHandle));
 				break;
 			case ObjectType::WALL:
-				_boxList.push_back(new Box(ConvertNumToPos(x, y)));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), _wallHandle));
 				break;
 			case ObjectType::PLAYER:
 			case ObjectType::ENEMY:
@@ -39,6 +42,9 @@ StageManager::~StageManager()
 	{
 		delete _boxList[i];
 	}
+
+	DeleteGraph(_boxHandle);
+	DeleteGraph(_wallHandle);
 }
 
 void StageManager::Proc()

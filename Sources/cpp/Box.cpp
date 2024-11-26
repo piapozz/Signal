@@ -1,6 +1,6 @@
 #include "../header/Box.h"
 
-Box::Box(Vector2 pos)
+Box::Box(Vector2 pos, int handle)
 {
 	// 座標指定
 	SetPosition(pos);
@@ -11,9 +11,10 @@ Box::Box(Vector2 pos)
 	CalVertexPos();
 
 	_isWall = true;
+	_graphHandle = handle;
 }
 
-Box::Box(Vector2 pos, float life)
+Box::Box(Vector2 pos, float life, int handle)
 {
 	// 座標指定
 	SetPosition(pos);
@@ -30,16 +31,18 @@ Box::Box(Vector2 pos, float life)
 	_exp = 1;
 
 	_isWall = false;
+	_graphHandle = handle;
 }
 
 void Box::Draw()
 {
-	int x1 = _vertex[0].x;
-	int y1 = _vertex[0].y;
-	int x2 = _vertex[2].x;
-	int y2 = _vertex[2].y;
+	int x1 = (int)_vertex[0].x;
+	int y1 = (int)_vertex[0].y;
+	int x2 = (int)_vertex[2].x;
+	int y2 = (int)_vertex[2].y;
 
-	DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
+	DrawExtendGraph(x1, y1, x2, y2, _graphHandle, TRUE);
+	//DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
 }
 
 // 頂点の座標を計算する関数

@@ -52,6 +52,9 @@ private:
 
 	Vector2 _defaultStagePos;				// ステージのアンカー座標
 
+	int _boxHandle;
+	int _wallHandle;
+
 public:
 
 	StageManager();

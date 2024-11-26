@@ -4,19 +4,15 @@
 // 音声ファイル名を可変長配列に格納
 AudioManager::AudioManager()
 {
-	_bgmHandle.push_back(LoadSoundMem("Resource/mainBGM.mp3"));
-	_bgmHandle.push_back(LoadSoundMem("Resource/titleBGM.mp3"));
+	for (int i = 0; i < (int)BGMName::MAX; i++)
+	{
+		_bgmHandle.push_back(LoadSoundMem(BGM_ADRESS[i].c_str()));
+	}
 
-	_soundHandle.push_back(LoadSoundMem("Resource/bound.mp3"));			// 0
-	_soundHandle.push_back(LoadSoundMem("Resource/move.mp3"));			// 1
-	_soundHandle.push_back(LoadSoundMem("Resource/shoot.mp3"));			// 2
-	_soundHandle.push_back(LoadSoundMem("Resource/destroyBullet.mp3"));	// 3
-	_soundHandle.push_back(LoadSoundMem("Resource/rotate.mp3"));		// 4
-	_soundHandle.push_back(LoadSoundMem("Resource/destroy.mp3"));		// 5
-	_soundHandle.push_back(LoadSoundMem("Resource/clear.mp3"));			// 6
-	_soundHandle.push_back(LoadSoundMem("Resource/gameover.mp3"));		// 7
-	_soundHandle.push_back(LoadSoundMem("Resource/cursor.mp3"));		// 8
-	_soundHandle.push_back(LoadSoundMem("Resource/enter.mp3"));			// 9
+	for (int i = 0; i < (int)SEName::MAX; i++)
+	{
+		_soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i].c_str()));
+	}
 }
 
 AudioManager::~AudioManager()
@@ -33,34 +29,34 @@ AudioManager::~AudioManager()
 }
 
 // num番目のSEを再生
-void AudioManager::PlaySE(int num)
+void AudioManager::PlaySE(SEName se)
 {
-	PlaySoundMem(_soundHandle[num], DX_PLAYTYPE_BACK, TRUE);
+	PlaySoundMem(_soundHandle[(int)se], DX_PLAYTYPE_BACK, TRUE);
 }
 
 // BGMを再生する関数
-void AudioManager::PlayLoopBGM(int num)
+void AudioManager::PlayLoopBGM(BGMName bgm)
 {
 	// 再生中でないなら
-	if (CheckSoundMem(_bgmHandle[num]) == false)
+	if (CheckSoundMem(_bgmHandle[(int)bgm]) == false)
 	{
-		PlaySoundMem(_bgmHandle[num], DX_PLAYTYPE_BACK, TRUE);
+		PlaySoundMem(_bgmHandle[(int)bgm], DX_PLAYTYPE_BACK, TRUE);
 	}
 }
 
 // SEの停止
-void AudioManager::StopSE(int num)
+void AudioManager::StopSE(SEName se)
 {
-	StopSoundMem(_soundHandle[num]);
+	StopSoundMem(_soundHandle[(int)se]);
 }
 
 // ループ再生
-void AudioManager::StartLoopSE(int num)
+void AudioManager::StartLoopSE(SEName se)
 {
 	// 再生中でないなら
-	if (CheckSoundMem(_soundHandle[num]) == false)
+	if (CheckSoundMem(_soundHandle[(int)se]) == false)
 	{
-		PlaySoundMem(_soundHandle[num], DX_PLAYTYPE_BACK, TRUE);
+		PlaySoundMem(_soundHandle[(int)se], DX_PLAYTYPE_BACK, TRUE);
 	}
 }
 

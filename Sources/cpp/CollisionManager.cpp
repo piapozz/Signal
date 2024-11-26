@@ -158,10 +158,10 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 
 		// ダメージ処理
 		player->TakeDamage(bullet->GetDamage());
+		// 当たったオブジェクトを渡す
+		bullet->hitCharObject.push_back(player);
 		// 着弾処理
 		bullet->Impact(ObjectType::PLAYER);
-		// 貫通弾なら当たったオブジェクトを渡す
-		bullet->hitCharObject.push_back(player);
 	}
 }
 
@@ -207,11 +207,11 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 				result = true;
 		}
 
-		// 着弾処理
-		bullet->Impact(objType);
-
 		// 当たったオブジェクトを渡す
 		bullet->hitBoxObject.push_back(box);
+
+		// 着弾処理
+		bullet->Impact(objType);
 	}
 
 	return result;

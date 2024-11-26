@@ -16,7 +16,7 @@ StageManager::StageManager()
 	{
 		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[1]); y++)
 		{
-			switch ((ObjectType)_stageLayout[x][y])
+			switch ((ObjectType)_stageLayout[y][x])
 			{
 			case ObjectType::BOX:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE, _boxHandle));

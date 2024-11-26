@@ -90,6 +90,7 @@ void GameManager::Proc()
 
 	// “–‚½‚è”»’è
 	collisionManager->HitCheck_Everything();
+	collisionManager->UpdateHitObj();
 
 	// À•W‚ğXV
 	for (int i = 0; i < devices.size(); i++)

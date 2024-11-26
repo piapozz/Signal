@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseObject.h"
+#include "Box.h"
 
 class BaseDamageObject :
     public BaseObject
@@ -7,20 +8,29 @@ class BaseDamageObject :
 protected:
 
     float damage;
-    std::vector<BaseObject*> hitObject;
 
 public:
+    std::vector<Box*> hitBoxObject;
+    std::vector<BaseObject*> hitCharObject;
 
     // 初期化
-    BaseDamageObject() :damage(0) { hitObject.clear(); }
-    ~BaseDamageObject() { hitObject.clear(); }
+    BaseDamageObject() : damage(0)
+    { 
+        hitBoxObject.clear();
+        hitCharObject.clear();
+    }
 
-    // 当たったオブジェクトを追加
-    void AddHitObject(BaseObject* hit) { hitObject.push_back(hit); }
-
-    // 当たったオブジェクト履歴を取得
-    std::vector<BaseObject*> GetHitObject() { return hitObject; }
-
+    ~BaseDamageObject() 
+    {
+        for (int i = 0; i < hitBoxObject.size(); i++) 
+        {
+            delete hitBoxObject[i];
+        }
+        for (int i = 0; i < hitCharObject.size(); i++)
+        {
+            delete hitCharObject[i];
+        }
+    }
     // ダメージ取得
     float GetDamage() { return damage; }
 };

@@ -42,12 +42,16 @@ void MainBullet::Move()
 // ’…’eŽž
 void MainBullet::Impact(ObjectType hitType)
 {
-	if (hitObject.size() > 0 && hitType != ObjectType::PLAYER) 
+	if (hitBoxObject.size() > 0 && hitType != ObjectType::PLAYER) 
 	{
-		Box newObj = (Box)*hitObject[hitObject.size() - 1];
+		Box newObj =  *hitBoxObject[hitBoxObject.size() - 1];
 		BaseChamber::ReflectionContainer temp;
 		temp.norm = newObj.GetNormDir(status.m_position);
 		_bulletContainer->reflectionContainer = temp;
+	}
+	else if (hitCharObject.size() > 0 && hitType == ObjectType::PLAYER) 
+	{
+
 	}
 
 	switch (hitType)
@@ -114,7 +118,8 @@ void MainBullet::Reload(Status objStatus, float Pram[], int type[])
 	status.m_isActive = true;
 	_distance = 0;
 	UpdateStatus();
-	hitObject.clear();
+	hitBoxObject.clear();
+	hitCharObject.clear();
 	_bulletContainer->LevelUp(_bulletType);
 }
 

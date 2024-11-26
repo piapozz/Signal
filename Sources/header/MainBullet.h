@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BaseDamageObject.h"
 #include "NormalChamber.h"
 #include "ExplosionChamber.h"
 #include "PenetrationChamber.h"

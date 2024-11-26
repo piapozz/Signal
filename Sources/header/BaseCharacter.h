@@ -30,7 +30,7 @@ public:
 	void Rotate(Vector2 stickAngle);
 	void Move();
 	void Dodge();
-	void LevelUp();
+	void LevelUp() {};
 	void ObserveExp();
 	void LotteryStatus();
 	void LotteryPower();

@@ -13,6 +13,8 @@ private:
 	StageManager* _pStageManager;
 
 	BaseObject* _targetObj;
+	void SetTarget();
+	void SelectPowerUp();
 
 public:
 
@@ -21,5 +23,4 @@ public:
 
 	void Init(BulletManager* bullet, std::vector<BaseCharacter*> players, CollisionManager* collisionManager, StageManager* stageManager);
 	void Proc();
-	void SetTarget();
 };

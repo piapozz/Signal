@@ -43,6 +43,9 @@ void Enemy::Proc()
 
 	// 射撃
 	_pBulletManager->AddBullet(deviceNum, status);
+
+	// パワーアップの選択
+	SelectPowerUp();
 }
 
 void Enemy::SetTarget()
@@ -85,4 +88,10 @@ void Enemy::SetTarget()
 		// 一番近くの箱を標的にする
 		_targetObj = _pStageManager->GetNearBox(pos);
 	}
+}
+
+void Enemy::SelectPowerUp()
+{
+	int randNum = GetRand(3);
+	ChooseBonus(randNum);
 }

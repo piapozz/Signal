@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "DxLib.h"
+#include "Const.h"
 
 class AudioManager
 {
@@ -15,15 +16,15 @@ public:
 
 	~AudioManager();
 
-	void PlaySE(int num);
+	void PlaySE(SEName se);
 
-	void PlayLoopBGM(int num);
+	void PlayLoopBGM(BGMName bgm);
 
 	void StopAllBGM();
 
-	void StopSE(int num);
+	void StopSE(SEName se);
 
-	void StartLoopSE(int num);
+	void StartLoopSE(SEName se);
 
 	void StopAllSound();
 };

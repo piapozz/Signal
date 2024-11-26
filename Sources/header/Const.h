@@ -9,7 +9,7 @@ const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
 // 箱
 const float BOX_SIZE = 100.0f;  // 箱のサイズ
-const int REVIVAL_TIME = 300;   // 復活までの時間
+const int REVIVAL_TIME = 500;   // 復活までの時間
 const float BOX_LIFE = 10.0f;
 
 // 色データ
@@ -91,6 +91,34 @@ enum class ObjectType
     WALL,
     BULLET,
     MAX
+};
+
+enum class BGMName
+{
+    IN_GAME = 0,
+
+    MAX
+};
+
+enum class SEName
+{
+    SHOT = 0,
+    IMPACT,
+    LEVEL_UP,
+
+    MAX
+};
+
+const std::string BGM_ADRESS[(int)BGMName::MAX]
+{
+    "Resources/BGM.mp3",
+};
+
+const std::string SOUND_ADRESS[(int)SEName::MAX]
+{
+    "Resources/Shot.mp3",
+    "Resources/Impact.mp3",
+    "Resources/LevelUp.mp3",
 };
 
 // 二次元ベクトル

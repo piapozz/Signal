@@ -145,18 +145,23 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	// 当たってたら
 	if (HitCheck_BaseObj(player, bullet) == true)
 	{
-		// まだダメージを与えていないなら
-		std::vector<MainBullet*> bulletHitList = bullet->GetHitObj();
-		for (int i = 0; i < )
+		std::vector<BaseCharacter*> hitCharaList = bullet->GetHitPlayer();
+		// すでに当たっているオブジェクトならスキップし、
+		// 当たっているオブジェクトを更新
+		for (int i = 0; i < hitCharaList.size(); i++)
 		{
-			// ダメージ処理
-			player->TakeDamage(bullet->GetDamage());
-			// 着弾処理
-			bullet->Impact(ObjectType::PLAYER);
-			// 貫通弾なら当たったオブジェクトを渡す
-			if (bullet->GetBulletType(BulletType::PENETRATION) > 0)
-				bullet->AddHitObject(player);
+			if (player == hitCharaList[i])
+			{
+				return;
+			}
 		}
+
+		// ダメージ処理
+		player->TakeDamage(bullet->GetDamage());
+		// 着弾処理
+		bullet->Impact(ObjectType::PLAYER);
+		// 貫通弾なら当たったオブジェクトを渡す
+		bullet->AddHitPlayer(player);
 	}
 }
 
@@ -180,12 +185,23 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
+		std::vector<Box*> hitBoxList = bullet->GetHitBox();
+		bool isHit = false;
+		for (int i = 0; i < hitBoxList.size(); i++)
+		{
+			if (box == hitBoxList[i])
+				return;
+		}
+
 		ObjectType objType = ObjectType::WALL;
+
 		// 箱なら
 		if (box->GetIsWall() == false)
 		{
 			objType = ObjectType::BOX;
 			// まだダメージを与えていないなら
+			
+
 			// ダメージ処理、倒しているなら
 			if (box->TakeDamage(bullet->GetDamage()) == true)
 				result = true;
@@ -198,7 +214,7 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 		bullet->AddHitObject(box);
 	}
 
-	return false;
+	return result;
 }
 
 // すべてのオブジェクトを判定する関数

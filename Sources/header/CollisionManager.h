@@ -19,8 +19,6 @@ private:
 	BulletManager* _pBullet;
 
 	bool IsInProximity(BaseObject* obj1, BaseObject* obj2);
-	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
-	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
 	bool CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2);
 	void HitCheck_Player_Player(BaseCharacter* player_1, BaseCharacter* player_2);
 	void HitCheck_Player_Bullet(BaseCharacter* player, MainBullet* bullet);
@@ -34,6 +32,8 @@ public:
 
 	void Init(vector<BaseCharacter*> players, vector<Box*> boxs, BulletManager* bullet);
 
+	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
+	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
 	bool CheckHitRay(Vector2 pos1, Vector2 pos2);
 	void HitCheck_Everything();
 };

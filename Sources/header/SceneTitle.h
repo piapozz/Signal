@@ -7,7 +7,7 @@ class SceneTitle :
 {
 private:
 
-    int _titleLogoHandle;
+    int _titleLogoHandle = LoadGraph("Resources/Signal_Logo");
 
     SelectionButton* select;
 

@@ -12,7 +12,7 @@ public:
 	// ƒvƒŒƒCƒ„[‚²‚Æ‚É‚Â’e‚Ìî•ñ
 	struct BulletPram
 	{
-		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,10,1 };
+		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 		int m_BulletType[(int)BulletType::MAX] = { 1,10,0,0,10,0 };
 		std::vector<MainBullet*> m_BulletList;
 		std::vector<Explosion*> m_ExplosionList;

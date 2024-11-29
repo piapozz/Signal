@@ -67,7 +67,7 @@ public:
 	struct ExplosionContainer
 	{
 		float expansionRange = 0.2f;			// ˆêƒtƒŒ[ƒ€‚²‚Æ‚É–c’£‚·‚é”ÍˆÍ
-		float time = 1;							// Ž‘±ŽžŠÔ
+		float time = 2;							// Ž‘±ŽžŠÔ
 		bool active = false;					// ”š”­‚Ì—LŒø‰»
 	public:
 		void LevelUp(int level)
@@ -97,10 +97,10 @@ public:
 				temp[i] = type[i];
 			}
 
-			if (temp[(int)BulletType::REFLECTION] > 0) reflectionContainer->LevelUp(temp[(int)BulletType::REFLECTION]);
-			if (temp[(int)BulletType::TRACKING_SHOT] > 0) trackingContainer->LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
-			if (temp[(int)BulletType::PENETRATION] > 0) penetrationContainer->LevelUp(temp[(int)BulletType::PENETRATION]);
-			if (temp[(int)BulletType::EXPLOSION] > 0) explosionContainer->LevelUp(temp[(int)BulletType::EXPLOSION]);
+			reflectionContainer->LevelUp(temp[(int)BulletType::REFLECTION]);
+			trackingContainer->LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
+			penetrationContainer->LevelUp(temp[(int)BulletType::PENETRATION]);
+			explosionContainer->LevelUp(temp[(int)BulletType::EXPLOSION]);
 		}
 	};
 

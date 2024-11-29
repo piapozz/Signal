@@ -4,16 +4,18 @@
 Explosion::Explosion() 
 {
 	// 時間の初期化
-	_time = (float)GetNowCount();
+	_time = GetNowCount();
 	objectHandle = LoadGraph("Resources/Enemy.png");
 }
 
 Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus)
 {
 	// 情報、ステータス、時間の初期化
-	_time = (float)GetNowCount();
+	_time = GetNowCount();
 	_explosionContainer = container;
 	status = objStatus;
+	status.m_isActive = true;
+	damage = 3;
 }
 
 Explosion::~Explosion()
@@ -31,5 +33,6 @@ void Explosion::Move()
 void Explosion::CheckExplosionTimeOver()
 {
 	// 経過時間が過ぎていたら使用を終わる
-	if (_time - GetNowCount() > _explosionContainer.time) status.m_isActive = false;
+	if (GetNowCount() - _time  > _explosionContainer.time * 60)
+		status.m_isActive = false;
 }

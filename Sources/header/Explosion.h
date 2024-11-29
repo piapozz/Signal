@@ -9,7 +9,7 @@ class Explosion:
 private:
 
 	BaseChamber::ExplosionContainer _explosionContainer;
-	float _time;
+	int _time;
 
 public:
 

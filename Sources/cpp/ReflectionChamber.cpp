@@ -1,6 +1,5 @@
 #include "../header/ReflectionChamber.h"
 
-
 // ラジアンから方向ベクトルを取得
 Vector2 RadianToVector2(float radian);
 

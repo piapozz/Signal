@@ -2,7 +2,7 @@
 
 SceneMain::SceneMain() 
 {
-    gameManager = new GameManager();
+    gameManager = new GameManager(input);
 }
 
 SceneMain::~SceneMain() 
@@ -27,7 +27,7 @@ void SceneMain::Proc()
 int SceneMain::CheckChangeScene() 
 {
     // ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚¢‚½‚çƒV[ƒ“‚ð‘JˆÚ
-    if (gameManager->CheckFinish() == true)sceneName = SceneName::GAME_RESULT;
+    if (gameManager->GetFinish() == true)sceneName = SceneName::GAME_RESULT;
 
     return sceneName;
 }

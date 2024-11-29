@@ -36,10 +36,10 @@ Box::Box(Vector2 pos, float life, int handle)
 
 void Box::Draw()
 {
-	int x1 = (int)_vertex[0].x;
-	int y1 = (int)_vertex[0].y;
-	int x2 = (int)_vertex[2].x;
-	int y2 = (int)_vertex[2].y;
+	int x1 = (int)_vertex[0].x * 0.25f;
+	int y1 = (int)_vertex[0].y * 0.25f;
+	int x2 = (int)_vertex[2].x * 0.25f;
+	int y2 = (int)_vertex[2].y * 0.25f;
 
 	DrawExtendGraph(x1, y1, x2, y2, _graphHandle, TRUE);
 	//DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
@@ -49,7 +49,7 @@ void Box::Draw()
 void Box::CalVertexPos()
 {
 	// ’¸“_‚Ü‚Å‚Ì’·‚³
-	float length = sqrtf(powf(BOX_SIZE / 2, 2) * 2);
+	float length = sqrtf(powf(status.m_shapeSize / 2, 2) * 2);
 
 	// Žl‚ÂŠp•ªŒJ‚è•Ô‚·
 	for (int i = 0; i < 4; i++)

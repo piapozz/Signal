@@ -4,6 +4,7 @@ BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 {
 	canLottery = true;
 	request = 1;
+	status.m_shapeSize = 1;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -31,10 +32,10 @@ void BaseCharacter::Move()
 			vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));
 
 			// 正規化された移動ベクトルにスピードをかけて次の位置を計算
-			status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength);
-			status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength);
+			status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * speed;
+			status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * speed;
 
-			status.m_nextPosition * speed;
+			printfDx("nextPosition %f", status.m_nextPosition.x);
 		}
 	}
 }

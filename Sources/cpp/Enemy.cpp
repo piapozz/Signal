@@ -42,7 +42,7 @@ void Enemy::Proc()
 	Move();
 
 	// 射撃
-	_pBulletManager->AddBullet(deviceNum, status);
+	//_pBulletManager->AddBullet(deviceNum, status);
 
 	// パワーアップの選択
 	SelectPowerUp();

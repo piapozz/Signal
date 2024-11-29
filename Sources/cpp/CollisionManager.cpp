@@ -170,9 +170,6 @@ void CollisionManager::HitCheck_Player_Box(BaseCharacter* player, Box* box)
 {
 	if (HitCheck_BaseObj_Box(player, box) == true)
 	{
-		// 法線の更新
-		box->GetNormDir(player->GetStatus().m_nextPosition);
-
 		// オブジェクトのhitFlagを立てる
 		player->SetHitFlag(true);
 	}
@@ -309,7 +306,7 @@ void CollisionManager::UpdateHitObj()
 		for (int bu = 0; bu < bulletList.size(); bu++)
 		{
 			// プレイヤーとの判定
-			std::vector<BaseObject*> hitCharaList = bulletList[bu]->hitCharObject;
+			std::vector<BaseObject*>& hitCharaList = bulletList[bu]->hitCharObject;
 			for (int chara = hitCharaList.size() - 1; chara >= 0; chara--)
 			{
 				// プレイヤーが接触していないならリストから削除
@@ -318,7 +315,7 @@ void CollisionManager::UpdateHitObj()
 			}
 
 			// boxとの判定
-			std::vector<Box*> hitBoxList = bulletList[bu]->hitBoxObject;
+			std::vector<Box*>& hitBoxList = bulletList[bu]->hitBoxObject;
 			for (int box = hitBoxList.size() - 1; box >= 0; box--)
 			{
 				// プレイヤーが接触していないならリストから削除

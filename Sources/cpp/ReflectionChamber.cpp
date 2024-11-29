@@ -50,7 +50,7 @@ Vector2 ReflectVector(Vector2 direction, Vector2 normal)
 // ラジアンの反射計算
 float ReflectRadian(float radian, Vector2 normal)
 {
-    Vector2 direction = RadianToVector2(radian); // ラジアンを方向ベクトルに変換
+    Vector2 direction = RadianToVector2(radian / RAD); // ラジアンを方向ベクトルに変換
     Vector2 reflectedDirection = ReflectVector(direction, normal); // 反射後の方向ベクトル
     return Vector2ToRadian(reflectedDirection); // 反射後のラジアンを計算
 }

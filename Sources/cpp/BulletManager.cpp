@@ -49,8 +49,8 @@ void BulletManager::Move()
 			// ˆÚ“®
 			if (_bulletPram[i].m_BulletList[j]->GetActive())
 			{
-				_bulletPram[i].m_BulletList[j]->UpdateAngle();
 				_bulletPram[i].m_BulletList[j]->Move();
+				_bulletPram[i].m_BulletList[j]->UpdateAngle();
 			}
 
 			// ”š”­•¨‚ÌˆÚ“®AŠgk
@@ -131,7 +131,7 @@ void BulletManager::CreateExplosion()
 			{
 				if (_bulletPram[i].m_ExplosionList[k]->GetActive()) continue;
 
-				// g‚¦‚é’e‚ğŒ©‚Â‚¯‚½
+				// g‚¦‚é”š”­‚ğŒ©‚Â‚¯‚½
 				_bulletPram[i].m_ExplosionList[k] = new Explosion(_bulletPram[i].m_BulletList[j]->GetExplosionStatus(), _bulletPram[i].m_BulletList[j]->status);
 
 				break;

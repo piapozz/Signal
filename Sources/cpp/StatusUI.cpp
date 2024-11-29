@@ -43,7 +43,7 @@ void StatusUI::ArrangeIcon(int deviceNum, int imageHandle[])
 		DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + BULLET_ICON_HEIGHT, infoPos.y + BULLET_ICON_WIDTH, imageHandle[i], TRUE);
 
 		// ’e‚ÌƒŒƒxƒ‹ƒo[‚ğ•`‰æ
-		for (int j = 0; j < LEVEL_MAX; j++)
+		for (int j = 0; j < bullet->GetBulletList()[deviceNum].m_BulletType[i]; j++)
 		{
 			barPos = infoPos;
 

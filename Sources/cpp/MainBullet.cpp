@@ -50,16 +50,16 @@ void MainBullet::Impact(ObjectType hitType)
 	if (hitBoxObject.size() > 0 && hitType != ObjectType::PLAYER) 
 	{
 		Box newObj =  *hitBoxObject[hitBoxObject.size() - 1];
-		BaseChamber::ReflectionContainer temp;
-		temp.norm = newObj.GetNormDir(status.m_position);
-		_bulletContainer->reflectionContainer = &temp;
+		BaseChamber::ReflectionContainer* temp = _bulletContainer->reflectionContainer;
+		temp->norm = newObj.GetNormDir(status.m_position);
+		_bulletContainer->reflectionContainer = temp;
 	}
 	else if(hitType != ObjectType::PLAYER)
 	{
 		Box newObj = *hitBoxObject[0];
-		BaseChamber::ReflectionContainer temp;
-		temp.norm = newObj.GetNormDir(status.m_position);
-		_bulletContainer->reflectionContainer = &temp;
+		BaseChamber::ReflectionContainer* temp = _bulletContainer->reflectionContainer;
+		temp->norm = newObj.GetNormDir(status.m_position);
+		_bulletContainer->reflectionContainer = temp;
 	}
 
 	switch (hitType)
@@ -90,7 +90,8 @@ void MainBullet::Impact(ObjectType hitType)
 void MainBullet::Destroy()
 {
 	// ”š”­‚ÌÁ–Å
-	_chambers[(int)BulletType::EXPLOSION]->Destroy();
+	if(_bulletType[(int)BulletType::EXPLOSION] > 0)
+		_chambers[(int)BulletType::EXPLOSION]->Destroy();
 
 	// g—p‚ğI‚í‚é
 	status.m_isActive = false;

@@ -30,7 +30,7 @@ bool ReflectionChamber::Impact()
 // ラジアンから方向ベクトルを取得
 Vector2 RadianToVector2(float radian)
 {
-    return Vector2(sinf(radian), cosf(radian));
+    return Vector2(cosf(radian), sinf(radian));
 }
 
 // 方向ベクトルからラジアンを取得
@@ -43,7 +43,8 @@ float Vector2ToRadian(Vector2 direction)
 Vector2 ReflectVector(Vector2 direction, Vector2 normal)
 {
     normal.normalize(); // 法線は単位ベクトルである必要がある
-    return (direction) - ( normal * ( 2.0f * Vector2::Dot(direction, normal)));
+    Vector2 result = (direction)-(normal * 2.0f * Vector2::Dot(direction, normal));
+    return result;
 }
 
 // ラジアンの反射計算

@@ -77,7 +77,7 @@ enum class Shape				// “–‚½‚è”»’è‚ÌŒ`‹æ•Ê‚·‚é‚½‚ß‚Ìî•ñ
 // •ûˆÊ
 enum class Cardinal
 {
-    WEST = 0,
+    WEST,
     NORTH,
     EAST,
     SOUTH,

@@ -13,7 +13,7 @@ public:
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 	int request;						// 次の要求量
-	int levelUpCount;				
+	int levelUpCount;					
 	int lotteryPowerCount;				// パワーを抽選できる回数
 	int lotteryStatusCount;				// ステータス抽選できる回数
 
@@ -24,7 +24,7 @@ public:
 	bool choosePower;					// パワーの強化を実行してるかどうか
 	bool chooseStatus;					// ステータスの強化を実行しているかどうか
 
-	BaseCharacter();					// コンストラクタ
+	BaseCharacter(BulletManager* bullet);	// コンストラクタ
 	~BaseCharacter();					// デストラクタ
 
 	void Rotate(Vector2 stickAngle);
@@ -47,7 +47,7 @@ public:
 	virtual void Proc() = 0;
 
 protected:
-	BulletManager* bullet;
+	BulletManager* bulletManager;
 
 	Vector2 moveVec;
 

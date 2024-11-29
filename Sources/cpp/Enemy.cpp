@@ -1,12 +1,6 @@
 #include "../header/Enemy.h"
 #include "../header/Player.h"
 
-Enemy::Enemy(Vector2 pos)
-{
-	status.m_position = pos;
-	status.m_nextPosition = pos;
-}
-
 Enemy::~Enemy()
 {
 

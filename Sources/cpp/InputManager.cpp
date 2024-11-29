@@ -4,20 +4,12 @@ void InputManager::Proc()
 {
 	// 接続されてるコントローラーの数を調べる
 	_inputControllerNum = GetJoypadNum();
-	printfDx("接続コントローラー%d\n", _inputControllerNum);
 
 	// コントローラーの数だけ処理
 	for (int i = 0; i < _inputControllerNum; i++)
 	{
 		// コントローラーの入力情報を構造体に代入
 		int result = GetJoypadDirectInputState(i + DX_INPUT_PAD1, &_inputParam[i]);
-
-		printfDx("プレイヤー%d\n", i + 1);
-		printfDx("LX:%d\n", _inputParam[i].X);
-		printfDx("LY:%d\n", _inputParam[i].Y);
-		printfDx("RX:%d\n", _inputParam[i].Z);
-		printfDx("RY:%d\n", _inputParam[i].Rz);
-		printfDx("RT:%d\n", _inputParam[i].Buttons[(int)Button::RIGHT_TRIGGER]);
 	}
 }
 
@@ -56,10 +48,6 @@ Vector2 InputManager::GetStick(int playerNum, Stick stick)
 		break;
 	default: break;
 	}
-
-	printfDx("temp.x%f\n", temp.x);
-	printfDx("temp.y%f\n", temp.y);
-	printfDx("num%d\n", playerNum);
 
 	temp.normalize();
 

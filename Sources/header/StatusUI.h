@@ -21,10 +21,15 @@ private:
 	int deviceMax = 2;
 	int deviceCount;
 
-	const float DISTANCE_ERROR = 20.0f;
-	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 10;
-	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 5;
+	const float DISTANCE_ERROR = 50.0f;
+	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 2;
+	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 2;
 	const int LEVEL_MAX = 5;
+	
+	const float TYPE_ICON_HEIGHT = 50.0f;
+	const float TYPE_ICON_WIDTH = 50.0f;
+
+	const Vector2 TYPE_ICON = { TYPE_ICON_HEIGHT / 2 ,TYPE_ICON_WIDTH / 2 };
 
 	// パワーアップに使う画像を管理
 	int bulletIcon[(int)BulletType::MAX];

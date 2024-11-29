@@ -19,8 +19,15 @@ void BaseCharacter::Move()
 	if (dodgeNow)
 	{
 		// 向いている方向に強制的に進む
-		status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
-		status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
+		//status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
+		//status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
+
+					// 移動ベクトルの長さを計算
+		vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));
+
+		// 正規化された移動ベクトルにスピードをかけて次の位置を計算
+		status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * dodgeSpeed;
+		status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * dodgeSpeed;
 	}
 
 	// 通常移動

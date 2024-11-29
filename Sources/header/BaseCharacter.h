@@ -55,7 +55,7 @@ protected:
 	int exp;					// 壊した箱の数を管理
 
 	float speed = 5;			// 自機のスピード
-	float dodgeSpeed;			// 回避の速さ
+	float dodgeSpeed = 10;			// 回避の速さ
 	float dodgeCount;			// 回避のクールタイム管理
 	float dodgeFlame;			// 回避に使うフレーム数
 

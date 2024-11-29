@@ -185,6 +185,7 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 	if (HitCheck_BaseObj_Box(bullet, box) == true)
 	{
+		// ダメージを与えているならスキップ
 		std::vector<Box*> hitBoxList = bullet->hitBoxObject;
 		bool isHit = false;
 		for (int i = 0; i < hitBoxList.size(); i++)
@@ -199,8 +200,6 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 		if (box->GetIsWall() == false)
 		{
 			objType = ObjectType::BOX;
-			// まだダメージを与えていないなら
-			
 
 			// ダメージ処理、倒しているなら
 			if (box->TakeDamage(bullet->GetDamage()) == true)
@@ -315,7 +314,7 @@ void CollisionManager::UpdateHitObj()
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj(bulletList[bu], hitCharaList[chara]))
-					hitCharaList.erase(hitCharaList.begin() + 1);
+					hitCharaList.erase(hitCharaList.begin() + chara);
 			}
 
 			// boxとの判定
@@ -324,7 +323,7 @@ void CollisionManager::UpdateHitObj()
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj_Box(bulletList[bu], hitBoxList[box]))
-					hitBoxList.erase(hitBoxList.begin() + 1);
+					hitBoxList.erase(hitBoxList.begin() + box);
 			}
 		}
 	}

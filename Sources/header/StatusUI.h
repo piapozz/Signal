@@ -22,8 +22,9 @@ private:
 	int deviceCount;
 
 	const float DISTANCE_ERROR = 50.0f;
-	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 2;
-	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 2;
+	const float BAR_TO_BAR_ERROR = 7.0f;
+	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 3;
+	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 3;
 	const int LEVEL_MAX = 5;
 	
 	const float TYPE_ICON_HEIGHT = 50.0f;
@@ -31,8 +32,6 @@ private:
 
 	const Vector2 TYPE_ICON = { TYPE_ICON_HEIGHT / 2 ,TYPE_ICON_WIDTH / 2 };
 
-	// パワーアップに使う画像を管理
-	int bulletIcon[(int)BulletType::MAX];
 	// 弾のレベル表示に使う画像
 	int levelViewIcon;
 	string bulletStateText[(int)BulletStatus::MAX];
@@ -42,8 +41,8 @@ public:
 	~StatusUI();
 	void Init();
 
-	void ArrangeIcon(int deviceNum);
-	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos);
+	void ArrangeIcon(int deviceNum, int imageHandle[]);
+	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos, int imageHandle[]);
 	void StatusViewer(int deviceNum);
 
 	void LevelUpUI();

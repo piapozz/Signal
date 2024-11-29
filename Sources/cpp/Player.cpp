@@ -50,9 +50,6 @@ void Player::Proc()
 		// UpdatePosition();
 	}
 
-	// 体力が0になったときプレイヤーは死にます
-	if (status.m_life <= 0) status.m_isActive = false;
-
 }
 
 // コントローラー情報を更新

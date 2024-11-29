@@ -42,6 +42,7 @@ public:
 	void GainExp(int expValue);
 	Vector2 GetPlayerPos();
 	int GetChooceFlag();
+	void SetSurvival();
 	void SetPlayerNum(int playerNumber);
 
 	virtual void Proc() = 0;

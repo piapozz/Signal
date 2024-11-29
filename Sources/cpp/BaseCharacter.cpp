@@ -1,17 +1,9 @@
 #include "../header/BaseCharacter.h"
 
-BaseCharacter::BaseCharacter()
+BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 {
-	bullet = new BulletManager();
-
-	hitObject = false;
-	dodgeNow = false;
-
 	canLottery = true;
-
-	exp = 0;
-	request = 3;
-	// speed = 1.0f;
+	request = 1;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -59,11 +51,24 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 // 経験値を見て
 void BaseCharacter::ObserveExp()
 {
+	printfDx("%d\n", GetExpValue());
+	printfDx("LevelUpCount%d\n", levelUpCount);
+	printfDx("lotteryPowerCount%d\n", lotteryPowerCount);
+	printfDx("lotteryStatusCount%d\n", lotteryStatusCount);
+	printfDx("choicePowerArraySize%d\n", choicePower.size());
+	printfDx("choiceStatusArraySize%d\n", choiceStatus.size());
+	printfDx("Flag%d\n", GetChooceFlag());
+
 	// レベルアップに必要な個数を満たしていたら
 	if (GetExpValue() >= request)
 	{
+		// 経験値をリセット
+		exp -= request;
+
 		// レベルアップしたら次のレベルアップに必要なコストを上げる
-		request += request + 1;
+		request = request + 1;
+
+		levelUpCount++;
 
 		// 三の倍数回これまでにレベルアップしていたらパワーアップから選ぶ
 		if (levelUpCount % 3 == 0)
@@ -80,13 +85,14 @@ void BaseCharacter::ObserveExp()
 		}
 	}
 
+	// 抽選ができる状態だったら
 	if (canLottery == true)
 	{
 		// どちらかの値が「0」ではなかったら選択肢の抽選を行う
 		if (lotteryStatusCount != 0 || lotteryPowerCount != 0)
 		{
 			// パワーアップを優先で強化できるものの抽選を行う
-			//lotteryPowerCount > 0 ? LotteryPower() : LotteryStatus();
+			lotteryPowerCount > 0 ? LotteryPower() : LotteryStatus();
 
 			// プレイヤーが選択を行い適応させるまで抽選を制限
 			canLottery = false;
@@ -97,14 +103,18 @@ void BaseCharacter::ObserveExp()
 // パワーアップできるものを抽選する
 void BaseCharacter::LotteryPower()
 {
-	// MAXをのぞいた可変長配列の初期化
-	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
+	// 初期化
+	// choicePower = DeleteVector(choicePower);
+	choicePower.clear();
+
+	// 列挙体MAXをのぞいた可変長配列の初期化
+	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
 		// 可変長配列に要素を追加
 		choicePower.push_back(i);
 	}
 
-	// BulletType::NORMALを削除 （begin() で戦闘を削除）
+	// BulletType::NORMALを削除 （begin() で先頭を削除）
 	choicePower.erase(choicePower.begin());
 
 	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
@@ -117,6 +127,9 @@ void BaseCharacter::LotteryPower()
 		choicePower.erase(it);
 	}
 
+	// 抽選する回数を一回減らす
+	lotteryPowerCount--;
+
 	// 選択肢を選べる状態にする
 	choosePower = true;
 }
@@ -124,15 +137,16 @@ void BaseCharacter::LotteryPower()
 // ステータスアップできるものを抽選する
 void BaseCharacter::LotteryStatus()
 {
+	// 初期化
+	// choiceStatus = DeleteVector(choiceStatus);
+	choiceStatus.clear();
+
 	// MAXをのぞいた可変長配列の初期化
-	for (int i = 0; 0 < (int)BulletType::MAX - 1; i++)
+	for (int i = 0; i < (int)BulletStatus::MAX - 1; i++)
 	{
 		// 可変長配列に要素を追加
 		choiceStatus.push_back(i);
 	}
-
-	// BulletType::NORMALを削除 （begin() で戦闘を削除）
-	choiceStatus.erase(choiceStatus.begin());
 
 	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
 	for (int i = 0; i < choiceStatus.size() - CHOICE_POWER_MAX; i++)
@@ -143,6 +157,9 @@ void BaseCharacter::LotteryStatus()
 		choiceStatus.erase(it);
 	}
 
+	// 抽選する回数を一回減らす
+	lotteryStatusCount--;
+
 	// 選択肢を選べる状態にする
 	chooseStatus = true;
 }
@@ -150,26 +167,30 @@ void BaseCharacter::LotteryStatus()
 void BaseCharacter::ChooseBonus(int selectedButton)
 {
 	// 強化を得ることができる状態だったら
-	if (choosePower != 0 || chooseStatus != 0)
+	if (choosePower != false || chooseStatus != false)
 	{
-		// パワーアップ処理を行う
-		if (choosePower)
-		{
-			// パワーアップ
-			bullet->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
-			choosePower = false;
-		}
 
-		// ステータスアップ処理を行う 
-		else
+		if (selectedButton != (int)Cardinal::MAX)
 		{
-			// ステータスアップ
-			bullet->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
-			chooseStatus = false;
-		}
+			// パワーアップ処理を行う
+			if (choosePower)
+			{
+				// パワーアップ
+				bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
+				choosePower = false;
+			}
 
-		// 抽選できる状態に戻す
-		canLottery = true;
+			// ステータスアップ処理を行う 
+			else
+			{
+				// ステータスアップ
+				bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
+				chooseStatus = false;
+			}
+
+			// 抽選できる状態に戻す
+			canLottery = true;
+		}
 	}
 
 	else { return; }
@@ -178,11 +199,29 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
 void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
 
+// 配列の中身を削除
+std::vector<int>DeleteVector(std::vector<int> vector)
+{
+	// 配列の大きさ分繰り返して中身を削除する
+	for (int i = 0; i < vector.size(); i++)
+	{
+		vector.erase(vector.begin());
+	}
+
+	return vector;
+}
+
 // プレイヤーに番号を振り分け
 void BaseCharacter::SetPlayerNum(int playerNumber)
 {
 	// 引数でもらった番号をプレイヤー番号に設定
 	playerNum = playerNumber;
+}
+
+void BaseCharacter::SetSurvival() 
+{
+	// 体力が0になったときプレイヤーは死にます
+	if (status.m_life <= 0) status.m_isActive = false;
 }
 
 Vector2 BaseCharacter::GetPlayerPos() { return status.m_position; }
@@ -197,8 +236,8 @@ bool BaseCharacter::GetIsPlayer() { return isPlayer; }
 /// <param name="2">chooseStatusがtrue</param>
 int BaseCharacter::GetChooceFlag()
 {
-	//if (choosePower) return 1;
-	//if (chooseStatus) return 2;
+	if (choosePower) return 1;
+	if (chooseStatus) return 2;
 
 	return 0;
 }

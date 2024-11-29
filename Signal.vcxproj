@@ -152,6 +152,7 @@
     <ClCompile Include="Sources\cpp\NormalChamber.cpp" />
     <ClCompile Include="Sources\cpp\PenetrationChamber.cpp" />
     <ClCompile Include="Sources\cpp\ReflectionChamber.cpp" />
+    <ClCompile Include="Sources\cpp\SelectionButton.cpp" />
     <ClCompile Include="Sources\cpp\StageManager.cpp" />
     <ClCompile Include="Sources\cpp\StatusUI.cpp" />
     <ClCompile Include="Sources\cpp\TrackingChamber.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Sources\header\NormalChamber.h" />
     <ClInclude Include="Sources\header\PenetrationChamber.h" />
     <ClInclude Include="Sources\header\ReflectionChamber.h" />
+    <ClInclude Include="Sources\header\SelectionButton.h" />
     <ClInclude Include="Sources\header\StageManager.h" />
     <ClInclude Include="Sources\header\StatusUI.h" />
     <ClInclude Include="Sources\header\TrackingChamber.h" />

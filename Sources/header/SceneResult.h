@@ -1,12 +1,24 @@
 #pragma once
-#include "../header/BaseScene.h"
+#include "BaseScene.h"
+#include "SelectionButton.h"
 
 class SceneResult :
-    public BaseScene 
+    public BaseScene
 {
 private:
 
-    int sceneName = BaseScene::SceneName::NONE;
+    int _resultLogoHandle;
+
+    SelectionButton* select;
+
+    const int RESULT_SELECT_NUMBER = 3;
+
+    vector<string> str = {
+        "Title",
+        "Retry",
+        "Optipn",
+        "Exit",
+    };
 
 public:
 
@@ -18,3 +30,4 @@ public:
     void Draw();
     int CheckChangeScene();
 };
+

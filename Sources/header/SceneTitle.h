@@ -1,13 +1,30 @@
 #pragma once
-#include "../header/BaseScene.h"
+#include "BaseScene.h"
+#include "SelectionButton.h"
 
 class SceneTitle :
     public BaseScene
 {
-
 private:
 
-    int sceneName = BaseScene::SceneName::NONE;
+    int _titleLogoHandle;
+
+    SelectionButton* select;
+
+    const int TITLE_SELECT_NUMBER = 3;
+
+    float alpha = 255;                  // アルファ値
+    float flickerSpeed = 0.05f;          // 点滅の変化速度
+    float baseFrequency = 5.0f;         // 基本の点滅周期
+    float randomFrequencyOffset = 1.0f; // 周期のランダムな範囲
+
+    int startTime;
+
+    vector<string> str = {
+       "New Game",
+       "Optipn",
+       "Exit",
+    };
 
 public:
 

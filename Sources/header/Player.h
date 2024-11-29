@@ -4,7 +4,6 @@
 class Player : public BaseCharacter
 {
 private:
-	BulletManager* bulletManager;
 	InputManager* inputManager;
 
 public:
@@ -19,7 +18,19 @@ public:
 
 	Controller controller;
 
-	Player(Vector2 pos);					// コンストラクタ
+	Player(Vector2 pos, BulletManager* bullet) : BaseCharacter(bullet)
+	{
+		status.m_position = pos;
+		status.m_nextPosition = pos;
+
+		// プレイヤーの生存状況
+		canMove = true;
+
+		isPlayer = true;
+
+
+	}
+
 	~Player();								// デストラクタ
 
 	void Proc();

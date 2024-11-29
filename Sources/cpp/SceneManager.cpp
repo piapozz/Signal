@@ -62,4 +62,5 @@ void SceneManager::ChangeScene(int scene)
 
 	// ‰Šú‰»‚ð‚µ‚Ä‚¨‚­
 	_scene->Init();
+	SetFontSize(20);
 }

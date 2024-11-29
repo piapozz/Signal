@@ -66,10 +66,10 @@ int Player::InputButtonToInt()
 {
 	int value = (int)Cardinal::MAX;
 
-	if (inputManager->GetButton(deviceNum, Button::X)) value = (int)Cardinal::WEST;
-	else if (inputManager->GetButton(deviceNum, Button::Y)) value = (int)Cardinal::NORTH;
-	else if (inputManager->GetButton(deviceNum, Button::B)) value = (int)Cardinal::EAST;
-	else if (inputManager->GetButton(deviceNum, Button::A)) value = (int)Cardinal::SOUTH;
+	if (inputManager->CheckDownButton(deviceNum, Button::X)) value = (int)Cardinal::WEST;
+	else if (inputManager->CheckDownButton(deviceNum, Button::Y)) value = (int)Cardinal::NORTH;
+	else if (inputManager->CheckDownButton(deviceNum, Button::B)) value = (int)Cardinal::EAST;
+	else if (inputManager->CheckDownButton(deviceNum, Button::A)) value = (int)Cardinal::SOUTH;
 
 	printfDx("value %d\n", value);
 

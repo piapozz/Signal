@@ -15,6 +15,8 @@ StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 
 	// bulletManager‚ğŒp‚¬‚È‚ª‚çæ“¾
 	bullet = bulletManager;
+
+	SetFontSize(20);
 }
 
 StatusUI::~StatusUI()
@@ -101,7 +103,7 @@ void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos,int 
 	Vector2 centerPos;
 
 	// ”z—ñ‚Ì•ªƒvƒŒƒCƒ„[‚Ìü‚è‚ÉUI‚ğ•`‰æ
-	for (int i = 0; i < vectorArray.size(); i++)
+	for (int i = 0; i < 4; i++)
 	{
 		// uiv‚Ìó‘Ô‚ğŒ©‚Ä•ûŠp‚ğ•ªŠò ¦–k“Œ“ì¼‚Ì‡”Ô‚Å•`‰æ
 		switch (i)

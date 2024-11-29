@@ -13,18 +13,29 @@ Vector2 ReflectVector(Vector2 direction, Vector2 normal);
 // ラジアンの反射計算
 float ReflectRadian(float radian, Vector2 normal);
 
+// 反射を角度に反映する
+void ReflectionChamber::AngleModifying()
+{
+    frameFlag = false;
+}
+
 // 反射カウントが残っていればfalse
 bool ReflectionChamber::Impact()
 {
-	bool reflectionEnd = true;
+    if (frameFlag)
+        return true;
 
-	// 残っているならカウントを減らす
-	bulletContainer->reflectionContainer->reflectionCount > 0 ?
-		bulletContainer->reflectionContainer->reflectionCount-- : reflectionEnd = true;
+    bool reflection = true;
 
-    status->m_angle = ReflectRadian(status->m_angle , bulletContainer->reflectionContainer->norm);
+    // 残っているならカウントを減らす
+    bulletContainer->reflectionContainer->reflectionCount > 0 ?
+        bulletContainer->reflectionContainer->reflectionCount-- : reflection = false;
+    status->m_angle =
+        ReflectRadian(status->m_angle, bulletContainer->reflectionContainer->norm);
 
-	return reflectionEnd;
+    frameFlag = true;
+
+    return reflection;
 }
 
 // ラジアンから方向ベクトルを取得

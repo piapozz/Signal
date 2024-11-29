@@ -5,6 +5,10 @@
 class ReflectionChamber
 	: public BaseChamber
 {
+private:
+
+	bool frameFlag = false;
+
 public:
 
 	ReflectionChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
@@ -12,7 +16,7 @@ public:
 	void Move() {}
 
 	// Šp“xC³ŠÖ”
-	void AngleModifying() {}
+	void AngleModifying();
 
 	// ’…’eŠÖ”
 	bool Impact();

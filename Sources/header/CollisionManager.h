@@ -22,8 +22,10 @@ private:
 	bool CheckLineCross(Vector2 line1pos1, Vector2 line1pos2, Vector2 line2pos1, Vector2 line2pos2);
 	void HitCheck_Player_Player(BaseCharacter* player_1, BaseCharacter* player_2);
 	void HitCheck_Player_Bullet(BaseCharacter* player, MainBullet* bullet);
+	void HitCheck_Player_Explosion(BaseCharacter* player, Explosion* explosion);
 	void HitCheck_Player_Box(BaseCharacter* player, Box* box);
 	bool HitCheck_Bullet_Box(MainBullet* bullet, Box* box);
+	bool HitCheck_Explosion_Box(Explosion* explosion, Box* box);
 	bool HitCheck_BaseObj_Box(BaseObject* obj, Box* box);
 	bool HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2);
 	

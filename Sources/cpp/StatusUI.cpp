@@ -34,12 +34,15 @@ void StatusUI::ArrangeIcon(int deviceNum)
 {
 	// 描画する座標の左上の頂点座標を初期化
 	Vector2 infoPos = initPos;
+	Vector2 barPos;
+
+	infoPos.x -= BULLET_ICON_HEIGHT;
 
 	// 弾の種類を描画
 	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
-		infoPos.x += BULLET_ICON_HEIGHT * i;
-		infoPos.y += BULLET_ICON_WIDTH * i;
+		infoPos.x += BULLET_ICON_HEIGHT;
+		// infoPos.y += BULLET_ICON_WIDTH * ;
 
 		// 描画
 		DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + BULLET_ICON_HEIGHT, infoPos.y + BULLET_ICON_WIDTH, bulletIcon[i], TRUE);
@@ -51,14 +54,20 @@ void StatusUI::ArrangeIcon(int deviceNum)
 			Vector2 distanceError;
 
 			// 定数を使ってx,yそれぞれの誤差を初期化する
-			distanceError.x = j * LEVEL_BAR_HEIGHT;
-			distanceError.y = j * LEVEL_BAR_WIDTH;
+			//distanceError.x = j * LEVEL_BAR_HEIGHT;
+			//distanceError.y = j * LEVEL_BAR_WIDTH;
+
+			barPos = infoPos;
+
+			// 高さを調節
+			barPos.y += BULLET_ICON_WIDTH + LEVEL_BAR_WIDTH;
 
 			// 弾のレベルを見てレベル分レベルバーを描画する
 			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i])
 			{
+				barPos.y += LEVEL_BAR_WIDTH;
 				// レベルバーを描画
-				DrawExtendGraph(infoPos.x + distanceError.x, infoPos.y + distanceError.y, infoPos.x + distanceError.x * 2, infoPos.y + distanceError.y * 2, bulletIcon[i], TRUE);
+				DrawExtendGraph(barPos.x, barPos.y , barPos.x + BULLET_ICON_HEIGHT, barPos.y + LEVEL_BAR_WIDTH, levelViewIcon, TRUE);
 			}
 		}
 	}
@@ -87,7 +96,7 @@ void StatusUI::StatusViewer(int deviceNum)
 		DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, bulletStateText[i].c_str());
 
 		// ステータスの値によって星を描画
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < 10; j++)
 		{
 			infoPos.x = initPos.x;
 			// 
@@ -103,7 +112,7 @@ void StatusUI::StatusViewer(int deviceNum)
 // プレイヤーの周りにステータスを描画
 void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos)
 {
-	Vector2 tempPos;
+	Vector2 centerPos;
 
 	// 配列の分プレイヤーの周りにUIを描画
 	for (int i = 0; i < vectorArray.size(); i++)
@@ -112,31 +121,33 @@ void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos)
 		switch (i)
 		{
 		case (int)Cardinal::WEST:
-			tempPos.x = -DISTANCE_ERROR;
-			tempPos.y = 0.0f;
+			centerPos.x = -DISTANCE_ERROR;
+			centerPos.y = 0.0f;
 
 			break;
 		case (int)Cardinal::NORTH:
-			tempPos.x = 0.0f;
-			tempPos.y = -DISTANCE_ERROR;
+			centerPos.x = 0.0f;
+			centerPos.y = -DISTANCE_ERROR;
 
 			break;
 		case (int)Cardinal::EAST:
-			tempPos.x = DISTANCE_ERROR;
-			tempPos.y = 0.0f;
+			centerPos.x = DISTANCE_ERROR;
+			centerPos.y = 0.0f;
 
 			break;
 		case (int)Cardinal::SOUTH:
-			tempPos.x = 0.0f;
-			tempPos.y = DISTANCE_ERROR;
+			centerPos.x = 0.0f;
+			centerPos.y = DISTANCE_ERROR;
 
 			break;
 		}
 
 		// プレイヤーから方角に合わせる
-		tempPos = tempPos + playerPos;
+		centerPos = centerPos + playerPos;
 
 		// 画像を描画
-		DrawRotaGraph(tempPos.x, tempPos.y, 1.0f, DX_PI_F / 2, bulletIcon[vectorArray[i]], TRUE);
+		// DrawRotaGraph(tempPos.x, tempPos.y, 1.0f, DX_PI_F / 2, bulletIcon[vectorArray[i]], TRUE);
+
+		DrawExtendGraph(centerPos.x - TYPE_ICON.x, centerPos.y - TYPE_ICON.y, centerPos.x + TYPE_ICON.x, centerPos.y + TYPE_ICON.y, bulletIcon[vectorArray[i]], TRUE);
 	}
 }

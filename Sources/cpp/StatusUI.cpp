@@ -38,7 +38,7 @@ void StatusUI::ArrangeIcon(int deviceNum, int imageHandle[])
 		// infoPos.y += BULLET_ICON_WIDTH * ;
 
 		// ï`âÊ
-		DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + BULLET_ICON_HEIGHT, infoPos.y + BULLET_ICON_WIDTH, bulletIcon[i], TRUE);
+		DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + BULLET_ICON_HEIGHT, infoPos.y + BULLET_ICON_WIDTH, imageHandle[i], TRUE);
 
 		// íeÇÃÉåÉxÉãÉoÅ[Çï`âÊ
 		for (int j = 0; j < LEVEL_MAX; j++)
@@ -134,6 +134,6 @@ void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos,int 
 		// âÊëúÇï`âÊ
 		// DrawRotaGraph(tempPos.x, tempPos.y, 1.0f, DX_PI_F / 2, bulletIcon[vectorArray[i]], TRUE);
 
-		DrawExtendGraph(centerPos.x - TYPE_ICON.x, centerPos.y - TYPE_ICON.y, centerPos.x + TYPE_ICON.x, centerPos.y + TYPE_ICON.y, bulletIcon[vectorArray[i]], TRUE);
+		DrawExtendGraph(centerPos.x - TYPE_ICON.x, centerPos.y - TYPE_ICON.y, centerPos.x + TYPE_ICON.x, centerPos.y + TYPE_ICON.y, imageHandle[vectorArray[i]], TRUE);
 	}
 }

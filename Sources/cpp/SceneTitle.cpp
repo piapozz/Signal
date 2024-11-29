@@ -3,7 +3,7 @@
 SceneTitle::SceneTitle()
 {
     select = new SelectionButton();
-    _titleLogoHandle = LoadGraph("Resources/Enemy.png");
+    _titleLogoHandle = LoadGraph("Resources/Signal_Logo.png");
 }
 
 SceneTitle::~SceneTitle()
@@ -36,7 +36,6 @@ int SceneTitle::CheckChangeScene()
 
 void SceneTitle::Draw()
 {
-    // DrawGraph(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, _titleLogoHandle, true);
     SetFontSize(WINDOW_HEIGHT / 7);
 
     // 周期を不規則に変化させる
@@ -54,7 +53,10 @@ void SceneTitle::Draw()
     if (alpha > 200) alpha = 200; // 最大アルファ値
 
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
-    DrawFormatString(WINDOW_WIDTH / 2 - (WINDOW_WIDTH / 10), WINDOW_HEIGHT / 4, GetColor(255, 255, 255), "%s", "Signal");
+    //DrawFormatString(WINDOW_WIDTH / 2 - (WINDOW_WIDTH / 10), WINDOW_HEIGHT / 4, GetColor(255, 255, 255), "%s", "Signal");
+   // DrawGraph(WINDOW_WIDTH / 4, WINDOW_HEIGHT / 20, _titleLogoHandle, true);
+    DrawExtendGraph(720, 100, 1220, 600,
+        _titleLogoHandle, true);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     // 描画
     select->Draw();

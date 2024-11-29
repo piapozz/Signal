@@ -19,7 +19,7 @@ private:
 
 	float _distance = 0;
 
-	BaseChamber* _chanbers[(int)BulletType::MAX];
+	BaseChamber* _chambers[(int)BulletType::MAX];
 
 	float _bulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
 	int _bulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };

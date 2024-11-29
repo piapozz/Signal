@@ -19,6 +19,7 @@ BulletManager::BulletManager(int playerNum)
 			_bulletPram[i].m_BulletList.push_back(new MainBullet());
 			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
 			_bulletPram[i].m_BulletList[j]->SetActive(false);
+			_bulletPram[i].m_ExplosionList[j]->SetActive(false);
 		}
 	}
 }
@@ -31,6 +32,7 @@ BulletManager::~BulletManager()
 		for (int j = 0; j < BULLET_MAX; j++)
 		{
 			delete _bulletPram[i].m_BulletList[j];
+			delete _bulletPram[i].m_ExplosionList[j];
 		}
 	}
 }
@@ -46,7 +48,10 @@ void BulletManager::Move()
 			// 有効判定
 			// 移動
 			if (_bulletPram[i].m_BulletList[j]->GetActive())
+			{
+				_bulletPram[i].m_BulletList[j]->UpdateAngle();
 				_bulletPram[i].m_BulletList[j]->Move();
+			}
 
 			// 爆発物の移動、拡縮
 			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
@@ -59,6 +64,7 @@ void BulletManager::Move()
 void BulletManager::Draw()
 {
 	int count = 0;
+	int countE = 0;
 
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
 	for (int i = 0; i < _bulletPram.size(); i++)
@@ -75,11 +81,14 @@ void BulletManager::Draw()
 				_bulletPram[i].m_ExplosionList[j]->Draw();
 
 			if (_bulletPram[i].m_BulletList[j]->GetActive())
-			count++;
+				count++;
+			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
+				countE++;
 		}
 	}
 
 	printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
+	printfDx("\n%d / %d\n", countE, BULLET_MAX * _bulletPram.size());
 }
 
 // 座標更新
@@ -92,7 +101,7 @@ void BulletManager::UpdatePosition()
 		{
 			// 爆発物の経過時間チェック
 			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
-				_bulletPram[i].m_ExplosionList[j]->Move();
+				_bulletPram[i].m_ExplosionList[j]->CheckExplosionTimeOver();
 
 			// 有効判定
 			if (!_bulletPram[i].m_BulletList[j]->GetActive()) continue;
@@ -120,10 +129,10 @@ void BulletManager::CreateExplosion()
 			// 生成
 			for (int k = 0; k < _bulletPram[i].m_ExplosionList.size(); k++)
 			{
-				if (_bulletPram[k].m_ExplosionList[i]->GetActive()) continue;
+				if (_bulletPram[i].m_ExplosionList[k]->GetActive()) continue;
 
 				// 使える弾を見つけた
-				_bulletPram[i].m_ExplosionList[i] = new Explosion(_bulletPram[i].m_BulletList[j]->GetExplosionStatus(), _bulletPram[i].m_BulletList[j]->status);
+				_bulletPram[i].m_ExplosionList[k] = new Explosion(_bulletPram[i].m_BulletList[j]->GetExplosionStatus(), _bulletPram[i].m_BulletList[j]->status);
 
 				break;
 			}

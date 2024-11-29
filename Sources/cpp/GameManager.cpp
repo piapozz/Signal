@@ -88,6 +88,9 @@ void GameManager::Proc()
 	// ’e‚ÌˆÚ“®
 	bulletManager->Move();
 
+	// ”š”­‚Ì¶¬
+	bulletManager->CreateExplosion();
+
 	// “–‚½‚è”»’è
 	collisionManager->HitCheck_Everything();
 	collisionManager->UpdateHitObj();

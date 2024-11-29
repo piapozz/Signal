@@ -165,6 +165,30 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	}
 }
 
+// プレイヤーと爆発を判定する関数
+void CollisionManager::HitCheck_Player_Explosion(BaseCharacter* player, Explosion* explosion)
+{
+	// 当たってたら
+	if (HitCheck_BaseObj(player, explosion) == true)
+	{
+		std::vector<BaseObject*> hitCharaList = explosion->hitCharObject;
+		// すでに当たっているオブジェクトならスキップし、
+		// 当たっているオブジェクトを更新
+		for (int i = 0; i < hitCharaList.size(); i++)
+		{
+			if (player == hitCharaList[i])
+			{
+				return;
+			}
+		}
+
+		// ダメージ処理
+		player->TakeDamage(explosion->GetDamage());
+		// 当たったオブジェクトを渡す
+		explosion->hitCharObject.push_back(player);
+	}
+}
+
 // プレイヤーと箱を判定する関数
 void CollisionManager::HitCheck_Player_Box(BaseCharacter* player, Box* box)
 {
@@ -213,6 +237,41 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 	return result;
 }
 
+// 爆発と箱を判定する関数
+bool CollisionManager::HitCheck_Explosion_Box(Explosion* explosion, Box* box)
+{
+	bool result = false;
+
+	if (HitCheck_BaseObj_Box(explosion, box) == true)
+	{
+		// ダメージを与えているならスキップ
+		std::vector<Box*> hitBoxList = explosion->hitBoxObject;
+		bool isHit = false;
+		for (int i = 0; i < hitBoxList.size(); i++)
+		{
+			if (box == hitBoxList[i])
+				return result;
+		}
+
+		ObjectType objType = ObjectType::WALL;
+
+		// 箱なら
+		if (box->GetIsWall() == false)
+		{
+			objType = ObjectType::BOX;
+
+			// ダメージ処理、倒しているなら
+			if (box->TakeDamage(explosion->GetDamage()) == true)
+				result = true;
+		}
+
+		// 当たったオブジェクトを渡す
+		explosion->hitBoxObject.push_back(box);
+	}
+
+	return result;
+}
+
 // すべてのオブジェクトを判定する関数
 void CollisionManager::HitCheck_Everything()
 {
@@ -235,7 +294,7 @@ void CollisionManager::HitCheck_Everything()
 
 			// 弾との判定
 			std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
-			//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
+			std::vector<Explosion*> explosionList = _pBullet->GetBulletList()[p2].m_ExplosionList;
 
 			// 弾のループ
 			for (int bu = 0; bu < bulletList.size(); bu++)
@@ -247,6 +306,18 @@ void CollisionManager::HitCheck_Everything()
 				// プレイヤーと弾
 				if (IsInProximity(player_1, bullet) == true)
 					HitCheck_Player_Bullet(player_1, bullet);
+			}
+
+			// 爆発のループ
+			for (int ex = 0; ex < explosionList.size(); ex++)
+			{
+				Explosion* explosion = explosionList[ex];
+				// 爆発が非アクティブならスキップ
+				if (!explosion->GetActive()) continue;
+
+				// プレイヤーと爆発
+				if (IsInProximity(player_1, explosion) == true)
+					HitCheck_Player_Explosion(player_1, explosion);
 			}
 		}
 
@@ -278,7 +349,7 @@ void CollisionManager::HitCheck_Everything()
 			BaseCharacter* player_2 = _pPlayers[p2];
 
 			std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
-			//std::vector<MainBullet*> explosionList = bullets->GetBulletList()[p2].m_ExplosionList;
+			std::vector<Explosion*> explosionList = _pBullet->GetBulletList()[p2].m_ExplosionList;
 
 			// 弾のループ
 			for (int bu = 0; bu < bulletList.size(); bu++)
@@ -289,6 +360,18 @@ void CollisionManager::HitCheck_Everything()
 
 				if (IsInProximity(bullet, box) == true)
 					if (HitCheck_Bullet_Box(bullet, box))
+						player_2->GainExp(box->GetExp());
+			}
+
+			// 爆発のループ
+			for (int ex = 0; ex < explosionList.size(); ex++)
+			{
+				Explosion* explosion = explosionList[ex];
+				// 爆発が非アクティブならスキップ
+				if (!explosion->GetActive()) continue;
+
+				if (IsInProximity(explosion, box) == true)
+					if (HitCheck_Explosion_Box(explosion, box))
 						player_2->GainExp(box->GetExp());
 			}
 		}
@@ -320,6 +403,29 @@ void CollisionManager::UpdateHitObj()
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj_Box(bulletList[bu], hitBoxList[box]))
+					hitBoxList.erase(hitBoxList.begin() + box);
+			}
+		}
+
+		std::vector<Explosion*>explosionList = _pBullet->GetBulletList()[p2].m_ExplosionList;
+		// 爆発のループ
+		for (int ex = 0; ex < explosionList.size(); ex++)
+		{
+			// プレイヤーとの判定
+			std::vector<BaseObject*>& hitCharaList = explosionList[ex]->hitCharObject;
+			for (int chara = hitCharaList.size() - 1; chara >= 0; chara--)
+			{
+				// プレイヤーが接触していないならリストから削除
+				if (!HitCheck_BaseObj(explosionList[ex], hitCharaList[chara]))
+					hitCharaList.erase(hitCharaList.begin() + chara);
+			}
+
+			// boxとの判定
+			std::vector<Box*>& hitBoxList = explosionList[ex]->hitBoxObject;
+			for (int box = hitBoxList.size() - 1; box >= 0; box--)
+			{
+				// プレイヤーが接触していないならリストから削除
+				if (!HitCheck_BaseObj_Box(explosionList[ex], hitBoxList[box]))
 					hitBoxList.erase(hitBoxList.begin() + box);
 			}
 		}

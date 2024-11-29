@@ -49,8 +49,8 @@ void BulletManager::Move()
 			// ˆÚ“®
 			if (_bulletPram[i].m_BulletList[j]->GetActive())
 			{
-				_bulletPram[i].m_BulletList[j]->UpdateAngle();
 				_bulletPram[i].m_BulletList[j]->Move();
+				_bulletPram[i].m_BulletList[j]->UpdateAngle();
 			}
 
 			// ”š”­•¨‚ÌˆÚ“®AŠgk

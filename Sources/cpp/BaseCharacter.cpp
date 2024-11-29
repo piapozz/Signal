@@ -33,6 +33,8 @@ void BaseCharacter::Move()
 			// 正規化された移動ベクトルにスピードをかけて次の位置を計算
 			status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength);
 			status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength);
+
+			status.m_nextPosition * speed;
 		}
 	}
 }
@@ -121,10 +123,10 @@ void BaseCharacter::LotteryPower()
 	for (int i = 0; i < choicePower.size() - CHOICE_POWER_MAX; i++)
 	{
 		// auto型で取得してから削除
-		auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size()));
+		// auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size() - 1));
 
 		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
-		choicePower.erase(it);
+		choicePower.erase(choicePower.begin() + GetRand(choicePower.size() - 1));
 	}
 
 	// 抽選する回数を一回減らす
@@ -142,20 +144,20 @@ void BaseCharacter::LotteryStatus()
 	choiceStatus.clear();
 
 	// MAXをのぞいた可変長配列の初期化
-	for (int i = 0; i < (int)BulletStatus::MAX - 1; i++)
+	for (int i = 0; i < (int)BulletStatus::MAX; i++)
 	{
 		// 可変長配列に要素を追加
 		choiceStatus.push_back(i);
 	}
 
-	// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
-	for (int i = 0; i < choiceStatus.size() - CHOICE_POWER_MAX; i++)
-	{
-		auto it = std::find(choiceStatus.begin(), choiceStatus.end(), GetRand(choiceStatus.size()));
+	//// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
+	//for (int i = 0; i < choiceStatus.size() - CHOICE_POWER_MAX; i++)
+	//{
+	//	auto it = std::find(choiceStatus.begin(), choiceStatus.end(), GetRand(choiceStatus.size()));
 
-		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
-		choiceStatus.erase(it);
-	}
+	//	// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
+	//	choiceStatus.erase(it);
+	//}
 
 	// 抽選する回数を一回減らす
 	lotteryStatusCount--;
@@ -177,6 +179,9 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			{
 				// パワーアップ
 				bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
+				// 抽選できる状態に戻す
+				canLottery = true;
+
 				choosePower = false;
 			}
 
@@ -185,11 +190,11 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			{
 				// ステータスアップ
 				bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
+				// 抽選できる状態に戻す
+				canLottery = true;
+
 				chooseStatus = false;
 			}
-
-			// 抽選できる状態に戻す
-			canLottery = true;
 		}
 	}
 
@@ -199,17 +204,17 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
 void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
 
-// 配列の中身を削除
-std::vector<int>DeleteVector(std::vector<int> vector)
-{
-	// 配列の大きさ分繰り返して中身を削除する
-	for (int i = 0; i < vector.size(); i++)
-	{
-		vector.erase(vector.begin());
-	}
-
-	return vector;
-}
+//// 配列の中身を削除
+//std::vector<int>DeleteVector(std::vector<int> vector)
+//{
+//	// 配列の大きさ分繰り返して中身を削除する
+//	for (int i = 0; i < vector.size(); i++)
+//	{
+//		vector.erase(vector.begin());
+//	}
+//
+//	return vector;
+//}
 
 // プレイヤーに番号を振り分け
 void BaseCharacter::SetPlayerNum(int playerNumber)

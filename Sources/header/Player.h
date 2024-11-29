@@ -28,7 +28,6 @@ public:
 
 		isPlayer = true;
 
-
 	}
 
 	~Player();								// デストラクタ

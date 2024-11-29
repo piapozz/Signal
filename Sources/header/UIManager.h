@@ -15,6 +15,11 @@ private:
 
 	Vector2 initPos[PLAYER_MAX];
 
+	// パワーアップに使う画像を管理
+	int bulletIcon[(int)BulletType::MAX];
+	// ステータスアップに使う画像を管理
+	int statusIcon[(int)BulletStatus::MAX];
+
 	int flagStatus;
 
 public:

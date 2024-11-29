@@ -3,7 +3,7 @@
 BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 {
 	canLottery = true;
-	request = 3;
+	request = 1;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -108,7 +108,7 @@ void BaseCharacter::LotteryPower()
 	choicePower.clear();
 
 	// 列挙体MAXをのぞいた可変長配列の初期化
-	for (int i = 0; i < (int)BulletType::MAX - 1; i++)
+	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
 		// 可変長配列に要素を追加
 		choicePower.push_back(i);
@@ -126,6 +126,9 @@ void BaseCharacter::LotteryPower()
 		// 配列の要素数を使って乱数を取得してそのまま配列の要素を削除
 		choicePower.erase(it);
 	}
+
+	// 抽選する回数を一回減らす
+	lotteryPowerCount--;
 
 	// 選択肢を選べる状態にする
 	choosePower = true;
@@ -154,6 +157,9 @@ void BaseCharacter::LotteryStatus()
 		choiceStatus.erase(it);
 	}
 
+	// 抽選する回数を一回減らす
+	lotteryStatusCount--;
+
 	// 選択肢を選べる状態にする
 	chooseStatus = true;
 }
@@ -171,7 +177,6 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			{
 				// パワーアップ
 				bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
-				lotteryPowerCount--;
 				choosePower = false;
 			}
 
@@ -180,7 +185,6 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			{
 				// ステータスアップ
 				bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
-				lotteryStatusCount--;
 				chooseStatus = false;
 			}
 
@@ -212,6 +216,12 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 {
 	// 引数でもらった番号をプレイヤー番号に設定
 	playerNum = playerNumber;
+}
+
+void BaseCharacter::SetSurvival() 
+{
+	// 体力が0になったときプレイヤーは死にます
+	if (status.m_life <= 0) status.m_isActive = false;
 }
 
 Vector2 BaseCharacter::GetPlayerPos() { return status.m_position; }

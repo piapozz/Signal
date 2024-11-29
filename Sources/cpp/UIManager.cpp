@@ -6,6 +6,13 @@ UIManager::UIManager()
 	initPos[1] = { 1500.0f,25.0f };
 	// initPos[2] = { 0.0f,750.0f };
 	// initPos[3] = { 1500,750.0f };
+
+	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("Resources/Bullet_Normal.png");
+	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("Resources/Bullet_Explosion.png");
+	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_MultiShot.png");
+	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("Resources/Bullet_Penetration.png");
+	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("Resources/Bullet_Reflection.png");
+	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
 }
 
 UIManager::~UIManager()

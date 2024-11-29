@@ -3,13 +3,6 @@
 // 色々なものを初期化する
 StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 {
-	bulletIcon[(int)BulletType::NORMAL] = LoadGraph("Resources/Bullet_Normal.png");
-	bulletIcon[(int)BulletType::EXPLOSION] = LoadGraph("Resources/Bullet_Explosion.png");
-	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_MultiShot.png");
-	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("Resources/Bullet_Penetration.png");
-	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("Resources/Bullet_Reflection.png");
-	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
-
 	bulletStateText[(int)BulletStatus::SPEED] = "SPEED";
 	bulletStateText[(int)BulletStatus::POWER] = "POWER";
 	bulletStateText[(int)BulletStatus::RANGE] = "RANGE";
@@ -30,7 +23,7 @@ StatusUI::~StatusUI()
 }
 
 // アイコンとその弾のレベルを描画
-void StatusUI::ArrangeIcon(int deviceNum)
+void StatusUI::ArrangeIcon(int deviceNum, int imageHandle[])
 {
 	// 描画する座標の左上の頂点座標を初期化
 	Vector2 infoPos = initPos;
@@ -50,24 +43,17 @@ void StatusUI::ArrangeIcon(int deviceNum)
 		// 弾のレベルバーを描画
 		for (int j = 0; j < LEVEL_MAX; j++)
 		{
-			// 間隔を調節するための変数
-			Vector2 distanceError;
-
-			// 定数を使ってx,yそれぞれの誤差を初期化する
-			//distanceError.x = j * LEVEL_BAR_HEIGHT;
-			//distanceError.y = j * LEVEL_BAR_WIDTH;
-
 			barPos = infoPos;
 
 			// 高さを調節
-			barPos.y += BULLET_ICON_WIDTH + LEVEL_BAR_WIDTH;
+			barPos.y += BULLET_ICON_WIDTH;
 
 			// 弾のレベルを見てレベル分レベルバーを描画する
-			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i])
+			if (j < bullet->GetBulletList()[deviceNum].m_BulletType[i])
 			{
-				barPos.y += LEVEL_BAR_WIDTH;
+				barPos.y += BAR_TO_BAR_ERROR * j;
 				// レベルバーを描画
-				DrawExtendGraph(barPos.x, barPos.y , barPos.x + BULLET_ICON_HEIGHT, barPos.y + LEVEL_BAR_WIDTH, levelViewIcon, TRUE);
+				DrawExtendGraph(barPos.x, barPos.y, barPos.x + BULLET_ICON_HEIGHT, barPos.y + LEVEL_BAR_WIDTH, levelViewIcon, TRUE);
 			}
 		}
 	}
@@ -79,7 +65,7 @@ void StatusUI::StatusViewer(int deviceNum)
 	Vector2 infoPos;
 
 	// 高さの初期位置
-	infoPos.y = initPos.y;
+	infoPos.y = initPos.y + 150.0f;
 
 	int textError = 0;
 
@@ -110,7 +96,7 @@ void StatusUI::StatusViewer(int deviceNum)
 }
 
 // プレイヤーの周りにステータスを描画
-void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos)
+void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos,int imageHandle[])
 {
 	Vector2 centerPos;
 

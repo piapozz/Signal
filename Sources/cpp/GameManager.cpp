@@ -1,7 +1,7 @@
 #include "../header/GameManager.h"
 
 // コンストラクタ
-GameManager::GameManager()
+GameManager::GameManager(InputManager* pInputManager)
 {
 	stageManager = new StageManager();
 	players.push_back(new Player(stageManager->GetStartPos()[0], bulletManager));
@@ -9,7 +9,7 @@ GameManager::GameManager()
 	collisionManager = new CollisionManager();
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
-	inputManager = new InputManager();
+	inputManager = pInputManager;
 	// 弾を人数分用意
 	bulletManager = new BulletManager(players.size() + enemys.size());
 
@@ -105,6 +105,9 @@ void GameManager::Proc()
 	bulletManager->UpdatePosition();
 
 	stageManager->Proc();
+
+	// 終了確認
+	CheckFinish();
 }
 
 // 描画
@@ -121,13 +124,32 @@ void GameManager::Draw()
 		// uiManager->Draw(i);
 
 		uiManager->Draw();
-
-
 	}
 
 	// 弾の描画
 	bulletManager->Draw();
-
 }
 
-bool GameManager::CheckFinish() { return isFinish; }
+// 終了確認
+void GameManager::CheckFinish()
+{
+	// 死亡確認
+	std::vector<int> activeDevice;
+	for (int i = 0; i < devices.size(); i++)
+	{
+		devices[i]->SetSurvival();
+		if (devices[i]->GetActive())
+			activeDevice.push_back(i);
+	}
+	// アクティブなキャラが1以下なら
+	if (activeDevice.size() <= 1)
+	{
+		winDevice = activeDevice[0];
+		isFinish = true;
+	}
+}
+
+bool GameManager::GetFinish()
+{
+	return isFinish;
+}

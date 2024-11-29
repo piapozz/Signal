@@ -14,14 +14,16 @@ class GameManager
 {							
 public:
 
-	GameManager();												// コンストラクタ
+	GameManager(InputManager* pInputManager);					// コンストラクタ
 	~GameManager();												// デストラクタ
 
 	void Init();												// 初期化
 	void Proc();												// 処理
 	void Draw();												// 描画
 
-	bool CheckFinish();
+	bool GetFinish();
+
+	 int winDevice;
 
 private:
 
@@ -36,6 +38,8 @@ private:
 
 	int playerMax;
 	bool isFinish;
+	float _drawRatio;
 
+	void CheckFinish();
 };
 

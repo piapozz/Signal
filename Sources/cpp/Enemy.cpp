@@ -25,14 +25,23 @@ void Enemy::Proc()
 	{
 		// ターゲットを変更
 		SetTarget();
+		targetPos = _targetObj->status.m_position;
 	}
+
+	// 標的との距離を求める
+	float targetDistance = Vector2::Distance(targetPos, pos);
 
 	// 標的の方向を向く
 	Vector2 angleDir = Vector2::Normalize(targetPos - pos);
 	Rotate(angleDir);
 
 	// 移動量を決める
-	moveVec = angleDir;
+	moveVec = Vector2(0, 0);
+	if (targetDistance > 700)
+		moveVec = angleDir;
+	else if (targetDistance < 150)
+		moveVec = angleDir * (-1);
+
 	Move();
 
 	// 射撃

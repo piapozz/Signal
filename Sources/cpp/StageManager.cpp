@@ -3,18 +3,15 @@
 
 StageManager::StageManager()
 {
-	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
-	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
-
-	_defaultStagePos.x = WINDOW_WIDTH / 2 - _stageWidth / 2 * BOX_SIZE;
-	_defaultStagePos.y = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
+	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
+	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
 
 	_boxHandle = LoadGraph("Resources/Box.png");
 	_wallHandle = LoadGraph("Resources/Wall.png");
 
-	for (int x = 0; x < sizeof(_stageLayout) / sizeof(_stageLayout[0]); x++)
+	for (int x = 0; x < sizeof(_stageLayout) / sizeof(_stageLayout[1]); x++)
 	{
-		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[1]); y++)
+		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[0]); y++)
 		{
 			switch ((ObjectType)_stageLayout[y][x])
 			{
@@ -34,6 +31,8 @@ StageManager::StageManager()
 			}
 		}
 	}
+
+	SetDrawRatio();
 }
 
 StageManager::~StageManager()
@@ -45,6 +44,26 @@ StageManager::~StageManager()
 
 	DeleteGraph(_boxHandle);
 	DeleteGraph(_wallHandle);
+}
+
+void StageManager::SetDrawRatio()
+{
+	// ステージ比率と画面比率を比べて合わせる軸を決める
+	float stageRatio = (float)(_stageWidth / _stageHeight);
+	float windowRatio = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
+
+	if (stageRatio >= windowRatio)
+	{
+		_defaultStagePos.x = 0;
+		_defaultStagePos.y = 0;
+		//drawRatio = (float)_stageWidth / (float)(WINDOW_WIDTH + WINDOW_WIDTH * STAGE_MARGIN_RATE);
+	}
+	else
+	{
+		_defaultStagePos.x = 0;
+		_defaultStagePos.y = 0;
+		//drawRatio = (float)_stageHeight / (float)(WINDOW_HEIGHT + WINDOW_HEIGHT * STAGE_MARGIN_RATE);
+	}
 }
 
 void StageManager::Proc()

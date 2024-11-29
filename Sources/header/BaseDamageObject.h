@@ -15,7 +15,7 @@ public:
 
     // ‰Šú‰»
     BaseDamageObject() : damage(0)
-    { 
+    {
         hitBoxObject.clear();
         hitCharObject.clear();
     }

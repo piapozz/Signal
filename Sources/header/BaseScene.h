@@ -1,10 +1,15 @@
 #pragma once
 #include "Const.h"
+#include "InputManager.h"
 using namespace std;
 
 // シーンの基本クラス
 class BaseScene 
 {
+protected:
+
+	// コントローラーの入力
+	InputManager* input;
 
 public:
 	// シーンの名前
@@ -36,5 +41,5 @@ public:
 	// シーンの切り替え
 	virtual int CheckChangeScene() = 0;
 
-	void DrawString(string text, Vector2 position);
+	//void DrawString(string text, Vector2 position);
 };

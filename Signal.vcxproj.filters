@@ -135,6 +135,9 @@
     <ClCompile Include="Sources\cpp\UIManager.cpp">
       <Filter>ソース ファイル\Sein</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\cpp\SelectionButton.cpp">
+      <Filter>ソース ファイル\Ishihara</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\header\BaseScene.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Sources\header\StatusUI.h">
       <Filter>ヘッダー ファイル\Sein</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\header\SelectionButton.h">
+      <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

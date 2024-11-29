@@ -3,13 +3,13 @@
 // コンストラクタ
 BaseScene::BaseScene() 
 {
-
+	input = new InputManager();
 }
 
 // デストラクタ
 BaseScene::~BaseScene() 
 {
-
+	delete input;
 }
 
 // フォントサイズをリセットしながら文字の描画

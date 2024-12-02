@@ -232,22 +232,40 @@ enum class SEName
 {
     SHOT = 0,
     IMPACT,
-    LEVEL_UP,
+    LEVELUP,
+    LEVELUP_DECIDE,
+    EXPLOSION,
+    DAMAGE,
+    DODGE,
+    REFLECT,
+    BOMB,
+    CURSOR_DECIDE,
+    CURSOR_MOVE,
+    GAMEEND,
 
     MAX
 };
 
-const std::string BGM_ADRESS[(int)BGMName::MAX]
-{
-    "Resources/BGM.mp3",
-};
+//const std::string BGM_ADRESS[(int)BGMName::MAX]
+//{
+//    "Resources/BGM.mp3",
+//};
 
-const std::string SOUND_ADRESS[(int)SEName::MAX]
-{
-    "Resources/Shot.mp3",
-    "Resources/Impact.mp3",
-    "Resources/LevelUp.mp3",
-};
+//const std::string SOUND_ADRESS[(int)SEName::MAX]
+//{
+//    "Resources/Audio/Shot.mp3",
+//    "Resources/Audio/Impact.mp3",
+//    "Resources/Audio/LevelUp.mp3",
+//    "Resources/Audio/Levelup_Decide.mp3",
+//    "Resources/Audio/Explosion.mp3",
+//    "Resources/Audio/Damage.mp3",
+//    "Resources/Audio/Dodge.mp3",
+//    "Resources/Audio/Reflect.mp3",
+//    "Resources/Audio/Bomb.mp3",
+//    "Resources/Audio/Cursor_Decide.mp3",
+//    "Resources/Audio/Cursor_Move.mp3",
+//
+//};
 
 // プレイヤー
 const int PLAYER_MAX = 2;		// プレイヤーの最大数

@@ -2,10 +2,12 @@
 #include <DxLib.h>
 #include <math.h>
 #include "../header/Const.h"
+#include "../header/AudioManager.h"
 
 class BaseObject
 {
 public:
+
 	struct Status
 	{
 		Vector2 m_position;		// ˆÊ’u

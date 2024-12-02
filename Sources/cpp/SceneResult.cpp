@@ -28,7 +28,7 @@ void SceneResult::Proc()
 
 int SceneResult::CheckChangeScene()
 {
-    return select->CheckChengButton(input->CheckDownButton(0, Button::B));
+    return select->CheckChangeButton(input->CheckDownButton(0, Button::B));
 }
 
 void SceneResult::Draw()

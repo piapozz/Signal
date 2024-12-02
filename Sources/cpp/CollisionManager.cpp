@@ -157,6 +157,8 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 
 		// ダメージ処理
 		player->TakeDamage(bullet->GetDamage());
+		// 効果音
+		AudioManager::GetInstance().PlaySE(SEName::DAMAGE);
 		// 当たったオブジェクトを渡す
 		bullet->hitCharObject.push_back(player);
 		// 着弾処理
@@ -228,6 +230,8 @@ bool CollisionManager::HitCheck_Bullet_Box(MainBullet* bullet, Box* box)
 
 		// 当たったオブジェクトを渡す
 		bullet->hitBoxObject.push_back(box);
+
+		AudioManager::GetInstance().PlaySE(SEName::IMPACT);
 
 		// 着弾処理
 		bullet->Impact(objType);

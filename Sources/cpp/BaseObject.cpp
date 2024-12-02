@@ -14,7 +14,7 @@ BaseObject::~BaseObject()
 void BaseObject::Draw()
 {
 	// ï`âÊ
-	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize, status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
+	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize * 0.01 , status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
 }
 
 // åªç›ç¿ïWÇ…ìKâû

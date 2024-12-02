@@ -39,6 +39,8 @@ void SelectionButton::Proc(InputManager* input)
 		
 	}
 
+	if ((input->GetStick(0, Stick::LEFT).y < -0.7) || (input->GetStick(0, Stick::LEFT).y > 0.7))AudioManager::GetInstance().PlaySE(SEName::CURSOR_MOVE);
+
 	if(_nowSelecteNumber >= _selectCount)
 	{
 		_nowSelecteNumber = 0;
@@ -50,14 +52,16 @@ void SelectionButton::Proc(InputManager* input)
 	
 }
 
-BaseScene::SceneName SelectionButton::CheckChengButton(bool input)
+BaseScene::SceneName SelectionButton::CheckChangeButton(bool input)
 {
 	if (input)
 	{
+		AudioManager::GetInstance().PlaySE(SEName::CURSOR_DECIDE);
+
 		if (_selectString[_nowSelecteNumber] == "New Game") return BaseScene::SceneName::GAME_MAIN;
 		if (_selectString[_nowSelecteNumber] == "Option") return BaseScene::SceneName::GAME_OPTION;
 		if (_selectString[_nowSelecteNumber] == "Exit") return BaseScene::SceneName::GAME_EXIT;
-		if (_selectString[_nowSelecteNumber] == "ReTry") return BaseScene::SceneName::GAME_MAIN;
+		if (_selectString[_nowSelecteNumber] == "Retry") return BaseScene::SceneName::GAME_MAIN;
 		if (_selectString[_nowSelecteNumber] == "Title") return BaseScene::SceneName::GAME_TITLE;
 
 		return BaseScene::SceneName::NONE;

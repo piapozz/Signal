@@ -21,6 +21,7 @@ void ReflectionChamber::AngleModifying()
 // 反射カウントが残っていればfalse
 bool ReflectionChamber::Impact()
 {
+    AudioManager::GetInstance().PlaySE(SEName::REFLECT);
     if (frameFlag)
         return true;
 

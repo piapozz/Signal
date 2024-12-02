@@ -2,9 +2,10 @@
 
 BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 {
+	canDodge = true;
 	canLottery = true;
 	request = 1;
-	status.m_shapeSize = 1;
+	status.m_shapeSize = 100.0f / 2.0f;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -19,15 +20,16 @@ void BaseCharacter::Move()
 	if (dodgeNow)
 	{
 		// 向いている方向に強制的に進む
-		//status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
-		//status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
+		status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
+		status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
+		printfDx("aaaaaaaa");
 
-					// 移動ベクトルの長さを計算
-		vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));
+		//			// 移動ベクトルの長さを計算
+		//vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));
 
-		// 正規化された移動ベクトルにスピードをかけて次の位置を計算
-		status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * dodgeSpeed;
-		status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * dodgeSpeed;
+		//// 正規化された移動ベクトルにスピードをかけて次の位置を計算
+		//status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * dodgeSpeed;
+		//status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * dodgeSpeed;
 	}
 
 	// 通常移動
@@ -42,7 +44,7 @@ void BaseCharacter::Move()
 			status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * speed;
 			status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * speed;
 
-			printfDx("nextPosition %f", status.m_nextPosition.x);
+			// printfDx("nextPosition %f", status.m_nextPosition.x);
 		}
 	}
 }
@@ -61,17 +63,19 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 // 経験値を見て
 void BaseCharacter::ObserveExp()
 {
-	printfDx("%d\n", GetExpValue());
-	printfDx("LevelUpCount%d\n", levelUpCount);
-	printfDx("lotteryPowerCount%d\n", lotteryPowerCount);
-	printfDx("lotteryStatusCount%d\n", lotteryStatusCount);
-	printfDx("choicePowerArraySize%d\n", choicePower.size());
-	printfDx("choiceStatusArraySize%d\n", choiceStatus.size());
-	printfDx("Flag%d\n", GetChooceFlag());
+	// printfDx("%d\n", GetExpValue());
+	//printfDx("LevelUpCount%d\n", levelUpCount);
+	//printfDx("lotteryPowerCount%d\n", lotteryPowerCount);
+	//printfDx("lotteryStatusCount%d\n", lotteryStatusCount);
+	//printfDx("choicePowerArraySize%d\n", choicePower.size());
+	//printfDx("choiceStatusArraySize%d\n", choiceStatus.size());
+	//printfDx("Flag%d\n", GetChooceFlag());
 
 	// レベルアップに必要な個数を満たしていたら
 	if (GetExpValue() >= request)
 	{
+		AudioManager::GetInstance().PlaySE(SEName::LEVELUP);
+
 		// 経験値をリセット
 		exp -= request;
 
@@ -190,6 +194,8 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 				// 抽選できる状態に戻す
 				canLottery = true;
 
+				AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
+
 				choosePower = false;
 			}
 
@@ -200,6 +206,8 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 				bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
 				// 抽選できる状態に戻す
 				canLottery = true;
+
+				AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
 
 				chooseStatus = false;
 			}
@@ -233,8 +241,11 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 
 void BaseCharacter::SetSurvival() 
 {
+	if(status.m_life <= 0 && status.m_isActive == true)
+		// AudioManager::GetInstance().PlaySE(SEName::);
 	// 体力が0になったときプレイヤーは死にます
 	if (status.m_life <= 0) status.m_isActive = false;
+
 }
 
 Vector2 BaseCharacter::GetPlayerPos() { return status.m_position; }

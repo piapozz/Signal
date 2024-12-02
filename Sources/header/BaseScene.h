@@ -1,6 +1,7 @@
 #pragma once
 #include "Const.h"
 #include "InputManager.h"
+#include "AudioManager.h"
 using namespace std;
 
 // シーンの基本クラス

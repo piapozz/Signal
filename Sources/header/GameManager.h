@@ -8,6 +8,8 @@
 #include "UIManager.h"
 #include "InputManager.h"
 
+#include "AudioManager.h"
+
 // ゲームの進行クラス
 
 class GameManager
@@ -35,6 +37,7 @@ private:
 	BulletManager* bulletManager;		// 弾
 	UIManager* uiManager;				// UI
 	InputManager* inputManager;			// 入力
+	// AudioManager& audioManager;
 
 	int playerMax;
 	bool isFinish;

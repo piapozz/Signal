@@ -14,7 +14,11 @@ void Player::Init(BulletManager* bullet, InputManager* input)
 // プレイヤーのメイン処理
 void Player::Proc()
 {
-	DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
+	//DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
+	//printfDx("HP %f",status.m_life);
+
+	SetSurvival();
+
 	// 死んでいなかったら処理をする ※isActiveがtrueのときは死んでいる
 	if (status.m_isActive)
 	{
@@ -24,7 +28,7 @@ void Player::Proc()
 		moveVec = controller.m_LStick;
 
 		// 回避が押されていたら回避する
-		if (controller.m_LTrigger)Dodge();
+		// if (controller.m_LTrigger)Dodge();
 
 		// もし移動できる状態だったら
 		if (canMove)

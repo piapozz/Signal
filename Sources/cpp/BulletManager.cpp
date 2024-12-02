@@ -134,6 +134,8 @@ void BulletManager::CreateExplosion()
 				// Žg‚¦‚é”š”­‚ðŒ©‚Â‚¯‚½
 				_bulletPram[i].m_ExplosionList[k] = new Explosion(_bulletPram[i].m_BulletList[j]->GetExplosionStatus(), _bulletPram[i].m_BulletList[j]->status);
 
+				AudioManager::GetInstance().PlaySE(SEName::BOMB);
+
 				break;
 			}
 		}

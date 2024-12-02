@@ -5,13 +5,18 @@ GameManager::GameManager(InputManager* pInputManager)
 {
 	stageManager = new StageManager();
 	players.push_back(new Player(stageManager->GetStartPos()[0], bulletManager));
-	enemys.push_back(new Enemy(stageManager->GetStartPos()[1], bulletManager));
+	players.push_back(new Player(stageManager->GetStartPos()[1], bulletManager));
+	// enemys.push_back(new Enemy(stageManager->GetStartPos()[1], bulletManager));
 	collisionManager = new CollisionManager();
 	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
 	inputManager = pInputManager;
 	// 弾を人数分用意
 	bulletManager = new BulletManager(players.size() + enemys.size());
+	// audioManager = AudioManager::GetInstance();
+	// audioManager = new AudioManager();
+
+	AudioManager::GetInstance().PlayLoopBGM(BGMName::IN_GAME);
 
 	// ゲームが終了しているかを管理
 	isFinish = false;

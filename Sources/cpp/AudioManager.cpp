@@ -6,13 +6,20 @@ AudioManager::AudioManager()
 {
 	for (int i = 0; i < (int)BGMName::MAX; i++)
 	{
-		_bgmHandle.push_back(LoadSoundMem(BGM_ADRESS[i].c_str()));
+		// _bgmHandle.push_back(LoadSoundMem(BGM_ADRESS[i].c_str()));
+		_bgmHandle.push_back(LoadSoundMem(BGM_ADRESS[i]));
 	}
 
 	for (int i = 0; i < (int)SEName::MAX; i++)
 	{
-		_soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i].c_str()));
+		// _soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i].c_str()));
+		_soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i]));
 	}
+
+	//for (int i = 0; i < _soundHandle.size(); i++)
+	//{
+	//	ChangeVolumeSoundMem(50.0f, _soundHandle[i]);
+	//}
 }
 
 AudioManager::~AudioManager()
@@ -28,10 +35,22 @@ AudioManager::~AudioManager()
 	}
 }
 
+//AudioManager& AudioManager::GetInstance()
+//{
+//	static AudioManager instance; // ‰‰ñŒÄ‚Ño‚µŽž‚É1‰ñ‚¾‚¯‰Šú‰»
+//	printfDx("AudioManager instance address: %p\n", &instance);
+//	return instance;
+//}
+
 // num”Ô–Ú‚ÌSE‚ðÄ¶
 void AudioManager::PlaySE(SEName se)
 {
 	PlaySoundMem(_soundHandle[(int)se], DX_PLAYTYPE_BACK, TRUE);
+}
+
+int AudioManager::GetNum(SEName se)
+{
+	return (int)se;
 }
 
 // BGM‚ðÄ¶‚·‚éŠÖ”

@@ -36,7 +36,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetCameraNearFar(16.0f, 10000.0f);
 
 	// 背景の色を灰色にする
-	//SetBackgroundColor(128, 128, 128);
+	SetBackgroundColor(128, 128, 128);
 
 	// Zバッファを使用する
 	SetUseZBufferFlag(true);

@@ -62,11 +62,11 @@ void UIManager::Draw()
 
 		if (flagStatus == 1)
 		{
-			statusUI[i]->PlayerAround(devices[i]->choicePower, devices[i]->status.m_position, bulletIcon);
+			statusUI[i]->PlayerAround(devices[i]->choicePower, devices[i]->GetDisplayPos(), bulletIcon);
 		}
 		else if (flagStatus == 2)
 		{
-			statusUI[i]->PlayerAround(devices[i]->choiceStatus, devices[i]->status.m_position, statusIcon);
+			statusUI[i]->PlayerAround(devices[i]->choiceStatus, devices[i]->GetDisplayPos(), statusIcon);
 		}
 
 	}

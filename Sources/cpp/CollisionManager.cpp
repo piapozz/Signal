@@ -287,7 +287,7 @@ void CollisionManager::HitCheck_Everything()
 		for (int p2 = 0; p2 < _pPlayers.size(); p2++)
 		{
 			// 同じ組み合わせはスキップ
-			if (p1 >= p2) continue;
+			if (p1 == p2) continue;
 			BaseCharacter* player_2 = _pPlayers[p2];
 
 			// ほかプレイヤーとの当たり判定

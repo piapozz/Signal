@@ -8,13 +8,10 @@ GameManager::GameManager(InputManager* pInputManager)
 	players.push_back(new Player(stageManager->GetStartPos()[1], bulletManager));
 	// enemys.push_back(new Enemy(stageManager->GetStartPos()[1], bulletManager));
 	collisionManager = new CollisionManager();
-	//bulletManager = new BulletManager();
 	uiManager = new UIManager();
 	inputManager = pInputManager;
 	// ’e‚ğl”•ª—pˆÓ
 	bulletManager = new BulletManager(players.size() + enemys.size());
-	// audioManager = AudioManager::GetInstance();
-	// audioManager = new AudioManager();
 
 	AudioManager::GetInstance().PlayLoopBGM(BGMName::IN_GAME);
 

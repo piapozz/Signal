@@ -54,6 +54,7 @@ public:
 	void Draw();
 	virtual Vector2 GetNormDir(Vector2 hitPos);			// –@ü‚ğ•Ô‚·ŠÖ”
 	Shape GetShape();						// Œ`‚ğæ“¾
+	Vector2 GetDisplayPos();
 
 	Status status;
 protected:

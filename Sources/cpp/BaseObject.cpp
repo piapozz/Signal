@@ -2,7 +2,7 @@
 
 BaseObject::BaseObject()
 {
-
+	
 }
 
 BaseObject::~BaseObject()
@@ -13,8 +13,10 @@ BaseObject::~BaseObject()
 // 画像を描画
 void BaseObject::Draw()
 {
+	Vector2 drawPos = GetDisplayPos();
+	float drawSize = status.m_shapeSize * drawRatio * 0.05f;
 	// 描画
-	DrawRotaGraph(status.m_position.x, status.m_position.y, status.m_shapeSize * 0.01 , status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
+	DrawRotaGraph(drawPos.x, drawPos.y, drawSize, status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
 }
 
 // 現在座標に適応
@@ -72,4 +74,10 @@ BaseObject::Status BaseObject::GetStatus() { return status; }
 Vector2 BaseObject::GetNormDir(Vector2 hitPos)
 {
 	return Vector2::Normalize(hitPos - status.m_position);
+}
+
+// ディスプレイ座標を取得する関数
+Vector2 BaseObject::GetDisplayPos()
+{
+	return drawAnchorPos + status.m_position * drawRatio;
 }

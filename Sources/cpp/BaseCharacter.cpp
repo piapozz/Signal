@@ -5,7 +5,7 @@ BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 	canDodge = true;
 	canLottery = true;
 	request = 1;
-	status.m_shapeSize = 100.0f / 2.0f;
+	status.m_shapeSize = BOX_SIZE / 4.0f;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -22,7 +22,6 @@ void BaseCharacter::Move()
 		// 向いている方向に強制的に進む
 		status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
 		status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
-		printfDx("aaaaaaaa");
 
 		//			// 移動ベクトルの長さを計算
 		//vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));

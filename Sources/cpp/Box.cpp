@@ -36,13 +36,12 @@ Box::Box(Vector2 pos, float life, int handle)
 
 void Box::Draw()
 {
-	int x1 = (int)_vertex[0].x * 0.25f;
-	int y1 = (int)_vertex[0].y * 0.25f;
-	int x2 = (int)_vertex[2].x * 0.25f;
-	int y2 = (int)_vertex[2].y * 0.25f;
+	int x1 = drawAnchorPos.x + (int)_vertex[0].x * drawRatio;
+	int y1 = drawAnchorPos.y + (int)_vertex[0].y * drawRatio;
+	int x2 = drawAnchorPos.x + (int)_vertex[2].x * drawRatio;
+	int y2 = drawAnchorPos.y + (int)_vertex[2].y * drawRatio;
 
 	DrawExtendGraph(x1, y1, x2, y2, _graphHandle, TRUE);
-	//DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
 }
 
 // í∏ì_ÇÃç¿ïWÇåvéZÇ∑ÇÈä÷êî
@@ -69,10 +68,10 @@ void Box::RevivalBox()
 	status.m_life = _maxLife;
 }
 
-void Box::DestroyBox()
+void Box::DestroyBox(float revivalTime)
 {
 	SetActive(false);
-	_untilRevivalCount = REVIVAL_TIME;
+	_untilRevivalCount = revivalTime;
 }
 
 void Box::RevivalCount()

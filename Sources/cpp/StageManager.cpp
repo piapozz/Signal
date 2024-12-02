@@ -9,6 +9,9 @@ StageManager::StageManager()
 	_boxHandle = LoadGraph("Resources/Box.png");
 	_wallHandle = LoadGraph("Resources/Wall.png");
 
+	SetDrawRatio();
+
+	int boxCount = 0;
 	for (int x = 0; x < sizeof(_stageLayout) / sizeof(_stageLayout[1]); x++)
 	{
 		for (int y = 0; y < sizeof(_stageLayout) / sizeof(_stageLayout[0]); y++)
@@ -17,6 +20,7 @@ StageManager::StageManager()
 			{
 			case ObjectType::BOX:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE, _boxHandle));
+				boxCount++;
 				break;
 			case ObjectType::WALL:
 				_boxList.push_back(new Box(ConvertNumToPos(x, y), _wallHandle));
@@ -32,7 +36,7 @@ StageManager::StageManager()
 		}
 	}
 
-	SetDrawRatio();
+	_boxRevivalTime = REVIVAL_TIME * boxCount;
 }
 
 StageManager::~StageManager()
@@ -54,15 +58,18 @@ void StageManager::SetDrawRatio()
 
 	if (stageRatio >= windowRatio)
 	{
-		_defaultStagePos.x = 0;
-		_defaultStagePos.y = 0;
-		//drawRatio = (float)_stageWidth / (float)(WINDOW_WIDTH + WINDOW_WIDTH * STAGE_MARGIN_RATE);
+		_boxSize = (float)(WINDOW_WIDTH - (float)(WINDOW_WIDTH * STAGE_MARGIN_RATE * 2)) / ((float)_stageWidth);
+		drawRatio = _boxSize / BOX_SIZE;
+		drawAnchorPos.x = (WINDOW_HEIGHT - (float)_stageHeight * _boxSize + _boxSize) / 2;
+		drawAnchorPos.y = WINDOW_WIDTH * STAGE_MARGIN_RATE;
 	}
 	else
 	{
-		_defaultStagePos.x = 0;
-		_defaultStagePos.y = 0;
-		//drawRatio = (float)_stageHeight / (float)(WINDOW_HEIGHT + WINDOW_HEIGHT * STAGE_MARGIN_RATE);
+		// 画面の高さから余白を引いた長さをブロック1つ分に割る
+		_boxSize = (float)(WINDOW_HEIGHT - (float)(WINDOW_HEIGHT * STAGE_MARGIN_RATE * 2)) / ((float)_stageHeight);
+		drawRatio = _boxSize / BOX_SIZE;
+		drawAnchorPos.x = (WINDOW_WIDTH - (float)_stageWidth * _boxSize + _boxSize) / 2;
+		drawAnchorPos.y = WINDOW_HEIGHT * STAGE_MARGIN_RATE;
 	}
 }
 
@@ -78,7 +85,7 @@ void StageManager::Proc()
 				_boxList[i]->RevivalBox();
 		// 体力がなくなったら非アクティブにする
 		else if(_boxList[i]->GetStatus().m_life <= 0)
-			_boxList[i]->DestroyBox();
+			_boxList[i]->DestroyBox(_boxRevivalTime);
 	}
 }
 
@@ -93,7 +100,8 @@ void StageManager::Draw()
 
 Vector2 StageManager::ConvertNumToPos(int x, int y)
 {
-	return _defaultStagePos + Vector2(x * BOX_SIZE, y * BOX_SIZE);
+	Vector2 result = Vector2(x, y) * BOX_SIZE;
+	return result;
 }
 
 Box* StageManager::GetNearBox(Vector2 pos)

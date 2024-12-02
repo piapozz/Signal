@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseObject.h"
+#include "Const.h"
 
 class Box : public BaseObject
 {
@@ -11,6 +12,7 @@ private:
 	float _maxLife;
 	int _exp;
 	int _graphHandle;
+
 
 public:
 
@@ -26,7 +28,7 @@ public:
 	Vector2 GetNormDir(Vector2 hitPos) override;		// –@ü‚ğ•Ô‚·ŠÖ”
 	Vector2 GetVertexPos(int n);			// ’¸“_À•W‚ğ•Ô‚·ŠÖ”
 	void RevivalBox();
-	void DestroyBox();
+	void DestroyBox(float revivalTime);
 	void RevivalCount();
 	bool GetIsWall() { return _isWall; }
 	int GetRevivalCount() { return _untilRevivalCount; }

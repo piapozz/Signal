@@ -144,6 +144,7 @@
     <ClCompile Include="Sources\cpp\Box.cpp" />
     <ClCompile Include="Sources\cpp\BulletManager.cpp" />
     <ClCompile Include="Sources\cpp\CollisionManager.cpp" />
+    <ClCompile Include="Sources\cpp\Const.cpp" />
     <ClCompile Include="Sources\cpp\EffectManager.cpp" />
     <ClCompile Include="Sources\cpp\Enemy.cpp" />
     <ClCompile Include="Sources\cpp\ExplosionChamber.cpp" />

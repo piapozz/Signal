@@ -146,8 +146,7 @@ void CollisionManager::HitCheck_Player_Bullet(BaseCharacter* player , MainBullet
 	if (HitCheck_BaseObj(player, bullet) == true)
 	{
 		std::vector<BaseObject*> hitCharaList = bullet->hitCharObject;
-		// すでに当たっているオブジェクトならスキップし、
-		// 当たっているオブジェクトを更新
+		// すでに当たっているオブジェクトならスキップ
 		for (int i = 0; i < hitCharaList.size(); i++)
 		{
 			if (player == hitCharaList[i])

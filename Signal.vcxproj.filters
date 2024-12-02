@@ -138,6 +138,9 @@
     <ClCompile Include="Sources\cpp\SelectionButton.cpp">
       <Filter>ソース ファイル\Ishihara</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\cpp\Const.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\header\BaseScene.h">

@@ -86,7 +86,7 @@ void SelectionButton::Draw()
 		int color = GetColor(255, 255, 255);
 		if (i == _nowSelecteNumber) color = GetColor(_luminance, _luminance, _luminance);
 
-		SetFontSize(WINDOW_HEIGHT / (_selectCount * 7));
-		DrawFormatString((WINDOW_WIDTH / 2) - ((_selectString[i].size() / 2) * 20), Pos, color, "%s", _selectString[i].c_str());
+		SetFontSize(WINDOW_HEIGHT / (_selectCount * fontSize));
+		DrawFormatString((WINDOW_WIDTH / 2) - ((_selectString[i].size() / 2) * (_selectCount * fontSize)), Pos, color, "%s", _selectString[i].c_str());
 	}
 }

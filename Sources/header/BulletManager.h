@@ -12,21 +12,21 @@ public:
 	// プレイヤーごとに持つ弾の情報
 	struct BulletPram
 	{
-		float m_BulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
-		int m_BulletType[(int)BulletType::MAX] = { 1,10,0,0,0,0 };
+		float m_BulletStatus[(int)BulletStatus::MAX] = { 10,10,10,10 };
+		int m_BulletType[(int)BulletType::MAX] = { 1,10,10,10,10,10 };
 		std::vector<MainBullet*> m_BulletList;
 		std::vector<Explosion*> m_ExplosionList;
 		float time = 0;
 	};
 
-	const int BULLET_MAX = 256;
+	const int BULLET_MAX = 2048;
 	const int EXPLOSION_MAX = BULLET_MAX;
 
 private:
 
 	std::vector<BulletPram> _bulletPram;
 
-	const float RATE_VALUE = 0.2f;	// 一レベルごとに上がっていくレート
+	const float RATE_VALUE = 100.0f;	// 一レベルごとに上がっていくレート
 
 	int _diffusion = 2;				// 拡散のレベル一ごとに増える弾の数
 	int _diffusionAngleMax = 120 ;	// 拡散する角度

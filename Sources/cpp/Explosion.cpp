@@ -5,7 +5,7 @@ Explosion::Explosion()
 {
 	// éûä‘ÇÃèâä˙âª
 	_time = GetNowCount();
-	objectHandle = LoadGraph("Resources/Enemy.png");
+	objectHandle = LoadGraph("Resources/Bullet_Bomb.png");
 }
 
 Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus)
@@ -16,7 +16,7 @@ Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus
 	status = objStatus;
 	status.m_isActive = true;
 	damage = 5;
-	objectHandle = LoadGraph("Resources/Enemy.png");
+	objectHandle = LoadGraph("Resources/Bullet_Bomb.png");
 }
 
 Explosion::~Explosion()

@@ -148,8 +148,7 @@ void BulletManager::CreateExplosion()
 void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 {
 	// RateåvéZ
-
-	float interval = 1000 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
+	float interval = 1100 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
 	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 

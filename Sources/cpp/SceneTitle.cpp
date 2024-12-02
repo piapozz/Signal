@@ -55,7 +55,11 @@ void SceneTitle::Draw()
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
     //DrawFormatString(WINDOW_WIDTH / 2 - (WINDOW_WIDTH / 10), WINDOW_HEIGHT / 4, GetColor(255, 255, 255), "%s", "Signal");
    // DrawGraph(WINDOW_WIDTH / 4, WINDOW_HEIGHT / 20, _titleLogoHandle, true);
-    DrawExtendGraph(720, 100, 1220, 600,
+    DrawExtendGraph(
+        (WINDOW_WIDTH / 2) - (TITLE_LOGO_X /2),
+        (WINDOW_HEIGHT / 3) - (TITLE_LOGO_Y / 2),
+        (WINDOW_WIDTH / 2) + (TITLE_LOGO_X / 2),
+        (WINDOW_HEIGHT / 3) + (TITLE_LOGO_Y / 2),
         _titleLogoHandle, true);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     // •`‰æ

@@ -103,7 +103,7 @@ void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos,int 
 	Vector2 centerPos;
 
 	// 配列の分プレイヤーの周りにUIを描画
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < vectorArray.size(); i++)
 	{
 		// 「i」の状態を見て方角を分岐 ※北東南西の順番で描画
 		switch (i)

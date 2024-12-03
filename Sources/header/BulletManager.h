@@ -51,6 +51,7 @@ public:
 
 	// ”š”­‚Ì—v¿‚ª‚ ‚é‚È‚ç¶¬‚·‚é
 	void CreateExplosion();
+	void CreateExplosion(BaseObject::Status status, BaseChamber::ExplosionContainer container);
 
 	// ”­Ë
 	void AddBullet(int playerNum , BaseObject::Status status);

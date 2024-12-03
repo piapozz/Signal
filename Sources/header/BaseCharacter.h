@@ -9,20 +9,33 @@ private:
 	float vecLength;					// ベクトルの長さ
 	float selecting;					// 選択中のコマンドを代入
 
-public:
-	int deviceNum;						// 弾の管理などに使う変数
-	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
+	float speed = 5;			// 自機のスピード
+	float dodgeSpeed = 20;		// 回避の速さ
+	float dodgeMoveCount;		// 回避の移動時間を管理
+	float dodgeCooltime;		// 回避のクールタイムを管理
+	float playerBombCount;
+
 	int request;						// 次の要求量
-	int levelUpCount;					
+	int levelUpCount;
 	int lotteryPowerCount;				// パワーを抽選できる回数
 	int lotteryStatusCount;				// ステータス抽選できる回数
-
-	std::vector<int> choicePower;		// パワーアップの選択肢を格納
-	std::vector<int> choiceStatus;		// ステータスアップの選択肢を格納
 
 	bool canLottery;					// 抽選を行うことができるかの管理
 	bool choosePower;					// パワーの強化を実行してるかどうか
 	bool chooseStatus;					// ステータスの強化を実行しているかどうか
+	bool playerBomb;
+
+public:
+	const float DODGE_COOLTIME = 2000.0f;
+	const float DODGE_MOVETIME = 250.0f;
+
+	const float PLAYER_BOMB_TIME = 1000.0f;
+
+	int deviceNum;						// 弾の管理などに使う変数
+	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
+
+	std::vector<int> choicePower;		// パワーアップの選択肢を格納
+	std::vector<int> choiceStatus;		// ステータスアップの選択肢を格納
 
 	BaseCharacter(BulletManager* bullet);	// コンストラクタ
 	~BaseCharacter();					// デストラクタ
@@ -30,6 +43,7 @@ public:
 	void Rotate(Vector2 stickAngle);
 	void Move();
 	void Dodge();
+	void DodgeCoolTime();
 	void LevelUp() {};
 	void ObserveExp();
 	void LotteryStatus();
@@ -38,6 +52,7 @@ public:
 
 	// 値の取得や変更を行う関数
 	bool GetIsPlayer();
+	bool GetIsInvincible();
 	int GetExpValue();
 	void GainExp(int expValue);
 	Vector2 GetPlayerPos();
@@ -54,10 +69,9 @@ protected:
 
 	int exp;					// 壊した箱の数を管理
 
-	float speed = 5;			// 自機のスピード
-	float dodgeSpeed = 10;			// 回避の速さ
-	float dodgeCount;			// 回避のクールタイム管理
-	float dodgeFlame;			// 回避に使うフレーム数
+	bool isInvincible;			// 無敵かどうか判断
+
+	Vector2 dodgeVec;
 
 	bool isPlayer;
 	bool canDodge;

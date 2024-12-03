@@ -29,9 +29,9 @@ int SceneMain::CheckChangeScene()
     // ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚¢‚½‚çƒV[ƒ“‚ð‘JˆÚ
     if (gameManager->GetFinish() == true)
     {
-
         AudioManager::GetInstance().PlaySE(SEName::GAMEEND);
         sceneName = SceneName::GAME_RESULT;
+
     }
 
     return sceneName;

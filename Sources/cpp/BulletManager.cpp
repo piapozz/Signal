@@ -16,7 +16,7 @@ BulletManager::BulletManager(int playerNum)
 
 		for (int j = 0; j < BULLET_MAX; j++)
 		{
-			_bulletPram[i].m_BulletList.push_back(new MainBullet(LoadGraph()));
+			_bulletPram[i].m_BulletList.push_back(new MainBullet(LoadGraph("1")));
 			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
 			_bulletPram[i].m_BulletList[j]->SetActive(false);
 			_bulletPram[i].m_ExplosionList[j]->SetActive(false);

@@ -36,7 +36,7 @@ void SceneResult::Draw()
     // DrawGraph(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, _titleLogoHandle, true);
     SetFontSize(WINDOW_HEIGHT / 7);
 
-    DrawFormatString(WINDOW_WIDTH / 2 - (WINDOW_WIDTH / 10), WINDOW_HEIGHT / 4, GetColor(255, 255, 255), "%s", "Game Clear");
+    DrawFormatString(WINDOW_WIDTH / 2 - (WINDOW_WIDTH / 10), WINDOW_HEIGHT / 4, GetColor(255, 255, 255), "%dP WIN!!", Memory::GetInstance().winner);
     // •`‰æ
     select->Draw();
 }

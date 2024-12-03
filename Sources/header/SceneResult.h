@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseScene.h"
 #include "SelectionButton.h"
+#include "Memory.h"
 
 class SceneResult :
     public BaseScene

@@ -150,7 +150,8 @@ void GameManager::CheckFinish()
 	if (activeDevice.size() <= 1)
 	{
 		// 配列の0番目にいるプレイヤーを勝者にする
-		winDevice = activeDevice[0];
+		Memory::GetInstance().winner = activeDevice[0] + 1;
+
 		// ゲームを終了
 		isFinish = true;
 	}

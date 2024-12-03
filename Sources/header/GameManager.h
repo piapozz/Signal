@@ -7,7 +7,7 @@
 #include "BulletManager.h"
 #include "UIManager.h"
 #include "InputManager.h"
-
+#include "Memory.h"
 #include "AudioManager.h"
 
 // ゲームの進行クラス
@@ -25,7 +25,7 @@ public:
 
 	bool GetFinish();
 
-	 int winDevice;
+	static int winDevice;
 
 private:
 

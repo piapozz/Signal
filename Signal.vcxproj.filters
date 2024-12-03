@@ -233,5 +233,8 @@
     <ClInclude Include="Sources\header\SelectionButton.h">
       <Filter>ヘッダー ファイル\Ishihara</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\header\Memory.h">
+      <Filter>ヘッダー ファイル\Ishihara</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

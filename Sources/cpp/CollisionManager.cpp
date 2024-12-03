@@ -434,3 +434,29 @@ void CollisionManager::UpdateHitObj()
 		}
 	}
 }
+
+// 箱とほかのオブジェクトの接触を判定する関数
+bool CollisionManager::HitCheckBox_Other(Box* box)
+{
+	// プレイヤーとの判定
+	for (int p = 0; p < _pPlayers.size(); p++)
+	{
+		BaseCharacter* player = _pPlayers[p];
+		if (HitCheck_BaseObj_Box(player, box))
+			return true;
+
+		// 弾との判定
+		std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p].m_BulletList;
+		for (int b = 0; b < bulletList.size(); b++)
+		{
+			MainBullet* bullet = bulletList[b];
+			// 弾が非アクティブならスキップ
+			if (!bullet->GetActive()) continue;
+
+			if (HitCheck_BaseObj_Box(bullet, box))
+				return true;
+		}
+	}
+
+	return false;
+}

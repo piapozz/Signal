@@ -39,4 +39,5 @@ public:
 	bool CheckHitRay(Vector2 pos1, Vector2 pos2);
 	void HitCheck_Everything();
 	void UpdateHitObj();
+	bool HitCheckBox_Other(Box* box);
 };

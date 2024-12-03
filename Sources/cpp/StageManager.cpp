@@ -1,8 +1,9 @@
 #include "../header/StageManager.h"
-#include "../header/Box.h"
 
-StageManager::StageManager()
+StageManager::StageManager(CollisionManager* collisionManager)
 {
+	_pCollisionManager = collisionManager;
+
 	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
 	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
 
@@ -36,7 +37,7 @@ StageManager::StageManager()
 		}
 	}
 
-	_boxRevivalTime = REVIVAL_TIME * boxCount;
+	_boxRevivalTime = REVIVAL_TIME;
 }
 
 StageManager::~StageManager()
@@ -77,15 +78,20 @@ void StageManager::Proc()
 {
 	for (int i = 0; i < _boxList.size(); i++)
 	{
+		Box* box = _boxList[i];
 		// boxが非アクティブなら復活をカウント
-		if (_boxList[i]->GetActive() == false)
-			if (_boxList[i]->GetRevivalCount() > 0)
-				_boxList[i]->RevivalCount();
-			else
-				_boxList[i]->RevivalBox();
+		if (box->GetActive() == false)
+		{
+			// カウントに達していないならカウント
+			if (box->GetRevivalCount() > 0)
+				box->RevivalCount();
+			// カウントに達していて、その場に何もないなら復活
+			else if (!_pCollisionManager->HitCheckBox_Other(box))
+				box->RevivalBox();
+		}
 		// 体力がなくなったら非アクティブにする
-		else if(_boxList[i]->GetStatus().m_life <= 0)
-			_boxList[i]->DestroyBox(_boxRevivalTime);
+		else if(box->GetStatus().m_life <= 0)
+			box->DestroyBox(_boxRevivalTime);
 	}
 }
 
@@ -93,8 +99,9 @@ void StageManager::Draw()
 {
 	for (int i = 0; i < _boxList.size(); i++)
 	{
-		if (_boxList[i]->GetActive() == true)
-			_boxList[i]->Draw();
+		Box* box = _boxList[i];
+		if (box->GetActive() == true)
+			box->Draw();
 	}
 }
 
@@ -110,15 +117,16 @@ Box* StageManager::GetNearBox(Vector2 pos)
 	float nearDistance = Vector2::Distance(pos, nearBox->GetStatus().m_position);
 	for (int i = 1; i < _boxList.size(); i++)
 	{
+		Box* box = _boxList[i];
 		// 非アクティブならスキップ
-		if (_boxList[i]->GetStatus().m_isActive == false) continue;
+		if (box->GetStatus().m_isActive == false) continue;
 		// 壁ならスキップ
-		if (_boxList[i]->GetIsWall() == true) continue;
+		if (box->GetIsWall() == true) continue;
 
 		// 距離の比較
-		float distance = Vector2::Distance(pos, _boxList[i]->GetStatus().m_position);
+		float distance = Vector2::Distance(pos, box->GetStatus().m_position);
 		if (distance < nearDistance)
-			nearBox = _boxList[i];
+			nearBox = box;
 	}
 
 	return nearBox;

@@ -3,11 +3,11 @@
 // コンストラクタ
 GameManager::GameManager(InputManager* pInputManager)
 {
-	stageManager = new StageManager();
+	collisionManager = new CollisionManager();
+	stageManager = new StageManager(collisionManager);
 	players.push_back(new Player(stageManager->GetStartPos()[0], bulletManager));
 	players.push_back(new Player(stageManager->GetStartPos()[1], bulletManager));
 	// enemys.push_back(new Enemy(stageManager->GetStartPos()[1], bulletManager));
-	collisionManager = new CollisionManager();
 	uiManager = new UIManager();
 	inputManager = pInputManager;
 	// 弾を人数分用意
@@ -56,21 +56,22 @@ void GameManager::Init()
 	// プレイヤーの設定
 	for (int i = 0; i < devices.size(); i++)
 	{
+		BaseCharacter* device = devices[i];
 		// デバイスごとに番号をつける
-		devices[i]->deviceNum = i;
+		device->deviceNum = i;
 
 		// プレイヤーだったらどのコントローラーを使うかを割り当てる
-		if (devices[i]->GetIsPlayer() == true)
+		if (device->GetIsPlayer() == true)
 		{
 			// 割り当て
-			devices[i]->SetPlayerNum(i);
+			device->SetPlayerNum(i);
 			// プレイヤー用のイメージを設定
-			devices[i]->SetImageData("Resources/Signal_Player.png");
+			device->SetImageData("Resources/Signal_Player.png");
 		}
 		else
 		{
 			// 敵用のイメージを設定
-			devices[i]->SetImageData("Resources/Signal_Enemy.png");
+			device->SetImageData("Resources/Signal_Enemy.png");
 		}
 	}
 
@@ -122,8 +123,6 @@ void GameManager::Draw()
 	for (int i = 0; i < devices.size(); i++)
 	{
 		if (devices[i]->status.m_isActive != false)devices[i]->Draw();
-
-		// uiManager->Draw(i);
 
 		uiManager->Draw();
 	}

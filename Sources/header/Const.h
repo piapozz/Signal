@@ -272,7 +272,7 @@ const int PLAYER_MAX = 2;		// プレイヤーの最大数
 
 // 箱
 const float BOX_SIZE = 100.0f;   // 箱のサイズ
-const int REVIVAL_TIME = 500;   // 復活までの時間
+const int REVIVAL_TIME = 1000;   // 復活までの時間
 const float BOX_LIFE = 10.0f;
 
 // 色データ

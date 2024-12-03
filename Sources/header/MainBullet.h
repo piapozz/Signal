@@ -22,13 +22,13 @@ private:
 	BaseChamber* _chambers[(int)BulletType::MAX];
 
 	float _bulletStatus[(int)BulletStatus::MAX] = { 1,1,1,1 };
-	int _bulletType[(int)BulletType::MAX] = { 1,0,0,0,0,0 };
+	int _bulletType[(int)BulletType::MAX] = { 1,0,0,0,0 };
 
 	void UpdateStatus();
 
 public:
 
-	MainBullet();
+	MainBullet(int handle);
 	~MainBullet();
 
 	// äpìxèCê≥

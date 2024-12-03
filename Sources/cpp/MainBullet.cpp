@@ -1,6 +1,6 @@
 #include "../header/MainBullet.h"
 
-MainBullet::MainBullet()
+MainBullet::MainBullet(int handle)
 {
 	_bulletContainer = new BaseChamber::BulletContainer();
 
@@ -12,7 +12,7 @@ MainBullet::MainBullet()
 	_chambers[(int)BulletType::TRACKING_SHOT] = new TrackingChamber(&status, _bulletContainer);
 	_chambers[(int)BulletType::MULTI_SHOT] = new NormalChamber(&status, _bulletContainer);
 
-	objectHandle = LoadGraph("Resources/Bullet.png");
+	objectHandle = handle;
 
 	status.m_isActive = false;
 }

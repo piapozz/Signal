@@ -17,6 +17,8 @@ Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus
 	status.m_isActive = true;
 	damage = 5;
 	objectHandle = LoadGraph("Resources/Bomb.png");
+
+	drawUpScale = 0.05f;
 }
 
 Explosion::~Explosion()

@@ -47,7 +47,7 @@ public:
 	public:
 		void LevelUp(int level)
 		{
-			penetrationCount = level;
+			penetrationCount = level * 2;
 		}
 	};
 

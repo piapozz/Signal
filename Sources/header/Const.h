@@ -159,16 +159,15 @@ enum class BulletType
     MULTI_SHOT,
     PENETRATION,
     REFLECTION,
-    TRACKING_SHOT,
 
     MAX
 };
 enum class DirButton
 {
-    UP = 0,
-    RIGHT,
-    DOWN,
+    DOWN = 0,
     LEFT,
+    RIGHT,
+    UP,
     MAX
 };
 
@@ -184,8 +183,7 @@ enum class Button
 	RIGHT_TRIGGER,
 	LEFT_STICK_BUTTON,
 	RIGHT_STICK_BUTTON,
-    BACK,
-    START,
+
 	MAX
 };
 
@@ -270,11 +268,25 @@ enum class SEName
 
 // プレイヤー
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
+const std::string PLAYER_GRAPH_ADRESS[PLAYER_MAX] =
+{
+    "Resources/Player_1.png",
+    "Resources/Player_2.png"
+};
+
+// 弾
+const std::string BULLET_GRAPH_ADRESS[PLAYER_MAX] =
+{
+    "Resources/Bullet_1.png",
+    "Resources/Bullet_2.png"
+};
 
 // 箱
 const float BOX_SIZE = 100.0f;   // 箱のサイズ
 const int REVIVAL_TIME = 1000;   // 復活までの時間
 const float BOX_LIFE = 10.0f;
+const std::string BOX_GRAPH_ADRESS = "Resources/Box.png";
+const std::string WALL_GRAPH_ADRESS = "Resources/Wall.png";
 
 // 色データ
 const int COLOR_BLACK = GetColor(0, 0, 0);

@@ -75,7 +75,5 @@ int Player::InputButtonToInt()
 	else if (inputManager->CheckDownButton(deviceNum, Button::B)) value = (int)Cardinal::EAST;
 	else if (inputManager->CheckDownButton(deviceNum, Button::A)) value = (int)Cardinal::SOUTH;
 
-	printfDx("value %d\n", value);
-
 	return value;
 }

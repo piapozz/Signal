@@ -37,18 +37,18 @@ void Enemy::Proc()
 
 	// 移動量を決める
 	moveVec = Vector2(0, 0);
-	if (targetDistance > 700)
+	if (targetDistance > BOX_SIZE * 3)
 		moveVec = angleDir;
-	else if (targetDistance < 150)
+	else if (targetDistance < BOX_SIZE)
 		moveVec = angleDir * (-1);
 
 	Move();
 
 	// 射撃
-	//_pBulletManager->AddBullet(deviceNum, status);
+	_pBulletManager->AddBullet(deviceNum, status);
 
 	// パワーアップの選択
-	SelectPowerUp();
+	//SelectPowerUp();
 }
 
 void Enemy::SetTarget()

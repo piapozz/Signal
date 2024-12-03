@@ -7,8 +7,8 @@ StageManager::StageManager(CollisionManager* collisionManager)
 	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
 	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
 
-	_boxHandle = LoadGraph("Resources/Box.png");
-	_wallHandle = LoadGraph("Resources/Wall.png");
+	_boxHandle = LoadGraph(BOX_GRAPH_ADRESS.c_str());
+	_wallHandle = LoadGraph(WALL_GRAPH_ADRESS.c_str());
 
 	SetDrawRatio();
 

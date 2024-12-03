@@ -296,6 +296,10 @@ void CollisionManager::HitCheck_Everything()
 				HitCheck_Player_Player(player_1, player_2);
 
 			// 弾との判定
+			// プレイヤーが無敵ならスキップ
+			if (player_1->GetIsInvincible())
+				continue;
+
 			std::vector<MainBullet*> bulletList = _pBullet->GetBulletList()[p2].m_BulletList;
 			std::vector<Explosion*> explosionList = _pBullet->GetBulletList()[p2].m_ExplosionList;
 

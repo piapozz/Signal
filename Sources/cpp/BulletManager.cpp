@@ -16,7 +16,7 @@ BulletManager::BulletManager(int playerNum)
 
 		for (int j = 0; j < BULLET_MAX; j++)
 		{
-			_bulletPram[i].m_BulletList.push_back(new MainBullet(LoadGraph("1")));
+			_bulletPram[i].m_BulletList.push_back(new MainBullet(LoadGraph(BULLET_GRAPH_ADRESS[i].c_str())));
 			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
 			_bulletPram[i].m_BulletList[j]->SetActive(false);
 			_bulletPram[i].m_ExplosionList[j]->SetActive(false);
@@ -63,8 +63,6 @@ void BulletManager::Move()
 // 描画
 void BulletManager::Draw()
 {
-	int count = 0;
-	int countE = 0;
 
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
 	for (int i = 0; i < _bulletPram.size(); i++)
@@ -80,15 +78,8 @@ void BulletManager::Draw()
 			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
 				_bulletPram[i].m_ExplosionList[j]->Draw();
 
-			if (_bulletPram[i].m_BulletList[j]->GetActive())
-				count++;
-			if (_bulletPram[i].m_ExplosionList[j]->GetActive())
-				countE++;
 		}
 	}
-
-	printfDx("\n%d / %d\n", count, BULLET_MAX * _bulletPram.size());
-	printfDx("\n%d / %d\n", countE, BULLET_MAX * _bulletPram.size());
 }
 
 // 座標更新
@@ -166,7 +157,7 @@ void BulletManager::CreateExplosion(BaseObject::Status status,BaseChamber::Explo
 void BulletManager::AddBullet(int playerNum, BaseObject::Status status)
 {
 	// Rate計算
-	float interval = 1100 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
+	float interval = 1300 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
 
 	if (GetNowCount() - _bulletPram[playerNum].time < interval) return;
 

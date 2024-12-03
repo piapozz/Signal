@@ -66,13 +66,13 @@ void GameManager::Init()
 			// 割り当て
 			device->SetPlayerNum(i);
 			// プレイヤー用のイメージを設定
-			device->SetImageData("Resources/Signal_Player.png");
+			device->SetImageData(PLAYER_GRAPH_ADRESS[i].c_str());
 		}
-		else
-		{
-			// 敵用のイメージを設定
-			device->SetImageData("Resources/Signal_Enemy.png");
-		}
+		//else
+		//{
+		//	// 敵用のイメージを設定
+		//	device->SetImageData("Resources/Signal_Enemy.png");
+		//}
 	}
 
 	uiManager->Init(bulletManager, devices);
@@ -119,6 +119,9 @@ void GameManager::Draw()
 	// ステージの描画
 	stageManager->Draw();
 
+	// 弾の描画
+	bulletManager->Draw();
+
 	// プレイヤーたちの描画
 	for (int i = 0; i < devices.size(); i++)
 	{
@@ -126,8 +129,6 @@ void GameManager::Draw()
 
 		uiManager->Draw();
 	}
-	// 弾の描画
-	bulletManager->Draw();
 }
 
 // 終了確認

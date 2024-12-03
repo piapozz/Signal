@@ -7,6 +7,7 @@ BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 	playerBomb = false;
 	request = 1;
 	status.m_shapeSize = BOX_SIZE / 4.0f;
+	drawUpScale = 0.008f;
 }
 
 BaseCharacter::~BaseCharacter()
@@ -68,14 +69,6 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 // 経験値を見て
 void BaseCharacter::ObserveExp()
 {
-	printfDx("%d\n", choiceStatus.size());
-	//printfDx("LevelUpCount%d\n", levelUpCount);
-	//printfDx("lotteryPowerCount%d\n", lotteryPowerCount);
-	//printfDx("lotteryStatusCount%d\n", lotteryStatusCount);
-	//printfDx("choicePowerArraySize%d\n", choicePower.size());
-	//printfDx("choiceStatusArraySize%d\n", choiceStatus.size());
-	//printfDx("Flag%d\n", GetChooceFlag());
-
 	// レベルアップに必要な個数を満たしていたら
 	if (GetExpValue() >= request)
 	{

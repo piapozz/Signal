@@ -57,10 +57,13 @@ public:
 	Vector2 GetDisplayPos();
 
 	Status status;
+
 protected:
 
 	int objectHandle;		// オブジェクトの見た目を管理（モデルや画像）
 
 	bool canMove;			// 動けるかどうかを管理
 	bool hitObject;			// オブジェクトにヒットしたかを管理
+
+	float drawUpScale = 0.01f;		// 描画時の縮尺
 };

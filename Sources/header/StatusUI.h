@@ -44,6 +44,8 @@ public:
 	void ArrangeIcon(int deviceNum, int imageHandle[]);
 	void PlayerAround(std::vector<int> vectorArray, Vector2 playerPos, int imageHandle[]);
 	void StatusViewer(int deviceNum);
+	void PlayerLevel(int playerLevel);
+	void RequestCount(int exp, int request);
 
 	void LevelUpUI();
 };

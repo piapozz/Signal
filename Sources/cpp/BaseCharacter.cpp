@@ -68,7 +68,7 @@ void BaseCharacter::Rotate(Vector2 stickAngle)
 // 経験値を見て
 void BaseCharacter::ObserveExp()
 {
-	// printfDx("%d\n", GetExpValue());
+	printfDx("%d\n", choiceStatus.size());
 	//printfDx("LevelUpCount%d\n", levelUpCount);
 	//printfDx("lotteryPowerCount%d\n", lotteryPowerCount);
 	//printfDx("lotteryStatusCount%d\n", lotteryStatusCount);
@@ -129,8 +129,12 @@ void BaseCharacter::LotteryPower()
 	// 列挙体MAXをのぞいた可変長配列の初期化
 	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
-		// 可変長配列に要素を追加
-		choicePower.push_back(i);
+		// 上限に達してる種類を配列に含めない
+		if (LEVEL_MAX > bulletManager->GetBulletList()[deviceNum].m_BulletType[i])
+		{
+			// 可変長配列に要素を追加
+			choicePower.push_back(i);
+		}
 	}
 
 	// BulletType::NORMALを削除 （begin() で先頭を削除）
@@ -163,8 +167,12 @@ void BaseCharacter::LotteryStatus()
 	// MAXをのぞいた可変長配列の初期化
 	for (int i = 0; i < (int)BulletStatus::MAX; i++)
 	{
-		// 可変長配列に要素を追加
-		choiceStatus.push_back(i);
+		// 上限に達してる種類を配列に含めない
+		if (LEVEL_MAX > bulletManager->GetBulletList()[deviceNum].m_BulletStatus[i])
+		{
+			// 可変長配列に要素を追加
+			choiceStatus.push_back(i);
+		}
 	}
 
 	//// 現在の配列の大きさから表示させたい分を引いて、取り除きたい分for文を回す
@@ -188,6 +196,18 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 	// 強化を得ることができる状態だったら
 	if (choosePower != false || chooseStatus != false)
 	{
+		// 上限に達していたらスキップ
+		if (choiceStatus.size() == 0)
+		{
+			canLottery = true;
+			chooseStatus = false;
+		}
+		// 上限に達していたらスキップ
+		if (choicePower.size() == 0)
+		{
+			canLottery = true;
+			choosePower = false;
+		}
 
 		if (selectedButton != (int)Cardinal::MAX)
 		{
@@ -195,7 +215,7 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			if (choosePower)
 			{
 				// 中身がなかったら選択を無効にする
-				if (choicePower[selectedButton] != NULL)
+				if (choicePower.size() > selectedButton)
 				{
 					// パワーアップ
 					bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
@@ -209,10 +229,10 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			}
 
 			// ステータスアップ処理を行う 
-			else
+			else if(chooseStatus)
 			{
 				// 中身がなかったら選択を無効にする
-				if (choiceStatus[selectedButton] != NULL)
+				if (choiceStatus.size() > selectedButton)
 				{
 					// ステータスアップ
 					bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
@@ -346,3 +366,4 @@ int BaseCharacter::GetChooceFlag()
 void BaseCharacter::GainExp(int expValue) { exp += expValue; }
 
 int BaseCharacter::GetExpValue() { return exp; }
+int BaseCharacter::GetRequestValue() { return request; }

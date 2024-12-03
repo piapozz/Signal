@@ -40,18 +40,6 @@ public:
 		}
 	};
 
-	// 誘導ステータス
-	struct TrackingContainer
-	{
-		float turnAngle = 5;			// 補正する角度
-		Vector2 targetPosition;			// 誘導対象
-	public:
-		void LevelUp(int level)
-		{
-			turnAngle = (float)(level * 5.0f);
-		}
-	};
-
 	// 貫通ステータス
 	struct PenetrationContainer
 	{
@@ -66,13 +54,13 @@ public:
 	// 爆発ステータス
 	struct ExplosionContainer
 	{
-		float expansionRange = 0.2f;			// 一フレームごとに膨張する範囲
+		float expansionRange = 1.0f;			// 一フレームごとに膨張する範囲
 		float time = 2;							// 持続時間
 		bool active = false;					// 爆発の有効化
 	public:
 		void LevelUp(int level)
 		{
-			expansionRange = level * 0.2f;
+			expansionRange = level * 1.0f;
 		}
 
 	};
@@ -82,7 +70,6 @@ public:
 	{
 		MainContainer* mainContainer = new MainContainer();
 		ReflectionContainer* reflectionContainer = new ReflectionContainer();
-		TrackingContainer* trackingContainer = new TrackingContainer();
 		PenetrationContainer* penetrationContainer = new PenetrationContainer();
 		ExplosionContainer* explosionContainer = new ExplosionContainer();
 		int level[(int)BulletType::MAX];
@@ -98,7 +85,6 @@ public:
 			}
 
 			reflectionContainer->LevelUp(temp[(int)BulletType::REFLECTION]);
-			trackingContainer->LevelUp(temp[(int)BulletType::TRACKING_SHOT]);
 			penetrationContainer->LevelUp(temp[(int)BulletType::PENETRATION]);
 			explosionContainer->LevelUp(temp[(int)BulletType::EXPLOSION]);
 		}

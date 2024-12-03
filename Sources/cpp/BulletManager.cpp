@@ -1,7 +1,7 @@
 #include "../header/BulletManager.h"
 
 // コンストラクタ
-BulletManager::BulletManager() 
+BulletManager::BulletManager()
 {
 
 }
@@ -9,14 +9,14 @@ BulletManager::BulletManager()
 // コンストラクタ
 BulletManager::BulletManager(int playerNum)
 {
-	for (int i = 0; i < playerNum; i++) 
+	for (int i = 0; i < playerNum; i++)
 	{
 		_bulletPram.push_back(BulletPram());
 		_bulletPram[i].time = GetNowCount();
 
-		for (int j = 0; j < BULLET_MAX; j++) 
+		for (int j = 0; j < BULLET_MAX; j++)
 		{
-			_bulletPram[i].m_BulletList.push_back(new MainBullet());
+			_bulletPram[i].m_BulletList.push_back(new MainBullet(LoadGraph()));
 			_bulletPram[i].m_ExplosionList.push_back(new Explosion());
 			_bulletPram[i].m_BulletList[j]->SetActive(false);
 			_bulletPram[i].m_ExplosionList[j]->SetActive(false);
@@ -38,12 +38,12 @@ BulletManager::~BulletManager()
 }
 
 // 弾の移動
-void BulletManager::Move() 
+void BulletManager::Move()
 {
 	// プレイヤーとそれぞれの弾の分繰り返して移動する
-	for (int i = 0; i < _bulletPram.size(); i++) 
+	for (int i = 0; i < _bulletPram.size(); i++)
 	{
-		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++) 
+		for (int j = 0; j < _bulletPram[i].m_BulletList.size(); j++)
 		{
 			// 有効判定
 			// 移動
@@ -87,7 +87,7 @@ void BulletManager::Draw()
 		}
 	}
 
-	printfDx("\n%d / %d\n", count , BULLET_MAX * _bulletPram.size());
+	printfDx("\n%d / %d\n", count, BULLET_MAX * _bulletPram.size());
 	printfDx("\n%d / %d\n", countE, BULLET_MAX * _bulletPram.size());
 }
 
@@ -158,13 +158,12 @@ void BulletManager::CreateExplosion(BaseObject::Status status,BaseChamber::Explo
 		break;
 	}
 }
-
 /// <summary>
 /// バレットリストに現在のステータスの弾を追加する
 /// </summary>
 /// <param name="playerNum">プレイヤー番号</param>
 /// <param name="status">弾を発射する座標と角度</param>
-void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
+void BulletManager::AddBullet(int playerNum, BaseObject::Status status)
 {
 	// Rate計算
 	float interval = 1100 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
@@ -177,7 +176,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 	if (_bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT] == 0)
 	{
 		// 渡されたプレイヤーの弾を一つ追加
-		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++) 
+		for (int i = 0; i < _bulletPram[playerNum].m_BulletList.size(); i++)
 		{
 			if (_bulletPram[playerNum].m_BulletList[i]->GetActive()) continue;
 
@@ -187,7 +186,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 			break;
 		}
 	}
-	else 
+	else
 	{
 		// レベルを格納
 		int level = _bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT];
@@ -212,7 +211,7 @@ void BulletManager::AddBullet(int playerNum , BaseObject::Status status)
 			for (int j = 0; j < _bulletPram[playerNum].m_BulletList.size(); j++)
 			{
 				if (_bulletPram[playerNum].m_BulletList[j]->GetActive()) continue;
-				
+
 				// 使える弾を見つけた
 				_bulletPram[playerNum].m_BulletList[j]->Reload(temp, _bulletPram[playerNum].m_BulletStatus, _bulletPram[playerNum].m_BulletType);
 				break;

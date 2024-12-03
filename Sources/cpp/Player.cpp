@@ -16,9 +16,7 @@ void Player::Proc()
 {
 	//DrawFormatString(15, 5, GetColor(0, 0, 0), "[Debug]");
 	//printfDx("HP %f",status.m_life);
-
-	SetSurvival();
-
+	// 
 	// €‚ñ‚Å‚¢‚È‚©‚Á‚½‚çˆ—‚ğ‚·‚é ¦isActive‚ªtrue‚Ì‚Æ‚«‚Í€‚ñ‚Å‚¢‚é
 	if (status.m_isActive)
 	{
@@ -27,8 +25,10 @@ void Player::Proc()
 
 		moveVec = controller.m_LStick;
 
+		DodgeCoolTime();
+
 		// ‰ñ”ğ‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚ç‰ñ”ğ‚·‚é
-		// if (controller.m_LTrigger)Dodge();
+		if (controller.m_LTrigger)Dodge();
 
 		// ‚à‚µˆÚ“®‚Å‚«‚éó‘Ô‚¾‚Á‚½‚ç
 		if (canMove)

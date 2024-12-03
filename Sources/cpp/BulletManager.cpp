@@ -142,6 +142,23 @@ void BulletManager::CreateExplosion()
 	}
 }
 
+// // 爆発の要請があるなら生成する
+void BulletManager::CreateExplosion(BaseObject::Status status,BaseChamber::ExplosionContainer container)
+{
+	// 生成
+	for (int i = 0; i < _bulletPram[0].m_ExplosionList.size(); i++)
+	{
+		if (_bulletPram[0].m_ExplosionList[i]->GetActive()) continue;
+
+		// 使える爆発を見つけた
+		_bulletPram[0].m_ExplosionList[i] = new Explosion(container, status);
+
+		AudioManager::GetInstance().PlaySE(SEName::BOMB);
+
+		break;
+	}
+}
+
 /// <summary>
 /// バレットリストに現在のステータスの弾を追加する
 /// </summary>

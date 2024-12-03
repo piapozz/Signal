@@ -4,6 +4,7 @@ BaseCharacter::BaseCharacter(BulletManager* bulletManager)
 {
 	canDodge = true;
 	canLottery = true;
+	playerBomb = false;
 	request = 1;
 	status.m_shapeSize = BOX_SIZE / 4.0f;
 }
@@ -19,16 +20,21 @@ void BaseCharacter::Move()
 	// 回避移動だったら
 	if (dodgeNow)
 	{
-		// 向いている方向に強制的に進む
-		status.m_nextPosition.x = (status.m_position.x + cos(status.m_angle)) * dodgeSpeed;
-		status.m_nextPosition.y = (status.m_position.y + sin(status.m_angle)) * dodgeSpeed;
+		// 移動ベクトルの長さを計算
+		vecLength = sqrt(pow(dodgeVec.x, 2.0f) + pow(dodgeVec.y, 2.0f));
 
-		//			// 移動ベクトルの長さを計算
-		//vecLength = sqrt(pow(moveVec.x, 2.0f) + pow(moveVec.y, 2.0f));
+		// 正規化された移動ベクトルにスピードをかけて次の位置を計算
+		status.m_nextPosition.x = status.m_position.x + (dodgeVec.x / vecLength) * dodgeSpeed;
+		status.m_nextPosition.y = status.m_position.y + (dodgeVec.y / vecLength) * dodgeSpeed;
 
-		//// 正規化された移動ベクトルにスピードをかけて次の位置を計算
-		//status.m_nextPosition.x = status.m_position.x + (moveVec.x / vecLength) * dodgeSpeed;
-		//status.m_nextPosition.y = status.m_position.y + (moveVec.y / vecLength) * dodgeSpeed;
+		// 回避時間
+		if (GetNowCount() >= dodgeMoveCount + DODGE_MOVETIME)
+		{
+			// 回避状態を解除
+			dodgeNow = false;
+			// 無敵を解除
+			isInvincible = false;
+		}
 	}
 
 	// 通常移動
@@ -188,27 +194,35 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 			// パワーアップ処理を行う
 			if (choosePower)
 			{
-				// パワーアップ
-				bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
-				// 抽選できる状態に戻す
-				canLottery = true;
+				// 中身がなかったら選択を無効にする
+				if (choicePower[selectedButton] != NULL)
+				{
+					// パワーアップ
+					bulletManager->LevelUpType((BulletType)choicePower[selectedButton], deviceNum);
+					// 抽選できる状態に戻す
+					canLottery = true;
 
-				AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
+					AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
 
-				choosePower = false;
+					choosePower = false;
+				}
 			}
 
 			// ステータスアップ処理を行う 
 			else
 			{
-				// ステータスアップ
-				bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
-				// 抽選できる状態に戻す
-				canLottery = true;
+				// 中身がなかったら選択を無効にする
+				if (choiceStatus[selectedButton] != NULL)
+				{
+					// ステータスアップ
+					bulletManager->LevelUpStatus((BulletStatus)choiceStatus[selectedButton], deviceNum);
+					// 抽選できる状態に戻す
+					canLottery = true;
 
-				AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
+					AudioManager::GetInstance().PlaySE(SEName::LEVELUP_DECIDE);
 
-				chooseStatus = false;
+					chooseStatus = false;
+				}
 			}
 		}
 	}
@@ -217,7 +231,55 @@ void BaseCharacter::ChooseBonus(int selectedButton)
 }
 
 // 回避ボタンが押されたら移動方法をMoveからDodgeMoveに切り替える
-void BaseCharacter::Dodge() { if (canDodge == true)dodgeNow = true; }
+void BaseCharacter::Dodge()
+{
+	// 回避が押されたならクールタイムが上がっているかを確認
+	if (canDodge == true)
+	{
+		// 回避状態ではなかったら回避を開始
+		if (dodgeNow != true)
+		{
+			// 移動方向を保存
+			dodgeVec = moveVec;
+
+			// 移動方向がなかったら回避しない
+			if (dodgeVec.x != 0 || dodgeVec.y != 0)
+			{
+				// 計測を開始
+				dodgeMoveCount = GetNowCount();
+
+				// クールタイムを発生させる
+				dodgeCooltime = GetNowCount();
+
+				// 効果音を鳴らす
+				AudioManager::GetInstance().PlaySE(SEName::DODGE);
+
+				// 回避中に状態を変更
+				dodgeNow = true;
+
+				// 無敵にする
+				isInvincible = true;
+
+				// 回避不可能状態にする
+				canDodge = false;
+			}
+		}
+	}
+}
+
+void BaseCharacter::DodgeCoolTime()
+{
+	// 回避ができなくなったらクールタイムを開始
+	if (canDodge == false)
+	{
+		// 
+		if (GetNowCount() >= dodgeCooltime + DODGE_COOLTIME)
+		{
+			canDodge = true;
+		}
+	}
+
+}
 
 //// 配列の中身を削除
 //std::vector<int>DeleteVector(std::vector<int> vector)
@@ -240,16 +302,32 @@ void BaseCharacter::SetPlayerNum(int playerNumber)
 
 void BaseCharacter::SetSurvival() 
 {
-	if(status.m_life <= 0 && status.m_isActive == true)
-		// AudioManager::GetInstance().PlaySE(SEName::);
 	// 体力が0になったときプレイヤーは死にます
-	if (status.m_life <= 0) status.m_isActive = false;
+	if (status.m_life <= 0 && playerBomb != true)
+	{
+		// 時間を保存
+		playerBombCount = GetNowCount();
 
+		// 爆発を実行
+		BaseChamber::ExplosionContainer temp;
+		temp.expansionRange = 5;
+		temp.time = PLAYER_BOMB_TIME / 1000;
+
+		bulletManager->CreateExplosion(status, temp);
+
+		// プレイヤー爆発フラグを動かす
+		playerBomb = true;
+	}
+
+	// 爆発が終わった時、プレイヤーを死亡させる
+	if (playerBomb == true && GetNowCount() >= playerBombCount + PLAYER_BOMB_TIME)status.m_isActive = false;
 }
 
 Vector2 BaseCharacter::GetPlayerPos() { return status.m_position; }
 
 bool BaseCharacter::GetIsPlayer() { return isPlayer; }
+
+bool BaseCharacter::GetIsInvincible() { return isInvincible; }
 
 /// <summary>
 /// フラグがtrueになっているかどうか確かめる

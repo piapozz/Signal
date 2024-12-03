@@ -34,6 +34,6 @@ void Explosion::Move()
 void Explosion::CheckExplosionTimeOver()
 {
 	// 経過時間が過ぎていたら使用を終わる
-	if (GetNowCount() - _time  > _explosionContainer.time * 60)
+	if (GetNowCount() - _time  > _explosionContainer.time * 1000)
 		status.m_isActive = false;
 }

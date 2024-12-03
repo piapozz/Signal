@@ -55,7 +55,7 @@ public:
 	struct ExplosionContainer
 	{
 		float expansionRange = 1.0f;			// ˆêƒtƒŒ[ƒ€‚²‚Æ‚É–c’£‚·‚é”ÍˆÍ
-		float time = 2;							// ‘±ŠÔ
+		float time = 0.5f;							// ‘±ŠÔ
 		bool active = false;					// ”š”­‚Ì—LŒø‰»
 	public:
 		void LevelUp(int level)

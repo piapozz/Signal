@@ -14,9 +14,9 @@ BaseObject::~BaseObject()
 void BaseObject::Draw()
 {
 	Vector2 drawPos = GetDisplayPos();
-	float drawSize = status.m_shapeSize * drawRatio * 0.05f;
+	float drawSize = status.m_shapeSize * drawRatio * drawUpScale;
 	// ï`âÊ
-	DrawRotaGraph(drawPos.x, drawPos.y, drawSize, status.m_angle * (DX_PI_F / 180), objectHandle, TRUE);
+	DrawRotaGraph(drawPos.x, drawPos.y, drawSize, status.m_angle / RAD, objectHandle, TRUE);
 }
 
 // åªç›ç¿ïWÇ…ìKâû

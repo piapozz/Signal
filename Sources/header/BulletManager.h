@@ -19,7 +19,7 @@ public:
 		float time = 0;
 	};
 
-	const int BULLET_MAX = 2048;
+	const int BULLET_MAX = 1024;
 	const int EXPLOSION_MAX = BULLET_MAX;
 
 private:

@@ -165,10 +165,10 @@ enum class BulletType
 };
 enum class DirButton
 {
-    DOWN = 0,
-    LEFT,
+    UP = 0,
     RIGHT,
-    UP,
+    DOWN,
+    LEFT,
     MAX
 };
 
@@ -184,7 +184,8 @@ enum class Button
 	RIGHT_TRIGGER,
 	LEFT_STICK_BUTTON,
 	RIGHT_STICK_BUTTON,
-
+    BACK,
+    START,
 	MAX
 };
 

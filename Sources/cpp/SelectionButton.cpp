@@ -25,21 +25,19 @@ void SelectionButton::Init(std::vector<std::string> str)
 
 void SelectionButton::Proc(InputManager* input)
 {
-	if (input->GetStick(0, Stick::LEFT).y < -0.7 )
+	if (input->CheckDownDirButton(0, DirButton::UP))
 	{
 		_nowSelecteNumber -= 1;
 		_luminance = 0;
-		
+		AudioManager::GetInstance().PlaySE(SEName::CURSOR_MOVE);
 	}
 
-	if (input->GetStick(0, Stick::LEFT).y > 0.7)
+	if (input->CheckDownDirButton(0, DirButton::DOWN))
 	{
 		_nowSelecteNumber += 1;
 		_luminance = 0;
-		
+		AudioManager::GetInstance().PlaySE(SEName::CURSOR_MOVE);
 	}
-
-	if ((input->GetStick(0, Stick::LEFT).y < -0.7) || (input->GetStick(0, Stick::LEFT).y > 0.7))AudioManager::GetInstance().PlaySE(SEName::CURSOR_MOVE);
 
 	if(_nowSelecteNumber >= _selectCount)
 	{

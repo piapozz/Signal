@@ -2,6 +2,7 @@
 #include <vector>
 #include "BaseObject.h"
 #include "Box.h"
+#include "CollisionManager.h"
 
 class StageManager
 {
@@ -74,9 +75,11 @@ private:
 	float _boxSize;
 	int _boxRevivalTime;
 
+	CollisionManager* _pCollisionManager;
+
 public:
 
-	StageManager();
+	StageManager(CollisionManager* collisionManager);
 	~StageManager();
 
 	void Proc();

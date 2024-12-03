@@ -62,11 +62,12 @@ void Enemy::SetTarget()
 
 	for (int i = 0; i < _pPlayers.size(); i++)
 	{
-		Vector2 targetPos = _pPlayers[i]->status.m_position;
+		BaseCharacter* player = _pPlayers[i];
+		Vector2 targetPos = player->status.m_position;
 
 		// 間にオブジェクトがないか判定
 		if (_pCollisionManager->CheckHitRay(pos, targetPos))
-			playerList.push_back(_pPlayers[i]);
+			playerList.push_back(player);
 	}
 
 	// 射線上にプレイヤーがいるか

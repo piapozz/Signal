@@ -16,7 +16,6 @@ private:
 	float playerBombCount;
 
 	int request;						// 次の要求量
-	int levelUpCount;
 	int lotteryPowerCount;				// パワーを抽選できる回数
 	int lotteryStatusCount;				// ステータス抽選できる回数
 
@@ -30,9 +29,11 @@ public:
 	const float DODGE_MOVETIME = 250.0f;
 
 	const float PLAYER_BOMB_TIME = 1000.0f;
+	const int LEVEL_MAX = 10;
 
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
+	int levelUpCount;
 
 	std::vector<int> choicePower;		// パワーアップの選択肢を格納
 	std::vector<int> choiceStatus;		// ステータスアップの選択肢を格納
@@ -54,6 +55,7 @@ public:
 	bool GetIsPlayer();
 	bool GetIsInvincible();
 	int GetExpValue();
+	int GetRequestValue();
 	void GainExp(int expValue);
 	Vector2 GetPlayerPos();
 	int GetChooceFlag();

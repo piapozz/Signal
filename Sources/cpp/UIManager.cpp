@@ -12,7 +12,6 @@ UIManager::UIManager()
 	bulletIcon[(int)BulletType::MULTI_SHOT] = LoadGraph("Resources/Bullet_MultiShot.png");
 	bulletIcon[(int)BulletType::PENETRATION] = LoadGraph("Resources/Bullet_Penetration.png");
 	bulletIcon[(int)BulletType::REFLECTION] = LoadGraph("Resources/Bullet_Reflection.png");
-	bulletIcon[(int)BulletType::TRACKING_SHOT] = LoadGraph("");
 
 	statusIcon[(int)BulletStatus::SPEED] = LoadGraph("Resources/Status_Speed.png");
 	statusIcon[(int)BulletStatus::POWER] = LoadGraph("Resources/Status_Power.png");
@@ -68,6 +67,12 @@ void UIManager::Draw()
 		{
 			statusUI[i]->PlayerAround(devices[i]->choiceStatus, devices[i]->GetDisplayPos(), statusIcon);
 		}
+
+		// レベルの表示
+		statusUI[i]->PlayerLevel(devices[i]->levelUpCount);
+
+		// 経験値/必要量 の表示
+		statusUI[i]->RequestCount(devices[i]->GetExpValue(), devices[i]->GetRequestValue());
 
 	}
 }

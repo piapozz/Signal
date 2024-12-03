@@ -36,6 +36,9 @@ void StatusUI::ArrangeIcon(int deviceNum, int imageHandle[])
 	// ’e‚Ìí—Ş‚ğ•`‰æ
 	for (int i = 0; i < (int)BulletType::MAX; i++)
 	{
+		// ƒm[ƒ}ƒ‹‚Ì•`‰æ‚ğ”ò‚Î‚·
+		if (i == (int)BulletType::NORMAL) continue;
+
 		infoPos.x += BULLET_ICON_HEIGHT;
 		// infoPos.y += BULLET_ICON_WIDTH * ;
 
@@ -138,4 +141,26 @@ void StatusUI::PlayerAround(std::vector<int> vectorArray, Vector2 playerPos,int 
 
 		DrawExtendGraph(centerPos.x - TYPE_ICON.x, centerPos.y - TYPE_ICON.y, centerPos.x + TYPE_ICON.x, centerPos.y + TYPE_ICON.y, imageHandle[vectorArray[i]], TRUE);
 	}
+}
+
+void StatusUI::RequestCount(int exp, int request)
+{
+	// ‰Šú‰»
+	Vector2 infoPos = initPos;
+
+	// ‚‚³‚Ì‰ŠúˆÊ’u
+	infoPos.y = initPos.y + 150.0f;
+
+	DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "NextLevel: %d / %d", exp, request);
+}
+
+void StatusUI::PlayerLevel(int playerLevel)
+{
+	// ‰Šú‰»
+	Vector2 infoPos = initPos;
+
+	// ‚‚³‚Ì‰ŠúˆÊ’u
+	infoPos.y = initPos.y + 130.0f;
+
+	DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "PlayerLevel:%d", playerLevel);
 }

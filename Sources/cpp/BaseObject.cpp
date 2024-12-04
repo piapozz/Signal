@@ -43,6 +43,7 @@ void BaseObject::SetHitFlag(bool hitCheck)
 bool BaseObject::TakeDamage(float damageSize)
 {
 	status.m_life -= damageSize;
+	hitDamage = true;
 
 	return status.m_life <= 0;
 }
@@ -65,6 +66,8 @@ void BaseObject::SetShapeSize(float size) { status.m_shapeSize = size; }
 
 // イメージデータをセット
 void BaseObject::SetImageData(const char* objName) { objectHandle = LoadGraph(objName); }
+
+void BaseObject::SetHitDamage(float hit) { hitDamage = hit; }
 
 // 形を取得する
 Shape BaseObject::GetShape() { return status.m_shape; }

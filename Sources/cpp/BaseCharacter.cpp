@@ -134,7 +134,7 @@ void BaseCharacter::LotteryPower()
 	choicePower.erase(choicePower.begin());
 
 	// Œ»İ‚Ì”z—ñ‚Ì‘å‚«‚³‚©‚ç•\¦‚³‚¹‚½‚¢•ª‚ğˆø‚¢‚ÄAæ‚èœ‚«‚½‚¢•ªfor•¶‚ğ‰ñ‚·
-	for (int i = 0; i < choicePower.size() - CHOICE_POWER_MAX; i++)
+	for (int i = 0; i < CHOICE_POWER_MAX - choicePower.size(); i++)
 	{
 		// autoŒ^‚Åæ“¾‚µ‚Ä‚©‚çíœ
 		// auto it = std::find(choicePower.begin(), choicePower.end(), GetRand(choicePower.size() - 1));

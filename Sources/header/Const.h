@@ -245,26 +245,13 @@ enum class SEName
     MAX
 };
 
-//const std::string BGM_ADRESS[(int)BGMName::MAX]
-//{
-//    "Resources/BGM.mp3",
-//};
+enum class UIGraph
+{
+    STATUS_DIA_BASE = 0,
+    STATUS_DIA,
 
-//const std::string SOUND_ADRESS[(int)SEName::MAX]
-//{
-//    "Resources/Audio/Shot.mp3",
-//    "Resources/Audio/Impact.mp3",
-//    "Resources/Audio/LevelUp.mp3",
-//    "Resources/Audio/Levelup_Decide.mp3",
-//    "Resources/Audio/Explosion.mp3",
-//    "Resources/Audio/Damage.mp3",
-//    "Resources/Audio/Dodge.mp3",
-//    "Resources/Audio/Reflect.mp3",
-//    "Resources/Audio/Bomb.mp3",
-//    "Resources/Audio/Cursor_Decide.mp3",
-//    "Resources/Audio/Cursor_Move.mp3",
-//
-//};
+    MAX,
+};
 
 // プレイヤー
 const int PLAYER_MAX = 2;		// プレイヤーの最大数
@@ -279,6 +266,12 @@ const std::string BULLET_GRAPH_ADRESS[PLAYER_MAX] =
 {
     "Resources/Bullet_1.png",
     "Resources/Bullet_2.png"
+};
+
+const std::string UI_GRAPH_ADRESS[(int)UIGraph::MAX] =
+{
+    "Resources/Status_Dia_Base.png",
+    "Resources/Status_Dia.png",
 };
 
 // 箱
@@ -302,7 +295,6 @@ const int WINDOW_HEIGHT = 1080;
 // UI関連
 const int CHOICE_POWER_MAX = 3;
 const int CHOICE_STATUS_MAX = 3;
-const float DISTANCE_ERROR = 20.0f;
 
 const float BULLET_ICON_WIDTH = 75.0f;
 const float BULLET_ICON_HEIGHT = 75.0f;
@@ -310,6 +302,26 @@ const float BULLET_ICON_HEIGHT = 75.0f;
 const int FONT_DEFAULT = 20;
 
 const float RAD = (float)(180 / DX_PI);
+
+const float DISTANCE_ERROR = 50.0f;
+const float BAR_TO_BAR_ERROR = 7.0f;
+const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 3;
+const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 3;
+
+const float TYPE_ICON_HEIGHT = 50.0f;
+const float TYPE_ICON_WIDTH = 50.0f;
+
+const int TEXT_TO_STAR = 10;
+const int STAR_TO_STAR = 20;
+
+const Vector2 TYPE_ICON = { TYPE_ICON_HEIGHT / 2 ,TYPE_ICON_WIDTH / 2 };
+
+// プレイヤー関連
+const float DODGE_COOLTIME = 2000.0f;
+const float DODGE_MOVETIME = 250.0f;
+
+const float PLAYER_BOMB_TIME = 1000.0f;
+const int LEVEL_MAX = 10;
 
 extern Vector2 drawAnchorPos;				// ステージのアンカー座標
 extern float drawRatio;

@@ -26,7 +26,7 @@ private:
 
     vector<string> str = {
        "New Game",
-       "Optipn",
+       "Option",
        "Exit",
     };
 

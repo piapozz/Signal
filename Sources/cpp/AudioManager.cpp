@@ -15,11 +15,6 @@ AudioManager::AudioManager()
 		// _soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i].c_str()));
 		_soundHandle.push_back(LoadSoundMem(SOUND_ADRESS[i]));
 	}
-
-	//for (int i = 0; i < _soundHandle.size(); i++)
-	//{
-	//	ChangeVolumeSoundMem(50.0f, _soundHandle[i]);
-	//}
 }
 
 AudioManager::~AudioManager()
@@ -34,13 +29,6 @@ AudioManager::~AudioManager()
 		DeleteSoundMem(_soundHandle[i]);
 	}
 }
-
-//AudioManager& AudioManager::GetInstance()
-//{
-//	static AudioManager instance; // ‰‰ñŒÄ‚Ño‚µŽž‚É1‰ñ‚¾‚¯‰Šú‰»
-//	printfDx("AudioManager instance address: %p\n", &instance);
-//	return instance;
-//}
 
 // num”Ô–Ú‚ÌSE‚ðÄ¶
 void AudioManager::PlaySE(SEName se)

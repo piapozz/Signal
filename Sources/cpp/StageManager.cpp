@@ -20,7 +20,7 @@ StageManager::StageManager(CollisionManager* collisionManager)
 			switch ((ObjectType)_stageLayout[y][x])
 			{
 			case ObjectType::BOX:
-				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE, _boxHandle));
+				_boxList.push_back(new Box(ConvertNumToPos(x, y), BOX_LIFE, REVIVAL_TIME, _boxHandle));
 				boxCount++;
 				break;
 			case ObjectType::WALL:
@@ -36,8 +36,6 @@ StageManager::StageManager(CollisionManager* collisionManager)
 			}
 		}
 	}
-
-	_boxRevivalTime = REVIVAL_TIME;
 }
 
 StageManager::~StageManager()
@@ -89,9 +87,6 @@ void StageManager::Proc()
 			else if (!_pCollisionManager->HitCheckBox_Other(box))
 				box->RevivalBox();
 		}
-		// 体力がなくなったら非アクティブにする
-		else if(box->GetStatus().m_life <= 0)
-			box->DestroyBox(_boxRevivalTime);
 	}
 }
 

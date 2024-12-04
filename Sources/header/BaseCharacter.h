@@ -9,10 +9,10 @@ private:
 	float vecLength;					// ベクトルの長さ
 	float selecting;					// 選択中のコマンドを代入
 
-	float speed = 5;			// 自機のスピード
-	float dodgeSpeed = 20;		// 回避の速さ
-	float dodgeMoveCount;		// 回避の移動時間を管理
-	float dodgeCooltime;		// 回避のクールタイムを管理
+	float speed = 5;					// 自機のスピード
+	float dodgeSpeed = 20;				// 回避の速さ
+	float dodgeMoveCount;				// 回避の移動時間を管理
+	float dodgeCooltime;				// 回避のクールタイムを管理
 	float playerBombCount;
 
 	int request;						// 次の要求量
@@ -22,15 +22,9 @@ private:
 	bool canLottery;					// 抽選を行うことができるかの管理
 	bool choosePower;					// パワーの強化を実行してるかどうか
 	bool chooseStatus;					// ステータスの強化を実行しているかどうか
-	bool playerBomb;
+	bool playerBomb;					// プレイヤーが死亡したかどうか
 
 public:
-	const float DODGE_COOLTIME = 2000.0f;
-	const float DODGE_MOVETIME = 250.0f;
-
-	const float PLAYER_BOMB_TIME = 1000.0f;
-	const int LEVEL_MAX = 10;
-
 	int deviceNum;						// 弾の管理などに使う変数
 	int playerNum;						// どのプレイヤーがどのコントローラーを使うのかを管理する
 	int levelUpCount;

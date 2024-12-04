@@ -4,6 +4,7 @@ UIManager::UIManager()
 {
 	initPos[0] = { 0.0f,25.0f };
 	initPos[1] = { 1500.0f,25.0f };
+	// initPos[2] = { 1500.0f,25.0f };
 	// initPos[2] = { 0.0f,750.0f };
 	// initPos[3] = { 1500,750.0f };
 
@@ -49,8 +50,7 @@ void UIManager::Draw()
 	{
 		// 取得している射撃タイプを画像で順番に並べる
 		statusUI[i]->ArrangeIcon(devices[i]->deviceNum,bulletIcon);
-		// 取得している射撃タイプの下にレベルを表示する
-		// statusUI[i]->
+
 		// ステータスの状態を星で描画
 		statusUI[i]->StatusViewer(devices[i]->deviceNum);
 

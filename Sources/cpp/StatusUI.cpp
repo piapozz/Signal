@@ -10,6 +10,9 @@ StatusUI::StatusUI(BulletManager* bulletManager, Vector2 position)
 
 	levelViewIcon = LoadGraph("Resources/Bullet_Level_Bar.png");
 
+	statusDiaIcon[(int)UIGraph::STATUS_DIA_BASE] = LoadGraph(UI_GRAPH_ADRESS[(int)UIGraph::STATUS_DIA_BASE].c_str());
+	statusDiaIcon[(int)UIGraph::STATUS_DIA] = LoadGraph(UI_GRAPH_ADRESS[(int)UIGraph::STATUS_DIA].c_str());
+
 	// 初期位置を更新
 	initPos = position;
 
@@ -92,10 +95,16 @@ void StatusUI::StatusViewer(int deviceNum)
 			infoPos.x = initPos.x;
 			// 
 			infoPos.x += j * STAR_TO_STAR + textError * TEXT_TO_STAR;
-			// ステータスのレベルが「i」を超えていたら黒星で描画
-			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "★"); }
-			// 超えていなかったら白星で描画
-			else DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "☆");
+			//// ステータスのレベルが「i」を超えていたら黒星で描画
+			//if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "★"); }
+			//// 超えていなかったら白星で描画
+			//else DrawFormatString(infoPos.x, infoPos.y, COLOR_WHITE, "☆");
+
+			// ステータスのレベルが「i」を超えていたら星で描画
+			if (j < bullet->GetBulletList()[deviceNum].m_BulletStatus[i]) { DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + 20, infoPos.y + 20, statusDiaIcon[(int)UIGraph::STATUS_DIA], TRUE); }
+			// 超えていなかったら中身のない星で描画
+			else DrawExtendGraph(infoPos.x, infoPos.y, infoPos.x + 20, infoPos.y + 20, statusDiaIcon[(int)UIGraph::STATUS_DIA_BASE], TRUE);
+
 		}
 	}
 }

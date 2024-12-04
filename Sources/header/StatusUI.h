@@ -9,32 +9,15 @@ private:
 
 	BulletManager* bullet;
 
-	// 色データ
-	const int COLOR_BLACK = GetColor(0, 0, 0);
-	const int COLOR_WHITE = GetColor(255, 255, 255);
-
-	const int TEXT_TO_STAR = 10;
-	const int STAR_TO_STAR = 20;
-
 	Vector2 initPos;
 
 	int deviceMax = 2;
 	int deviceCount;
 
-	const float DISTANCE_ERROR = 50.0f;
-	const float BAR_TO_BAR_ERROR = 7.0f;
-	const float LEVEL_BAR_HEIGHT = BULLET_ICON_WIDTH / 3;
-	const float LEVEL_BAR_WIDTH = BULLET_ICON_HEIGHT / 3;
-	const int LEVEL_MAX = 5;
-	
-	const float TYPE_ICON_HEIGHT = 50.0f;
-	const float TYPE_ICON_WIDTH = 50.0f;
-
-	const Vector2 TYPE_ICON = { TYPE_ICON_HEIGHT / 2 ,TYPE_ICON_WIDTH / 2 };
-
 	// 弾のレベル表示に使う画像
 	int levelViewIcon;
 	string bulletStateText[(int)BulletStatus::MAX];
+	int statusDiaIcon[1];
 
 public:
 	StatusUI(BulletManager* bulletManager, Vector2 position);

@@ -23,11 +23,11 @@ public:
 
 	void SetSelectNum(int num);
 
-	void Init(std::vector<std::string> str);
+	void Init(const std::vector<std::string> &str);
 
-	BaseScene::SceneName CheckChangeButton(bool input);
+	BaseScene::SceneName CheckChangeButton(const bool &input);
 
-	void Proc(InputManager* input);
+	void Proc(InputManager* &input);
 
 	void Draw();
 };

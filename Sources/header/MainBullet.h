@@ -28,7 +28,7 @@ private:
 
 public:
 
-	MainBullet(int handle);
+	MainBullet(const int &handle);
 	~MainBullet();
 
 	// 角度修正
@@ -38,7 +38,7 @@ public:
 	void Move();
 
 	// 着弾時
-	void Impact(ObjectType hitType);
+	void Impact(const ObjectType &hitType);
 
 	// 消滅時
 	void Destroy();
@@ -47,13 +47,13 @@ public:
 	void CheckRange();
 
 	// 座標、角度、ステータスセット
-	void Reload(Status objStatus, float Pram[], int type[]);
+	void Reload(const Status &objStatus,const float Pram[],const int type[]);
 
 	// 弾の性質を取得
-	int GetBulletType(BulletType type) { return _bulletType[(int)type]; }
+	inline int GetBulletType(const BulletType &type) const { return _bulletType[(int)type]; }
 
 	// 爆発が有効かどうか
-	bool GetExplosion() 
+	inline bool GetExplosion() const
 	{
 		if (_bulletContainer->explosionContainer->active)
 		{
@@ -63,5 +63,5 @@ public:
 		return  false;
 	}
 
-	BaseChamber::ExplosionContainer GetExplosionStatus() { return *_bulletContainer->explosionContainer; }
+	inline BaseChamber::ExplosionContainer GetExplosionStatus() const { return *_bulletContainer->explosionContainer; }
 };

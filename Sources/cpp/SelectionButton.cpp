@@ -14,7 +14,7 @@ void SelectionButton::SetSelectNum(int num)
 	_selectCount = num;
 }
 
-void SelectionButton::Init(std::vector<std::string> str)
+void SelectionButton::Init(const std::vector<std::string> &str)
 {
 	// 配列を選択文字列にコピーする
 	for (int i = 0; i < str.size(); i++)
@@ -23,7 +23,7 @@ void SelectionButton::Init(std::vector<std::string> str)
 	}
 }
 
-void SelectionButton::Proc(InputManager* input)
+void SelectionButton::Proc(InputManager* &input)
 {
 	if (input->CheckDownDirButton(0, DirButton::UP))
 	{
@@ -50,7 +50,7 @@ void SelectionButton::Proc(InputManager* input)
 	
 }
 
-BaseScene::SceneName SelectionButton::CheckChangeButton(bool input)
+BaseScene::SceneName SelectionButton::CheckChangeButton(bool &input)
 {
 	if (input)
 	{

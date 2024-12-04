@@ -11,10 +11,10 @@ Box::Box(Vector2 pos, int handle)
 	CalVertexPos();
 
 	_isWall = true;
-	_graphHandle = handle;
+	objectHandle = handle;
 }
 
-Box::Box(Vector2 pos, float life, int handle)
+Box::Box(Vector2 pos, float life, float revivalTime, int handle)
 {
 	// ç¿ïWéwíË
 	SetPosition(pos);
@@ -31,7 +31,8 @@ Box::Box(Vector2 pos, float life, int handle)
 	_exp = 1;
 
 	_isWall = false;
-	_graphHandle = handle;
+	objectHandle = handle;
+	_revivalTime = revivalTime;
 }
 
 void Box::Draw()
@@ -41,7 +42,18 @@ void Box::Draw()
 	int x2 = drawAnchorPos.x + (int)_vertex[2].x * drawRatio;
 	int y2 = drawAnchorPos.y + (int)_vertex[2].y * drawRatio;
 
-	DrawExtendGraph(x1, y1, x2, y2, _graphHandle, TRUE);
+	if (hitDamage)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255); //îΩì]çáê¨ 
+		DrawExtendGraph(x1, y1, x2, y2, objectHandle, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_ADD, 255); //â¡éZçáê¨ 
+		DrawExtendGraph(x1, y1, x2, y2, objectHandle, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+	}
+	else
+	{
+		DrawExtendGraph(x1, y1, x2, y2, objectHandle, TRUE);
+	}
 }
 
 // í∏ì_ÇÃç¿ïWÇåvéZÇ∑ÇÈä÷êî
@@ -68,10 +80,10 @@ void Box::RevivalBox()
 	status.m_life = _maxLife;
 }
 
-void Box::DestroyBox(float revivalTime)
+void Box::DestroyBox()
 {
 	SetActive(false);
-	_untilRevivalCount = revivalTime;
+	_untilRevivalCount = _revivalTime;
 }
 
 void Box::RevivalCount()

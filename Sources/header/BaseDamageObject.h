@@ -32,6 +32,6 @@ public:
         }
     }
     // ƒ_ƒ[ƒWæ“¾
-    float GetDamage() { return damage; }
+    inline float GetDamage() const { return damage; }
 };
 

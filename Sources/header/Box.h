@@ -11,13 +11,12 @@ private:
 	int _untilRevivalCount = REVIVAL_TIME;
 	float _maxLife;
 	int _exp;
-	int _graphHandle;
-
+	float _revivalTime;
 
 public:
 
 	Box(Vector2 pos, int handle);
-	Box(Vector2 pos, float life, int handle);
+	Box(Vector2 pos, float life, float revivalTime, int handle);
 	~Box(){}
 
 	void Draw();
@@ -28,7 +27,7 @@ public:
 	Vector2 GetNormDir(Vector2 hitPos) override;		// ñ@ê¸Çï‘Ç∑ä÷êî
 	Vector2 GetVertexPos(int n);			// í∏ì_ç¿ïWÇï‘Ç∑ä÷êî
 	void RevivalBox();
-	void DestroyBox(float revivalTime);
+	void DestroyBox();
 	void RevivalCount();
 	bool GetIsWall() { return _isWall; }
 	int GetRevivalCount() { return _untilRevivalCount; }

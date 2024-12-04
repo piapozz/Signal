@@ -8,7 +8,7 @@ Explosion::Explosion()
 	objectHandle = LoadGraph("Resources/Bomb.png");
 }
 
-Explosion::Explosion(BaseChamber::ExplosionContainer container, Status objStatus)
+Explosion::Explosion(const BaseChamber::ExplosionContainer &container,const Status &objStatus)
 {
 	// 情報、ステータス、時間の初期化
 	_time = GetNowCount();

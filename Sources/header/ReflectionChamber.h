@@ -5,13 +5,9 @@
 class ReflectionChamber
 	: public BaseChamber
 {
-private:
-
-	bool frameFlag = false;
-
 public:
 
-	ReflectionChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
+	ReflectionChamber(BaseObject::Status* const& status,BulletContainer* const& container) : BaseChamber(status, container) {  }
 
 	void Move() {}
 

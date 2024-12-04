@@ -349,6 +349,7 @@ void CollisionManager::HitCheck_Everything()
 		Box* box = _pBoxs[bo];
 		// 箱が非アクティブならスキップ
 		if (!box->GetActive()) continue;
+		box->SetHitDamage(false);
 
 		// プレイヤーの数繰り返す
 		for (int p2 = 0; p2 < _pPlayers.size(); p2++)
@@ -364,10 +365,15 @@ void CollisionManager::HitCheck_Everything()
 				MainBullet* bullet = bulletList[bu];
 				// 弾が非アクティブならスキップ
 				if (!bullet->GetActive()) continue;
+				// 箱が非アクティブならスキップ
+				if (!box->GetActive()) continue;
 
 				if (IsInProximity(bullet, box) == true)
 					if (HitCheck_Bullet_Box(bullet, box))
+					{
 						player_2->GainExp(box->GetExp());
+						box->DestroyBox();
+					}
 			}
 
 			// 爆発のループ
@@ -376,10 +382,15 @@ void CollisionManager::HitCheck_Everything()
 				Explosion* explosion = explosionList[ex];
 				// 爆発が非アクティブならスキップ
 				if (!explosion->GetActive()) continue;
+				// 箱が非アクティブならスキップ
+				if (!box->GetActive()) continue;
 
 				if (IsInProximity(explosion, box) == true)
 					if (HitCheck_Explosion_Box(explosion, box))
+					{
 						player_2->GainExp(box->GetExp());
+						box->DestroyBox();
+					}
 			}
 		}
 	}

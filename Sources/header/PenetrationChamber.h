@@ -7,7 +7,7 @@ class PenetrationChamber
 {
 public:
 
-	PenetrationChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
+	PenetrationChamber( BaseObject::Status* const& status, BulletContainer* const& container) : BaseChamber(status, container) {  }
 
 	void Move(){}
 

@@ -7,7 +7,7 @@ BaseChamber::BaseChamber()
 }
 
 
-BaseChamber::BaseChamber(BaseObject::Status* objStatus, BulletContainer* container)
+BaseChamber::BaseChamber(BaseObject::Status* const &objStatus,BulletContainer* const &container)
 {
 	status = objStatus;
 	bulletContainer = container;

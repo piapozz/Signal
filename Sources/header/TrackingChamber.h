@@ -7,7 +7,7 @@ class TrackingChamber
 {
 public:
 
-	TrackingChamber(BaseObject::Status* status, BulletContainer* container) : BaseChamber(status, container) {  }
+	TrackingChamber(BaseObject::Status* const &status, BulletContainer* const &container) : BaseChamber(status, container) {  }
 
 	void Move() {}
 
@@ -15,7 +15,7 @@ public:
 	void AngleModifying() {};
 
 	// ’…’eŠÖ”
-	bool Impact() { return true; }
+	inline bool Impact() const { return true; }
 
 	// Á–ÅŠÖ” 
 	void Destroy() {}

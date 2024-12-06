@@ -7,7 +7,7 @@ BulletManager::BulletManager()
 }
 
 // コンストラクタ
-BulletManager::BulletManager(int playerNum)
+BulletManager::BulletManager(const int& playerNum)
 {
 	for (int i = 0; i < playerNum; i++)
 	{
@@ -134,7 +134,7 @@ void BulletManager::CreateExplosion()
 }
 
 // // 爆発の要請があるなら生成する
-void BulletManager::CreateExplosion(BaseObject::Status status,BaseChamber::ExplosionContainer container)
+void BulletManager::CreateExplosion(const BaseObject::Status &status, const BaseChamber::ExplosionContainer &container)
 {
 	// 生成
 	for (int i = 0; i < _bulletPram[0].m_ExplosionList.size(); i++)
@@ -149,12 +149,13 @@ void BulletManager::CreateExplosion(BaseObject::Status status,BaseChamber::Explo
 		break;
 	}
 }
+
 /// <summary>
 /// バレットリストに現在のステータスの弾を追加する
 /// </summary>
 /// <param name="playerNum">プレイヤー番号</param>
 /// <param name="status">弾を発射する座標と角度</param>
-void BulletManager::AddBullet(int playerNum, BaseObject::Status status)
+void BulletManager::AddBullet(const int &playerNum, const BaseObject::Status &status)
 {
 	// Rate計算
 	float interval = 1300 - (_bulletPram[playerNum].m_BulletStatus[(int)BulletStatus::RATE] * RATE_VALUE);
@@ -183,20 +184,20 @@ void BulletManager::AddBullet(int playerNum, BaseObject::Status status)
 		int level = _bulletPram[playerNum].m_BulletType[(int)BulletType::MULTI_SHOT];
 
 		// 間隔を算出
-		float rate = (float)(_diffusionAngleMax / ((_diffusion * level) + 1));
+		float rate = (float)(DIFFUSION_ANGLE_MAX / ((DIFFUSION * level) + 1));
 
 		// ラジアンに変換
 		float radianAngle = rate;
 
 		// 発射ステータスを作成
 		BaseObject::Status temp = status;
-		temp.m_angle -= radianAngle * ((_diffusion * level) / 2);
+		temp.m_angle -= radianAngle * ((DIFFUSION * level) / 2);
 
 		// それぞれの角度に対して弾を発射
-		for (int i = 0; i < ((_diffusion * level) + 1); i++)
+		for (int i = 0; i < ((DIFFUSION * level) + 1); i++)
 		{
 			// 現在の角度に応じて弾の発射ステータスを調整
-			temp.m_angle = status.m_angle - radianAngle * ((_diffusion * level) / 2) + radianAngle * i;
+			temp.m_angle = status.m_angle - radianAngle * ((DIFFUSION * level) / 2) + radianAngle * i;
 
 			// 使える弾を探してリロード
 			for (int j = 0; j < _bulletPram[playerNum].m_BulletList.size(); j++)
@@ -213,7 +214,7 @@ void BulletManager::AddBullet(int playerNum, BaseObject::Status status)
 
 // バレットのステータスを上げる
 // 引数 上げるステータス、プレイヤーの番号、
-void BulletManager::LevelUpStatus(BulletStatus status, int playerNum)
+void BulletManager::LevelUpStatus(const BulletStatus &status, const int &playerNum)
 {
 	// 受け取ったパラメーターを上昇
 	_bulletPram[playerNum].m_BulletStatus[(int)status]++;
@@ -221,7 +222,7 @@ void BulletManager::LevelUpStatus(BulletStatus status, int playerNum)
 
 // バレットのタイプを上げる
 // 引数 追加するタイプ、プレイヤーの番号、
-void BulletManager::LevelUpType(BulletType type, int playerNum)
+void BulletManager::LevelUpType(const BulletType &type,const int &playerNum)
 {
 	// 受け取ったタイプを上昇
 	_bulletPram[playerNum].m_BulletType[(int)type]++;

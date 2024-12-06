@@ -1,6 +1,6 @@
 #include "../header/MainBullet.h"
 
-MainBullet::MainBullet(int handle)
+MainBullet::MainBullet(const int &handle)
 {
 	_bulletContainer = new BaseChamber::BulletContainer();
 
@@ -44,7 +44,7 @@ void MainBullet::Move()
 }
 
 // 着弾時
-void MainBullet::Impact(ObjectType hitType)
+void MainBullet::Impact(const ObjectType &hitType)
 {
 	if (hitBoxObject.size() > 0 && hitType != ObjectType::PLAYER) 
 	{
@@ -108,7 +108,7 @@ void MainBullet::CheckRange()
 }
 
 // 座標、角度、ステータスセット
-void MainBullet::Reload(Status objStatus, float Pram[], int type[])
+void MainBullet::Reload(const Status &objStatus,const float Pram[],const int type[])
 {
 	status = objStatus;
 

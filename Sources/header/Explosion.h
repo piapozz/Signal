@@ -14,7 +14,7 @@ private:
 public:
 
 	Explosion();
-	Explosion(BaseChamber::ExplosionContainer container , Status objStatus);
+	Explosion(const BaseChamber::ExplosionContainer &container, const Status &objStatus);
 	~Explosion();
 
 	// ”š”­‚Ì–c’£

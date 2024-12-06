@@ -25,7 +25,6 @@ public:
 	{
 		float m_Speed = 5.0f;			// スピード
 		float m_Range = 1.0f;			// 射程
-		int color = GetColor(0, 0, 0);	// 弾丸の色
 	};
 
 	// 反射ステータス
@@ -34,7 +33,7 @@ public:
 		int reflectionCount = 0;		// 反射回数
 		Vector2 norm;					// 法線
 	public:
-		void LevelUp(int level)
+		void LevelUp(const int &level)
 		{
 			reflectionCount = level;
 		}
@@ -45,7 +44,7 @@ public:
 	{
 		int penetrationCount = 0;		// 貫通回数 
 	public:
-		void LevelUp(int level)
+		void LevelUp(const int &level)
 		{
 			penetrationCount = level * 2;
 		}
@@ -58,7 +57,7 @@ public:
 		float time = 0.5f;							// 持続時間
 		bool active = false;					// 爆発の有効化
 	public:
-		void LevelUp(int level)
+		void LevelUp(const int &level)
 		{
 			expansionRange = level * 1.0f;
 		}
@@ -72,21 +71,13 @@ public:
 		ReflectionContainer* reflectionContainer = new ReflectionContainer();
 		PenetrationContainer* penetrationContainer = new PenetrationContainer();
 		ExplosionContainer* explosionContainer = new ExplosionContainer();
-		int level[(int)BulletType::MAX];
 
 	public:
 		void LevelUp(int type[])
 		{
-			int temp[(int)BulletType::MAX];
-
-			for (int i = 0; i < (int)BulletType::MAX; i++) 
-			{
-				temp[i] = type[i];
-			}
-
-			reflectionContainer->LevelUp(temp[(int)BulletType::REFLECTION]);
-			penetrationContainer->LevelUp(temp[(int)BulletType::PENETRATION]);
-			explosionContainer->LevelUp(temp[(int)BulletType::EXPLOSION]);
+			reflectionContainer->LevelUp(type[(int)BulletType::REFLECTION]);
+			penetrationContainer->LevelUp(type[(int)BulletType::PENETRATION]);
+			explosionContainer->LevelUp(type[(int)BulletType::EXPLOSION]);
 		}
 	};
 
@@ -99,7 +90,7 @@ public:
 
 	// コンストラクタ
 	BaseChamber();
-	BaseChamber(BaseObject::Status *status, BulletContainer*container);
+	BaseChamber(BaseObject::Status* const &status,BulletContainer* const &container);
 
 	// デストラクタ
 	~BaseChamber();

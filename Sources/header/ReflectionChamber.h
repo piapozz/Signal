@@ -15,7 +15,7 @@ public:
 	void AngleModifying();
 
 	// ’…’eŠÖ”
-	bool Impact();
+	bool Impact() const;
 
 	// Á–ÅŠÖ” 
 	void Destroy() {}

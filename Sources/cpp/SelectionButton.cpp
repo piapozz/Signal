@@ -50,7 +50,7 @@ void SelectionButton::Proc(InputManager* &input)
 	
 }
 
-BaseScene::SceneName SelectionButton::CheckChangeButton(bool &input)
+BaseScene::SceneName SelectionButton::CheckChangeButton(const bool &input)
 {
 	if (input)
 	{

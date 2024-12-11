@@ -6,7 +6,7 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::Init(BulletManager* bullet, std::vector<BaseCharacter*> players, CollisionManager* collisionManager, StageManager* stageManager)
+void Enemy::Init(BulletManager* bullet, const std::vector<BaseCharacter*>& players, CollisionManager* collisionManager, StageManager* stageManager)
 {
 	_pBulletManager = bullet;
 	_pPlayers = players;

@@ -13,10 +13,11 @@
 // ゲームの進行クラス
 
 class GameManager
-{							
+{
 public:
 
-	GameManager(InputManager* pInputManager);					// コンストラクタ
+	GameManager(InputManager* pInputManager) :_pInputManager(pInputManager), _pCollisionManager(new CollisionManager()),
+		_pStageManager(new StageManager(_pCollisionManager)), _pUiManager(new UIManager()), _pBulletManager(new BulletManager(PLAYER_MAX)) {};				// コンストラクタ
 	~GameManager();												// デストラクタ
 
 	void Init();												// 初期化
@@ -29,19 +30,16 @@ public:
 
 private:
 
-	std::vector<BaseCharacter*> devices;	// プレイヤーたちの可変長配列
-	std::vector<Player*> players;			// プレイヤーの配列
-	std::vector<Enemy*> enemys;				// 敵の配列
-	CollisionManager* collisionManager;	// 当たり判定
-	StageManager* stageManager;			// ステージ
-	BulletManager* bulletManager;		// 弾
-	UIManager* uiManager;				// UI
-	InputManager* inputManager;			// 入力
-	// AudioManager& audioManager;
+	std::vector<BaseCharacter*> _pDevices;	// プレイヤーたちの可変長配列
+	std::vector<Player*> _pPlayers;			// プレイヤーの配列
+	std::vector<Enemy*> _pEnemys;			// 敵の配列
+	CollisionManager* _pCollisionManager;	// 当たり判定
+	StageManager* _pStageManager;			// ステージ
+	BulletManager* _pBulletManager;			// 弾
+	UIManager* _pUiManager;					// UI
+	InputManager* _pInputManager;			// 入力
 
-	int playerMax;
-	bool isFinish;
-	float _drawRatio;
+	bool _isFinish;
 
 	void CheckFinish();
 };

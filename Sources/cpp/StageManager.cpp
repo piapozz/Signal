@@ -1,9 +1,18 @@
 #include "../header/StageManager.h"
 
-StageManager::StageManager(CollisionManager* collisionManager)
+StageManager::~StageManager()
 {
-	_pCollisionManager = collisionManager;
+	for (int i = 0; i < _boxList.size(); i++)
+	{
+		delete _boxList[i];
+	}
 
+	DeleteGraph(_boxHandle);
+	DeleteGraph(_wallHandle);
+}
+
+void StageManager::Init()
+{
 	_stageWidth = sizeof(_stageLayout) / sizeof(_stageLayout[1]);
 	_stageHeight = sizeof(_stageLayout) / sizeof(_stageLayout[0]);
 
@@ -36,17 +45,6 @@ StageManager::StageManager(CollisionManager* collisionManager)
 			}
 		}
 	}
-}
-
-StageManager::~StageManager()
-{
-	for (int i = 0; i < _boxList.size(); i++)
-	{
-		delete _boxList[i];
-	}
-
-	DeleteGraph(_boxHandle);
-	DeleteGraph(_wallHandle);
 }
 
 void StageManager::SetDrawRatio()
@@ -87,6 +85,10 @@ void StageManager::Proc()
 			else if (!_pCollisionManager->HitCheckBox_Other(box))
 				box->RevivalBox();
 		}
+		else
+		{
+			box->HitCount();
+		}
 	}
 }
 
@@ -100,13 +102,13 @@ void StageManager::Draw()
 	}
 }
 
-Vector2 StageManager::ConvertNumToPos(int x, int y)
+Vector2 StageManager::ConvertNumToPos(const int& x, const int& y)
 {
 	Vector2 result = Vector2(x, y) * BOX_SIZE;
 	return result;
 }
 
-Box* StageManager::GetNearBox(Vector2 pos)
+Box* StageManager::GetNearBox(const Vector2& pos)
 {
 	Box* nearBox = _boxList[0];
 	float nearDistance = Vector2::Distance(pos, nearBox->GetStatus().m_position);

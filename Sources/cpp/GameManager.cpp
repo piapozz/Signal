@@ -1,62 +1,48 @@
 #include "../header/GameManager.h"
 
-// コンストラクタ
-GameManager::GameManager(InputManager* pInputManager)
-{
-	collisionManager = new CollisionManager();
-	stageManager = new StageManager(collisionManager);
-	players.push_back(new Player(stageManager->GetStartPos()[0], bulletManager));
-	players.push_back(new Player(stageManager->GetStartPos()[1], bulletManager));
-	// enemys.push_back(new Enemy(stageManager->GetStartPos()[1], bulletManager));
-	uiManager = new UIManager();
-	inputManager = pInputManager;
-	// 弾を人数分用意
-	bulletManager = new BulletManager(players.size() + enemys.size());
-
-	AudioManager::GetInstance().PlayLoopBGM(BGMName::IN_GAME);
-
-	// ゲームが終了しているかを管理
-	isFinish = false;
-}
-
 // デストラクタ
 GameManager::~GameManager() 
 {
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
-		delete devices[i];
+		delete _pDevices[i];
 	}
-	delete collisionManager;	// 当たり判定
-	delete stageManager;		// ステージ
-	delete bulletManager;		// 弾
-	delete uiManager;			// UI
-	delete inputManager;		// 入力
+	delete _pCollisionManager;	// 当たり判定
+	delete _pStageManager;		// ステージ
+	delete _pBulletManager;		// 弾
+	delete _pUiManager;			// UI
+	delete _pInputManager;		// 入力
 }
 
 // 初期化
 void GameManager::Init()
 {
-	for (int i = 0; i < players.size(); i++)
+	_pPlayers.push_back(new Player(_pStageManager->GetStartPos()[0], _pBulletManager));
+	_pPlayers.push_back(new Player(_pStageManager->GetStartPos()[1], _pBulletManager));
+
+	AudioManager::GetInstance().PlayLoopBGM(BGMName::IN_GAME);
+
+	// ゲームが終了しているかを管理
+	_isFinish = false;
+
+	for (int i = 0; i < _pPlayers.size(); i++)
 	{
-		players[i]->Init(bulletManager, inputManager);
-		devices.push_back(players[i]);
+		_pPlayers[i]->Init(_pBulletManager, _pInputManager);
+		_pDevices.push_back(_pPlayers[i]);
 	}
 
-	for (int i = 0; i < enemys.size(); i++)
+	for (int i = 0; i < _pEnemys.size(); i++)
 	{
-		enemys[i]->Init(bulletManager, devices, collisionManager, stageManager);
-		devices.push_back(enemys[i]);
+		_pEnemys[i]->Init(_pBulletManager, _pDevices, _pCollisionManager, _pStageManager);
+		_pDevices.push_back(_pEnemys[i]);
 	}
 
-	collisionManager->Init(devices, stageManager->GetBoxData(), bulletManager);
-
-	// プレイヤーの数を取得
-	playerMax = devices.size();
+	_pCollisionManager->Init(_pDevices, _pStageManager->GetBoxData(), _pBulletManager);
 	
 	// プレイヤーの設定
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
-		BaseCharacter* device = devices[i];
+		BaseCharacter* device = _pDevices[i];
 		// デバイスごとに番号をつける
 		device->deviceNum = i;
 
@@ -75,39 +61,39 @@ void GameManager::Init()
 		//}
 	}
 
-	uiManager->Init(bulletManager, devices);
+	_pUiManager->Init(_pBulletManager, _pDevices);
 }
 // 処理
 void GameManager::Proc()
 {
 	// 入力取得
-	inputManager->Proc();
+	_pInputManager->Proc();
 
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
-		devices[i]->Proc();
+		_pDevices[i]->Proc();
 	}
 
 	// 弾の移動
-	bulletManager->Move();
+	_pBulletManager->Move();
 
 	// 爆発の生成
-	bulletManager->CreateExplosion();
+	_pBulletManager->CreateExplosion();
 
 	// 当たり判定
-	collisionManager->HitCheck_Everything();
-	collisionManager->UpdateHitObj();
+	_pCollisionManager->HitCheck_Everything();
+	_pCollisionManager->UpdateHitObj();
 
 	// 座標を更新
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
-		devices[i]->UpdatePosition();
+		_pDevices[i]->UpdatePosition();
 	}
 
 	// 弾の座標更新
-	bulletManager->UpdatePosition();
+	_pBulletManager->UpdatePosition();
 
-	stageManager->Proc();
+	_pStageManager->Proc();
 
 	// 終了確認
 	CheckFinish();
@@ -117,17 +103,17 @@ void GameManager::Proc()
 void GameManager::Draw()
 {
 	// ステージの描画
-	stageManager->Draw();
+	_pStageManager->Draw();
 
 	// 弾の描画
-	bulletManager->Draw();
+	_pBulletManager->Draw();
 
 	// プレイヤーたちの描画
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
-		if (devices[i]->status.m_isActive != false)devices[i]->Draw();
+		if (_pDevices[i]->status.m_isActive != false)_pDevices[i]->Draw();
 
-		uiManager->Draw();
+		_pUiManager->Draw();
 	}
 }
 
@@ -136,13 +122,13 @@ void GameManager::CheckFinish()
 {
 	// 死亡確認
 	std::vector<int> activeDevice;
-	for (int i = 0; i < devices.size(); i++)
+	for (int i = 0; i < _pDevices.size(); i++)
 	{
 		// 死亡させる
-		devices[i]->SetSurvival();
+		_pDevices[i]->SetSurvival();
 
 		// 死亡しているか確認
-		if (devices[i]->GetActive())
+		if (_pDevices[i]->GetActive())
 			// 死亡していなかったら追加
 			activeDevice.push_back(i);
 	}
@@ -154,11 +140,11 @@ void GameManager::CheckFinish()
 		Memory::GetInstance().winner = activeDevice[0] + 1;
 
 		// ゲームを終了
-		isFinish = true;
+		_isFinish = true;
 	}
 }
 
 bool GameManager::GetFinish()
 {
-	return isFinish;
+	return _isFinish;
 }

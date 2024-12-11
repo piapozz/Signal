@@ -11,7 +11,7 @@ public:
     float x;
     float y;
 
-    Vector2 operator+(Vector2 vec)
+    Vector2 operator+(const Vector2& vec) const
     {
         Vector2 temp;
 
@@ -21,7 +21,7 @@ public:
         return temp;
     }
 
-    Vector2 operator-(Vector2 vec)
+    Vector2 operator-(const Vector2& vec) const
     {
         Vector2 temp;
 
@@ -31,7 +31,7 @@ public:
         return temp;
     }
 
-    Vector2 operator*(Vector2 vec)
+    Vector2 operator*(const Vector2& vec) const
     {
         Vector2 temp;
 
@@ -41,7 +41,7 @@ public:
         return temp;
     }
 
-    Vector2 operator+(float num)
+    Vector2 operator+(const float& num) const
     {
         Vector2 temp;
 
@@ -51,7 +51,7 @@ public:
         return temp;
     }
 
-    Vector2 operator-(float num)
+    Vector2 operator-(const float& num) const
     {
         Vector2 temp;
 
@@ -61,7 +61,7 @@ public:
         return temp;
     }
 
-    Vector2 operator*(float num)
+    Vector2 operator*(const float& num) const
     {
         Vector2 temp;
 
@@ -71,7 +71,7 @@ public:
         return temp;
     }
 
-    Vector2 operator/(float num)
+    Vector2 operator/(const float& num) const
     {
         Vector2 temp;
 
@@ -87,23 +87,23 @@ public:
         y = 0;
     }
 
-    Vector2(float X, float Y)
+    Vector2(const float& X, const float& Y)
     {
         x = X;
         y = Y;
     }
 
-    static float Distance(Vector2 vec1, Vector2 vec2)
+    static float Distance(const Vector2& vec1, const Vector2& vec2)
     {
         return Size(vec1 - vec2);
     }
 
-    float size()
+    inline float size() const
     {
         return sqrtf(powf(x, 2) + powf(y, 2));
     }
 
-    static float Size(Vector2 vec)
+    inline static float Size(const Vector2& vec)
     {
         return sqrtf(powf(vec.x, 2) + powf(vec.y, 2));
     }
@@ -118,7 +118,7 @@ public:
         y /= distance;
     }
 
-    static Vector2 Normalize(Vector2 vec)
+    inline static Vector2 Normalize(const Vector2& vec)
     {
         Vector2 temp;
         float distance = vec.size();
@@ -129,12 +129,12 @@ public:
         return temp;
     }
 
-    static float Dot(Vector2 vec1, Vector2 vec2) 
+    inline static float Dot(const Vector2& vec1, const Vector2& vec2)
     {
         return vec1.x * vec2.x + vec2.y * vec1.y;
     }
 
-    static float Cross(Vector2 vec1, Vector2 vec2)
+    inline static float Cross(const Vector2& vec1, const Vector2& vec2)
     {
         return vec1.x * vec2.y - vec2.x * vec1.y;
     }
@@ -276,8 +276,10 @@ const std::string UI_GRAPH_ADRESS[(int)UIGraph::MAX] =
 
 // ” 
 const float BOX_SIZE = 100.0f;   // ” ‚ÌƒTƒCƒY
-const int REVIVAL_TIME = 1000;   // •œŠˆ‚Ü‚Å‚ÌŽžŠÔ
+const int REVIVAL_TIME = 2000;   // •œŠˆ‚Ü‚Å‚ÌŽžŠÔ
 const float BOX_LIFE = 10.0f;
+const int BOX_HIT_COUNT = 10;
+const float BOX_HIT_SCALE = 0.2f;
 const std::string BOX_GRAPH_ADRESS = "Resources/Box.png";
 const std::string WALL_GRAPH_ADRESS = "Resources/Wall.png";
 

@@ -1,5 +1,10 @@
 #include "../header/InputManager.h"
 
+InputManager::InputManager()
+{
+	Proc();
+}
+
 void InputManager::Proc()
 {
 	UpdateBuffer();
@@ -11,29 +16,12 @@ void InputManager::Proc()
 	for (int i = 0; i < _inputControllerNum; i++)
 	{
 		// コントローラーの入力情報を構造体に代入
-		int result = GetJoypadDirectInputState(i + DX_INPUT_PAD1, &_inputParam[i]);
+		GetJoypadDirectInputState(i + DX_INPUT_PAD1, &_inputParam[i]);
 	}
 }
 
-// 接続コントローラーの数を返す関数
-int InputManager::GetPlayerNum()
-{
-	return _inputControllerNum;
-}
-
-// 押されているか返す関数
-bool InputManager::GetButton(int playerNum, Button button)
-{
-	bool result = false;
-
-	if (_inputParam[playerNum].Buttons[(int)button] != 0)
-		result = true;
-
-	return result;
-}
-
-// スティックの入力情報を取得する関数
-Vector2 InputManager::GetStick(int playerNum, Stick stick)
+// スティックの入力情報を正規化して取得する関数
+Vector2 InputManager::GetStick(const int& playerNum, const Stick& stick)
 {
 	Vector2 temp;
 
@@ -57,7 +45,7 @@ Vector2 InputManager::GetStick(int playerNum, Stick stick)
 }
 
 // 押された瞬間だけtrueを返す関数
-bool InputManager::CheckDownButton(int playerNum, Button button)
+bool InputManager::CheckDownButton(const int& playerNum, const Button& button)
 {
 	// 結果
 	bool result = false;
@@ -72,7 +60,7 @@ bool InputManager::CheckDownButton(int playerNum, Button button)
 	return result;
 }
 
-bool InputManager::GetDirButton(int playerNum, DirButton dirButton)
+bool InputManager::GetDirButton(const int& playerNum, const DirButton& dirButton)
 {
 	// 角度から度のボタンが押されているか判定
 	int input = _inputParam[playerNum].POV[0];
@@ -104,7 +92,7 @@ bool InputManager::GetDirButton(int playerNum, DirButton dirButton)
 	return false;
 }
 
-bool InputManager::CheckDownDirButton(int playerNum, DirButton dirButton)
+bool InputManager::CheckDownDirButton(const int& playerNum, const DirButton& dirButton)
 {
 	// 結果
 	bool result = false;

@@ -1,7 +1,7 @@
 #include "../header/PenetrationChamber.h"
 
 // 貫通カウントが残っていればfalse
-bool PenetrationChamber::Impact() 
+bool PenetrationChamber::Impact() const
 {
 	bool penetration = true;
 

@@ -102,7 +102,7 @@ public:
 	virtual void Move() = 0;
 
 	// ’…’eŠÖ”
-	virtual bool Impact() = 0;
+	inline virtual bool Impact() const = 0;
 
 	// Á–ÅŠÖ” 
 	virtual void Destroy() = 0;

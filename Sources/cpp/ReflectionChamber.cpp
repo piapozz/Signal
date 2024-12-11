@@ -19,7 +19,7 @@ void ReflectionChamber::AngleModifying()
 }
 
 // 反射カウントが残っていればfalse
-bool ReflectionChamber::Impact()
+bool ReflectionChamber::Impact() const
 {
     AudioManager::GetInstance().PlaySE(SEName::REFLECT);
 

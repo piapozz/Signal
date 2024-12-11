@@ -78,15 +78,16 @@ private:
 
 public:
 
-	StageManager(CollisionManager* collisionManager);
+	StageManager(CollisionManager* collisionManager) :_pCollisionManager(collisionManager) { Init(); }
 	~StageManager();
 
+	void Init();
 	void Proc();
 	void Draw();
 
 	void SetDrawRatio();
-	Vector2 ConvertNumToPos(int x, int y);
-	std::vector<Box*> GetBoxData() { return _boxList; }
-	std::vector<Vector2> GetStartPos() { return _playerStartPos; }
-	Box* GetNearBox(Vector2 pos);				// ˆê”Ô‹ß‚¢” ‚ğ•Ô‚·ŠÖ”
+	Vector2 ConvertNumToPos(const int& x, const int& y);
+	inline std::vector<Box*> GetBoxData() const { return _boxList; }
+	inline std::vector<Vector2> GetStartPos() const { return _playerStartPos; }
+	Box* GetNearBox(const Vector2& pos);				// ˆê”Ô‹ß‚¢” ‚ğ•Ô‚·ŠÖ”
 };

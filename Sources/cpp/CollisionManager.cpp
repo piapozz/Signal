@@ -2,7 +2,7 @@
 
 CollisionManager::CollisionManager()
 {
-	
+	_pBullet = NULL;
 }
 
 CollisionManager::~CollisionManager()
@@ -10,7 +10,7 @@ CollisionManager::~CollisionManager()
 
 }
 
-void CollisionManager::Init(vector<BaseCharacter*> players, vector<Box*> boxs, BulletManager* bullet)
+void CollisionManager::Init(const vector<BaseCharacter*>& players, const vector<Box*>& boxs, BulletManager* bullet)
 {
 	_pPlayers = players;
 	_pBoxs = boxs;
@@ -18,7 +18,7 @@ void CollisionManager::Init(vector<BaseCharacter*> players, vector<Box*> boxs, B
 }
 
 // オブジェクト同士が近距離にあるかを返す関数
-bool CollisionManager::IsInProximity(BaseObject* obj1, BaseObject* obj2)
+bool CollisionManager::IsInProximity(BaseObject* obj1, BaseObject* obj2) const
 {
 	float distance = Vector2::Distance(obj1->GetStatus().m_nextPosition, obj2->GetStatus().m_nextPosition);
 	if (distance <= obj1->GetStatus().m_shapeSize / 2 + obj2->GetStatus().m_shapeSize / 2 + 50)
@@ -28,7 +28,7 @@ bool CollisionManager::IsInProximity(BaseObject* obj1, BaseObject* obj2)
 }
 
 // ベースオブジェクトとベースオブジェクトの判定
-bool CollisionManager::HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2)
+bool CollisionManager::HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2) const
 {
 	// 座標と半径
 	Vector2 pos1 = obj1->GetStatus().m_nextPosition;
@@ -46,7 +46,7 @@ bool CollisionManager::HitCheck_BaseObj(BaseObject* obj1, BaseObject* obj2)
 }
 
 // ベースオブジェクトと箱の判定
-bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
+bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box) const
 {
 	Vector2 objPos = obj->GetStatus().m_nextPosition;
 	Vector2 vertexPos[4];
@@ -78,7 +78,7 @@ bool CollisionManager::HitCheck_BaseObj_Box(BaseObject* obj, Box* box)
 }
 
 // 射線が通っているかレイで判定する関数
-bool CollisionManager::CheckHitRay(Vector2 pos1, Vector2 pos2)
+bool CollisionManager::CheckHitRay(const Vector2& pos1, const Vector2& pos2) const
 {
 	// すべての箱と判定
 	for (int i = 0; i < _pBoxs.size(); i++)
@@ -100,7 +100,7 @@ bool CollisionManager::CheckHitRay(Vector2 pos1, Vector2 pos2)
 }
 
 // 線分と線分が交わっているかを判定する関数
-bool CollisionManager::CheckLineCross(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
+bool CollisionManager::CheckLineCross(const Vector2& a, const Vector2& b, const Vector2& c, const Vector2& d) const
 {
 	// 外積を使って計算
 	// グループ①
@@ -349,7 +349,6 @@ void CollisionManager::HitCheck_Everything()
 		Box* box = _pBoxs[bo];
 		// 箱が非アクティブならスキップ
 		if (!box->GetActive()) continue;
-		box->SetHitDamage(false);
 
 		// プレイヤーの数繰り返す
 		for (int p2 = 0; p2 < _pPlayers.size(); p2++)
@@ -408,7 +407,7 @@ void CollisionManager::UpdateHitObj()
 		{
 			// プレイヤーとの判定
 			std::vector<BaseObject*>& hitCharaList = bulletList[bu]->hitCharObject;
-			for (int chara = hitCharaList.size() - 1; chara >= 0; chara--)
+			for (int chara = (int)hitCharaList.size() - 1; chara >= 0; chara--)
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj(bulletList[bu], hitCharaList[chara]))
@@ -417,7 +416,7 @@ void CollisionManager::UpdateHitObj()
 
 			// boxとの判定
 			std::vector<Box*>& hitBoxList = bulletList[bu]->hitBoxObject;
-			for (int box = hitBoxList.size() - 1; box >= 0; box--)
+			for (int box = (int)hitBoxList.size() - 1; box >= 0; box--)
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj_Box(bulletList[bu], hitBoxList[box]))
@@ -431,7 +430,7 @@ void CollisionManager::UpdateHitObj()
 		{
 			// プレイヤーとの判定
 			std::vector<BaseObject*>& hitCharaList = explosionList[ex]->hitCharObject;
-			for (int chara = hitCharaList.size() - 1; chara >= 0; chara--)
+			for (int chara = (int)hitCharaList.size() - 1; chara >= 0; chara--)
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj(explosionList[ex], hitCharaList[chara]))
@@ -440,7 +439,7 @@ void CollisionManager::UpdateHitObj()
 
 			// boxとの判定
 			std::vector<Box*>& hitBoxList = explosionList[ex]->hitBoxObject;
-			for (int box = hitBoxList.size() - 1; box >= 0; box--)
+			for (int box = (int)hitBoxList.size() - 1; box >= 0; box--)
 			{
 				// プレイヤーが接触していないならリストから削除
 				if (!HitCheck_BaseObj_Box(explosionList[ex], hitBoxList[box]))

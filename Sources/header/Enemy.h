@@ -18,7 +18,7 @@ private:
 
 public:
 
-	Enemy(Vector2 pos, BulletManager* bullet) : BaseCharacter(bullet) 
+	Enemy(Vector2 pos, BulletManager* bullet) : BaseCharacter(bullet)
 	{
 		status.m_position = pos;
 		status.m_nextPosition = pos;
@@ -26,6 +26,6 @@ public:
 
 	~Enemy();
 
-	void Init(BulletManager* bullet, std::vector<BaseCharacter*> players, CollisionManager* collisionManager, StageManager* stageManager);
+	void Init(BulletManager* bullet, const std::vector<BaseCharacter*>& players, CollisionManager* collisionManager, StageManager* stageManager);
 	void Proc();
 };

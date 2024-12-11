@@ -56,6 +56,7 @@ public:
 	virtual Vector2 GetNormDir(Vector2 hitPos);			// 法線を返す関数
 	Shape GetShape();						// 形を取得
 	Vector2 GetDisplayPos();
+	bool GetIsHit() { return hitDamage; }
 
 	Status status;
 
@@ -65,6 +66,6 @@ protected:
 
 	bool canMove;			// 動けるかどうかを管理
 	bool hitObject;			// オブジェクトにヒットしたかを管理
-	bool hitDamage;			// ダメージを受けたか
+	bool hitDamage = false;			// ダメージを受けたか
 	float drawUpScale = 0.01f;		// 描画時の縮尺
 };

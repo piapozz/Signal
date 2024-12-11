@@ -12,24 +12,26 @@ private:
 	float _maxLife;
 	int _exp;
 	float _revivalTime;
+	int _hitCount = 0;
 
 public:
 
-	Box(Vector2 pos, int handle);
-	Box(Vector2 pos, float life, float revivalTime, int handle);
+	Box(const Vector2& pos, const int& handle);
+	Box(const Vector2& pos, const float& life, const float& revivalTime, const int& handle);
 	~Box(){}
 
+	void Init();
 	void Draw();
-
 	void Move(){}
 
 	void CalVertexPos();
-	Vector2 GetNormDir(Vector2 hitPos) override;		// 法線を返す関数
-	Vector2 GetVertexPos(int n);			// 頂点座標を返す関数
+	Vector2 GetNormDir(const Vector2 hitPos) override;		// 法線を返す関数
+	Vector2 GetVertexPos(const int& n);			// 頂点座標を返す関数
 	void RevivalBox();
 	void DestroyBox();
 	void RevivalCount();
-	bool GetIsWall() { return _isWall; }
-	int GetRevivalCount() { return _untilRevivalCount; }
-	int GetExp() { return _exp; }
+	inline bool GetIsWall() const { return _isWall; }
+	inline int GetRevivalCount() const { return _untilRevivalCount; }
+	inline int GetExp() const { return _exp; }
+	void HitCount();
 };

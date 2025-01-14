@@ -29,5 +29,6 @@ public:
 	void Init(BulletManager* bulletManager, std::vector<BaseCharacter*> devicesObject);
 	void Proc();
 	void Draw();
+	void TutorialDraw();
 };
 

@@ -55,6 +55,7 @@ void SceneManager::ChangeScene(int scene)
 		break;
 	case BaseScene::GAME_EXIT:
 		_exitFlag = true;
+		DxLib_End();
 		return;
 	default:
 		break;

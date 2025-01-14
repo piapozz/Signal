@@ -73,6 +73,16 @@ void UIManager::Draw()
 
 		// 経験値/必要量 の表示
 		statusUI[i]->RequestCount(devices[i]->GetExpValue(), devices[i]->GetRequestValue());
-
 	}
+
+	TutorialDraw();
+}
+
+void UIManager::TutorialDraw()
+{
+	DrawFormatString(1700, 980, COLOR_WHITE, "左スティック：移動");
+	DrawFormatString(1700, 1000, COLOR_WHITE, "右スティック：回転");
+	DrawFormatString(1700, 1020, COLOR_WHITE, "左トリガー：回避");
+	DrawFormatString(1700, 1040, COLOR_WHITE, "右トリガー：射撃");
+	DrawFormatString(1700, 1060, COLOR_WHITE, "右ボタン：スキル選択");
 }

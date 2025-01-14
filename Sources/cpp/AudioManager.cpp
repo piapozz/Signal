@@ -47,7 +47,7 @@ void AudioManager::PlayLoopBGM(BGMName bgm)
 	// çƒê∂íÜÇ≈Ç»Ç¢Ç»ÇÁ
 	if (CheckSoundMem(_bgmHandle[(int)bgm]) == false)
 	{
-		PlaySoundMem(_bgmHandle[(int)bgm], DX_PLAYTYPE_BACK, TRUE);
+		PlaySoundMem(_bgmHandle[(int)bgm], DX_PLAYTYPE_LOOP, TRUE);
 	}
 }
 
@@ -63,7 +63,7 @@ void AudioManager::StartLoopSE(SEName se)
 	// çƒê∂íÜÇ≈Ç»Ç¢Ç»ÇÁ
 	if (CheckSoundMem(_soundHandle[(int)se]) == false)
 	{
-		PlaySoundMem(_soundHandle[(int)se], DX_PLAYTYPE_BACK, TRUE);
+		PlaySoundMem(_soundHandle[(int)se], DX_PLAYTYPE_LOOP, TRUE);
 	}
 }
 
